@@ -80,6 +80,7 @@
   min-height: 2rem;
 }
 
-.embedded-field-button button {
+.embedded-field-button {
   width: 35%;
+  height: 100%;
 }
