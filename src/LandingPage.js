@@ -7,11 +7,25 @@ import {
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
 import { useHistory } from "react-router-dom";
+import React, {useRef} from "react";
 
 function LandingPage(props) {
+  const base_url = "http://localhost:5000"
   const history = useHistory();
-  const navTo = () => {history.push({pathname: '/calculate', state: {email: "yo"}}); }
-  
+  const navTo = () => {const email = emailInput.current.value; history.push({pathname: '/calculate', state: {email: email}}); }
+  const axios = require('axios');
+  const emailInput = useRef(null);
+  function addEmail(email) {
+      axios.post(base_url + '/waitlist', {
+        email: email
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <div className="root">
       <ThemeProvider theme={theme}>
@@ -23,11 +37,15 @@ function LandingPage(props) {
               <span className="underline-highlight">10 minutes</span>.
             </Typography>
             <div class="embedded-field">
-              <OutlinedInput
+              {/* <OutlinedInput
                 className="embedded-field-input"
                 label="Enter your email address"
                 variant="outlined"
-              />
+              /> */}
+              <input className="embedded-field-input"
+                label="Enter your email address"
+                variant="outlined"
+                ref={emailInput}/>
               <div className="embedded-field-button-container">
                 <Button
                   className="embedded-field-button"

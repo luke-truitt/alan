@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {
   withRouter
@@ -8,25 +8,70 @@ import {Container, Row, Col, Card } from "react-bootstrap";
 
 function Calculator(props) {
     const [step, setStep] = useState(1);
+    const [data, setData] = useState({});
+    const base_url = "http://localhost:5000"
+    const axios = require('axios');
+    useEffect(() => {
+      if(step==5) {
+        sendData();
+      }
+    })
+    function sendData() {
+        axios.post(base_url + '/calculated', data)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    const updateDict = (d) => {
+      for (const [key, value] of Object.entries(d)) {
+        setData(data => ({...data, [key]:value}));
+      }
+    }
     const backClick = () => {
       if(step <=1) {
-        setStep(1)
+        setStep(1);
       } else {
-        setStep(step - 1)
+        setStep(step - 1);
       }
     };
+    let estIncome, dependent, estimatedRefund, deduction, taxableIncome, taxBill, credits, eduCredits, refund, firstName,  lastName, phone, classYear, howFiled, international;
+
     const forwardClick = () => {
-      if(step==1){
-        incomeLabel.current.innerHTML = textInput.current.value;
+      if(step==1) {
+        estIncome = textInput.current.value;
+        dependent = depInput.current.value;
+        estimatedRefund = refInput.current.value;
+        incomeLabel.current.innerHTML = estIncome;
+        const d = {'email': 'ltruitt5@gmail.com', 'estimatedIncome': estIncome,'dependent': dependent,'estimatedRefund': estimatedRefund}
+        updateDict(d);
       } else if (step==2) {
-        dedLabel.current.innerHTML = textInput2.current.value;
-        taxIncomeLabel.current.innerHTML = textInput.current.value - textInput2.current.value - 12400;
-        taxBillLabel.current.innerHTML = 0.1 * (textInput.current.value - textInput2.current.value - 12400);
+        deduction = textInput2.current.value;
+        dedLabel.current.innerHTML = deduction;
+        taxableIncome = estIncome - deduction - 12400;
+        taxIncomeLabel.current.innerHTML = taxableIncome;
+        const taxRate = 0.1;
+        taxBill = taxRate * (taxableIncome);
+        taxBillLabel.current.innerHTML = taxBill;
       } else if (step==3) {
-        creditsLabel.current.innerHTML = textInput3.current.value;
+        credits = textInput3.current.value;
+        creditsLabel.current.innerHTML = credits;
+        eduCredits = eduCreditInput.current.value;
+        updateDict({'taxCredits': eduCredits});
       } else if (step == 4) {
-        refundLabel.current.innerHTML = textInput3.current.value
-        - (0.1 * (textInput.current.value - textInput2.current.value - 12400));
+        refund = credits - taxBill;
+        refundLabel.current.innerHTML = refund;
+        firstName = firstInput.current.value;
+        lastName = lastInput.current.value;
+        phone = phoneInput.current.value;
+        classYear = yearInput.current.value;
+        howFiled = filedInput.current.value;
+        international = intlInput.current.value;
+        const dd = {'firstName': firstName, 'lastName': lastName, 'phone': phone,'classYear': classYear,'howFiled': howFiled,'international': international}
+        updateDict(dd)
+        // sendData();
       }
       if(step >=5) {
         setStep(5)
@@ -34,10 +79,21 @@ function Calculator(props) {
         setStep(step + 1)
       }
     };
+
     const textInput = useRef(null);
+    const depInput = useRef(null);
+    const refInput = useRef(null);
     const textInput2 = useRef(null);
     const textInput3 = useRef(null);
+    const eduCreditInput = useRef(null);
     const textInput4 = useRef(null);
+    const firstInput = useRef(null);
+    const lastInput = useRef(null);
+    const phoneInput = useRef(null);
+    const yearInput = useRef(null);
+    const filedInput = useRef(null);
+    const intlInput = useRef(null);
+
     const incomeLabel = useRef(null);
     const dedLabel = useRef(null);
     const taxIncomeLabel = useRef(null);
@@ -60,6 +116,18 @@ function Calculator(props) {
             <Row type="flex" justify="center" align="middle"> 
             <Col>
             <Card.Body>This is some text within a card body.</Card.Body>
+            </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col>Are you a dependent?</Col>
+            <Col>
+            <input ref={depInput} type="number"/>
+            </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col>How big of a refund did you get last year?</Col>
+            <Col>
+            <input ref={refInput} type="number"/>
             </Col>
             </Row>
           </Card>
@@ -90,6 +158,12 @@ function Calculator(props) {
             <Card.Body>This is some text within a card body.</Card.Body>
             </Col>
             </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col>Had you heard of educational tax creadts before this?</Col>
+            <Col>
+            <input ref={eduCreditInput} type="checkbox"/>
+            </Col>
+            </Row>
           </Card>
           <Card style={{display: step==4 ? '' : 'none'}}>
             <Card.Title>Your History</Card.Title>
@@ -99,9 +173,29 @@ function Calculator(props) {
             <input ref={textInput4} type="number"/>
             </Col>
             </Row>
+            
             <Row type="flex" justify="center" align="middle"> 
+            <Col><input ref={firstInput} type="text" placeholder="First Name"/></Col>
             <Col>
-            <Card.Body>This is some text within a card body.</Card.Body>
+            <input ref={lastInput} type="text" placeholder="Last Name"/>
+            </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col><input ref={phoneInput} type="tel" placeholder="Phone Number"/></Col>
+            <Col>
+            <input ref={yearInput} type="number" placeholder="Grad Year"/>
+            </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col>How did you file for taxes last year?</Col>
+            <Col>
+              <input ref={filedInput} type="text"/>
+            </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle"> 
+            <Col>International Student?</Col>
+            <Col>
+              <input ref={intlInput} type="checkbox"/>
             </Col>
             </Row>
           </Card>
@@ -154,7 +248,7 @@ function Calculator(props) {
             </Col>
             <Col>
 
-              <button className="calc-button" onClick={() => forwardClick()} style={{display: step>=5 ? 'none' : ''}}>Keep Going</button>
+              <button className="calc-button" onClick={() => forwardClick()} >Keep Going</button>
             </Col>
           </Row>
           </Col>

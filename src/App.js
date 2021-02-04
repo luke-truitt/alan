@@ -22,13 +22,12 @@ function App() {
   return (
     <div> 
         <Router>
-        <Switch>
-          <Route exact path='/'><LandingPage /></Route>
-          <Route path='/calculate'><Calculator/></Route>
-        </Switch>
+          <Switch>
+            <Route exact path='/'><LandingPage /></Route>
+            <Route path='/calculate'><Calculator/></Route>
+          </Switch>
         </Router>
     </div>
-    
   );
 }
 
