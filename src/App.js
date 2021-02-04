@@ -5,9 +5,9 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
-import Calculator from "./Calculator.js";
+import Calculator2 from "./Calculator2.js";
 import LandingPage from "./LandingPage";
-import "./App.css";
+import "./global.css";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/calculate">
-            <Calculator />
+            <Calculator2 />
           </Route>
         </Switch>
       </Router>

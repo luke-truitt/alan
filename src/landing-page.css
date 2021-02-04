@@ -1,10 +1,4 @@
 @media only screen and (max-width: 600px) {
-  #outer-container-mobile {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
   #h1-mobile {
     font-size: 1.8rem;
     line-height: 2.5rem;
@@ -41,16 +35,6 @@
   }
 }
 
-.outer-container {
-  width: 80vw;
-  padding: 5rem;
-  margin-top: 10vh;
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  justify-self: center;
-}
-
 .inner-container-left {
   width: 50%;
   row-gap: 0.5rem;
@@ -59,11 +43,7 @@
   justify-content: space-between;
   row-gap: 2rem;
 }
-.underline-highlight {
-  border-bottom: solid 10px #7282d3;
-}
 .embedded-field {
-  min-height: 2rem;
   column-gap: 0.3rem;
   display: flex;
   flex-direction: row;

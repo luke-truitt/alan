@@ -1,4 +1,5 @@
 import "./landing-page.css";
+import "./global.css";
 import {
   ThemeProvider,
   Button,
@@ -49,7 +50,6 @@ function LandingPage(props) {
               variant="contained"
               color="secondary"
               onClick={navTo}
-              textAllCaps="false"
             >
               Calculate my refund
             </Button>
