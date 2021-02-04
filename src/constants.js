@@ -26,21 +26,24 @@ export const theme = createMuiTheme({
     h1: {
       fontSize: "3rem",
       fontWeight: "600",
-      lineHeight: "4rem",
+      lineHeight: "4.2rem",
     },
     h3: {
-      fontSize: "1rem",
+      fontSize: "1.2rem",
     },
-    fontFamily: ["-apple-system"],
-    fontSize: "12px",
+    fontFamily: ["-apple-system, BlinkMacSystemFont, sans-serif;"],
+    fontSize: 14,
     input: {
       borderRadius: "0px",
+      fontSize: "1rem",
+      margin: 0,
     },
     button: {
       fontSize: "1rem",
-      margin: "auto",
+      margin: 0,
       fontWeight: "semi-bold",
       borderRadius: "0px",
+      boxShadow: "none",
     },
   },
 });
