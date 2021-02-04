@@ -6,8 +6,12 @@ import {
   OutlinedInput,
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
+import { useHistory } from "react-router-dom";
 
 function LandingPage(props) {
+  const history = useHistory();
+  const navTo = () => {history.push({pathname: '/calculate', state: {email: "yo"}}); }
+  
   return (
     <div className="root">
       <ThemeProvider theme={theme}>
@@ -29,6 +33,7 @@ function LandingPage(props) {
                   className="embedded-field-button"
                   variant="contained"
                   color="secondary"
+                  onClick={navTo}
                 >
                   Calculate my refund
                 </Button>
