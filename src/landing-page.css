@@ -1,52 +1,66 @@
-.root {
-  background-color: #f6f6f6;
-  position: fixed;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+@media only screen and (max-width: 600px) {
+  #h1-mobile {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+  }
+  #h3-mobile {
+    font-size: 1rem;
+  }
 
-.outer-container {
-  width: 90vw;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  padding: 10%;
+  #underline-highlight-mobile {
+    border-bottom: solid 8px #7282d3;
+  }
+  #embedded-field-mobile {
+    min-height: 1.5rem;
+  }
+  .embedded-field-input #embedded-field-input-mobile {
+    font-size: 0.8rem;
+    min-height: 0.5rem;
+  }
+
+  #embedded-field-button-mobile {
+    font-size: 0.8rem;
+    width: 50%;
+    line-height: 1rem;
+  }
+  #inner-container-left-mobile {
+    padding-top: 4rem;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    row-gap: 2rem;
+    width: 90%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .inner-container-left {
   width: 50%;
-  height: 40vh;
+  row-gap: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-.inner-container-right {
-  width: 50%;
-  display: flex;
-}
-.underline-highlight {
-  border-bottom: solid 10px #7282d3;
+  row-gap: 2rem;
 }
 .embedded-field {
-  position: relative;
+  column-gap: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .embedded-field-input {
-  position: relative;
-  height: 75px;
+  width: 65%;
+  height: 100%;
+}
+
+.embedded-field-input input {
   width: 100%;
+  min-height: 2rem;
 }
-.embedded-field-button-container {
-  position: absolute;
-  z-index: 9;
-  top: 10px;
-  right: 10px;
-}
+
 .embedded-field-button {
-  height: 55px;
+  width: 35%;
+  height: 100%;
 }

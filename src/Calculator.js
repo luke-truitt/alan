@@ -4,7 +4,9 @@ import {
   withRouter
 } from "react-router-dom";
 import "./calculator.css";
-import {Container, Row, Col, Card } from "react-bootstrap";
+import {} from ".";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 function Calculator(props) {
     const [step, setStep] = useState(1);
@@ -204,61 +206,189 @@ function Calculator(props) {
             <Card.Body>You're on track for a dope refund</Card.Body>
           </Card>
           </Col>
-          <Col >
-          <Card>
-          <Card.Title>Your Refund</Card.Title>
-          <Card.Body><p ref={refundLabel}>+ $X,TTT</p></Card.Body>
-          <hr/>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row">
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left" style={{display: step>=2 ? '' : 'none'}}>Your Income</Col>
-            <Col className="balance-sheet-right" id="income-label"><p ref={incomeLabel}>+ $X,TTT</p></Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=3 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Personal Deductions</Col>
-            <Col className="balance-sheet-right" id="deductions-label"><p ref={dedLabel}>+ $X,TTT</p></Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=3 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Standard Deduction</Col>
-            <Col className="balance-sheet-right">- $12,400</Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=3 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Taxable Income</Col>
-            <Col className="balance-sheet-right" id="tax-income-label"><p ref={taxIncomeLabel}>+ $X,TTT</p></Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=3 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Tax Bill</Col>
-            <Col className="balance-sheet-right" id="tax-bill"><p ref={taxBillLabel}>+ $X,TTT</p></Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=4 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Credits and Withholdings</Col>
-            <Col className="balance-sheet-right" id="credits-withholdings"><p ref={creditsLabel}>+ $X,TTT</p></Col>
-          </Row>
-          <Row type="flex" justify="center" align="middle" className="balance-sheet-row" style={{display: step>=5 ? '' : 'none'}}>
-            <Col xs={8} sm={8} md={8} lg={8} xl={8} className="balance-sheet-left">Your Estimated Refund</Col>
-            <Col className="balance-sheet-right" id="estimated-refund"><p ref={refundLabel}>+ $X,TTT</p></Col>
-          </Row>
-          </Card>
+          <Col>
+            <Card>
+              <Card.Title>Your Refund</Card.Title>
+              <Card.Body>
+                <p ref={refundLabel}>+ $X,TTT</p>
+              </Card.Body>
+              <hr />
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                  style={{ display: step >= 2 ? "" : "none" }}
+                >
+                  Your Income
+                </Col>
+                <Col className="balance-sheet-right" id="income-label">
+                  <p ref={incomeLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 3 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Personal Deductions
+                </Col>
+                <Col className="balance-sheet-right" id="deductions-label">
+                  <p ref={dedLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 3 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Standard Deduction
+                </Col>
+                <Col className="balance-sheet-right">- $12,400</Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 3 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Taxable Income
+                </Col>
+                <Col className="balance-sheet-right" id="tax-income-label">
+                  <p ref={taxIncomeLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 3 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Tax Bill
+                </Col>
+                <Col className="balance-sheet-right" id="tax-bill">
+                  <p ref={taxBillLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 4 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Credits and Withholdings
+                </Col>
+                <Col className="balance-sheet-right" id="credits-withholdings">
+                  <p ref={creditsLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+              <Row
+                type="flex"
+                justify="center"
+                align="middle"
+                className="balance-sheet-row"
+                style={{ display: step >= 5 ? "" : "none" }}
+              >
+                <Col
+                  xs={8}
+                  sm={8}
+                  md={8}
+                  lg={8}
+                  xl={8}
+                  className="balance-sheet-left"
+                >
+                  Your Estimated Refund
+                </Col>
+                <Col className="balance-sheet-right" id="estimated-refund">
+                  <p ref={refundLabel}>+ $X,TTT</p>
+                </Col>
+              </Row>
+            </Card>
           </Col>
         </Row>
         <Row type="flex" justify="center" align="middle">
           <Col>
-          <Row type="flex" justify="center" align="middle">
-            <Col>
-            <button className="calc-button back" onClick={() => backClick()} style={{display: step<=1 ? 'none' : ''}}>Back Up</button>
-            </Col>
-            <Col>
-
-              <button className="calc-button" onClick={() => forwardClick()} >Keep Going</button>
-            </Col>
-          </Row>
+            <Row type="flex" justify="center" align="middle">
+              <Col>
+                <button
+                  className="calc-button back"
+                  onClick={() => backClick()}
+                  style={{ display: step <= 1 ? "none" : "" }}
+                >
+                  Back Up
+                </button>
+              </Col>
+              <Col>
+                <button
+                  className="calc-button"
+                  onClick={() => forwardClick()}
+                  style={{ display: step >= 5 ? "none" : "" }}
+                >
+                  Keep Going
+                </button>
+              </Col>
+            </Row>
           </Col>
-          <Col>
-          </Col>
+          <Col></Col>
         </Row>
-        </Container>
-      </div>
-    )
-
+      </Container>
+    </div>
+  );
 }
 
 export default Calculator;
