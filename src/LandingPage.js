@@ -6,8 +6,14 @@ import {
   TextField,
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
+import { useHistory } from "react-router-dom";
 
 function LandingPage(props) {
+  const history = useHistory();
+  const navTo = () => {
+    history.push({ pathname: "/calculate", state: { email: "yo" } });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="outer-container" id="outer-container-mobile">
@@ -42,6 +48,7 @@ function LandingPage(props) {
               id="embedded-field-button-mobile"
               variant="contained"
               color="secondary"
+              onClick={navTo}
               textAllCaps="false"
             >
               Calculate my refund
