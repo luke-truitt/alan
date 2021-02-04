@@ -7,6 +7,7 @@ import { Input, Space } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Calculator from "./components/Calculator/Calculator.js";
 import Home from "./components/Home/Home.js";
+import LandingPage from "./LandingPage";
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,7 +23,7 @@ function App() {
     <div> 
         <Router>
         <Switch>
-          <Route exact path='/' component={Home}/>
+          <Route exact path='/' component={LandingPage}/>
           <Route path='/calculate' component={Calculator}/>
         </Switch>
         </Router>
