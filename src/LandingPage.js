@@ -17,6 +17,7 @@ function LandingPage(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <div className="header" />
       <div className="outer-container" id="outer-container-mobile">
         <div className="inner-container-left" id="inner-container-left-mobile">
           <Typography variant="h1" color="text-primary" id="h1-mobile">

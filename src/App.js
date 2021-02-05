@@ -8,15 +8,15 @@ import {
 import Calculator2 from "./Calculator2.js";
 import LandingPage from "./LandingPage";
 import "./global.css";
+import CalculationCard from "./CalculationCard.js";
 
 function App() {
   return (
     <div className="root">
-      <div className="header" />
       <Router>
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            <Calculator2 />
           </Route>
           <Route path="/calculate">
             <Calculator2 />

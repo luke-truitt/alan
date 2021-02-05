@@ -1,0 +1,133 @@
+body {
+  font-size: 12px;
+}
+
+.light {
+  color: white;
+}
+
+.dark {
+  color: #002e72;
+}
+
+.root {
+  background-image: url("./images/background-pattern.svg");
+}
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.container-0 {
+  width: 100vw;
+  height: 80vh;
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.container-1 {
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  justify-content: space-evenly;
+}
+
+.container-2-left {
+  width: 40vw;
+  max-width: 429px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20vw;
+  flex-direction: column;
+}
+
+.container-2-right {
+  width: 40vw;
+  max-width: 429px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.left-title {
+  padding-left: 10%;
+}
+
+.income-card {
+  min-width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.income-card-content {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 100%;
+  min-height: 50px;
+}
+
+.refund-card {
+  height: 130px;
+  min-width: 100%;
+  margin-bottom: 20px;
+}
+
+.refund-card-content {
+  background-color: #4056a1;
+  height: 100%;
+}
+
+.calculation-card {
+  min-width: 100%;
+  height: 400px;
+  padding: 0;
+}
+
+.calculation-card-content {
+  background-color: #7282d3;
+  margin: auto;
+  height: 100%;
+}
+
+.calculation-card-row {
+  margin: auto;
+  max-width: 90%;
+  display: inline-block;
+  padding-left: 0;
+}
+
+.refund-amount {
+  font-size: 5rem;
+}
+.refund-label {
+  font-weight: bolder;
+}
+.refund-content {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  text-align: right;
+}
+
+#previous-button {
+  border: 2px solid #002e72;
+}
+
+.cardSelect {
+  margin-top: 10px;
+}

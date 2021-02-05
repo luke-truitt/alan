@@ -1,4 +1,4 @@
-import "./calculator2.css";
+import "./calculator_page.css";
 import {
   ThemeProvider,
   Button,
@@ -8,9 +8,10 @@ import {
   CardActions,
   CardContent,
 } from "@material-ui/core/";
-import { theme } from "./constants.js";
+import { themeColor } from "./constants.js";
 import { useHistory } from "react-router-dom";
-
+import CalculationCard from "./CalculationCard.js";
+import IncomeCard from "./IncomeCard.js";
 function Calculator2(props) {
   const history = useHistory();
   const navTo = () => {
@@ -18,44 +19,38 @@ function Calculator2(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="outer-container-calculator" id="outer-container-mobile">
-        <div className="inner-container-left" id="inner-container-left-mobile">
-          <Typography variant="h1">
-            <span className="underline-highlight">Income</span>
-          </Typography>
-          <Card className="income-card" id="income-card-mobile">
-            <CardContent>Income Card</CardContent>
-          </Card>
-          <div className="button-container" id="button-container-mobile">
-            <Button color="secondary" variant="contained">
-              Previous
-            </Button>
-            <Button color="secondary" variant="contained">
-              Next
-            </Button>
+    <ThemeProvider theme={themeColor}>
+      <div className="root" className="container-0">
+        <Typography variant="h1" className="left-title">
+          <span className="underline-highlight">Income</span>
+        </Typography>
+        <div className="container-1">
+          <div className="container-2-left">
+            <IncomeCard />
+            <div className="button-container" id="button-container-mobile">
+              <Button
+                color="primary"
+                variant="contained"
+                id="previous-button"
+                style={{ boxShadow: "none" }}
+              >
+                Previous
+              </Button>
+              <Button
+                color="secondary"
+                style={{ boxShadow: "none" }}
+                variant="contained"
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
-        <div
-          className="inner-container-right"
-          id="inner-container-right-mobile"
-        >
-          <Card className="refund-card" id="refund-card-mobile">
-            <CardContent className="refund-card-content">
-              <div className="refund-content">
-                <Typography variant="h1" color="primary">
-                  <span className="refund-amount">$3,000</span>
-                </Typography>
-
-                <Typography variant="h3" color="primary">
-                  <span className="refund-label">Refund Amount</span>
-                </Typography>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="calculator-card" id="calculator-card-mobile">
-            <CardContent>Calculator Card</CardContent>
-          </Card>
+          <div className="container-2-right">
+            <Card className="refund-card" id="refund-card-mobile">
+              <CardContent className="refund-card-content"></CardContent>
+            </Card>
+            <CalculationCard />
+          </div>
         </div>
       </div>
     </ThemeProvider>
