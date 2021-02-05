@@ -14,6 +14,7 @@ import CalculationCard from "./CalculationCard.js";
 import IncomeCard from "./IncomeCard.js";
 import EducationCard from "./EducationCard.js";
 import HistoryCard from "./HistoryCard.js";
+import PersonalInfoCard from "./PersonalInfoCard.js";
 
 import { useHistory, useLocation } from "react-router-dom";
 const {
@@ -218,7 +219,7 @@ function Calculator2(props) {
         </Typography>
         <div className="container-1">
           <div className="container-2-left">
-            <HistoryCard />
+            <PersonalInfoCard />
             <div className="button-container" id="button-container-mobile">
               <Button
                 color="primary"

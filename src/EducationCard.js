@@ -26,7 +26,7 @@ const q2 = {
     "Most students usually don't begin loan repayment until graduation.",
 };
 const q3 = {
-  question: "Were you at least a full-time student last year?",
+  question: "Were you a student for at least 5 months last year?",
   description: "",
 };
 

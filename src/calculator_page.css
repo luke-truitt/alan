@@ -135,3 +135,12 @@ body {
 p.description-text {
   margin-top: 8px;
 }
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+}
+
+div.form-row.form-item > div:nth-child(1) {
+  margin-right: 10px;
+}
