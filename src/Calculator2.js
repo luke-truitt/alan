@@ -14,6 +14,7 @@ import CalculationCard from "./CalculationCard.js";
 import IncomeCard from "./IncomeCard.js";
 import EducationCard from "./EducationCard.js";
 import HistoryCard from "./HistoryCard.js";
+import PersonalInfoCard from "./PersonalInfoCard.js";
 
 import { useHistory, useLocation } from "react-router-dom";
 const {
@@ -231,6 +232,7 @@ function Calculator2({props}) {
             <IncomeCard stepNum={step} onUpdate={handleIncomeChange}></IncomeCard>
             <EducationCard stepNum={step} onUpdate={handleDeductionsChange}></EducationCard>
             <HistoryCard stepNum={step} onUpdate={handleHistoryChange}></HistoryCard>
+            <PersonalInfoCard stepNum={step} onUpdate={handleHistoryChange}></PersonalInfoCard>
             <div className="button-container" id="button-container-mobile">
               <Button
                 color="primary"
