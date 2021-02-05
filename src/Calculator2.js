@@ -10,22 +10,29 @@ import {
   CardContent,
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;
 
 function Calculator2(props) {
+  let location = useLocation();
+  let email = ''
+  try {
+    email = location.state['email']
+  } catch {
+    email = ''
+  }
   const history = useHistory();
   const goHome = () => {
     history.push({ pathname: "/"});
   };
   const [step, setStep] = useState(1);
-  const [data, setData] = useState({});
+  const [formData, setFormData] = useState({});
   const [taxableIncome, setTaxableIncome ] = useState(0);
   const [deductions, setDeductions] = useState(0);
   const [credits, setCredits ] = useState(0);
   const [taxBill, setTaxBill ] = useState(0);
   const [withholdings, setWithholdings] = useState(0);
-
+  
   const axios = require('axios');
   useEffect(() => {
     if(step==3) {
@@ -36,12 +43,12 @@ function Calculator2(props) {
     } else if(step == 4) {
       creditsLabel.current.innerHTML = credits;
     } 
-    // else if(step==5) {
-    //   sendData();
-    // }
+    else if(step==5) {
+      sendData();
+    }
   });
   function getWithholdings() {
-    const inc = data['estimatedIncome'];
+    const inc = formData['estimatedIncome'];
     if (inc < 9875) {
       setWithholdings(inc * 0.1);
     } else if (inc < 40125) {
@@ -90,7 +97,7 @@ function Calculator2(props) {
   }
 
   function sendData() {
-      axios.post(REACT_APP_API_BASE_URL + REACT_APP_CALCULATOR_URL, data)
+      axios.post(REACT_APP_API_BASE_URL + REACT_APP_CALCULATOR_URL, formData)
       .then(function (response) {
         console.log(response);
       })
@@ -100,7 +107,7 @@ function Calculator2(props) {
   };
   const updateDict = (d) => {
     for (const [key, value] of Object.entries(d)) {
-      setData(data => ({...data, [key]:value}));
+      setFormData(formData => ({...formData, [key]:value}));
     }
   };
   const backClick = () => {
@@ -118,13 +125,13 @@ function Calculator2(props) {
       dependent = depInput.current.value;
       estimatedRefund = refInput.current.value;
       incomeLabel.current.innerHTML = estIncome;
-      const d = {'email': 'ltruitt5@gmail.com', 'estimatedIncome': estIncome,'dependent': dependent,'estimatedRefund': estimatedRefund}
+      const d = {'email': email, 'estimatedIncome': estIncome,'dependent': dependent,'estimatedRefund': estimatedRefund}
       updateDict(d);
     } else if (step==2) {
       getWithholdings();
       setDeductions(textInput2.current.value);
-      setTaxableIncome(data['estimatedIncome'] - textInput2.current.value - 12400);
-      getTaxBill(data['estimatedIncome'] - textInput2.current.value - 12400);
+      setTaxableIncome(formData['estimatedIncome'] - textInput2.current.value - 12400);
+      getTaxBill(formData['estimatedIncome'] - textInput2.current.value - 12400);
     } else if (step==3) {
       detCredits();
       eduCredits = eduCreditInput.current.value;
