@@ -37,7 +37,7 @@ function EducationCard(props) {
         <CardContent className="income-card-content">
           <DollarInput question={q1.question} description={q1.description} />
           <DollarInput question={q2.question} description={q2.description} />
-          <YesNo question={q3.question} description={q3.question} />
+          <YesNo question={q3.question} description={q3.description} />
         </CardContent>
       </Card>
     </ThemeProvider>
