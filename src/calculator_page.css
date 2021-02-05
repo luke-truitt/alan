@@ -128,6 +128,10 @@ body {
   border: 2px solid #002e72;
 }
 
-.cardSelect {
-  margin-top: 10px;
+.input-container {
+  margin-top: 12px;
+}
+
+.form-item p {
+  margin-top: 8px;
 }

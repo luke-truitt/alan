@@ -63,9 +63,11 @@ export const themeColor = createMuiTheme({
     },
     h6: {
       fontWeight: 600,
+      lineHeight: "22px",
     },
     body2: {
-      fontSize: "16px",
+      fontSize: "14px",
+      lineHeight: "18px",
     },
     body1: {
       fontSize: "18px",

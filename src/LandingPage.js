@@ -8,12 +8,37 @@ import {
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
 import { useHistory } from "react-router-dom";
+import React, {useRef, useState} from "react";
+const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;
 
 function LandingPage(props) {
+  const [invalid, setInvalid] = useState(false);
   const history = useHistory();
   const navTo = () => {
-    history.push({ pathname: "/calculate", state: { email: "yo" } });
-  };
+
+    if(!emailInput.current.validity.valid) {
+      setInvalid(true);
+      return;
+    }
+    const email = emailInput.current.value; 
+    // console.log(email); 
+    addEmail(email);
+    setInvalid(false);
+    history.push({pathname: '/calculate', state: {email: email}}); 
+  }
+  const axios = require('axios');
+  const emailInput = useRef(null);
+  function addEmail(email) {
+      axios.post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
+        email: email
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,12 +63,12 @@ function LandingPage(props) {
             .
           </Typography>
           <div className="embedded-field" id="embedded-field-mobile">
-            <TextField
+            <input
               id="embedded-field-input-mobile"
               className="embedded-field-input"
-              defaultValue="Enter your email address"
-              variant="outlined"
-              size="large"
+              placeholder="What's your email?"
+              type="email"
+              ref = {emailInput}
             />
             <Button
               className="embedded-field-button"
@@ -54,6 +79,12 @@ function LandingPage(props) {
             >
               Calculate my refund
             </Button>
+
+          </div>
+          <div style={{display: invalid ? "" : "none" }}>
+            <p>
+              Please use a valid email
+            </p>
           </div>
 
           <Typography variant="h3" color="text-primary" id="h3-mobile">
