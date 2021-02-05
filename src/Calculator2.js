@@ -10,7 +10,6 @@ import {
   CardContent,
 } from "@material-ui/core/";
 import { themeColor } from "./constants.js";
-import { useHistory } from "react-router-dom";
 import CalculationCard from "./CalculationCard.js";
 import IncomeCard from "./IncomeCard.js";
 import EducationCard from "./EducationCard.js";

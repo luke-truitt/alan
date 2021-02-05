@@ -8,6 +8,9 @@ import {
   OutlinedInput,
   InputAdornment,
   FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -55,6 +58,29 @@ export function DollarInput(props) {
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
           defaultValue="0"
         />
+      </FormControl>
+    </div>
+  );
+}
+
+export function YesNo(props) {
+  return (
+    <div className="form-item">
+      <Typography variant="h6" color="textPrimary" className="question-text">
+        {props.question}
+      </Typography>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        className="description-text"
+      >
+        {props.description}
+      </Typography>
+      <FormControl>
+        <RadioGroup row>
+          <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+          <FormControlLabel value="No" control={<Radio />} label="No" />
+        </RadioGroup>
       </FormControl>
     </div>
   );

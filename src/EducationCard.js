@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { themeColor } from "./constants.js";
 import "./calculator_page.css";
-import { Dropdown, DollarInput } from "./formConstants.js";
+import { DollarInput, YesNo } from "./formConstants.js";
 
 const q1 = {
   question:
@@ -21,10 +21,13 @@ const q1 = {
 };
 
 const q2 = {
-  question: "Can you be claimed as a dependent for 2020?",
+  question: "How much of your student loans did you pay off in 2020?",
   description:
-    "Did your parents pay for most of your expenses (i.e. rent, food)",
-  options: ["Yes", "No", "I'm not sure"],
+    "Most students usually don't begin loan repayment until graduation.",
+};
+const q3 = {
+  question: "Were you at least a full-time student last year?",
+  description: "",
 };
 
 function EducationCard(props) {
@@ -33,6 +36,8 @@ function EducationCard(props) {
       <Card className="income-card" id="income-card-mobile">
         <CardContent className="income-card-content">
           <DollarInput question={q1.question} description={q1.description} />
+          <DollarInput question={q2.question} description={q2.description} />
+          <YesNo question={q3.question} description={q3.question} />
         </CardContent>
       </Card>
     </ThemeProvider>

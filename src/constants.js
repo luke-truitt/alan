@@ -67,15 +67,16 @@ export const themeColor = createMuiTheme({
     },
     h6: {
       fontWeight: 600,
-      lineHeight: "22px",
-    },
-    body2: {
-      fontSize: "14px",
+      fontSize: "16px",
       lineHeight: "18px",
     },
+    body2: {
+      fontSize: "12px",
+      lineHeight: "14px",
+    },
     body1: {
-      fontSize: "18px",
-      lineHeight: "20px",
+      fontSize: "16px",
+      lineHeight: "18px",
     },
     button: {
       fontWeight: 600,
