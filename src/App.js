@@ -11,15 +11,6 @@ import "./global.css";
 
 function App() {
   return (
-<<<<<<< HEAD
-    <div> 
-        <Router>
-          <Switch>
-            <Route exact path='/'><LandingPage /></Route>
-            <Route path='/calculate'><Calculator/></Route>
-          </Switch>
-        </Router>
-=======
     <div className="root">
       <div className="header" />
       <Router>
@@ -32,7 +23,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
->>>>>>> 09f78fe4441e0ece6f996c8aa7151140b552a04c
     </div>
   );
 }

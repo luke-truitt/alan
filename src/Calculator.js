@@ -17,7 +17,7 @@ function Calculator(props) {
       if(step==5) {
         sendData();
       }
-    })
+    });
     function sendData() {
         axios.post(base_url + '/calculated', data)
         .then(function (response) {
@@ -26,12 +26,12 @@ function Calculator(props) {
         .catch(function (error) {
           console.log(error);
         });
-    }
+    };
     const updateDict = (d) => {
       for (const [key, value] of Object.entries(d)) {
         setData(data => ({...data, [key]:value}));
       }
-    }
+    };
     const backClick = () => {
       if(step <=1) {
         setStep(1);

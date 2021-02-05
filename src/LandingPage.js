@@ -8,17 +8,28 @@ import {
 } from "@material-ui/core/";
 import { theme } from "./constants.js";
 import { useHistory } from "react-router-dom";
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
+const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;
 
 function LandingPage(props) {
-  const base_url = "http://localhost:5000"
+  const [invalid, setInvalid] = useState(false);
   const history = useHistory();
-<<<<<<< HEAD
-  const navTo = () => {const email = emailInput.current.value; history.push({pathname: '/calculate', state: {email: email}}); }
+  const navTo = () => {
+
+    if(!emailInput.current.validity.valid) {
+      setInvalid(true);
+      return;
+    }
+    const email = emailInput.current.value; 
+    // console.log(email); 
+    addEmail(email);
+    setInvalid(false);
+    history.push({pathname: '/calculate', state: {email: email}}); 
+  }
   const axios = require('axios');
   const emailInput = useRef(null);
   function addEmail(email) {
-      axios.post(base_url + '/waitlist', {
+      axios.post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
         email: email
       })
       .then(function (response) {
@@ -28,42 +39,6 @@ function LandingPage(props) {
         console.log(error);
       });
   }
-  return (
-    <div className="root">
-      <ThemeProvider theme={theme}>
-        <div className="outer-container">
-          <div className="inner-container-left">
-            <Typography variant="h1" color="text-primary">
-              Get up to a <span className="underline-highlight">$5,000</span>{" "}
-              tax refund in{" "}
-              <span className="underline-highlight">10 minutes</span>.
-            </Typography>
-            <div class="embedded-field">
-              {/* <OutlinedInput
-                className="embedded-field-input"
-                label="Enter your email address"
-                variant="outlined"
-              /> */}
-              <input className="embedded-field-input"
-                label="Enter your email address"
-                variant="outlined"
-                ref={emailInput}/>
-              <div className="embedded-field-button-container">
-                <Button
-                  className="embedded-field-button"
-                  variant="contained"
-                  color="secondary"
-                  onClick={navTo}
-                >
-                  Calculate my refund
-                </Button>
-              </div>
-            </div>
-=======
-  const navTo = () => {
-    history.push({ pathname: "/calculate", state: { email: "yo" } });
-  };
->>>>>>> 09f78fe4441e0ece6f996c8aa7151140b552a04c
 
   return (
     <ThemeProvider theme={theme}>
@@ -87,12 +62,12 @@ function LandingPage(props) {
             .
           </Typography>
           <div className="embedded-field" id="embedded-field-mobile">
-            <TextField
+            <input
               id="embedded-field-input-mobile"
               className="embedded-field-input"
-              defaultValue="Enter your email address"
-              variant="outlined"
-              size="large"
+              placeholder="What's your email?"
+              type="email"
+              ref = {emailInput}
             />
             <Button
               className="embedded-field-button"
@@ -103,6 +78,12 @@ function LandingPage(props) {
             >
               Calculate my refund
             </Button>
+
+          </div>
+          <div style={{display: invalid ? "" : "none" }}>
+            <p>
+              Please use a valid email
+            </p>
           </div>
 
           <Typography variant="h3" color="text-primary" id="h3-mobile">
