@@ -13,6 +13,7 @@ import { themeColor } from "./constants.js";
 import CalculationCard from "./CalculationCard.js";
 import IncomeCard from "./IncomeCard.js";
 import EducationCard from "./EducationCard.js";
+import HistoryCard from "./HistoryCard.js";
 
 import { useHistory, useLocation } from "react-router-dom";
 const {
@@ -36,7 +37,25 @@ function Calculator2({props}) {
   const handleDeductionsChange = (data) => {
     let newFields = { ...deductionFields };
     newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
     setDeductionFields(newFields);
+    console.log(newFields);
+  }
+  const handleHistoryChange = (data) => {
+    let newFields = { ...creditsFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
+    setCreditsFields(newFields);
+    console.log(newFields);
+  }
+  const handlePersonalChange = (data) => {
+    let newFields = { ...personalFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
+    setPersonalFields(newFields);
     console.log(newFields);
   }
   let location = useLocation();
@@ -210,8 +229,8 @@ function Calculator2({props}) {
         <div className="container-1">
           <div className="container-2-left">
             <IncomeCard stepNum={step} onUpdate={handleIncomeChange}></IncomeCard>
-            
             <EducationCard stepNum={step} onUpdate={handleDeductionsChange}></EducationCard>
+            <HistoryCard stepNum={step} onUpdate={handleHistoryChange}></HistoryCard>
             <div className="button-container" id="button-container-mobile">
               <Button
                 color="primary"
