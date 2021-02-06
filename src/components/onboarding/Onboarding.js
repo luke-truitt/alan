@@ -24,12 +24,15 @@ import {
   gradYear,
   phoneNumber,
   intlStudent,
+  refund
 } from "./OnboardingQuestions.js";
 import { onboardingTheme, ProgressBar } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
 
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {PageView, initGA, Event} from '../tracking/Tracking';
+const trackingId = 'UA-189058741-1';
 
 const forms = [
   { title: "Personal", items: [name, phoneNumber, gradYear, intlStudent] },
@@ -45,14 +48,18 @@ const forms = [
     title: "Education",
     items: [educationExpenses, studentLoans, studentStatus],
   },
+  {
+    title: "Refund",
+    items: [refund],
+  },
 ];
 
 function Onboarding(props) {
   const [step, setStep] = useState(1);
   const [fields, setFields] = useState({});
-
+  
   useEffect(() => {
-    console.log(fields);
+    console.log(calculatorItems);
   });
 
   const onDataUpdate = (d) => {
@@ -69,9 +76,17 @@ function Onboarding(props) {
   const nextDisabled = () => {
     let res = false;
     Object.entries(forms[step-1].items).map((item) => {
-        const fieldVal = fields[item[1].stateName];
-        if(fieldVal == '' || fieldVal == 0 || fieldVal == null) {
-          res = true;
+        if(item[1].stateName=="name") {
+          const first = fields['firstName'];
+          const last = fields['lastName'];
+          if(first == '' || first == null || last == '' || last == null) {
+            res = true;
+          }
+        } else {
+          const fieldVal = fields[item[1].stateName];
+          if(fieldVal == '' || fieldVal == 0 || fieldVal == null) {
+            res = true;
+          }
         }
     });
     return res;
@@ -94,20 +109,18 @@ function Onboarding(props) {
       onDataUpdate({
         "email": email
       })
-    } else if (step == 2) {
+    } else if (step == 3) {
       const data = {"withholdings": getWithholdings(), "deductions": getDeductions()};
       updateCalcData(data);
       console.log(fields);
       console.log(calculatorItems);
     }
-    else if (step == 3) {
-      const data = {"credits": getCredits(), "taxableIncome": getTaxableIncome(), "taxBill": getTaxBill()}
+    else if (step == 4) {
+      const data = {"credits": getCredits(), "taxableIncome": getTaxableIncome(), "taxBill": getTaxBill(), "refund": getRefund()}
       updateCalcData(data);
       console.log(fields);
       console.log(calculatorItems);
-    } else if (step == 4) {
-      const data = {"refund": getRefund()}
-      updateCalcData(data);
+    } else if (step == 5) {
       console.log(fields);
       console.log(calculatorItems);
     }
@@ -168,7 +181,9 @@ function Onboarding(props) {
   }
   function getTaxableIncome() {
     const income = fields['estimatedIncome'];
-    const deductions = fields['deductions'];
+    console.log(income);
+    const deductions = calculatorItems['deductions'];
+    console.log(deductions);
     return income - deductions - 12400;
   }
 
@@ -203,8 +218,8 @@ function Onboarding(props) {
 
   // Getting their refund based on all data
   function getRefund() {
-    const credits = calculatorItems['credits'];
-    const taxBill = calculatorItems['taxBill'];
+    const credits = getCredits();
+    const taxBill = getTaxBill();
     const tempVal = Math.min(credits - taxBill, 1000);
     const withholdings = calculatorItems['withholdings'];
     const refund = tempVal + withholdings;
@@ -235,6 +250,7 @@ function Onboarding(props) {
               id="onboarding-c1-right-form"
               title={forms[step - 1].title}
               formItems={forms[step - 1].items}
+              data={calculatorItems}
               onUpdate={onDataUpdate}
             />
             <div className="onboarding-back-div">

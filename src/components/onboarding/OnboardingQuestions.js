@@ -51,7 +51,7 @@ export const refundSize = {
   type: "DollarInput",
   question: "Estimate the size of the tax refund you received last year.",
   description: "",
-  options: [],
+  options: {},
   stateName: "estimatedRefund",
 };
 
@@ -61,7 +61,7 @@ export const educationExpenses = {
     "How much of your own money did you spend on educational expenses last year?",
   description:
     "This includes money spent on tuition, electronics, chargers, textbooks, and other supplies",
-  options: [],
+  options: {},
   stateName: "educationExpenses",
 };
 
@@ -70,9 +70,10 @@ export const studentLoans = {
   question: "How much of your student loans did you pay off in 2020?",
   description:
     "Most students usually don't begin loan repayment until graduation.",
-  options: [],
+  options: {},
   stateName: "loanPayments",
 };
+
 export const studentStatus = {
   type: "SingleSelect",
   question: "Were you a student for at least 5 months last year?",
@@ -106,7 +107,7 @@ export const intlStudent = {
   question: "Are you an international student?",
   description: "",
   options: { Yes: "Yes", No: "No" },
-  stateName: "student",
+  stateName: "international",
 };
 
 export const phoneNumber = {
@@ -114,5 +115,13 @@ export const phoneNumber = {
   question: "Phone Number",
   description: "",
   options: {},
-  stateName: "",
+  stateName: "phone",
+};
+
+export const refund = {
+  type: "Refund",
+  question: "",
+  description: "",
+  options: {},
+  stateName: "refund",
 };

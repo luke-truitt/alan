@@ -1,15 +1,17 @@
 .single-select-button-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 button.single-select-button {
   background-color: #ffffff;
   border: 1px solid #c6cacc;
   font-weight: normal;
+  width: 200px;
   color: #6d6d6d;
-  
+  margin-left: 20px;
+  margin-right: 20px;
 }
 button.single-select-button:hover {
   background-color: #d8dbe8;

@@ -8,8 +8,13 @@ import {
 } from "@material-ui/core/";
 
 import { theme } from "../../utils/constants.js";
+
 import { useHistory } from "react-router-dom";
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
+
+import {PageView, initGA, Event} from '../tracking/Tracking';
+const trackingId = 'UA-189058741-1';
+
 const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;
 
 function LandingPage(props) {
@@ -23,7 +28,12 @@ function LandingPage(props) {
       navTo();
     }
   };
+  useEffect(() => {
+    initGA(trackingId);
+    PageView();
+  });
   const navTo = () => {
+    Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
     addEmail(email);
     history.push({pathname: '/onboard', state: {email: email}}); 
   }

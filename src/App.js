@@ -9,10 +9,17 @@ import {
 import LandingPage from "./components/landing-page/LandingPage";
 import Onboarding from "./components/onboarding/Onboarding.js";
 import ErrorPage from "./components/error/ErrorPage";
+import RouteChangeTracker from "./utils/RouteChangeTracker";
 
+import {useEffect} from 'react';
 import "./global.css";
 
+import {PageView, initGA, Event} from './components/tracking/Tracking';
+const trackingId = 'UA-189058741-1';
+initGA(trackingId);
+
 function App() {
+  
   return (
     <div>
       <Router>
@@ -27,6 +34,7 @@ function App() {
             <ErrorPage/>
           </Route>
         </Switch>
+        <RouteChangeTracker/>
       </Router>
     </div>
   );

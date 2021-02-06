@@ -21,6 +21,7 @@ const InputTypes = {
   DollarInput,
   NameInput,
   PhoneNumberInput,
+  Refund
 };
 
 export function PhoneNumberInput(props) {
@@ -32,6 +33,7 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
+          onChange={(e) => props.onChange(e, {"stateName": "phone"})}
         />
       </div>
     </ThemeProvider>
@@ -47,8 +49,8 @@ export function NameInput(props) {
   return (
     <ThemeProvider theme={onboardingTheme}>
       <div className="form-item-container column-container">
-        <TextField label="First Name" autoComplete variant="outlined" />
-        <TextField label="Last Name" autoComplete variant="outlined" />
+        <TextField label="First Name" autoComplete variant="outlined" onChange={(e) => props.onChange(e, {"stateName": "firstName"})}/>
+        <TextField label="Last Name" autoComplete variant="outlined" onChange={(e) => props.onChange(e, {"stateName": "lastName"})}/>
       </div>
     </ThemeProvider>
   );
@@ -77,7 +79,7 @@ export function Dropdown(props) {
           {props.description}
         </Typography>
         <FormControl variant="outlined">
-          <Select onChange={props.onChange}>{items}</Select>
+          <Select onChange={(e) => props.onChange(e, {"stateName": props.stateName})}>{items}</Select>
         </FormControl>
       </div>
     </ThemeProvider>
@@ -146,9 +148,36 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            placeholder="0" onChange={(e) => props.onChange(e, props.stateName)}
+            placeholder="0" onChange={(e) => props.onChange(e, {"stateName": props.stateName})}
           />
         </FormControl>
+      </div>
+    </ThemeProvider>
+  );
+}
+export function Refund(props) {
+  const dataLabels = Object.entries(props.data).map(([name, value]) => (
+    <div>
+    <Typography
+          variant="h6"
+          color="textPrimary"
+          className="form-item-question"
+        >
+          {name}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          className="form-item-description"
+        >
+          {value}
+      </Typography>
+      </div>
+  ));
+  return (
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="form-item-container row-container">
+        {dataLabels}
       </div>
     </ThemeProvider>
   );
@@ -183,7 +212,8 @@ export function Form(props) {
       description={formItem.description}
       options={formItem.options}
       stateName={formItem.stateName}
-      onChange={(e) => onChange(e, formItem)}
+      data={props.data}
+      onChange={(e, item) => onChange(e, item)}
     />
   ));
 
