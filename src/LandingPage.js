@@ -25,7 +25,7 @@ function LandingPage(props) {
   };
   const navTo = () => {
     addEmail(email);
-    history.push({pathname: '/calculate', state: {email: email}}); 
+    history.push({pathname: '/onboard', state: {email: email}}); 
   }
   const axios = require('axios');
   const emailInput = useRef(null);
