@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   ThemeProvider,
   Typography,
@@ -6,23 +6,53 @@ import {
   Select,
   Button,
   MenuItem,
+  TextField,
   InputAdornment,
   OutlinedInput,
+  InputLabel,
 } from "@material-ui/core";
 import { onboardingTheme } from "./constants.js";
 import "./inputs.css";
 import "./styles.css";
-
+import InputMask from "react-input-mask";
 const InputTypes = {
   Dropdown,
   SingleSelect,
   DollarInput,
+  NameInput,
+  PhoneNumberInput,
 };
+
+export function PhoneNumberInput(props) {
+  return (
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="form-item-container column-container">
+        <TextField
+          className="form-item-phone-number"
+          label="Phone Number"
+          autoComplete
+          variant="outlined"
+        />
+      </div>
+    </ThemeProvider>
+  );
+}
 
 export const Input = (props) => {
   let SelectedInput = InputTypes[props.type];
   return <SelectedInput {...props} />;
 };
+
+export function NameInput(props) {
+  return (
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="form-item-container column-container">
+        <TextField label="First Name" autoComplete variant="outlined" />
+        <TextField label="Last Name" autoComplete variant="outlined" />
+      </div>
+    </ThemeProvider>
+  );
+}
 
 export function Dropdown(props) {
   const items = Object.entries(props.options).map(([option, index]) => (
@@ -40,7 +70,7 @@ export function Dropdown(props) {
           {props.question}
         </Typography>
         <Typography
-          variant="body2"
+          variant="caption"
           color="textSecondary"
           className="form-item-description"
         >
@@ -78,7 +108,7 @@ export function SingleSelect(props) {
           {props.question}
         </Typography>
         <Typography
-          variant="body2"
+          variant="caption"
           color="textSecondary"
           className="form-item-description"
         >
@@ -125,19 +155,17 @@ export function DollarInput(props) {
 }
 let dataChange = false;
 export function Form(props) {
-
   const [fields, setFields] = useState({});
 
-
   useEffect(() => {
-    if(dataChange) {
-    props.onUpdate(fields);
-    dataChange=false;
+    if (dataChange) {
+      props.onUpdate(fields);
+      dataChange = false;
     }
   });
 
   const onChange = (e, formItem) => {
-    const dic = {[formItem.stateName]: e.target.value};
+    const dic = { [formItem.stateName]: e.target.value };
     updateDict(dic);
     dataChange = true;
   };
@@ -160,11 +188,13 @@ export function Form(props) {
   ));
 
   return (
-    <div className="form-container">
-      <Typography variant="h4" color="textPrimary" className="form-title">
-        <span className="word-highlight">{props.title}</span>
-      </Typography>
-      {inputs}
-    </div>
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="form-container">
+        <Typography variant="h4" color="textPrimary" className="form-title">
+          <span className="word-highlight">{props.title}</span>
+        </Typography>
+        {inputs}
+      </div>
+    </ThemeProvider>
   );
 }
