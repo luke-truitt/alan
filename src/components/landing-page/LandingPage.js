@@ -1,5 +1,5 @@
 import "./landing-page.css";
-import "./global.css";
+import "../../global.css";
 import {
   ThemeProvider,
   Button,
@@ -7,7 +7,7 @@ import {
   TextField
 } from "@material-ui/core/";
 
-import { theme } from "./constants.js";
+import { theme } from "../../utils/constants.js";
 import { useHistory } from "react-router-dom";
 import React, {useRef, useState} from "react";
 const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;

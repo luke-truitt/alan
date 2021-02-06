@@ -11,7 +11,7 @@ body {
 }
 
 .calc-root {
-  background-image: url("./images/background-pattern.svg");
+  background-image: url("../../images/background-pattern.svg");
 }
 .form-item {
   display: flex;

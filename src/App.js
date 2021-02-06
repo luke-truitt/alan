@@ -5,11 +5,9 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
-import Calculator2 from "./Calculator2.js";
-import LandingPage from "./LandingPage";
+import LandingPage from "./components/landing-page/LandingPage";
 import "./global.css";
-import CalculationCard from "./CalculationCard.js";
-import Onboarding from "./Onboarding.js";
+import Onboarding from "./components/onboarding/Onboarding.js";
 
 function App() {
   return (
@@ -18,9 +16,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <LandingPage />
-          </Route>
-          <Route path="/calculate">
-            <Calculator2 />
           </Route>
           <Route path="/onboard">
             <Onboarding />

@@ -9,9 +9,9 @@ import {
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import {useState, useEffect} from "react";
-import { themeColor } from "./constants.js";
-import "./calculator_page.css";
-import { Dropdown } from "./formConstants.js";
+import { themeColor } from "../../utils/constants.js";
+import "../Calculators/calculator_page.css";
+import { Dropdown } from "../formConstants.js";
 
 const one_opts = {"$0-$5,000": 5000, "$5,000-$10,000": 10000, "$10,000-$20,000": 20000, "$20,000-$30,000": 30000, "$30,000-$40,000": 40000, "$40,000+": 50000}
 const q1 = {

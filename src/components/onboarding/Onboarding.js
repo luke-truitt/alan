@@ -7,11 +7,11 @@ import {
   Button,
   ThemeProvider,
 } from "@material-ui/core";
-import { onboardingTheme, ProgressBar } from "./constants.js";
+import { onboardingTheme, ProgressBar } from "../../utils/constants.js";
 import "./onboarding.css";
-import "./styles.css";
-import { Form } from "./Inputs.js";
-import snap from "./images/snap.svg";
+import "../../styles.css";
+import { Form } from "../inputs/Inputs.js";
+import snap from "../../images/snap.svg";
 import {
   income,
   dependence,
