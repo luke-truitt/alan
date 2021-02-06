@@ -7,12 +7,11 @@ import {
   Button,
   ThemeProvider,
 } from "@material-ui/core";
-import { onboardingTheme } from "./constants.js";
+import { onboardingTheme, ProgressBar } from "./constants.js";
 import "./onboarding.css";
 import "./styles.css";
 import { Form } from "./Inputs.js";
 import snap from "./images/snap.svg";
-
 import {
   income,
   dependence,
@@ -24,7 +23,7 @@ import {
   studentStatus,
 } from "./OnboardingQuestions.js";
 import { useLocation } from "react-router-dom";
-import {useState,useEffect} from "react"
+import { useState, useEffect } from "react";
 const forms = [
   {
     title: "Income",
@@ -41,13 +40,12 @@ const forms = [
 ];
 
 function Onboarding(props) {
-
   const [step, setStep] = useState(1);
   const [fields, setFields] = useState({});
 
   const useEffect = () => {
     console.log(fields);
-  }
+  };
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
       setFields((fields) => ({ ...fields, [key]: value }));
@@ -173,7 +171,7 @@ function Onboarding(props) {
   };
 
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={onboardingTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
         <div className="onboarding-c1-left row-container">
           <div container className="onboarding-c1-left-div">
@@ -188,7 +186,17 @@ function Onboarding(props) {
         </div>
         <div className="onboarding-c1-right row-container">
           <div container className="onboarding-c1-right-div">
-            <Form title={forms[step-1].title} formItems={forms[step-1].items} onUpdate={onDataUpdate}/>
+            <ProgressBar
+              value={step * 20}
+              className="onboarding-c1-right-progress-bar"
+            />
+
+            <Form
+              id="onboarding-c1-right-form"
+              title={forms[step - 1].title}
+              formItems={forms[step - 1].items}
+              onUpdate={onDataUpdate}
+            />
             <div className="onboarding-back-div">
               <Button
                 variant="contained"

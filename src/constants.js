@@ -1,4 +1,23 @@
 import { createMuiTheme } from "@material-ui/core/";
+import React from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+const LinearProgressBar = withStyles((theme) => ({
+  root: {
+    height: 10,
+  },
+  colorPrimary: {
+    backgroundColor: "#FFFFFF",
+  },
+  bar: {
+    backgroundColor: "#00B32A",
+  },
+}))(LinearProgress);
+
+export function ProgressBar(props) {
+  return <LinearProgressBar variant="determinate" value={props.value} />;
+}
 
 export const onboardingTheme = createMuiTheme({
   palette: {
