@@ -9,8 +9,18 @@ button.single-select-button {
   border: 1px solid #c6cacc;
   font-weight: normal;
   color: #6d6d6d;
+  
 }
-
+button.single-select-button:hover {
+  background-color: #d8dbe8;
+}
+button.selected {
+  background-color: #d8dbe8;
+  border: 1px solid #4056a1;
+  width: 32%;
+  font-weight: normal;
+  color: #6d6d6d;
+}
 .form-item-description {
   padding-bottom: 1rem;
 }
@@ -22,6 +32,7 @@ button.single-select-button {
   padding-bottom: 2rem;
 }
 
+<<<<<<< HEAD
 div.form-item-container.column-container {
   display: flex;
   flex-direction: row;
@@ -38,3 +49,27 @@ div.form-item-container.column-container > *:first-child {
 div.form-item-container > .form-item-phone-number {
   width: 100%;
 }
+=======
+div.form-container {
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
+
+}
+
+@media only screen and (max-width: 900px) {
+  button.single-select-button {
+    height: 50px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .single-select-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+>>>>>>> 93591b81911f57da9e993ee2c8f97567aabd57cc

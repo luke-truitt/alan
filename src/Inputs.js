@@ -58,6 +58,7 @@ export function Dropdown(props) {
   const items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>
   ));
+
   return (
     <ThemeProvider theme={onboardingTheme}>
       <div className="form-item-container row-container">
@@ -84,8 +85,15 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
+
+  const [selected, setSelected] = useState(-1);
+
+  const updateButtons = (index) => {
+    setSelected(index);
+    props.onChange({"target" : {"value": index}}, {"stateName": props.stateName});
+  }
   const buttons = Object.entries(props.options).map(([option, index]) => (
-    <Button variant="contained" value={index} className="single-select-button">
+    <Button variant="contained" value={index} onClick={() => updateButtons(index)} className={ selected == index ? "single-select-button selected" : "single-select-button"}>
       {option}
     </Button>
   ));
@@ -138,7 +146,7 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            defaultValue="0"
+            placeholder="0" onChange={(e) => props.onChange(e, props.stateName)}
           />
         </FormControl>
       </div>
@@ -174,6 +182,7 @@ export function Form(props) {
       question={formItem.question}
       description={formItem.description}
       options={formItem.options}
+      stateName={formItem.stateName}
       onChange={(e) => onChange(e, formItem)}
     />
   ));
