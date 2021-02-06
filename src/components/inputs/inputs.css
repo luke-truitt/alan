@@ -47,14 +47,13 @@ div.form-item-container.column-container > * {
 div.form-item-container.column-container > *:first-child {
   margin-right: 1rem;
 }
-div.form-item-container > .form-item-phone-number {
+div.form-item-container > .form-item-text-field {
   width: 100%;
 }
 div.form-container {
   width: 100%;
   height: 80%;
   overflow-y: scroll;
-
 }
 
 @media only screen and (max-width: 900px) {
@@ -71,4 +70,11 @@ div.form-container {
     align-items: center;
     justify-content: space-between;
   }
+}
+
+.embedded-email-input-container > * {
+  align-self: center;
+}
+.embedded-email-input-field > * {
+  height: 60px;
 }
