@@ -28,7 +28,7 @@ export function PhoneNumberInput(props) {
     <ThemeProvider theme={onboardingTheme}>
       <div className="form-item-container column-container">
         <TextField
-          className="form-item-phone-number"
+          className="form-item-text-field"
           label="Phone Number"
           autoComplete
           variant="outlined"
@@ -85,15 +85,26 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
-
   const [selected, setSelected] = useState(-1);
 
   const updateButtons = (index) => {
     setSelected(index);
-    props.onChange({"target" : {"value": index}}, {"stateName": props.stateName});
-  }
+    props.onChange(
+      { target: { value: index } },
+      { stateName: props.stateName }
+    );
+  };
   const buttons = Object.entries(props.options).map(([option, index]) => (
-    <Button variant="contained" value={index} onClick={() => updateButtons(index)} className={ selected == index ? "single-select-button selected" : "single-select-button"}>
+    <Button
+      variant="contained"
+      value={index}
+      onClick={() => updateButtons(index)}
+      className={
+        selected == index
+          ? "single-select-button selected"
+          : "single-select-button"
+      }
+    >
       {option}
     </Button>
   ));
@@ -146,7 +157,8 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            placeholder="0" onChange={(e) => props.onChange(e, props.stateName)}
+            placeholder="0"
+            onChange={(e) => props.onChange(e, props.stateName)}
           />
         </FormControl>
       </div>
@@ -194,6 +206,32 @@ export function Form(props) {
           <span className="word-highlight">{props.title}</span>
         </Typography>
         {inputs}
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export function EmbeddedEmailInput(props) {
+  return (
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="embedded-email-input-container form-item-container column-container">
+        <TextField
+          type="email"
+          className="form-item-text-field embedded-email-input-field"
+          variant="outlined"
+          value={props.emailValue}
+          onKeyDown={props.onKeyDown}
+          InputProps={{ disableUnderline: true }}
+          onChange={(e) => props.setEmail(e.target.value)}
+        />
+        <Button
+          className="embedded-email-input-button"
+          variant="contained"
+          color="secondary"
+          onClick={props.navTo}
+        >
+          Calculate my refund
+        </Button>
       </div>
     </ThemeProvider>
   );

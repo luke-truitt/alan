@@ -1,23 +1,29 @@
 import "./landing-page.css";
-import "./global.css";
+import "./styles.css";
+import Lottie from "react-lottie";
+import animationData from "./lotties/landing-page-animation.json";
 import {
   ThemeProvider,
   Button,
   Typography,
-  TextField
+  TextField,
 } from "@material-ui/core/";
-
-import { theme } from "./constants.js";
+import { EmbeddedEmailInput } from "./Inputs.js";
+import { onboardingTheme } from "./constants.js";
 import { useHistory } from "react-router-dom";
-import React, {useRef, useState} from "react";
-const { REACT_APP_API_BASE_URL, REACT_APP_WAITLIST_URL, REACT_APP_CALCULATOR_URL } = process.env;
+import React, { useRef, useState } from "react";
+const {
+  REACT_APP_API_BASE_URL,
+  REACT_APP_WAITLIST_URL,
+  REACT_APP_CALCULATOR_URL,
+} = process.env;
 
 function LandingPage(props) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const history = useHistory();
   const keyDown = (e) => {
     var code = e.keyCode || e.which;
-    
+
     if (code === 13 || code === 32 || code === 39) {
       //13 is the enter keycode
       navTo();
@@ -25,13 +31,14 @@ function LandingPage(props) {
   };
   const navTo = () => {
     addEmail(email);
-    history.push({pathname: '/calculate', state: {email: email}}); 
-  }
-  const axios = require('axios');
+    history.push({ pathname: "/calculate", state: { email: email } });
+  };
+  const axios = require("axios");
   const emailInput = useRef(null);
   function addEmail(email) {
-      axios.post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
-        email: email
+    axios
+      .post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
+        email: email,
       })
       .then(function (response) {
         console.log(response);
@@ -40,56 +47,46 @@ function LandingPage(props) {
         console.log(error);
       });
   }
+  const lottieOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="header" />
-      <div className="outer-container" id="outer-container-mobile">
-        <div className="inner-container-left" id="inner-container-left-mobile">
-          <Typography variant="h1" color="text-primary" id="h1-mobile">
-            Get up to a{" "}
-            <span
-              className="underline-highlight"
-              id="underline-highlight-mobile"
-            >
-              $5,000
-            </span>{" "}
-            tax refund in{" "}
-            <span
-              className="underline-highlight"
-              id="underline-highlight-mobile"
-            >
-              10 minutes
-            </span>
-            .
+    <ThemeProvider theme={onboardingTheme}>
+      <div className="landing-c0 row-container">
+        <div className="landing-c1 row-container">
+          <Typography
+            variant="h2"
+            color="text-primary"
+            className="landing-title"
+          >
+            Get up to a <span className="word-highlight">$5,000</span> tax
+            refund in <span className="word-highlight">10 minutes</span>.
           </Typography>
-          <div className="embedded-field input-row" id="embedded-field-mobile">
-            <TextField
-              id="embedded-field-input-mobile"
-              className="embedded-field-input"
-              placeholder="What's your email?"
-              type="email"
-              value={email}
-              onKeyDown={keyDown}
-              InputProps={{disableUnderline: true}}
-              onChange={(e) => setEmail(e.target.value)} 
-            />
-            <Button
-              className="embedded-field-button"
-              id="embedded-field-button-mobile"
-              variant="contained"
-              color="secondary"
-              onClick={navTo}
-            >
-              Calculate my refund
-            </Button>
+          <EmbeddedEmailInput
+            className="landing-input"
+            emailValue={email}
+            setEmail={setEmail}
+            keyDown={keyDown}
+          />
 
-          </div>
-
-          <Typography variant="h3" color="text-primary" id="h3-mobile">
-            Get what you’re owed. We are focused on helping you understand and
-            quickly file for credits you’re uniquely qualified for.{" "}
+          <Typography
+            variant="body2"
+            color="text-secondary"
+            className="landing-subtitle"
+          >
+            The government owes students money. Alan will find you the credits
+            you qualify for, maximize your refund, explain why. All in under 10
+            minutes.
           </Typography>
+        </div>
+        <div className="landing-animation-container">
+          <Lottie isPaused="landing-animation" options={lottieOptions} />
         </div>
       </div>
     </ThemeProvider>
