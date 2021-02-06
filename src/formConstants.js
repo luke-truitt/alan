@@ -17,7 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { themeColor } from "./constants.js";
 import "./calculator_page.css";
 export function Dropdown(props) {
-  const items = props.options.map((option, index) => (
+  const items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>
   ));
   return (
@@ -33,7 +33,7 @@ export function Dropdown(props) {
         {props.description}
       </Typography>
       <FormControl variant="outlined">
-        <Select className="inout0container">{items}</Select>
+        <Select className="inout0container" onChange={props.onChange}>{items}</Select>
       </FormControl>
     </div>
   );
@@ -57,6 +57,7 @@ export function DollarInput(props) {
           className="input-container"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
           defaultValue="0"
+          onChange={props.onChange}
         />
       </FormControl>
     </div>
@@ -77,7 +78,7 @@ export function YesNo(props) {
         {props.description}
       </Typography>
       <FormControl>
-        <RadioGroup row>
+        <RadioGroup row onChange={props.onChange}>
           <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
           <FormControlLabel value="No" control={<Radio />} label="No" />
         </RadioGroup>

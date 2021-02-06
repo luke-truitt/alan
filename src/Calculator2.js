@@ -23,7 +23,42 @@ const {
   REACT_APP_CALCULATOR_URL,
 } = process.env;
 
-function Calculator2(props) {
+function Calculator2({props}) {
+  const [incomeFields, setIncomeFields] = useState({});
+  const [deductionFields, setDeductionFields] = useState({});
+  const [creditsFields, setCreditsFields] = useState({});
+  const [personalFields, setPersonalFields] = useState({});
+
+  const handleIncomeChange = (data) => {
+    let newFields = { ...incomeFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    setIncomeFields(newFields);
+  }
+  const handleDeductionsChange = (data) => {
+    let newFields = { ...deductionFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
+    setDeductionFields(newFields);
+    console.log(newFields);
+  }
+  const handleHistoryChange = (data) => {
+    let newFields = { ...creditsFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
+    setCreditsFields(newFields);
+    console.log(newFields);
+  }
+  const handlePersonalChange = (data) => {
+    let newFields = { ...personalFields };
+    newFields['a1'] = data['a1'];
+    newFields['a2'] = data['a2'];
+    newFields['a3'] = data['a3'];
+    setPersonalFields(newFields);
+    console.log(newFields);
+  }
   let location = useLocation();
   let email = "";
   try {
@@ -31,6 +66,7 @@ function Calculator2(props) {
   } catch {
     email = "";
   }
+
   const history = useHistory();
   const goHome = () => {
     history.push({ pathname: "/" });
@@ -46,13 +82,13 @@ function Calculator2(props) {
   const axios = require("axios");
   useEffect(() => {
     if (step == 3) {
-      dedLabel.current.innerHTML = deductions;
-      taxIncomeLabel.current.innerHTML = taxableIncome;
-      taxBillLabel.current.innerHTML = taxBill;
+      // dedLabel.current.innerHTML = deductions;
+      // taxIncomeLabel.current.innerHTML = taxableIncome;
+      // taxBillLabel.current.innerHTML = taxBill;
     } else if (step == 4) {
-      creditsLabel.current.innerHTML = credits;
+      // creditsLabel.current.innerHTML = credits;
     } else if (step == 5) {
-      sendData();
+      // sendData();
     }
   });
   function getWithholdings() {
@@ -125,63 +161,54 @@ function Calculator2(props) {
       setStep(step - 1);
     }
   };
-  let estIncome,
-    dependent,
-    estimatedRefund,
-    eduCredits,
-    refund,
-    firstName,
-    lastName,
-    phone,
-    classYear,
-    howFiled,
-    international;
+
 
   const forwardClick = () => {
     if (step == 1) {
-      estIncome = incomeInput.current.value;
-      dependent = depInput.current.value;
-      estimatedRefund = refInput.current.value;
-      incomeLabel.current.innerHTML = estIncome;
-      const d = {
-        email: email,
-        estimatedIncome: estIncome,
-        dependent: dependent,
-        estimatedRefund: estimatedRefund,
-      };
-      updateDict(d);
+      // estIncome = incomeInput.current.value;
+      // dependent = depInput.current.value;
+      // estimatedRefund = refInput.current.value;
+      // incomeLabel.current.innerHTML = estIncome;
+      
+      // const d = {
+      //   email: email,
+      //   estimatedIncome: estIncome,
+      //   dependent: dependent,
+      //   estimatedRefund: estimatedRefund,
+      // };
+      // updateDict(d);
     } else if (step == 2) {
-      getWithholdings();
-      setDeductions(textInput2.current.value);
-      setTaxableIncome(
-        formData["estimatedIncome"] - textInput2.current.value - 12400
-      );
-      getTaxBill(
-        formData["estimatedIncome"] - textInput2.current.value - 12400
-      );
-    } else if (step == 3) {
-      detCredits();
-      eduCredits = eduCreditInput.current.value;
-      updateDict({ taxCredits: eduCredits });
+    //   getWithholdings();
+    //   setDeductions(textInput2.current.value);
+    //   setTaxableIncome(
+    //     formData["estimatedIncome"] - textInput2.current.value - 12400
+    //   );
+    //   getTaxBill(
+    //     formData["estimatedIncome"] - textInput2.current.value - 12400
+    //   );
+    // } else if (step == 3) {
+    //   detCredits();
+    //   eduCredits = eduCreditInput.current.value;
+    //   updateDict({ taxCredits: eduCredits });
     } else if (step == 4) {
-      refund = getRefund();
-      refundLabel.current.innerHTML = refund;
-      refundMainLabel.current.innerHTML = refund;
-      firstName = firstInput.current.value;
-      lastName = lastInput.current.value;
-      phone = phoneInput.current.value;
-      classYear = yearInput.current.value;
-      howFiled = filedInput.current.value;
-      international = intlInput.current.value;
-      const dd = {
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone,
-        classYear: classYear,
-        howFiled: howFiled,
-        international: international,
-      };
-      updateDict(dd);
+      // refund = getRefund();
+      // refundLabel.current.innerHTML = refund;
+      // refundMainLabel.current.innerHTML = refund;
+      // firstName = firstInput.current.value;
+      // lastName = lastInput.current.value;
+      // phone = phoneInput.current.value;
+      // classYear = yearInput.current.value;
+      // howFiled = filedInput.current.value;
+      // international = intlInput.current.value;
+      // const dd = {
+      //   firstName: firstName,
+      //   lastName: lastName,
+      //   phone: phone,
+      //   classYear: classYear,
+      //   howFiled: howFiled,
+      //   international: international,
+      // };
+      // updateDict(dd);
     }
     if (step >= 5) {
       setStep(5);
@@ -190,49 +217,37 @@ function Calculator2(props) {
     }
   };
 
-  const incomeInput = useRef(null);
-  const depInput = useRef(null);
-  const refInput = useRef(null);
-  const textInput2 = useRef(null);
-  const textInput3 = useRef(null);
-  const eduCreditInput = useRef(null);
-  const firstInput = useRef(null);
-  const lastInput = useRef(null);
-  const phoneInput = useRef(null);
-  const yearInput = useRef(null);
-  const filedInput = useRef(null);
-  const intlInput = useRef(null);
-
-  const incomeLabel = useRef(null);
-  const dedLabel = useRef(null);
-  const taxIncomeLabel = useRef(null);
-  const taxBillLabel = useRef(null);
-  const creditsLabel = useRef(null);
-  const refundLabel = useRef(null);
-  const refundMainLabel = useRef(null);
-
   return (
     <ThemeProvider theme={themeColor}>
       <div className="root" className="container-0">
         <Typography variant="h1" className="left-title">
-          <span className="underline-highlight">Income</span>
+          <span className="underline-highlight" style={{display: step<=1 ? "" : "none"}}>Income</span>
+          <span className="underline-highlight" style={{display: step==2 ? "" : "none"}}>Deductions</span>
+          <span className="underline-highlight" style={{display: step==3 ? "" : "none"}}>Credits</span>
+          <span className="underline-highlight" style={{display: step==4 ? "" : "none"}}>Personal Info</span>
+          <span className="underline-highlight" style={{display: step>=5 ? "" : "none"}}>Your Refund</span>
         </Typography>
         <div className="container-1">
           <div className="container-2-left">
-            <PersonalInfoCard />
+            <IncomeCard stepNum={step} onUpdate={handleIncomeChange}></IncomeCard>
+            <EducationCard stepNum={step} onUpdate={handleDeductionsChange}></EducationCard>
+            <HistoryCard stepNum={step} onUpdate={handleHistoryChange}></HistoryCard>
+            <PersonalInfoCard stepNum={step} onUpdate={handleHistoryChange}></PersonalInfoCard>
             <div className="button-container" id="button-container-mobile">
               <Button
                 color="primary"
                 variant="contained"
                 id="previous-button"
-                style={{ boxShadow: "none" }}
+                onClick={backClick}
+                style={{ boxShadow: "none", display: step>=2 ? "" : "none"  }}
               >
                 Previous
               </Button>
               <Button
                 color="secondary"
-                style={{ boxShadow: "none" }}
+                style={{ boxShadow: "none", display: step<=4 ? "" : "none" }}
                 variant="contained"
+                onClick={forwardClick}
               >
                 Next
               </Button>
