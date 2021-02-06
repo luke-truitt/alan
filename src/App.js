@@ -5,11 +5,12 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
-import Calculator2 from "./Calculator2.js";
-import LandingPage from "./LandingPage";
+
+import LandingPage from "./components/landing-page/LandingPage";
+import Onboarding from "./components/onboarding/Onboarding.js";
+import ErrorPage from "./components/error/ErrorPage";
+
 import "./global.css";
-import CalculationCard from "./CalculationCard.js";
-import Onboarding from "./Onboarding.js";
 
 function App() {
   return (
@@ -19,14 +20,11 @@ function App() {
           <Route exact path="/">
             <LandingPage />
           </Route>
-          <Route path="/calculate">
-            <Calculator2 />
-          </Route>
           <Route path="/onboard">
             <Onboarding />
           </Route>
           <Route>
-            <LandingPage/>
+            <ErrorPage/>
           </Route>
         </Switch>
       </Router>

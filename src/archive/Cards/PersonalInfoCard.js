@@ -10,9 +10,9 @@ import {
 } from "@material-ui/core/";
 import ReactPhoneInput from "react-phone-input-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
-import { themeColor } from "./constants.js";
-import "./calculator_page.css";
-import { DollarInput, YesNo, Dropdown } from "./formConstants.js";
+import { themeColor } from "../../utils/constants.js";
+import "../Calculators/calculator_page.css";
+import { DollarInput, YesNo, Dropdown } from "../formConstants.js";
 import { useState, useEffect } from "react";
 
 const q1 = {

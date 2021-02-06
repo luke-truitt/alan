@@ -9,9 +9,9 @@ import {
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
-import { themeColor } from "./constants.js";
-import "./calculator_page.css";
-import { DollarInput, YesNo, Dropdown } from "./formConstants.js";
+import { themeColor } from "../../utils/constants.js";
+import "../Calculators/calculator_page.css";
+import { DollarInput, YesNo, Dropdown } from "../formConstants.js";
 
 const q1 = {
   question: "Have you ever claimed educational tax credits before?",

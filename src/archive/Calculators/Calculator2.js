@@ -12,14 +12,14 @@ import {
   CardContent,
 } from "@material-ui/core/";
 
-import { themeColor } from "./constants.js";
+import { themeColor } from "../../utils/constants.js";
 import "./calculator_page.css";
 
 import CalculationCard from "./CalculationCard.js";
-import IncomeCard from "./IncomeCard.js";
-import EducationCard from "./EducationCard.js";
-import HistoryCard from "./HistoryCard.js";
-import PersonalInfoCard from "./PersonalInfoCard.js";
+import IncomeCard from "../Cards/IncomeCard.js";
+import EducationCard from "../Cards/EducationCard.js";
+import HistoryCard from "../Cards/HistoryCard.js";
+import PersonalInfoCard from "../Cards/PersonalInfoCard.js";
 
 const {
   REACT_APP_API_BASE_URL,

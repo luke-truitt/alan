@@ -7,11 +7,10 @@ import {
   Button,
   ThemeProvider,
 } from "@material-ui/core";
-import { onboardingTheme, ProgressBar } from "./constants.js";
 import "./onboarding.css";
-import "./styles.css";
-import { Form } from "./Inputs.js";
-import snap from "./images/snap.svg";
+import "../../styles.css";
+import snap from "../../images/snap.svg";
+
 import {
   income,
   dependence,
@@ -26,6 +25,9 @@ import {
   phoneNumber,
   intlStudent,
 } from "./OnboardingQuestions.js";
+import { onboardingTheme, ProgressBar } from "../../utils/constants.js";
+import { Form } from "../inputs/Inputs.js";
+
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -52,6 +54,7 @@ function Onboarding(props) {
   useEffect(() => {
     console.log(fields);
   });
+
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
       setFields((fields) => ({ ...fields, [key]: value }));
@@ -86,41 +89,27 @@ function Onboarding(props) {
   // Click Next Logic
   const forwardClick = () => {
     if (step == 1) {
-      // const d = {
-      //   email: email,
-      //   estimatedIncome: incomeFields['estimatedIncome'],
-      //   dependent: incomeFields['dependent'],
-      // };
-      // updateDict(d);
+      console.log(fields);
+      console.log(calculatorItems);
+      onDataUpdate({
+        "email": email
+      })
     } else if (step == 2) {
-    //   getWithholdings();
-    //   setDeductions(textInput2.current.value);
-    //   setTaxableIncome(
-    //     formData["estimatedIncome"] - textInput2.current.value - 12400
-    //   );
-    //   getTaxBill(
-    //     formData["estimatedIncome"] - textInput2.current.value - 12400
-    //   );
+      const data = {"withholdings": getWithholdings(), "deductions": getDeductions()};
+      updateCalcData(data);
+      console.log(fields);
+      console.log(calculatorItems);
     }
     else if (step == 3) {
-    //   detCredits();
-      // const ddd = {
-      //   taxCredits: historyFields['eduCredits'],
-      //   howFiled: historyFields['howFiled'],
-      //   estimatedRefund: historyFields['estRefund'],
-      // }
-      // updateDict(ddd);
+      const data = {"credits": getCredits(), "taxableIncome": getTaxableIncome(), "taxBill": getTaxBill()}
+      updateCalcData(data);
+      console.log(fields);
+      console.log(calculatorItems);
     } else if (step == 4) {
-      // refund = getRefund();
-      
-      // const dd = {
-      //   firstName: personalFields["firstName"],
-      //   lastName: personalFields["lastName"],
-      //   phone: personalFields["phone"],
-      //   classYear: personalFields["classYear"],
-      //   international: personalFields["international"],
-      // };
-      // updateDict(dd);
+      const data = {"refund": getRefund()}
+      updateCalcData(data);
+      console.log(fields);
+      console.log(calculatorItems);
     }
     if (step >= 5) {
       setStep(5);
@@ -132,21 +121,95 @@ function Onboarding(props) {
   /*
     State control for managing data on this page
   */
-  let location = useLocation();
-  let email = "";
-  try {
-    email = location.state["email"];
-  } catch {
-    email = "";
-  }
+ let location = useLocation();
+ let email = "";
+ try {
+   email = location.state["email"];
+ } catch {
+   email = "";
+ }
 
   // Data to be sent to server
-  const [formData, setFormData] = useState({});
-  const updateDict = (d) => {
+  const [calculatorItems, setCalculatorItems] = useState({});
+  const updateCalcData = (d) => {
     for (const [key, value] of Object.entries(d)) {
-      setFormData((formData) => ({ ...formData, [key]: value }));
+      setCalculatorItems((calculatorItems) => ({ ...calculatorItems, [key]: value }));
     }
   };
+
+  /*
+    Finance Utilities
+  */
+
+  // Getting the estimated withholdings based on income input
+  function getWithholdings() {
+    const inc = fields["estimatedIncome"];
+    let estWithholdings = 0;
+    if (inc < 9875) {
+      estWithholdings = inc * 0.1;
+    } else if (inc < 40125) {
+      estWithholdings = (987.5 + (inc - 9875) * 0.12);
+    } else if (inc < 85525) {
+      estWithholdings = (4617.5 + (inc - 40125) * 0.22);
+    } else if (inc < 163301) {
+      estWithholdings = (14605.5 + (inc - 85525) * 0.24);
+    } else if (inc < 207350) {
+      estWithholdings = (33271.5 + (inc - 163300) * 0.32);
+    } else if (inc < 518400) {
+      estWithholdings = (47367.5 + (inc - 207350) * 0.35);
+    } else {
+      estWithholdings = (156235 + (inc - 518400) * 0.37);
+    }
+    return estWithholdings;
+  }
+
+  function getDeductions() {
+    return 0;
+  }
+  function getTaxableIncome() {
+    const income = fields['estimatedIncome'];
+    const deductions = fields['deductions'];
+    return income - deductions - 12400;
+  }
+
+  // Getting the tax bill based on estimated taxable income
+  function getTaxBill() {
+    const income = getTaxableIncome();
+    let bill = 0;
+    if (income < 0) {
+      bill = 0;
+    } else if (income < 9875) {
+      bill = income * 0.1;
+    } else if (income < 40125) {
+      bill = (987.5 + (income - 9875) * 0.12);
+    } else if (income < 85525) {
+      bill = (4617.5 + (income - 40125) * 0.22);
+    } else if (income < 163301) {
+      bill = (14605.5 + (income - 85525) * 0.24);
+    } else if (income < 207350) {
+      bill = (33271.5 + (income - 163300) * 0.32);
+    } else if (income < 518400) {
+      bill = (47367.5 + (income - 207350) * 0.35);
+    } else {
+      bill = (156235 + (income - 518400) * 0.37);
+    }
+    return bill;
+  }
+
+  // Getting the estimated credits based on their student status
+  function getCredits() {
+    return 2500;
+  }
+
+  // Getting their refund based on all data
+  function getRefund() {
+    const credits = calculatorItems['credits'];
+    const taxBill = calculatorItems['taxBill'];
+    const tempVal = Math.min(credits - taxBill, 1000);
+    const withholdings = calculatorItems['withholdings'];
+    const refund = tempVal + withholdings;
+    return refund;
+  }
 
   return (
     <ThemeProvider theme={onboardingTheme} className="onboarding">

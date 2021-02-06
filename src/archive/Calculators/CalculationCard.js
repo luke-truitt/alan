@@ -1,6 +1,6 @@
 import { ThemeProvider, Grid, Card, CardContent } from "@material-ui/core/";
 import CalculationCardRow from "./CalculationCardRow.js";
-import { themeColor } from "./constants.js";
+import { themeColor } from "../../utils/constants.js";
 import "./calculator_page.css";
 
 const props_template = [

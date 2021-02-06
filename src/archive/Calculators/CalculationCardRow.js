@@ -1,10 +1,10 @@
 import { ThemeProvider, Typography, Link, Grid } from "@material-ui/core/";
-import add_icon from "./images/add.svg";
-import subtract_icon from "./images/subtract.svg";
-import multiply_icon from "./images/multiply.svg";
-import equal_icon from "./images/equal.svg";
+import add_icon from "../../images/add.svg";
+import subtract_icon from "../../images/subtract.svg";
+import multiply_icon from "../../images/multiply.svg";
+import equal_icon from "../../images/equal.svg";
 import "./calculator_page.css";
-import { themeColor } from "./constants.js";
+import { themeColor } from "../../utils/constants.js";
 
 const SYMBOLS = {
   add: add_icon,

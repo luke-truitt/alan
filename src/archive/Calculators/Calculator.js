@@ -4,7 +4,7 @@ import {
   withRouter
 } from "react-router-dom";
 import "./calculator.css";
-import {} from ".";
+import {} from "../..";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 

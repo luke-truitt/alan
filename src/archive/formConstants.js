@@ -15,8 +15,8 @@ import {
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { themeColor } from "./constants.js";
-import "./calculator_page.css";
+import { themeColor } from "../utils/constants.js";
+import "./Calculators/calculator_page.css";
 export function Dropdown(props) {
   let items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>

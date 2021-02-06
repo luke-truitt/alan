@@ -11,10 +11,10 @@ import {
   OutlinedInput,
   InputLabel,
 } from "@material-ui/core";
-import { onboardingTheme } from "./constants.js";
+import { onboardingTheme } from "../../utils/constants.js";
 import "./inputs.css";
-import "./styles.css";
-import InputMask from "react-input-mask";
+import "../../styles.css";
+
 const InputTypes = {
   Dropdown,
   SingleSelect,
