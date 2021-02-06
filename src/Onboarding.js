@@ -157,12 +157,11 @@ function Onboarding(props) {
           <img className="onboarding-c1-left-img" src={snap}></img>
         </div>
         <div className="onboarding-c1-right row-container">
+          <ProgressBar
+            value={step * 20}
+            className="onboarding-c1-right-progress-bar"
+          />
           <div container className="onboarding-c1-right-div">
-            <ProgressBar
-              value={step * 20}
-              className="onboarding-c1-right-progress-bar"
-            />
-
             <Form
               id="onboarding-c1-right-form"
               title={forms[step - 1].title}
