@@ -5,9 +5,12 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
+
 import LandingPage from "./components/landing-page/LandingPage";
-import "./global.css";
 import Onboarding from "./components/onboarding/Onboarding.js";
+import ErrorPage from "./components/error/ErrorPage";
+
+import "./global.css";
 
 function App() {
   return (
@@ -21,7 +24,7 @@ function App() {
             <Onboarding />
           </Route>
           <Route>
-            <LandingPage/>
+            <ErrorPage/>
           </Route>
         </Switch>
       </Router>
