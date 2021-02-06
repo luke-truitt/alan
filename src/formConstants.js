@@ -11,15 +11,17 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  InputLabel
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { themeColor } from "./constants.js";
 import "./calculator_page.css";
 export function Dropdown(props) {
-  const items = Object.entries(props.options).map(([option, index]) => (
+  let items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>
   ));
+  
   return (
     <div className="form-item">
       <Typography variant="h6" color="textPrimary" className="question-text">
@@ -32,7 +34,8 @@ export function Dropdown(props) {
       >
         {props.description}
       </Typography>
-      <FormControl variant="outlined">
+      <FormControl variant="outlined">        
+        <InputLabel id="demo-simple-select-helper-label">{props.placeholder}</InputLabel>
         <Select className="inout0container" onChange={props.onChange}>{items}</Select>
       </FormControl>
     </div>
@@ -41,7 +44,7 @@ export function Dropdown(props) {
 
 export function DollarInput(props) {
   return (
-    <div className="form-item">
+    <div className="form-item" >
       <Typography variant="h6" color="textPrimary" className="question-text">
         {props.question}
       </Typography>
@@ -56,7 +59,7 @@ export function DollarInput(props) {
         <OutlinedInput
           className="input-container"
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          defaultValue="0"
+          placeholder="0"
           onChange={props.onChange}
         />
       </FormControl>
@@ -66,7 +69,7 @@ export function DollarInput(props) {
 
 export function YesNo(props) {
   return (
-    <div className="form-item">
+    <div className="form-item" >
       <Typography variant="h6" color="textPrimary" className="question-text">
         {props.question}
       </Typography>
@@ -78,7 +81,7 @@ export function YesNo(props) {
         {props.description}
       </Typography>
       <FormControl>
-        <RadioGroup row onChange={props.onChange}>
+        <RadioGroup row onChange={props.onChange} defaultChecked={"Yes"}>
           <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
           <FormControlLabel value="No" control={<Radio />} label="No" />
         </RadioGroup>

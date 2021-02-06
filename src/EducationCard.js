@@ -35,7 +35,7 @@ function EducationCard(props) {
 
   const [a1, setA1] = useState(0);
   const [a2, setA2] = useState(0);
-  const [a3, setA3] = useState(0);
+  const [a3, setA3] = useState("");
 
   useEffect(() => {
     if(dataChange) {

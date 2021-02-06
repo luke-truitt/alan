@@ -20,7 +20,8 @@ const q1 = {
     "Yes": "Yes",
     "No": "No",
     "Not Sure": "Not Sure"
-  }
+  },
+  placeholder: "Heard of tax credits?"
 };
 
 const q2 = {
@@ -34,6 +35,7 @@ const q2 = {
     "I filed manually.": "I filed manually.",
     "I don't know.": "I don't know.",
   },
+  placeholder: "How did you file?"
 };
 const q3 = {
   question: "Estimate the size of the tax refund you received last year.",
@@ -41,8 +43,8 @@ const q3 = {
 };
 let dataChange = false;
 function HistoryCard(props) {
-  const [a1, setA1] = useState(0);
-  const [a2, setA2] = useState(0);
+  const [a1, setA1] = useState("");
+  const [a2, setA2] = useState("");
   const [a3, setA3] = useState(0);
 
   useEffect(() => {
@@ -68,14 +70,15 @@ function HistoryCard(props) {
     <ThemeProvider theme={themeColor}>
       <Card className="income-card" id="income-card-mobile" style={{display: props.stepNum == 3 ? "" : "none"}}>
         <CardContent className="income-card-content">
-          <Dropdown question={q1.question} description={q1.description} options={q1.options} onChange={(e) => updateA1(e)}/>
+          <Dropdown question={q1.question} description={q1.description} options={q1.options} placeholder={q1.placeholder} onChange={(e) => updateA1(e)}/>
           <Dropdown
             question={q2.question}
             description={q2.description}
             options={q2.options}
+            placeholder={q2.placeholder} 
             onChange={(e) => updateA2(e)}
           />
-          <DollarInput question={q3.question} description={q3.description}onChange={(e) => updateA3(e)}/>
+          <DollarInput question={q3.question} description={q3.description} onChange={(e) => updateA3(e)} />
         </CardContent>
       </Card>
     </ThemeProvider>

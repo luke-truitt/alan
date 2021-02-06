@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Calculator2 />
+            <LandingPage />
           </Route>
           <Route path="/calculate">
             <Calculator2 />
