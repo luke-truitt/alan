@@ -1,0 +1,22 @@
+.column-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#menu-
+  > div.MuiPaper-root-1121.MuiMenu-paper-1041.MuiPopover-paper-1044.MuiPaper-rounded-1122
+  > ul
+  > li {
+  line-height: 3rem;
+  color: #6d6d6d;
+}
+
+span.word-highlight {
+  border-bottom: 1px solid #d8dbe8;
+  box-shadow: 0px -9px 0px #d8dbe8 inset;
+}
