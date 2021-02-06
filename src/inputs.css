@@ -32,3 +32,26 @@ button.selected {
 .form-title {
   padding-bottom: 2rem;
 }
+
+div.form-container {
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
+
+}
+
+@media only screen and (max-width: 900px) {
+  button.single-select-button {
+    height: 50px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .single-select-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

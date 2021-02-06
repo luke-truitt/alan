@@ -137,7 +137,6 @@ export function Form(props) {
   });
 
   const onChange = (e, formItem) => {
-    console.log("CALLING IT");
     const dic = {[formItem.stateName]: e.target.value};
     updateDict(dic);
     dataChange = true;
