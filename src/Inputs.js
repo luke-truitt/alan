@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   ThemeProvider,
   Typography,
@@ -25,7 +25,7 @@ export const Input = (props) => {
 };
 
 export function Dropdown(props) {
-  const items = props.options.map((option, index) => (
+  const items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>
   ));
   return (
@@ -46,7 +46,7 @@ export function Dropdown(props) {
           {props.description}
         </Typography>
         <FormControl variant="outlined">
-          <Select>{items}</Select>
+          <Select onChange={props.onChange}>{items}</Select>
         </FormControl>
       </div>
     </ThemeProvider>
@@ -54,7 +54,7 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
-  const buttons = props.options.map((option, index) => (
+  const buttons = Object.entries(props.options).map(([option, index]) => (
     <Button variant="contained" value={index} className="single-select-button">
       {option}
     </Button>
@@ -115,16 +115,41 @@ export function DollarInput(props) {
     </ThemeProvider>
   );
 }
-
+let dataChange = false;
 export function Form(props) {
+
+  const [fields, setFields] = useState({});
+
+
+  useEffect(() => {
+    if(dataChange) {
+    props.onUpdate(fields);
+    dataChange=false;
+    }
+  });
+
+  const onChange = (e, formItem) => {
+    const dic = {[formItem.stateName]: e.target.value};
+    updateDict(dic);
+    dataChange = true;
+  };
+
+  const updateDict = (d) => {
+    for (const [key, value] of Object.entries(d)) {
+      setFields((fields) => ({ ...fields, [key]: value }));
+    }
+  };
+
   const inputs = props.formItems.map((formItem) => (
     <Input
       type={formItem.type}
       question={formItem.question}
       description={formItem.description}
       options={formItem.options}
+      onChange={(e) => onChange(e, formItem)}
     />
   ));
+
   return (
     <div className="form-container">
       <Typography variant="h4" color="textPrimary" className="form-title">

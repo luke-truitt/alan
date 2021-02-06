@@ -25,6 +25,9 @@ function App() {
           <Route path="/onboard">
             <Onboarding />
           </Route>
+          <Route>
+            <LandingPage/>
+          </Route>
         </Switch>
       </Router>
     </div>

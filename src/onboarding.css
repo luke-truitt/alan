@@ -47,7 +47,13 @@
 .onboarding-form-item {
   margin-bottom: 1rem;
 }
-
+.onboarding-back-div {
+  position: absolute;
+  bottom: 0vw;
+  left: 0vw;
+  width: 30%;
+  display: flex;
+}
 .onboarding-next-div {
   position: absolute;
   bottom: 0vw;
