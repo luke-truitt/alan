@@ -367,5 +367,4 @@ function Calculator2({props}) {
     </ThemeProvider>
   );
 }
-
 export default Calculator2;

@@ -1,0 +1,61 @@
+.onboarding-c0 {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f6f6;
+}
+.onboarding-c1-left {
+  width: 30vw;
+  background-image: url(./images/onboarding-left-div-bg.svg);
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.onboarding-c1-right {
+  width: 70vw;
+}
+.onboarding-c1-left-title {
+  padding-bottom: 2rem;
+}
+
+.onboarding-c1-left-subtitle {
+  line-height: 1.8rem;
+}
+.onboarding-c1-left-img {
+  position: absolute;
+  bottom: 0;
+  left: -2;
+  width: 15vw;
+}
+
+.onboarding-c1-left-div {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40%;
+  position: relative;
+}
+
+.onboarding-c1-right-div {
+  width: 60%;
+  height: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+  position: relative;
+}
+
+.onboarding-form-item {
+  margin-bottom: 1rem;
+}
+
+.onboarding-next-div {
+  position: absolute;
+  bottom: 0vw;
+  right: 0vw;
+  width: 30%;
+  display: flex;
+}
+button.onboarding-next {
+  float: right;
+  width: 100%;
+}

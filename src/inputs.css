@@ -1,0 +1,24 @@
+.single-select-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button.single-select-button {
+  background-color: #ffffff;
+  border: 1px solid #c6cacc;
+  width: 32%;
+  font-weight: normal;
+  color: #6d6d6d;
+}
+
+.form-item-description {
+  padding-bottom: 1rem;
+}
+.form-item-container {
+  padding-bottom: 3rem;
+}
+
+.form-title {
+  padding-bottom: 2rem;
+}

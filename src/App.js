@@ -9,10 +9,11 @@ import Calculator2 from "./Calculator2.js";
 import LandingPage from "./LandingPage";
 import "./global.css";
 import CalculationCard from "./CalculationCard.js";
+import Onboarding from "./Onboarding.js";
 
 function App() {
   return (
-    <div className="root">
+    <div>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/calculate">
             <Calculator2 />
+          </Route>
+          <Route path="/onboard">
+            <Onboarding />
           </Route>
         </Switch>
       </Router>
