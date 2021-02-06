@@ -45,9 +45,9 @@ function Onboarding(props) {
   const [step, setStep] = useState(1);
   const [fields, setFields] = useState({});
 
-  const useEffect = () => {
+  useEffect(() => {
     console.log(fields);
-  }
+  })
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
       setFields((fields) => ({ ...fields, [key]: value }));
