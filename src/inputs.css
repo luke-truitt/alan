@@ -7,7 +7,6 @@
 button.single-select-button {
   background-color: #ffffff;
   border: 1px solid #c6cacc;
-  width: 32%;
   font-weight: normal;
   color: #6d6d6d;
 }
@@ -16,9 +15,26 @@ button.single-select-button {
   padding-bottom: 1rem;
 }
 .form-item-container {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 
 .form-title {
   padding-bottom: 2rem;
+}
+
+div.form-item-container.column-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+div.form-item-container.column-container > * {
+  width: 50%;
+}
+
+div.form-item-container.column-container > *:first-child {
+  margin-right: 1rem;
+}
+div.form-item-container > .form-item-phone-number {
+  width: 100%;
 }

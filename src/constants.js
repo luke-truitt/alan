@@ -71,10 +71,13 @@ export const onboardingTheme = createMuiTheme({
       fontWeight: 600,
     },
     body1: {
-      fontSize: "1.375rem",
+      fontSize: "1rem",
     },
     body2: {
-      fontSize: "1rem",
+      fontSize: "1.375rem",
+    },
+    caption: {
+      fontSize: "0.8rem",
     },
     button: {
       fontWeight: 600,
@@ -82,6 +85,9 @@ export const onboardingTheme = createMuiTheme({
       boxShadow: "none",
       height: "60px",
       fontSize: "1rem",
+    },
+    input: {
+      fontSize: ".5rem",
     },
   },
 });

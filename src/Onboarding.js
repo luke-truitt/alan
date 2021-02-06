@@ -21,10 +21,16 @@ import {
   educationExpenses,
   studentLoans,
   studentStatus,
+  name,
+  gradYear,
+  phoneNumber,
+  intlStudent,
 } from "./OnboardingQuestions.js";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 const forms = [
+  { title: "Personal", items: [name, phoneNumber, gradYear, intlStudent] },
   {
     title: "Income",
     items: [income, dependence],
@@ -178,7 +184,7 @@ function Onboarding(props) {
             <Typography variant="h3" className="onboarding-c1-left-title">
               A few clicks from a bigger refund
             </Typography>
-            <Typography variant="body1" className="onboarding-c1-left-subtitle">
+            <Typography variant="body2" className="onboarding-c1-left-subtitle">
               File for your tax refund in minutes. Get back money and time.
             </Typography>
           </div>
