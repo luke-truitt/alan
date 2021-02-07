@@ -10,18 +10,22 @@ import "./../../styles.css";
 import "./onboard-complete.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import purpleArrow from "./../../images/purple-arrow.svg";
+import {useLocation} from "react-router-dom";
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
 
 function OnboardCompletePage(props) {
-  const fakeProps = {
-    breakdown: {
-      netRefund: "$4,443",
-      taxableIncome: "$18,500",
-      taxRate: "12.2%",
-      taxBill: "$2,257",
-      creditsAndWitholdings: "$6,600",
-    },
-  };
-  props = fakeProps;
+  
+  let location = useLocation();
+  
+  try {
+    props = location.state["breakdown"];
+  } catch {
+    props = {};
+  }
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0">
@@ -42,9 +46,9 @@ function OnboardCompletePage(props) {
             Your estimated refund amount
           </Typography>
           <Typography className="refund-amount " variant="h1" color="secondary">
-            {props.breakdown.netRefund}
+            ${numberWithCommas(props.netRefund)}
           </Typography>
-          <RefundBreakdown breakdown={props.breakdown}></RefundBreakdown>
+          <RefundBreakdown breakdown={props}></RefundBreakdown>
           <Button variant="contained" className="onboard-complete-apply-button">
             Ready to file? Apply now
           </Button>

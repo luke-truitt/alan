@@ -33,6 +33,7 @@ export function PhoneNumberInput(props) {
   const checkValid = (val, name) => {
     props.validData({[name]: (val.length > 9)});
   }
+  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
@@ -41,7 +42,8 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
-          onChange={(e) => {props.onChange(e, {"stateName": "phone"}); checkValid(e.target.value, "phone");}}
+          value={props.fields["phone"]}
+          onChange={(e) => {props.onChange(e.target.value, {"stateName": "phone"}); checkValid(e.target.value, "phone");}}
         />
       </div>
     </ThemeProvider>
@@ -60,8 +62,10 @@ export function NameInput(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
-        <TextField className="form-item-text-field" label="First Name" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "firstName"}); checkValid(e.target.value, "firstName");}}/>
-        <TextField className="form-item-text-field" label="Last Name" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "lastName"}); checkValid(e.target.value, "lastName");}}/>
+        <TextField className="form-item-text-field" label="First Name" 
+          value={props.fields["firstName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "firstName"}); checkValid(e.target.value, "firstName");}}/>
+        <TextField className="form-item-text-field" label="Last Name" 
+          value={props.fields["lastName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "lastName"}); checkValid(e.target.value, "lastName");}}/>
       </div>
     </ThemeProvider>
   );
@@ -69,9 +73,16 @@ export function NameInput(props) {
 
 export function SchoolInput(props) {
 
-  const checkValid = (val, name) => {
-    props.validData({[name]: val});
+  const checkValid = (value, name) => {
+    let res = ""
+    if(value==null) {
+      res = "";
+    } else {
+      res = value.name;
+    }
+    props.validData({[name]: (res.length > 0)});
   }
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container school-input">
@@ -80,10 +91,12 @@ export function SchoolInput(props) {
               className="form-item-text-field"
               options={schools}
               getOptionLabel={(option) => option.name}
-              onChange={(e, value) => {props.onChange(value.name, {"stateName": "school"}); checkValid(e.target.value, "classYear");}}
+              // inputValue = {props.fields["school"]}
+              onChange={(e, value) => {props.onChange(value, {"stateName": "school"}); checkValid(value, "school");}}
               renderInput={(params) => <TextField {...params} label="School" variant="outlined" />}
         />
-        <TextField className="form-item-text-field" label="Graduation Year" variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "classYear"}); checkValid(e.target.value, "classYear");}}/>
+        <TextField className="form-item-text-field" label="Graduation Year" 
+          value={props.fields["classYear"]} variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "classYear"}); checkValid({"name": e.target.value}, "classYear");}}/>
       </div>
     </ThemeProvider>
   );
@@ -111,8 +124,10 @@ export function JobInput(props) {
           {props.description}
       </Typography>
       <div className="form-item-container column-container">
-        <TextField className="form-item-text-field" label="Company Name" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "companyName"}); checkValid(e.target.value, "companyName");}}/>
-        <TextField className="form-item-text-field" label="Job Title" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "jobTitle"}); checkValid(e.target.value, "jobTitle");}}/>
+        <TextField className="form-item-text-field" label="Company Name" 
+          value={props.fields["companyName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "companyName"}); checkValid(e.target.value, "companyName");}}/>
+        <TextField className="form-item-text-field" label="Job Title" 
+          value={props.fields["jobTitle"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "jobTitle"}); checkValid(e.target.value, "jobTitle");}}/>
       </div>
     </ThemeProvider>
   );
@@ -145,7 +160,8 @@ export function Dropdown(props) {
           {props.description}
         </Typography>
         <FormControl variant="outlined">
-          <Select onChange={(e) => {props.onChange(e.target.value, {"stateName": props.stateName});; checkValid(e.target.value);}}>{items}</Select>
+          <Select 
+          value={props.fields[props.stateName]} onChange={(e) => {props.onChange(e.target.value, {"stateName": props.stateName});; checkValid(e.target.value);}}>{items}</Select>
         </FormControl>
       </div>
     </ThemeProvider>
@@ -153,12 +169,11 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
-  const [selected, setSelected] = useState(-1);
+  
   const checkValid = (index) => {
     props.validData({[props.stateName]: true})
   }
   const updateButtons = (index) => {
-    setSelected(index);
     props.onChange(
       index,
       { stateName: props.stateName }
@@ -167,10 +182,9 @@ export function SingleSelect(props) {
   const buttons = Object.entries(props.options).map(([option, index]) => (
     <Button
       variant="contained"
-      value={index}
       onClick={() => {updateButtons(index); checkValid(index);}}
       className={
-        selected == index
+        props.fields[props.stateName] == index
           ? "single-select-button selected"
           : "single-select-button"
       }
@@ -231,7 +245,8 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            placeholder="0" onChange={(e) => {props.onChange(parseInt(e.target.value), {"stateName": props.stateName}); checkValid(e.target.value);}}
+            placeholder="0" 
+            value={isNaN(props.fields[props.stateName]) ? '' : props.fields[props.stateName]} onChange={(e) => {props.onChange(parseInt(e.target.value), {"stateName": props.stateName}); checkValid(e.target.value);}}
           />
         </FormControl>
       </div>
@@ -269,11 +284,11 @@ let dataChange = false;
 export function Form(props) {
   const [fields, setFields] = useState({});
   const [isValid, setIsValid] = useState({});
-
+  
   useEffect(() => {
     if (dataChange) {
       props.onUpdate(fields);
-      props.validData(isValid);
+      props.validForm(isValid);
       dataChange = false;
     }
   });
@@ -303,7 +318,7 @@ export function Form(props) {
       description={formItem.description}
       options={formItem.options}
       stateName={formItem.stateName}
-      value={props.fields[formItem.stateName]}
+      fields={props.fields}
       data={props.data}
       validData={(item) => setValid(item)}
       onChange={(e, item) => onChange(e, item)}
@@ -323,9 +338,19 @@ export function Form(props) {
 }
 
 export function EmbeddedEmailInput(props) {
-  const checkValid = (val) => {
-    // TODO
-  }
+  const [valid, setValid] = useState(false);
+  const checkValid = (mail) =>
+    {
+     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+      {
+        console.log("Good");
+        setValid(true);
+      } else {
+        console.log("Bad");
+        setValid(false);
+      }
+    }
+  
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -343,7 +368,7 @@ export function EmbeddedEmailInput(props) {
           className="embedded-email-input-button"
           variant="contained"
           color="secondary"
-          onClick={props.navTo}
+          onClick={valid ? props.navTo : props.invalidClick}
         >
           Calculate my refund
         </Button>

@@ -4,6 +4,11 @@ import multiply_icon from "../../images/multiply.svg";
 import equal_icon from "../../images/equal.svg";
 import { ThemeProvider, Link, Typography } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
 
 function RefundBreakdownRow(props) {
   const SYMBOLS = {
@@ -20,14 +25,25 @@ function RefundBreakdownRow(props) {
             src={SYMBOLS[props.symbol]}
             className="refund-breakdown-row-symbol"
           ></img>
-
+          {
+            props.type == "dollar" ? 
+            <Typography
+            variant="body2"
+            color="secondary"
+            className="refund-breakdown-row-amount"
+            >
+            ${numberWithCommas(props.amount)}
+          </Typography>
+          :
           <Typography
             variant="body2"
             color="secondary"
             className="refund-breakdown-row-amount"
-          >
-            {props.amount}
+            >
+            {props.amount * 100}%
           </Typography>
+          }
+          
         </div>
         <Link
           variant="body1"
@@ -46,16 +62,19 @@ function RefundBreakdown(props) {
     <div className="refund-breakdown-c0 row-container">
       <RefundBreakdownRow
         amount={props.breakdown.taxableIncome}
+        type="dollar"
         label="Taxable Income"
       />
       <RefundBreakdownRow
         symbol="multiply"
+        type="percent"
         amount={props.breakdown.taxRate}
-        label="Taxable Income"
+        label="Effective Tax Rate"
       />{" "}
       <div className="refund-breakdown-highlight-red">
         <RefundBreakdownRow
           symbol="equal"
+          type="dollar"
           amount={props.breakdown.taxBill}
           label="Tax Bill"
         />
@@ -63,12 +82,14 @@ function RefundBreakdown(props) {
       <div className="refund-breakdown-highlight-green">
         <RefundBreakdownRow
           symbol="subtract"
+          type="dollar"
           amount={props.breakdown.creditsAndWitholdings}
           label="Credits + Witholdings"
         />
       </div>
       <RefundBreakdownRow
         symbol="equal"
+        type="dollar"
         amount={props.breakdown.netRefund}
         label="Net Refund"
       />
