@@ -17,7 +17,7 @@ function RefundBreakdownRow(props) {
       <div className="refund-breakdown-row-c0 row-container">
         <div className="refund-breakdown-row-c1 column-container">
           <img
-            src={multiply_icon}
+            src={SYMBOLS[props.symbol]}
             className="refund-breakdown-row-symbol"
           ></img>
 
@@ -53,16 +53,20 @@ function RefundBreakdown(props) {
         amount={props.breakdown.taxRate}
         label="Taxable Income"
       />{" "}
-      <RefundBreakdownRow
-        symbol="equal"
-        amount={props.breakdown.taxBill}
-        label="Tax Bill"
-      />{" "}
-      <RefundBreakdownRow
-        symbol="subtract"
-        amount={props.breakdown.creditsAndWitholdings}
-        label="Credits + Witholdings"
-      />{" "}
+      <div className="refund-breakdown-highlight-red">
+        <RefundBreakdownRow
+          symbol="equal"
+          amount={props.breakdown.taxBill}
+          label="Tax Bill"
+        />
+      </div>
+      <div className="refund-breakdown-highlight-green">
+        <RefundBreakdownRow
+          symbol="subtract"
+          amount={props.breakdown.creditsAndWitholdings}
+          label="Credits + Witholdings"
+        />
+      </div>
       <RefundBreakdownRow
         symbol="equal"
         amount={props.breakdown.netRefund}

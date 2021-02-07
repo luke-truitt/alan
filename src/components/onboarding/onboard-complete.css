@@ -1,32 +1,35 @@
-.onboard-complete-card-content {
-  background-color: white;
-  width: 100%;
-  height: 100%;
-}
 h1.refund-amount {
-  background: linear-gradient(to right, #5f40a1, #002e72);
+  background: linear-gradient(to right, #744fc2, 60%, #002e72);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 12rem;
 }
+h6.onboard-complete-title {
+  background: linear-gradient(to right, #744fc2, 60%, #002e72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
 
 button.onboard-complete-apply-button {
-  background-image: linear-gradient(to right, #5f40a1, #002e72);
+  background-image: linear-gradient(to right, #744fc2, 60%, #002e72);
   color: white;
   font-size: 2rem;
-  padding: 1.5rem;
+  padding: 2rem;
   margin-top: 5rem;
 }
 
 .onboard-complete-c1 {
-  width: 70%;
+  padding-top: 7rem;
+  width: 60%;
   margin: auto;
+  padding-bottom: 7rem;
 }
 
 .onboard-complete-c0 {
   margin: auto;
-  margin-top: 15rem;
   text-align: center;
+  background-color: #f6f6f6;
 }
 p.refund-breakdown-row-amount {
   width: 100%;
@@ -35,6 +38,7 @@ p.refund-breakdown-row-amount {
 .refund-breakdown-row-c0 {
   width: 100%;
   text-align: right;
+  margin-bottom: 1.5rem;
 }
 a.refund-breakdown-row-label {
   padding-top: 0.3rem;
@@ -49,13 +53,89 @@ a.refund-breakdown-row-label {
 .refund-breakdown-c0 {
   width: 50%;
   margin: auto;
-  margin-top: 10rem;
+  margin-top: 6rem;
 }
 
 .onboard-complete-card-container {
   margin-top: 5rem;
+  justify-content: space-between;
+}
+.onboard-complete-card-content {
+  background-color: white;
+  width: 100%;
+  height: 100%;
 }
 
-p.onboard-complete-fee-text {
+.onboard-complete-card:nth-child(3) {
+  margin-right: 0%;
+}
+.onboard-complete-card {
+  width: 100%;
+  height: 20rem;
+  margin-right: 2%;
+}
+h6.onboard-complete-fee-text {
   margin-top: 1rem;
+  line-height: 120%;
+}
+.onboard-complete-fee-text-container {
+  max-width: 80%;
+  text-align: left;
+  margin: auto;
+}
+
+.onboard-complete-help-button-container {
+  height: 100vh;
+  width: 100vw;
+  z-index: 9;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.onboard-complete-help-button {
+  margin: auto;
+  position: absolute;
+  bottom: -5%;
+  left: 75%;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  align-items: center;
+  border: double 4px transparent;
+  background-image: linear-gradient(#f6f6f6, #f6f6f6),
+    radial-gradient(circle at top left, #744fc2, #002e72);
+  background-origin: border-box;
+  background-clip: content-box, border-box, padding-box;
+  /* background: linear-gradient(to right, #744fc2, 60%, #002e72);
+  background-clip: padding-box;
+  /* border: solid 5px transparent;
+  background-color: #f6f6f6; */
+}
+
+h6.onboard-complete-help-text {
+  background: linear-gradient(to right, #744fc2, 60%, #002e72);
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-top: 50px;
+}
+
+img.onboard-complete-help-arrow {
+  width: 100px;
+}
+
+.refund-breakdown-highlight-red > *:first-child > *:first-child > *:last-child {
+  background-image: url("./../../images/red-highlight.svg");
+  background-position: right;
+  background-repeat: no-repeat;
+}
+.refund-breakdown-highlight-green
+  > *:first-child
+  > *:first-child
+  > *:last-child {
+  background-image: url("./../../images/green-highlight.svg");
+  background-position: right;
+  background-repeat: no-repeat;
 }
