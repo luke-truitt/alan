@@ -58,7 +58,7 @@ export function NameInput(props) {
     props.validData({[name]: (val.length > 0)});
   }
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
         <TextField className="form-item-text-field" label="First Name" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "firstName"}); checkValid(e.target.value, "firstName");}}/>
         <TextField className="form-item-text-field" label="Last Name" autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "lastName"}); checkValid(e.target.value, "lastName");}}/>
@@ -73,7 +73,7 @@ export function SchoolInput(props) {
     props.validData({[name]: val});
   }
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container school-input">
         <Autocomplete
               id="combo-box-demo"
@@ -258,7 +258,7 @@ export function Refund(props) {
       </div>
   ));
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
         {dataLabels}
       </div>
