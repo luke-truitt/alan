@@ -1,19 +1,7 @@
-dhjfdf.single-select-button-container {
+.single-select-button-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-}
-
-.single-select-button-container > button:first-child{
-  margin-right: 10px;
-}
-
-.single-select-button-container > button:last-child{
-  margin-left: 10px;
-}
-
-.single-select-button-container > button:last-child{
-  margin-left: 10px;
 }
 
 button.single-select-button {
@@ -22,6 +10,8 @@ button.single-select-button {
   font-weight: normal;
   width: 100%;
   color: #6d6d6d;
+  margin-left: 5px;
+  margin-right: 5px;
   /* margin-left: 20px;
   margin-right: 20px; */
 }

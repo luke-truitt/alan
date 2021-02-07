@@ -13,7 +13,7 @@ import RouteChangeTracker from "./utils/RouteChangeTracker";
 
 import {useEffect} from 'react';
 import "./global.css";
-import OnboardCompletePage from "./components/onboarding/OnboardCompletePage.js";
+import OnboardCompletePage from "./components/completion/OnboardCompletePage.js";
 
 import {PageView, initGA, Event} from './components/tracking/Tracking';
 const trackingId = 'UA-189058741-1';
@@ -31,7 +31,7 @@ function App() {
           <Route path="/onboard">
             <Onboarding />
           </Route>
-          <Route path="/onboard-done">
+          <Route path="/refund">
             <OnboardCompletePage />
           </Route>
           <Route>
