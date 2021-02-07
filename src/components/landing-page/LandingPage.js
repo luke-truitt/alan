@@ -1,15 +1,15 @@
 import "./landing-page.css";
-import "./styles.css";
+import "./../../styles.css";
 import Lottie from "react-lottie";
-import animationData from "./lotties/landing-page-animation.json";
+import animationData from "./../../lotties/landing-page-animation.json";
 import {
   ThemeProvider,
   Button,
   Typography,
   TextField,
 } from "@material-ui/core/";
-import { EmbeddedEmailInput } from "./Inputs.js";
-import { onboardingTheme } from "./constants.js";
+import { EmbeddedEmailInput } from "./../inputs/Inputs.js";
+import { primaryTheme } from "./../../utils/constants.js";
 import { useHistory } from "react-router-dom";
 import React, { useRef, useState } from "react";
 const {
@@ -57,7 +57,7 @@ function LandingPage(props) {
   };
 
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="landing-c0 row-container">
         <div className="landing-c1 row-container">
           <Typography

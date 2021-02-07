@@ -11,7 +11,7 @@ import {
   OutlinedInput,
   InputLabel,
 } from "@material-ui/core";
-import { onboardingTheme } from "../../utils/constants.js";
+import { primaryTheme } from "../../utils/constants.js";
 import "./inputs.css";
 import "../../styles.css";
 
@@ -25,7 +25,7 @@ const InputTypes = {
 
 export function PhoneNumberInput(props) {
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
         <TextField
           className="form-item-text-field"
@@ -45,7 +45,7 @@ export const Input = (props) => {
 
 export function NameInput(props) {
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
         <TextField label="First Name" autoComplete variant="outlined" />
         <TextField label="Last Name" autoComplete variant="outlined" />
@@ -60,7 +60,7 @@ export function Dropdown(props) {
   ));
 
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
         <Typography
           variant="h6"
@@ -109,7 +109,7 @@ export function SingleSelect(props) {
     </Button>
   ));
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
         <Typography
           variant="h6"
@@ -138,7 +138,7 @@ export function SingleSelect(props) {
 
 export function DollarInput(props) {
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
         <Typography
           variant="h6"
@@ -200,7 +200,7 @@ export function Form(props) {
   ));
 
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="form-container">
         <Typography variant="h4" color="textPrimary" className="form-title">
           <span className="word-highlight">{props.title}</span>
@@ -213,7 +213,7 @@ export function Form(props) {
 
 export function EmbeddedEmailInput(props) {
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
         <TextField
           type="email"

@@ -11,6 +11,7 @@ import Onboarding from "./components/onboarding/Onboarding.js";
 import ErrorPage from "./components/error/ErrorPage";
 
 import "./global.css";
+import OnboardCompletePage from "./components/onboarding/OnboardCompletePage.js";
 
 function App() {
   return (
@@ -23,8 +24,11 @@ function App() {
           <Route path="/onboard">
             <Onboarding />
           </Route>
+          <Route path="/onboard-done">
+            <OnboardCompletePage />
+          </Route>
           <Route>
-            <ErrorPage/>
+            <ErrorPage />
           </Route>
         </Switch>
       </Router>

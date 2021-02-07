@@ -10,7 +10,9 @@ import {
 import "./onboarding.css";
 import "../../styles.css";
 import snap from "../../images/snap.svg";
+import { withStyles } from "@material-ui/core/styles";
 
+import LinearProgress from "@material-ui/core/LinearProgress";
 import {
   income,
   dependence,
@@ -25,7 +27,7 @@ import {
   phoneNumber,
   intlStudent,
 } from "./OnboardingQuestions.js";
-import { onboardingTheme, ProgressBar } from "../../utils/constants.js";
+import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
 
 import { useLocation } from "react-router-dom";
@@ -46,6 +48,22 @@ const forms = [
     items: [educationExpenses, studentLoans, studentStatus],
   },
 ];
+
+const LinearProgressBar = withStyles((theme) => ({
+  root: {
+    height: 10,
+  },
+  colorPrimary: {
+    backgroundColor: "#FFFFFF",
+  },
+  bar: {
+    backgroundColor: "#00B32A",
+  },
+}))(LinearProgress);
+
+function ProgressBar(props) {
+  return <LinearProgressBar variant="determinate" value={props.value} />;
+}
 
 function Onboarding(props) {
   const [step, setStep] = useState(1);
@@ -68,14 +86,14 @@ function Onboarding(props) {
   // Logic for determining whether or not the "Next" button should be disabled
   const nextDisabled = () => {
     let res = false;
-    Object.entries(forms[step-1].items).map((item) => {
-        const fieldVal = fields[item[1].stateName];
-        if(fieldVal == '' || fieldVal == 0 || fieldVal == null) {
-          res = true;
-        }
+    Object.entries(forms[step - 1].items).map((item) => {
+      const fieldVal = fields[item[1].stateName];
+      if (fieldVal == "" || fieldVal == 0 || fieldVal == null) {
+        res = true;
+      }
     });
     return res;
-  }
+  };
 
   // Click Back Logic
   const backClick = () => {
@@ -92,21 +110,27 @@ function Onboarding(props) {
       console.log(fields);
       console.log(calculatorItems);
       onDataUpdate({
-        "email": email
-      })
+        email: email,
+      });
     } else if (step == 2) {
-      const data = {"withholdings": getWithholdings(), "deductions": getDeductions()};
+      const data = {
+        withholdings: getWithholdings(),
+        deductions: getDeductions(),
+      };
       updateCalcData(data);
       console.log(fields);
       console.log(calculatorItems);
-    }
-    else if (step == 3) {
-      const data = {"credits": getCredits(), "taxableIncome": getTaxableIncome(), "taxBill": getTaxBill()}
+    } else if (step == 3) {
+      const data = {
+        credits: getCredits(),
+        taxableIncome: getTaxableIncome(),
+        taxBill: getTaxBill(),
+      };
       updateCalcData(data);
       console.log(fields);
       console.log(calculatorItems);
     } else if (step == 4) {
-      const data = {"refund": getRefund()}
+      const data = { refund: getRefund() };
       updateCalcData(data);
       console.log(fields);
       console.log(calculatorItems);
@@ -121,19 +145,22 @@ function Onboarding(props) {
   /*
     State control for managing data on this page
   */
- let location = useLocation();
- let email = "";
- try {
-   email = location.state["email"];
- } catch {
-   email = "";
- }
+  let location = useLocation();
+  let email = "";
+  try {
+    email = location.state["email"];
+  } catch {
+    email = "";
+  }
 
   // Data to be sent to server
   const [calculatorItems, setCalculatorItems] = useState({});
   const updateCalcData = (d) => {
     for (const [key, value] of Object.entries(d)) {
-      setCalculatorItems((calculatorItems) => ({ ...calculatorItems, [key]: value }));
+      setCalculatorItems((calculatorItems) => ({
+        ...calculatorItems,
+        [key]: value,
+      }));
     }
   };
 
@@ -148,17 +175,17 @@ function Onboarding(props) {
     if (inc < 9875) {
       estWithholdings = inc * 0.1;
     } else if (inc < 40125) {
-      estWithholdings = (987.5 + (inc - 9875) * 0.12);
+      estWithholdings = 987.5 + (inc - 9875) * 0.12;
     } else if (inc < 85525) {
-      estWithholdings = (4617.5 + (inc - 40125) * 0.22);
+      estWithholdings = 4617.5 + (inc - 40125) * 0.22;
     } else if (inc < 163301) {
-      estWithholdings = (14605.5 + (inc - 85525) * 0.24);
+      estWithholdings = 14605.5 + (inc - 85525) * 0.24;
     } else if (inc < 207350) {
-      estWithholdings = (33271.5 + (inc - 163300) * 0.32);
+      estWithholdings = 33271.5 + (inc - 163300) * 0.32;
     } else if (inc < 518400) {
-      estWithholdings = (47367.5 + (inc - 207350) * 0.35);
+      estWithholdings = 47367.5 + (inc - 207350) * 0.35;
     } else {
-      estWithholdings = (156235 + (inc - 518400) * 0.37);
+      estWithholdings = 156235 + (inc - 518400) * 0.37;
     }
     return estWithholdings;
   }
@@ -167,8 +194,8 @@ function Onboarding(props) {
     return 0;
   }
   function getTaxableIncome() {
-    const income = fields['estimatedIncome'];
-    const deductions = fields['deductions'];
+    const income = fields["estimatedIncome"];
+    const deductions = fields["deductions"];
     return income - deductions - 12400;
   }
 
@@ -181,17 +208,17 @@ function Onboarding(props) {
     } else if (income < 9875) {
       bill = income * 0.1;
     } else if (income < 40125) {
-      bill = (987.5 + (income - 9875) * 0.12);
+      bill = 987.5 + (income - 9875) * 0.12;
     } else if (income < 85525) {
-      bill = (4617.5 + (income - 40125) * 0.22);
+      bill = 4617.5 + (income - 40125) * 0.22;
     } else if (income < 163301) {
-      bill = (14605.5 + (income - 85525) * 0.24);
+      bill = 14605.5 + (income - 85525) * 0.24;
     } else if (income < 207350) {
-      bill = (33271.5 + (income - 163300) * 0.32);
+      bill = 33271.5 + (income - 163300) * 0.32;
     } else if (income < 518400) {
-      bill = (47367.5 + (income - 207350) * 0.35);
+      bill = 47367.5 + (income - 207350) * 0.35;
     } else {
-      bill = (156235 + (income - 518400) * 0.37);
+      bill = 156235 + (income - 518400) * 0.37;
     }
     return bill;
   }
@@ -203,16 +230,16 @@ function Onboarding(props) {
 
   // Getting their refund based on all data
   function getRefund() {
-    const credits = calculatorItems['credits'];
-    const taxBill = calculatorItems['taxBill'];
+    const credits = calculatorItems["credits"];
+    const taxBill = calculatorItems["taxBill"];
     const tempVal = Math.min(credits - taxBill, 1000);
-    const withholdings = calculatorItems['withholdings'];
+    const withholdings = calculatorItems["withholdings"];
     const refund = tempVal + withholdings;
     return refund;
   }
 
   return (
-    <ThemeProvider theme={onboardingTheme} className="onboarding">
+    <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
         <div className="onboarding-c1-left row-container">
           <div container className="onboarding-c1-left-div">
