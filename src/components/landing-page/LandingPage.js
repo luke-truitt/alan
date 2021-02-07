@@ -1,15 +1,15 @@
 import "./landing-page.css";
-import "./styles.css";
+import "../../styles.css";
 import Lottie from "react-lottie";
-import animationData from "./lotties/landing-page-animation.json";
+import animationData from "../../lotties/landing-page-animation.json";
 import {
   ThemeProvider,
   Button,
   Typography,
   TextField,
 } from "@material-ui/core/";
-import { EmbeddedEmailInput } from "./Inputs.js";
-import { onboardingTheme } from "../../constants.js";
+import { EmbeddedEmailInput } from "../inputs/Inputs.js";
+import { onboardingTheme } from "../../utils/constants.js";
 
 import { useHistory } from "react-router-dom";
 import React, {useRef, useState, useEffect} from "react";
@@ -81,6 +81,7 @@ function LandingPage(props) {
             emailValue={email}
             setEmail={setEmail}
             keyDown={keyDown}
+            navTo={navTo}
           />
 
           <Typography

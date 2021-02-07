@@ -92,6 +92,23 @@ h4.onboarding.form-title {
   }
   .onboarding-c1-right {
     width: 100vw;
+    align-items: center;
   }
-
+  .onboarding-c0 {
+    background-image: url(../../images/onboarding-left-div-bg.svg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: cover;
+  }
+  .onboarding-c1-right-div {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f6f6f6;
+    padding: 30px;
+    box-shadow: -0.1em 0.1em 2em ;
+  }
+  .onboarding-button-div {
+    background-color: #f6f6f6;
+  }
 }

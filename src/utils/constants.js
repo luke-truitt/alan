@@ -39,11 +39,11 @@ export const onboardingTheme = createMuiTheme({
     },
   },
 
-  shadows: ["none"],
+  // shadows: ["none"],
   overrides: {
     body2: { color: "#6D6D6D" },
   },
-  shape: { borderRadius: "4px" },
+  shape: { borderRadius: "0px" },
   typography: {
     fontFamily: ["-apple-system, BlinkMacSystemFont, sans-serif;"],
     h1: {

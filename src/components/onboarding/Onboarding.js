@@ -21,9 +21,11 @@ import {
   studentLoans,
   studentStatus,
   name,
-  gradYear,
+  school,
   phoneNumber,
   intlStudent,
+  job,
+  state,
   refund
 } from "./OnboardingQuestions.js";
 import { onboardingTheme, ProgressBar } from "../../utils/constants.js";
@@ -35,31 +37,36 @@ import {PageView, initGA, Event} from '../tracking/Tracking';
 const trackingId = 'UA-189058741-1';
 
 const forms = [
-  { title: "Personal", items: [name, phoneNumber, gradYear, intlStudent] },
+  { title: "Personal", items: [name, phoneNumber, school, intlStudent], formFields: ["firstName", "lastName", "phone", "school", "classYear", "international"] },
   {
     title: "Income",
-    items: [income, dependence],
+    items: [income, job, state, dependence],
+    formFields: ["estimatedIncome", "companyName", "jobTitle", "state", "dependent"]
   },
   {
     title: "History",
     items: [taxMethod, refundSize, educationCredits],
+    formFields: ["howFiled", "estimatedRefund", "taxCredits"]
   },
   {
     title: "Education",
     items: [educationExpenses, studentLoans, studentStatus],
+    formFields: ["educationExpenses", "loanPayments", "student"]
   },
   {
     title: "Refund",
     items: [refund],
+    formFields: []
   },
 ];
 
 function Onboarding(props) {
   const [step, setStep] = useState(1);
   const [fields, setFields] = useState({});
-  
+  const [formValid, setFormValid] = useState(false);
+
   useEffect(() => {
-    console.log(calculatorItems);
+    console.log(fields);
   });
 
   const onDataUpdate = (d) => {
@@ -68,28 +75,28 @@ function Onboarding(props) {
     }
   };
 
+  const checkValid = (d) => {
+    const availableFields = forms;
+    console.log(availableFields);
+    let validData = true;
+    availableFields.map((field) => {
+      console.log(field);
+      console.log(d[field]);
+      try {
+        validData = validData && d[field];
+      } catch {
+        validData = false;
+      }
+    });
+    setFormValid(validData);
+  }
   /*
     Functions for controlling UI Elements and Interacting with DOM
   */
 
   // Logic for determining whether or not the "Next" button should be disabled
   const nextDisabled = () => {
-    let res = false;
-    Object.entries(forms[step-1].items).map((item) => {
-        if(item[1].stateName=="name") {
-          const first = fields['firstName'];
-          const last = fields['lastName'];
-          if(first == '' || first == null || last == '' || last == null) {
-            res = true;
-          }
-        } else {
-          const fieldVal = fields[item[1].stateName];
-          if(fieldVal == '' || fieldVal == 0 || fieldVal == null) {
-            res = true;
-          }
-        }
-    });
-    return res;
+    return formValid;
   }
 
   // Click Back Logic
@@ -251,28 +258,32 @@ function Onboarding(props) {
               title={forms[step - 1].title}
               formItems={forms[step - 1].items}
               data={calculatorItems}
+              fields={fields}
+              validForm={(d) => checkValid(d)}
               onUpdate={onDataUpdate}
             />
-            <div className="onboarding-back-div">
-              <Button
-                variant="contained"
-                color="primary"
-                className="onboarding-next"
-                onClick={backClick}
-              >
-                Back
-              </Button>
-            </div>
-            <div className="onboarding-next-div">
-              <Button
-                variant="contained"
-                color="secondary"
-                className="onboarding-next"
-                disabled={nextDisabled()}
-                onClick={forwardClick}
-              >
-                Next
-              </Button>
+            <div className="onboarding-button-div">
+              <div className="onboarding-back-div">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className="onboarding-next"
+                  onClick={backClick}
+                >
+                  Back
+                </Button>
+              </div>
+              <div className="onboarding-next-div">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className="onboarding-next"
+                  disabled={nextDisabled()}
+                  onClick={forwardClick}
+                >
+                  Next
+                </Button>
+              </div>
             </div>
           </div>
         </div>
