@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
-import { onboardingTheme } from "../../utils/constants.js";
+import { primaryTheme } from "../../utils/constants.js";
 
 import { useHistory } from "react-router-dom";
 import React, {useRef, useState, useEffect} from "react";
@@ -65,7 +65,7 @@ function LandingPage(props) {
   };
 
   return (
-    <ThemeProvider theme={onboardingTheme}>
+    <ThemeProvider theme={primaryTheme}>
       <div className="landing-c0 row-container">
         <div className="landing-c1 row-container">
           <Typography
