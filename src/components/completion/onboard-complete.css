@@ -2,7 +2,7 @@ h1.refund-amount {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 12rem;
+  font-size: 9rem;
 }
 h6.onboard-complete-title {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
@@ -15,26 +15,34 @@ button.onboard-complete-apply-button {
   background-image: linear-gradient(to right, #744fc2, 60%, #002e72);
   color: white;
   font-size: 2rem;
-  padding: 2rem;
+  padding: 1.5rem;
+  margin: auto;
+  margin-bottom: 5rem;
   margin-top: 5rem;
-  width: 100%;
+  width: 75%;
 }
-
+.onboard-complete-c1-content {
+  max-width: 90%;
+  margin: auto;
+}
 .onboard-complete-c1 {
-  padding-top: 7rem;
-  width: 55%;
+  width: 60%;
   margin: auto;
   margin-bottom: 4rem;
   padding-bottom: 6rem;
   background-color: white;
   box-shadow: -0.3rem 0.3rem 2rem black;
-}
-
-.onboard-complete-c0-top {
-  margin: auto;
+  margin-top: 8rem;
+  padding-top: 4rem;
+  position: relative;
   text-align: center;
-  background-image: url("./../../images/full-background-pattern.svg");
+}
+body {
+  margin: auto;
+  background-image: url("./../../images/bg-pattern-double.svg");
   background-size: cover;
+}
+.onboard-complete-c0-top {
 }
 .onboard-complete-c0-bottom {
   margin: auto;
@@ -158,4 +166,11 @@ img.onboard-complete-help-arrow {
   background-image: url("./../../images/green-highlight.svg");
   background-position: right;
   background-repeat: no-repeat;
+}
+
+.onboard-complete-footer {
+  width: 100%;
+  background-color: #f6f6f6;
+  vertical-align: center;
+  display: flex;
 }
