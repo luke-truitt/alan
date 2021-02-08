@@ -1,31 +1,50 @@
 .landing-c1 {
   width: 100%;
   max-width: 600px;
-  margin: auto;
-  margin-top: 10vh;
+  display: flex;
 }
-.landing-title {
-  padding-bottom: 3rem;
-  text-align: center;
+h2.landing-title {
+  margin-bottom: 3rem;
+  text-align: left;
+  color: #2d2d2d;
+  /* background-color: black;
+  color: transparent;
+  text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.3);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text; */
 }
-.landing-subtitle {
-  text-align: center;
+p.landing-subtitle {
+  text-align: left;
+  line-height: 120%;
+  font-size: 1.2rem;
 }
-
 .landing-input {
   padding-bottom: 2rem;
+}
+.landing-c0-overlay {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 .landing-c0 {
   width: 70%;
   margin: auto;
   overflow: hidden;
   height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   .landing-c0 {
     overflow: scroll;
     height: 110vh;
+  }
+  .landing-ben {
+    visibility: hidden;
   }
 }
 div.landing-c1.row-container > div > button {
@@ -35,4 +54,11 @@ div.landing-c1.row-container > div > button {
 .landing-animation-container {
   padding-top: 1rem;
   z-index: 0;
+}
+.landing-ben {
+  z-index: -2;
+  position: absolute;
+  bottom: -15%;
+  right: -10px;
+  max-width: 50%;
 }
