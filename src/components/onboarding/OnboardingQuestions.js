@@ -1,16 +1,9 @@
 export const income = {
-  type: "Dropdown",
+  type: "DollarInput",
   question: "How much money did you make last year?",
   placeholder: "",
-  description: "An estimate is fine.",
-  options: {
-    "$0-$5,000": 5000,
-    "$5,000-$10,000": 10000,
-    "$10,000-$20,000": 20000,
-    "$20,000-$30,000": 30000,
-    "$30,000-$40,000": 40000,
-    "$40,000+": 50000,
-  },
+  description: "A ball park is fine, round to the nearest $1000",
+  options: {},
   stateName: "estimatedIncome",
 };
 
@@ -51,7 +44,7 @@ export const refundSize = {
   type: "DollarInput",
   question: "Estimate the size of the tax refund you received last year.",
   description: "",
-  options: [],
+  options: {},
   stateName: "estimatedRefund",
 };
 
@@ -61,7 +54,7 @@ export const educationExpenses = {
     "How much of your own money did you spend on educational expenses last year?",
   description:
     "This includes money spent on tuition, electronics, chargers, textbooks, and other supplies",
-  options: [],
+  options: {},
   stateName: "educationExpenses",
 };
 
@@ -70,14 +63,89 @@ export const studentLoans = {
   question: "How much of your student loans did you pay off in 2020?",
   description:
     "Most students usually don't begin loan repayment until graduation.",
-  options: [],
+  options: {},
   stateName: "loanPayments",
+};
+export const job = {
+  type: "JobInput",
+  question: "Where did you work last year and what'd you do?",
+  description:
+    "We know you may have worked at many places, just put the one that you made the most money from. If you didn't work anywhere put N/A for both.",
+  options: {},
+  stateName: "job",
+};
+export const state = {
+  type: "Dropdown",
+  question: "Where did you work from most of the time last year?",
+  description:
+    "Not where your employer was, where ever you physically lived while working. Your parents house, a random apartment with friends, school dorm, etc.",
+  options: {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'American Samoa': 'AS',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'District of Columbia': 'DC',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Guam': 'GU',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Northern Mariana Islands':'MP',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Puerto Rico': 'PR',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virgin Islands': 'VI',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY',
+    "N/A": "N/A",
+    "Internationally": "IX"
+},
+  stateName: "state",
 };
 export const studentStatus = {
   type: "SingleSelect",
-  question: "Were you a student for at least 5 months last year?",
+  question: "Were you a student at least part-time last year?",
   description: "",
-  options: { Yes: "Yes", No: "No", "Not Sure": "idk" },
+  options: { Yes: "Yes", No: "No" },
   stateName: "student",
 };
 
@@ -88,25 +156,19 @@ export const name = {
   options: {},
   stateName: "name",
 };
-export const gradYear = {
-  type: "Dropdown",
-  question: "Graduation Year",
+export const school = {
+  type: "SchoolInput",
+  question: "",
   description: "",
-  options: {
-    Graduated: "Graduated",
-    2021: "2021",
-    2022: "2022",
-    2023: "2023",
-    2024: "2024",
-  },
-  stateName: "student",
+  options: {},
+  stateName: "school",
 };
 export const intlStudent = {
-  type: "Dropdown",
+  type: "SingleSelect",
   question: "Are you an international student?",
   description: "",
-  options: { Yes: "Yes", No: "No" },
-  stateName: "student",
+  options: { Yes: "Yes", No: "No", None: "HEy"},
+  stateName: "international",
 };
 
 export const phoneNumber = {
@@ -114,5 +176,13 @@ export const phoneNumber = {
   question: "Phone Number",
   description: "",
   options: {},
-  stateName: "",
+  stateName: "phone",
+};
+
+export const refund = {
+  type: "Refund",
+  question: "",
+  description: "",
+  options: {},
+  stateName: "refund",
 };

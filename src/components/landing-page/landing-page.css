@@ -34,4 +34,5 @@ div.landing-c1.row-container > div > button {
 
 .landing-animation-container {
   padding-top: 1rem;
+  z-index: 0;
 }

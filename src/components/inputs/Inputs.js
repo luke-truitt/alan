@@ -11,6 +11,9 @@ import {
   OutlinedInput,
   InputLabel,
 } from "@material-ui/core";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+import {schools} from "../../data/Schools.js";
 import { primaryTheme } from "../../utils/constants.js";
 import "./inputs.css";
 import "../../styles.css";
@@ -21,9 +24,16 @@ const InputTypes = {
   DollarInput,
   NameInput,
   PhoneNumberInput,
+  SchoolInput,
+  JobInput,
+  Refund
 };
 
 export function PhoneNumberInput(props) {
+  const checkValid = (val, name) => {
+    props.validData({[name]: (val.length > 9)});
+  }
+  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
@@ -32,6 +42,8 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
+          value={props.fields["phone"]}
+          onChange={(e) => {props.onChange(e.target.value, {"stateName": "phone"}); checkValid(e.target.value, "phone");}}
         />
       </div>
     </ThemeProvider>
@@ -44,11 +56,78 @@ export const Input = (props) => {
 };
 
 export function NameInput(props) {
+  const checkValid = (val, name) => {
+    props.validData({[name]: (val.length > 0)});
+  }
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
-        <TextField label="First Name" autoComplete variant="outlined" />
-        <TextField label="Last Name" autoComplete variant="outlined" />
+        <TextField className="form-item-text-field" label="First Name" 
+          value={props.fields["firstName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "firstName"}); checkValid(e.target.value, "firstName");}}/>
+        <TextField className="form-item-text-field" label="Last Name" 
+          value={props.fields["lastName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "lastName"}); checkValid(e.target.value, "lastName");}}/>
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export function SchoolInput(props) {
+
+  const checkValid = (value, name) => {
+    let res = ""
+    if(value==null) {
+      res = "";
+    } else {
+      res = value.name;
+    }
+    props.validData({[name]: (res.length > 0)});
+  }
+
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <div className="form-item-container column-container school-input">
+        <Autocomplete
+              id="combo-box-demo"
+              className="form-item-text-field"
+              options={schools}
+              getOptionLabel={(option) => option.name}
+              // inputValue = {props.fields["school"]}
+              onChange={(e, value) => {props.onChange(value, {"stateName": "school"}); checkValid(value, "school");}}
+              renderInput={(params) => <TextField {...params} label="School" variant="outlined" />}
+        />
+        <TextField className="form-item-text-field" label="Graduation Year" 
+          value={props.fields["classYear"]} variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "classYear"}); checkValid({"name": e.target.value}, "classYear");}}/>
+      </div>
+    </ThemeProvider>
+  );
+}
+
+export function JobInput(props) {
+
+  const checkValid = (val, name) => {
+    props.validData({[name]: (val.length > 0)});
+  }
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <Typography
+          variant="h6"
+          color="textPrimary"
+          className="form-item-question"
+        >
+          {props.question}
+        </Typography>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          className="form-item-description"
+        >
+          {props.description}
+      </Typography>
+      <div className="form-item-container column-container">
+        <TextField className="form-item-text-field" label="Company Name" 
+          value={props.fields["companyName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "companyName"}); checkValid(e.target.value, "companyName");}}/>
+        <TextField className="form-item-text-field" label="Job Title" 
+          value={props.fields["jobTitle"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "jobTitle"}); checkValid(e.target.value, "jobTitle");}}/>
       </div>
     </ThemeProvider>
   );
@@ -58,6 +137,10 @@ export function Dropdown(props) {
   const items = Object.entries(props.options).map(([option, index]) => (
     <MenuItem value={index}>{option}</MenuItem>
   ));
+
+  const checkValid = (val) => {
+    props.validData({[props.stateName]: (val.length > 0)});
+  };
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -77,7 +160,8 @@ export function Dropdown(props) {
           {props.description}
         </Typography>
         <FormControl variant="outlined">
-          <Select onChange={props.onChange}>{items}</Select>
+          <Select 
+          value={props.fields[props.stateName]} onChange={(e) => {props.onChange(e.target.value, {"stateName": props.stateName});; checkValid(e.target.value);}}>{items}</Select>
         </FormControl>
       </div>
     </ThemeProvider>
@@ -85,22 +169,22 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
-  const [selected, setSelected] = useState(-1);
-
+  
+  const checkValid = (index) => {
+    props.validData({[props.stateName]: true})
+  }
   const updateButtons = (index) => {
-    setSelected(index);
     props.onChange(
-      { target: { value: index } },
+      index,
       { stateName: props.stateName }
     );
   };
   const buttons = Object.entries(props.options).map(([option, index]) => (
     <Button
       variant="contained"
-      value={index}
-      onClick={() => updateButtons(index)}
+      onClick={() => {updateButtons(index); checkValid(index);}}
       className={
-        selected == index
+        props.fields[props.stateName] == index
           ? "single-select-button selected"
           : "single-select-button"
       }
@@ -137,6 +221,10 @@ export function SingleSelect(props) {
 }
 
 export function DollarInput(props) {
+  const checkValid = (val) => {
+    props.validData({[props.stateName]: !isNaN(val)});
+  };
+  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
@@ -148,7 +236,7 @@ export function DollarInput(props) {
           {props.question}
         </Typography>
         <Typography
-          variant="body2"
+          variant="caption"
           color="textSecondary"
           className="form-item-description"
         >
@@ -157,10 +245,37 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            placeholder="0"
-            onChange={(e) => props.onChange(e, props.stateName)}
+            placeholder="0" 
+            value={isNaN(props.fields[props.stateName]) ? '' : props.fields[props.stateName]} onChange={(e) => {props.onChange(parseInt(e.target.value), {"stateName": props.stateName}); checkValid(e.target.value);}}
           />
         </FormControl>
+      </div>
+    </ThemeProvider>
+  );
+}
+export function Refund(props) {
+  const dataLabels = Object.entries(props.data).map(([name, value]) => (
+    <div>
+    <Typography
+          variant="h6"
+          color="textPrimary"
+          className="form-item-question"
+        >
+          {name}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          className="form-item-description"
+        >
+          {value}
+      </Typography>
+      </div>
+  ));
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <div className="form-item-container row-container">
+        {dataLabels}
       </div>
     </ThemeProvider>
   );
@@ -168,16 +283,18 @@ export function DollarInput(props) {
 let dataChange = false;
 export function Form(props) {
   const [fields, setFields] = useState({});
-
+  const [isValid, setIsValid] = useState({});
+  
   useEffect(() => {
     if (dataChange) {
       props.onUpdate(fields);
+      props.validForm(isValid);
       dataChange = false;
     }
   });
-
+  
   const onChange = (e, formItem) => {
-    const dic = { [formItem.stateName]: e.target.value };
+    const dic = { [formItem.stateName]: e };
     updateDict(dic);
     dataChange = true;
   };
@@ -188,6 +305,12 @@ export function Form(props) {
     }
   };
 
+  const setValid = (item) => {
+    for (const [key, value] of Object.entries(item)) {
+      setIsValid((isValid) => ({ ...isValid, [key]: value }));
+    }
+  }
+
   const inputs = props.formItems.map((formItem) => (
     <Input
       type={formItem.type}
@@ -195,7 +318,10 @@ export function Form(props) {
       description={formItem.description}
       options={formItem.options}
       stateName={formItem.stateName}
-      onChange={(e) => onChange(e, formItem)}
+      fields={props.fields}
+      data={props.data}
+      validData={(item) => setValid(item)}
+      onChange={(e, item) => onChange(e, item)}
     />
   ));
 
@@ -212,6 +338,20 @@ export function Form(props) {
 }
 
 export function EmbeddedEmailInput(props) {
+  const [valid, setValid] = useState(false);
+  const checkValid = (mail) =>
+    {
+     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+      {
+        console.log("Good");
+        setValid(true);
+      } else {
+        console.log("Bad");
+        setValid(false);
+      }
+    }
+  
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
@@ -222,13 +362,13 @@ export function EmbeddedEmailInput(props) {
           value={props.emailValue}
           onKeyDown={props.onKeyDown}
           InputProps={{ disableUnderline: true }}
-          onChange={(e) => props.setEmail(e.target.value)}
+          onChange={(e) => {props.setEmail(e.target.value); checkValid(e.target.value);}}
         />
         <Button
           className="embedded-email-input-button"
           variant="contained"
           color="secondary"
-          onClick={props.navTo}
+          onClick={valid ? props.navTo : props.invalidClick}
         >
           Calculate my refund
         </Button>

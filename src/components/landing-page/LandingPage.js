@@ -1,17 +1,20 @@
 import "./landing-page.css";
-import "./../../styles.css";
+import "../../styles.css";
 import Lottie from "react-lottie";
-import animationData from "./../../lotties/landing-page-animation.json";
+import animationData from "../../lotties/landing-page-animation.json";
 import {
   ThemeProvider,
   Button,
   Typography,
   TextField,
 } from "@material-ui/core/";
-import { EmbeddedEmailInput } from "./../inputs/Inputs.js";
-import { primaryTheme } from "./../../utils/constants.js";
+import { EmbeddedEmailInput } from "../inputs/Inputs.js";
+import { primaryTheme } from "../../utils/constants.js";
+
 import { useHistory } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, {useRef, useState, useEffect} from "react";
+import {PageView, initGA, Event} from '../tracking/Tracking';
+const trackingId = 'UA-189058741-1';
 const {
   REACT_APP_API_BASE_URL,
   REACT_APP_WAITLIST_URL,
@@ -20,18 +23,28 @@ const {
 
 function LandingPage(props) {
   const [email, setEmail] = useState("");
-  const history = useHistory();
-  const keyDown = (e) => {
-    var code = e.keyCode || e.which;
+  const [invalid, setInvalid] = useState(false);
 
-    if (code === 13 || code === 32 || code === 39) {
-      //13 is the enter keycode
-      navTo();
-    }
-  };
+  const history = useHistory();
+  // const keyDown = (e) => {
+  //   var code = e.keyCode || e.which;
+
+  //   if (code === 13 || code === 32 || code === 39) {
+  //     //13 is the enter keycode
+  //     navTo();
+  //   }
+  // };
+  useEffect(() => {
+    initGA(trackingId);
+    PageView();
+  });
   const navTo = () => {
+    Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
     addEmail(email);
     history.push({ pathname: "/onboard", state: { email: email } });
+  };
+  const invalidClick = () => {
+    setInvalid(true);
   };
   const axios = require("axios");
   const emailInput = useRef(null);
@@ -72,9 +85,18 @@ function LandingPage(props) {
             className="landing-input"
             emailValue={email}
             setEmail={setEmail}
-            keyDown={keyDown}
+            // keyDown={keyDown}
+            navTo={navTo}
+            invalidClick={invalidClick}
           />
-
+<Typography
+            variant="body2"
+            color="text-secondary"
+            className="landing-subtitle"
+            style={{display: invalid ? "" : "none", color: "#4056a1"}}
+          >
+            Make sure you use a valid email!
+          </Typography>
           <Typography
             variant="body2"
             color="text-secondary"
@@ -84,6 +106,7 @@ function LandingPage(props) {
             you qualify for, maximize your refund, explain why. All in under 10
             minutes.
           </Typography>
+          
         </div>
         <div className="landing-animation-container">
           <Lottie isPaused="landing-animation" options={lottieOptions} />
