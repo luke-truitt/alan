@@ -3,6 +3,8 @@
   background-image: url("./../../images/bg-pattern-half.svg");
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100%;
+  margin: auto;
 }
 
 .join-page-c1-right {
@@ -29,6 +31,34 @@
   left: 0;
   box-shadow: inset -2px 2px 4px black;
 }
+.join-timeline {
+  max-width: 70%;
+  margin: auto;
+}
+h5.join-timeline-title {
+  padding-bottom: 2rem;
+  font-size: 1.9rem;
+}
+.join-timeline-step {
+  margin-bottom: 0.25rem;
+  vertical-align: center;
+  align-content: center;
+  vertical-align: middle;
+}
+span.join-disclaimer-text {
+  float: bottom left;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+}
+p.join-timeline-step-text {
+  font-size: 1.2rem;
+  align-self: baseline;
+  justify-items: flex-end;
+}
+.join-timeline-step-number {
+  width: 4rem;
+  margin-right: 2rem;
+}
 h2.purple-highlight {
   background-image: url("./../../images/purple-highlight.svg");
   background-position: left bottom;
@@ -36,8 +66,6 @@ h2.purple-highlight {
   background-repeat: no-repeat;
   margin-bottom: 4rem;
 }
-
-/* #root > div > div.join-page-c0.column-container > div.join-page-c1-right.row-container > div > h2 */
 
 .join-form > button {
   margin-bottom: 1rem;
@@ -47,6 +75,8 @@ h2.purple-highlight {
   width: 100%;
   background-color: #c6cacc;
   vertical-align: center;
+  align-self: center;
+  justify-items: center;
   margin: auto;
 }
 
