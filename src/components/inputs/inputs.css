@@ -22,7 +22,6 @@ button.single-select-button:hover {
 button.selected {
   background-color: #d8dbe8;
   border: 1px solid #4056a1;
-  width: 120%;
   font-weight: normal;
   color: #6d6d6d;
 }

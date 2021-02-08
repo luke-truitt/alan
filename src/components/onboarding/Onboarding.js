@@ -47,8 +47,13 @@ const forms = [
   // { title: "Personal", items: [name, phoneNumber, school, intlStudent], formFields: ["firstName", "lastName", "phone", "school", "classYear", "international"] },
   {
     title: "Income",
-    items: [income, state, dependence],
-    formFields: ["estimatedIncome", "state", "dependent"]
+    items: [income, state],
+    formFields: ["estimatedIncome", "state"]
+  },
+  {
+    title: "Dependent",
+    items: [dependence],
+    formFields: ["dependent"]
   },
   // {
   //   title: "History",
@@ -178,9 +183,9 @@ function Onboarding(props) {
         "email": email, "referToId": referToId, "referById": referById
       });
     } 
-    if (step >= 2) {
+    if (step >= forms.length) {
       navToRefund();
-      setStep(2);
+      setStep(forms.length);
     } else {
       setStep(step + 1);
     }

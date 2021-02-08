@@ -3,10 +3,14 @@ import {
   Button,
   Typography,
   TextField,
+  CircularProgress,
 } from "@material-ui/core";
-import { primaryTheme } from "./../../utils/constants.js";
-import "./join-page.css";
-import { NameInput, PhoneNumberInput } from "./../inputs/Inputs.js";
+import { primaryTheme } from "../../utils/constants.js";
+import "./join-form.css";
+import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
+import { useState } from "react";
+import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
+import { useHistory } from "react-router-dom";
 import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
 import joinTimeline2 from "./../../images/join-timeline/join-timeline-2.svg";
 import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
@@ -19,14 +23,6 @@ const timelineNumbers = {
   3: joinTimeline3,
   4: joinTimeline4,
   5: joinTimeline5,
-};
-
-const mockProps = {
-  fields: {
-    phone: "",
-    firstName: "",
-    lastName: "",
-  },
 };
 
 const timelineData = [
@@ -84,16 +80,99 @@ function JoinTimeline() {
 }
 
 function JoinForm(props) {
-  props = mockProps;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const navTo = () => {
+    console.log("Nav");
+    // Event("SIGNUP", "User Signed Up", "JOIN_PAGE");
+    history.push({ pathname: "/account" });
+  };
+  const checkValid = (d) => {
+    // TODO
+  };
+  const createUserWithEmailAndPasswordHandler = async (event) => {
+    setLoading(true);
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(user);
+      generateUserDocument(user, { firstName, lastName, phone });
+      navTo();
+      setLoading(false);
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+    } catch (error) {
+      setLoading(false);
+      setError("Error Signing up with email and password");
+    }
+  };
+
+  const onChange = (e, val) => {
+    if (val.stateName == "firstName") {
+      setFirstName(e);
+    } else if (val.stateName == "lastName") {
+      setLastName(e);
+    } else if (val.stateName == "phone") {
+      setPhone(e);
+    } else if (val.stateName == "email") {
+      setEmail(e);
+    } else if (val.stateName == "password") {
+      setPassword(e);
+    }
+  };
+
   return (
     <div className="join-form row-container">
-      <NameInput fields={props} />
-      <PhoneNumberInput fields={props} />
+      <NameInput
+        validData={(d) => checkValid(d)}
+        onChange={(e, val) => onChange(e, val)}
+        fields={{ firstName: firstName, lastName: lastName }}
+      />
+      <PhoneNumberInput
+        validData={(d) => checkValid(d)}
+        onChange={(e, val) => onChange(e, val)}
+        placeholder="Enter Phone Number"
+        fields={{ phone: phone }}
+      />
       <Typography variant="caption" className="join-phone-explainer">
         So we can text you when the review is complete!
       </Typography>
-      <Button className="join-button" variant="contained" color="secondary">
-        Join
+      <TextInput
+        validData={(d) => checkValid(d)}
+        onChange={(e, val) => onChange(e, val)}
+        stateName="email"
+        value={email}
+        placeholder="Enter Email"
+        type="email"
+      />
+      <TextInput
+        validData={(d) => checkValid(d)}
+        onChange={(e, val) => onChange(e, val)}
+        stateName="password"
+        value={password}
+        placeholder="Enter Password"
+        type="password"
+      />
+
+      <Button
+        className="join-button"
+        variant="contained"
+        color="secondary"
+        onClick={(e) => createUserWithEmailAndPasswordHandler(e)}
+      >
+        {loading ? <CircularProgress /> : "Join"}
       </Button>
       <div className="join-or-container column-container">
         <div className="join-or-horizontal-line" />
@@ -107,12 +186,19 @@ function JoinForm(props) {
         className="google-sign-button"
         variant="contained"
         color="primary"
+        onClick={() => {
+          try {
+            signInWithGoogle();
+          } catch (error) {
+            console.error("Error signing in with Google", error);
+          }
+        }}
       >
         Sign in with Google
       </Button>
-      <Button className="apple-sign-button" variant="contained" color="primary">
+      {/* <Button className="apple-sign-button" variant="contained" color="primary">
         Sign in Apple
-      </Button>
+      </Button> */}
     </div>
   );
 }
@@ -124,7 +210,6 @@ function JoinPage() {
         <div className="join-page-c1-left-shadow" />
         <div className="join-page-c1-left row-container">
           <JoinTimeline></JoinTimeline>
-
           <Typography
             variant="caption"
             color="primary"
