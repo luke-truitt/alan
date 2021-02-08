@@ -9,6 +9,7 @@ import {
   TextField,
   InputAdornment,
   OutlinedInput,
+  CircularProgress,
   InputLabel,
 } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -339,6 +340,7 @@ export function Form(props) {
 
 export function EmbeddedEmailInput(props) {
   const [valid, setValid] = useState(false);
+
   const checkValid = (mail) =>
     {
      if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
@@ -351,16 +353,17 @@ export function EmbeddedEmailInput(props) {
       }
     }
   
-
+  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
         <TextField
           type="email"
           className="form-item-text-field embedded-email-input-field"
-          variant="outlined"
+          variant={props.invalid ? "standard" : "outlined"}
           value={props.emailValue}
           onKeyDown={props.onKeyDown}
+          style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
           InputProps={{ disableUnderline: true }}
           onChange={(e) => {props.setEmail(e.target.value); checkValid(e.target.value);}}
         />
@@ -370,7 +373,7 @@ export function EmbeddedEmailInput(props) {
           color="secondary"
           onClick={valid ? props.navTo : props.invalidClick}
         >
-          Calculate my refund
+          {props.loading ? "Calculate my refund" : <CircularProgress />}
         </Button>
       </div>
     </ThemeProvider>

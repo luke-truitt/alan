@@ -14,6 +14,7 @@ import { primaryTheme } from "../../utils/constants.js";
 import { useHistory } from "react-router-dom";
 import React, {useRef, useState, useEffect} from "react";
 import {PageView, initGA, Event} from '../tracking/Tracking';
+
 const trackingId = 'UA-189058741-1';
 const {
   REACT_APP_API_BASE_URL,
@@ -24,7 +25,7 @@ const {
 function LandingPage(props) {
   const [email, setEmail] = useState("");
   const [invalid, setInvalid] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   // const keyDown = (e) => {
   //   var code = e.keyCode || e.which;
@@ -40,8 +41,8 @@ function LandingPage(props) {
   });
   const navTo = () => {
     Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
+    setLoading(true);
     addEmail(email);
-    history.push({ pathname: "/onboard", state: { email: email } });
   };
   const invalidClick = () => {
     setInvalid(true);
@@ -54,7 +55,10 @@ function LandingPage(props) {
         email: email,
       })
       .then(function (response) {
+        const referToId = response.referId;
+        history.push({ pathname: "/onboard", state: { email: email, referToId: referToId } });
         console.log(response);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -85,11 +89,13 @@ function LandingPage(props) {
             className="landing-input"
             emailValue={email}
             setEmail={setEmail}
+            invalid={invalid}
             // keyDown={keyDown}
             navTo={navTo}
             invalidClick={invalidClick}
+            loading={loading}
           />
-<Typography
+          <Typography
             variant="body2"
             color="text-secondary"
             className="landing-subtitle"

@@ -154,10 +154,10 @@ function Onboarding(props) {
         console.log(error);
       });
   }
+
   /*
     Functions for controlling UI Elements and Interacting with DOM
   */
-
   // Logic for determining whether or not the "Next" button should be disabled
   const nextDisabled = () => {
     console.log("Step: " + String(step) + " State: " + String(formValid))
@@ -178,8 +178,9 @@ function Onboarding(props) {
   // Click Next Logic
   const forwardClick = () => {
     if (step == 1) {
+      console.log(referToId);
       onDataUpdate({
-        "email": email
+        "email": email, "referToId": referToId
       });
     } 
     if (step >= 2) {
@@ -195,10 +196,15 @@ function Onboarding(props) {
   */
   let location = useLocation();
   let email = "";
+  let referToId = "";
+  let referById = "";
   try {
     email = location.state["email"];
+    referToId = location.state["referToId"];
+    console.log(referToId);
   } catch {
     email = "";
+    referToId = "";
   }
 
   // Data to be sent to server
