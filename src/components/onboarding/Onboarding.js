@@ -95,7 +95,7 @@ function Onboarding(props) {
   const history = useHistory();
 
   const redirectHome = () => {
-    history.push({ pathname: "/"});
+    // history.push({ pathname: "/"});
   }
 
   const onDataUpdate = (d) => {

@@ -21,14 +21,18 @@ function LandingPage(props) {
   const [invalid, setInvalid] = useState(false);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  // const keyDown = (e) => {
-  //   var code = e.keyCode || e.which;
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
 
-  //   if (code === 13 || code === 32 || code === 39) {
-  //     //13 is the enter keycode
-  //     navTo();
-  //   }
-  // };
+    if (code === 13 || code === 32 || code === 39) {
+      //13 is the enter keycode
+      if(!val) {
+        invalidClick();
+      } else {
+        navTo();
+      }
+    }
+  };
   useEffect(() => {
     initGA(trackingId);
     PageView();
@@ -104,7 +108,7 @@ function LandingPage(props) {
               emailValue={email}
               setEmail={setEmail}
               invalid={invalid}
-              // keyDown={keyDown}
+              onKeyPress={(e, val) => keyDown(e, val)}
               navTo={navTo}
               invalidClick={invalidClick}
               loading={loading}
