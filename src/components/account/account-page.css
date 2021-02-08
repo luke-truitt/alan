@@ -3,7 +3,7 @@
   height: 100vh;
 }
 .account-page-c1-left {
-  background-image: url("./../../images/bg-gradient-third.svg");
+  background-image: url("./../../images/bg/bg-gradient-third.svg");
   width: 30%;
   height: 100%;
   background-size: cover;
@@ -11,7 +11,7 @@
   z-index: -2;
 }
 .account-page-c1-right {
-  background-image: url("./../../images/bg-pattern-full-light.svg");
+  background-image: url("./../../images/bg/bg-pattern-full-light.svg");
   width: 70%;
   background-size: cover;
   background-repeat: no-repeat;

@@ -8,7 +8,7 @@ import { primaryTheme } from "../../utils/constants.js";
 import { useHistory, useLocation } from "react-router-dom";
 import React, { useRef, useState, useEffect } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
-import ben from "./../../images/ben.png";
+import ben from "./../../images/landing-page/ben.png";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -26,7 +26,7 @@ function LandingPage(props) {
 
     if (code === 13 || code === 32 || code === 39) {
       //13 is the enter keycode
-      if(!val) {
+      if (!val) {
         invalidClick();
       } else {
         navTo();

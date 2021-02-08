@@ -5,7 +5,7 @@
 }
 .onboarding-c1-left {
   width: 30vw;
-  background-image: url(../../images/onboarding-left-div-bg.svg);
+  background-image: url("./../../images/bg/bg-pattern-third.svg");
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -100,7 +100,7 @@ h4.onboarding.form-title {
     align-items: center;
   }
   .onboarding-c0 {
-    background-image: url(../../images/onboarding-left-div-bg.svg);
+    background-image: url("./../../images/bg/bg-pattern-third.svg");
     background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;

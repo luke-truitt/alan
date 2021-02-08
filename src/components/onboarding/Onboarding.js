@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import "./onboarding.css";
 import "../../styles.css";
-import snap from "../../images/snap.svg";
+import snap from "../../images/onboarding-page/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -96,7 +96,7 @@ function Onboarding(props) {
 
   const redirectHome = () => {
     // history.push({ pathname: "/"});
-  }
+  };
 
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
@@ -144,8 +144,16 @@ function Onboarding(props) {
     };
 
     sendData();
-    history.push({ pathname: "/refund", state: { email: email, referToId: referToId, referById: referById, breakdown: data } });
-  }
+    history.push({
+      pathname: "/refund",
+      state: {
+        email: email,
+        referToId: referToId,
+        referById: referById,
+        breakdown: data,
+      },
+    });
+  };
 
   const axios = require("axios");
 
@@ -211,7 +219,7 @@ function Onboarding(props) {
     referToId = "";
     referById = "";
   }
-  if(email=="" || referToId=="") {
+  if (email == "" || referToId == "") {
     redirectHome();
   }
   // Data to be sent to server

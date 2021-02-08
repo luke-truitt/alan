@@ -1,11 +1,24 @@
-import add_icon from "../../images/add.svg";
-import subtract_icon from "../../images/subtract.svg";
-import multiply_icon from "../../images/multiply.svg";
-import equal_icon from "../../images/equal.svg";
-import { ThemeProvider, Link, Typography, Dialog, DialogTitle } from "@material-ui/core";
+import add_icon from "../../images/icons/add-outline-white.svg";
+import subtract_icon from "../../images/icons/subtract-outline-white.svg";
+import multiply_icon from "../../images/icons/multiply-outline-dark.svg";
+import equal_icon from "../../images/icons/equal-outline-purple.svg";
+import {
+  ThemeProvider,
+  Link,
+  Typography,
+  Dialog,
+  DialogTitle,
+} from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
 import { useState } from "react";
-import { taxable_income_description, tax_bill_description, net_refund_description, effective_tax_rate_description, withholdings_description, credits_description} from "../../utils/summaries";
+import {
+  taxable_income_description,
+  tax_bill_description,
+  net_refund_description,
+  effective_tax_rate_description,
+  withholdings_description,
+  credits_description,
+} from "../../utils/summaries";
 function numberWithCommas(x) {
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -58,26 +71,36 @@ function RefundBreakdownRow(props) {
           variant="body1"
           color="secondary"
           className="refund-breakdown-row-label"
-          onClick={()=> handleOpen()}
+          onClick={() => handleOpen()}
         >
           {props.label}
         </Link>
       </div>
-      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" style={{backgroundColor: "white", padding: "10px"}} open={open}>
-        <Typography variant="body2"
-              color="secondary"
-              className="refund-breakdown-row-amount" id="simple-dialog-title" style={{marginLeft: "auto", padding: "10px"}}>{props.label}</Typography>
+      <Dialog
+        onClose={handleClose}
+        aria-labelledby="simple-dialog-title"
+        style={{ backgroundColor: "white", padding: "10px" }}
+        open={open}
+      >
         <Typography
-        variant="h6"
-        className="onboard-complete-fee-text"
-        color="secondary"
-        style={{marginLeft: "auto", padding: "10px"}}
+          variant="body2"
+          color="secondary"
+          className="refund-breakdown-row-amount"
+          id="simple-dialog-title"
+          style={{ marginLeft: "auto", padding: "10px" }}
         >
-        {props.description}
+          {props.label}
+        </Typography>
+        <Typography
+          variant="h6"
+          className="onboard-complete-fee-text"
+          color="secondary"
+          style={{ marginLeft: "auto", padding: "10px" }}
+        >
+          {props.description}
         </Typography>
       </Dialog>
     </ThemeProvider>
-    
   );
 }
 

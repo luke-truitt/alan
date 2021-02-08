@@ -11,7 +11,7 @@ import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./onboard-complete.css";
 import RefundBreakdown from "./RefundBreakdown.js";
-import whiteArrow from "./../../images/white-arrow.svg";
+import whiteArrow from "./../../images/refund-page/arrow-white.svg";
 import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 

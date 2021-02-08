@@ -1,6 +1,6 @@
 .join-page-c1-left {
   width: 50%;
-  background-image: url("./../../images/bg-pattern-half.svg");
+  background-image: url("./../../images/bg/bg-pattern-half.svg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -60,7 +60,7 @@ p.join-timeline-step-text {
   margin-right: 2rem;
 }
 h2.purple-highlight {
-  background-image: url("./../../images/purple-highlight.svg");
+  background-image: url("./../../images/text-decoration/purple-highlight.svg");
   background-position: left bottom;
   background-size: 6.5rem;
   background-repeat: no-repeat;

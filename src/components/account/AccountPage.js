@@ -7,33 +7,33 @@ import {
   Button,
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
-import {AuthContext} from "../../providers/AuthProvider";
-import {useContext} from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
 
 import "./../../styles.css";
 import "./account-page.css";
-import giftIcon from "./../../images/account/gift-icon.svg";
-import shareIcon from "./../../images/account/share-icon.svg";
-import copyIcon from "./../../images/account/copy-icon.svg";
-import reviewIcon from "./../../images/account/review-icon.svg";
-import placeholderText from "./../../images/account/placeholder-text.svg";
-import uploadIcon from "./../../images/account/upload-icon.svg";
-import submitIcon from "./../../images/account/submit-icon.svg";
-import investImg from "./../../images/account/invest-img.svg";
-import trackImg from "./../../images/account/track-img.svg";
-import placeholderBlock from "./../../images/account/placeholder-block.svg";
-import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
-import joinTimeline2 from "./../../images/account/account-timeline-2.svg";
-import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
-import joinTimeline4 from "./../../images/join-timeline/join-timeline-4.svg";
-import joinTimeline5 from "./../../images/join-timeline/join-timeline-5.svg";
+import giftIcon from "./../../images/icons/gift-dark.svg";
+import shareIcon from "./../../images/icons/share-dark.svg";
+import copyIcon from "./../../images/icons/copy-dark.svg";
+import reviewIcon from "./../../images/icons/review-dark.svg";
+import placeholderText from "./../../images/account-page/placeholder-text.svg";
+import uploadIcon from "./../../images/icons/upload-dark.svg";
+import submitIcon from "./../../images/icons/review-dark.svg";
+import investImg from "./../../images/account-page/invest-placeholder.svg";
+import trackImg from "./../../images/account-page/track-placeholder.svg";
+import placeholderBlock from "./../../images/account-page/placeholder-block.svg";
+import accountTimeline1 from "./../../images/timeline/timeline-1.svg";
+import accountTimeline2 from "./../../images/timeline/timeline-2-active.svg";
+import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
+import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
+import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 
 const timelineNumbers = {
-  1: joinTimeline1,
-  2: joinTimeline2,
-  3: joinTimeline3,
-  4: joinTimeline4,
-  5: joinTimeline5,
+  1: accountTimeline1,
+  2: accountTimeline2,
+  3: accountTimeline3,
+  4: accountTimeline4,
+  5: accountTimeline5,
 };
 
 const mockProps = {

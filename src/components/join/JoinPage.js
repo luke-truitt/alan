@@ -11,11 +11,11 @@ import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
-import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
-import joinTimeline2 from "./../../images/join-timeline/join-timeline-2.svg";
-import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
-import joinTimeline4 from "./../../images/join-timeline/join-timeline-4.svg";
-import joinTimeline5 from "./../../images/join-timeline/join-timeline-5.svg";
+import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
+import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
+import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
+import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
+import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -91,8 +91,8 @@ function JoinForm(props) {
   let location = useLocation();
 
   const redirectHome = () => {
-    history.push({ pathname: "/"});
-  }
+    history.push({ pathname: "/" });
+  };
   let em = "";
   let referToId = "";
   let referById = "";
@@ -105,7 +105,10 @@ function JoinForm(props) {
   }
 
   const navTo = () => {
-    history.push({ pathname: "/account", state: { email: em, referToId: referToId, referById: referById } });
+    history.push({
+      pathname: "/account",
+      state: { email: em, referToId: referToId, referById: referById },
+    });
   };
   const checkValid = (d) => {
     // TODO
@@ -113,10 +116,7 @@ function JoinForm(props) {
   const createUserWithEmailAndPasswordHandler = async (event) => {
     setLoading(true);
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        em,
-        password
-      );
+      const { user } = await auth.createUserWithEmailAndPassword(em, password);
       generateUserDocument(user, { firstName, lastName, phone });
       navTo();
       setLoading(false);

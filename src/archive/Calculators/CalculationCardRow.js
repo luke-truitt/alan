@@ -1,8 +1,8 @@
 import { ThemeProvider, Typography, Link, Grid } from "@material-ui/core/";
-import add_icon from "../../images/add.svg";
-import subtract_icon from "../../images/subtract.svg";
-import multiply_icon from "../../images/multiply.svg";
-import equal_icon from "../../images/equal.svg";
+import add_icon from "../../images/icons/add-outline-white.svg";
+import subtract_icon from "../../images/icons/subtract-outline-white.svg";
+import multiply_icon from "../../images/icons/multiply-outline-dark.svg";
+import equal_icon from "../../images/icons/equal-outline-purple.svg";
 import "./calculator_page.css";
 import { themeColor } from "../../utils/constants.js";
 
