@@ -11,7 +11,7 @@ import "./onboarding.css";
 import "../../styles.css";
 import snap from "../../images/onboarding-page/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
-
+import Typist from "react-typist";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import {
   income,
@@ -32,7 +32,8 @@ import {
 } from "./OnboardingQuestions.js";
 import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
-
+import Lottie from "react-lottie";
+import loadingAnimation from "./../../lotties/coin-loading.json";
 import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
@@ -329,12 +330,55 @@ function Onboarding(props) {
     );
   }
 
+  const loadingText = [
+    "Calculating witholdings",
+    "Checking credit eligibility",
+    "Refund found!",
+  ];
+
+  function Loading() {
+    const defaultOptions = {
+      loop: 1,
+      autoplay: true,
+      animationData: loadingAnimation,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    };
+    return (
+      <div className="onboard-loading-container row-container">
+        <Typography
+          className="onboard-loading-title"
+          variant="h4"
+          color="textPrimary"
+        >
+          Calculating your refund...
+        </Typography>
+        <Lottie
+          className="onboard-loading-lottie"
+          width={100}
+          height={100}
+          options={defaultOptions}
+        />
+        <Typist className="onboard-loading-subtitle" avgTypingDelay={50}>
+          {" "}
+          <span>{loadingText[0]}</span>
+          <Typist.Backspace count={loadingText[0].length} delay={200} />
+          <span>{loadingText[1]}</span>
+          <Typist.Backspace count={loadingText[1].length} delay={200} />
+          <span>{loadingText[2]}</span>
+        </Typist>
+      </div>
+    );
+  }
+
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
         <OnboardingTimeline activeStep={step} />
         <div className="onboarding-c1-right row-container">
-          <ProgressBar
+          <Loading />
+          {/* <ProgressBar
             value={step * (100 / forms.length)}
             className="onboarding-c1-right-progress-bar"
           />
@@ -371,7 +415,7 @@ function Onboarding(props) {
                 </Button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </ThemeProvider>
