@@ -6,6 +6,15 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants.js";
 import "./join-form.css";
+import { NameInput, PhoneNumberInput } from "./../inputs/Inputs.js";
+
+const mockProps = {
+  fields: {
+    phone: "",
+    firstName: "",
+    lastName: "",
+  },
+};
 
 const timelineData = [
   { number: 1, text: "Join Us" },
@@ -27,6 +36,7 @@ const timelineData = [
     text: "We collect a flat $25 fee only if you receive a refund (Read why).",
   },
 ];
+
 function JoinTimelineStep(props) {
   return (
     <div className="column-container join-timeline-step">
@@ -51,12 +61,12 @@ function JoinTimeline() {
   );
 }
 
-function JoinForm() {
+function JoinForm(props) {
+  props = mockProps;
   return (
     <div className="join-form row-container">
-      <TextField label="First Name" />
-      <TextField label="Last Name" />
-      <TextField label="Phone Number" />
+      <NameInput fields={props} />
+      <PhoneNumberInput fields={props} />
       <Button>Join</Button>
       <Typography variant="caption">OR</Typography>
       <Button>Sign in with Google</Button>
