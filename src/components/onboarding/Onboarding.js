@@ -36,6 +36,7 @@ import { Form } from "../inputs/Inputs.js";
 import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
+import OnboardingTimeline from "./OnboardingTimeline";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -311,20 +312,27 @@ function Onboarding(props) {
     return refund;
   }
 
+  function InitPanel() {
+    return (
+      <div className="onboarding-c1-left row-container">
+        <div container className="onboarding-c1-left-div">
+          <Typography variant="h3" className="onboarding-c1-left-title">
+            A few clicks from a bigger refund
+          </Typography>
+          <Typography variant="body2" className="onboarding-c1-left-subtitle">
+            File for your tax refund in minutes. Get back money and time.
+          </Typography>
+        </div>
+
+        <img className="onboarding-c1-left-img" src={snap} />
+      </div>
+    );
+  }
+
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
-        <div className="onboarding-c1-left row-container">
-          <div container className="onboarding-c1-left-div">
-            <Typography variant="h3" className="onboarding-c1-left-title">
-              A few clicks from a bigger refund
-            </Typography>
-            <Typography variant="body2" className="onboarding-c1-left-subtitle">
-              File for your tax refund in minutes. Get back money and time.
-            </Typography>
-          </div>
-          <img className="onboarding-c1-left-img" src={snap}></img>
-        </div>
+        <OnboardingTimeline activeStep={step} />
         <div className="onboarding-c1-right row-container">
           <ProgressBar
             value={step * (100 / forms.length)}
