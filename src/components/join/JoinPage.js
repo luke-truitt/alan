@@ -10,7 +10,7 @@ import "./join-form.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
 import joinTimeline2 from "./../../images/join-timeline/join-timeline-2.svg";
 import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
@@ -88,10 +88,18 @@ function JoinForm(props) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  let location = useLocation();
+
+  const redirectHome = () => {
+    history.push({ pathname: "/"});
+  }
+  try {
+    props = location.state["email"];
+  } catch {
+    redirectHome();
+  }
 
   const navTo = () => {
-    console.log("Nav");
-    // Event("SIGNUP", "User Signed Up", "JOIN_PAGE");
     history.push({ pathname: "/account" });
   };
   const checkValid = (d) => {

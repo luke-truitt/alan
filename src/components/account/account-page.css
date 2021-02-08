@@ -64,7 +64,7 @@
   border: 1px solid #444e9e;
 }
 .disabled-card-content {
-  opacity: 30%;
+  opacity: 20%;
 }
 
 p.review-card-text {
@@ -125,7 +125,7 @@ h4.account-timeline-title {
   vertical-align: center;
   align-content: center;
   vertical-align: middle;
-  opacity: 30%;
+  opacity: 20%;
 }
 p.account-timeline-step-text {
   align-self: baseline;

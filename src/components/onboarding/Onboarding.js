@@ -94,7 +94,9 @@ function Onboarding(props) {
   const [formValid, setFormValid] = useState({});
   const history = useHistory();
 
-  useEffect(() => {});
+  const redirectHome = () => {
+    history.push({ pathname: "/"});
+  }
 
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
@@ -142,8 +144,8 @@ function Onboarding(props) {
     };
 
     sendData();
-    history.push({ pathname: "/refund", state: { breakdown: data } });
-  };
+    history.push({ pathname: "/refund", state: { email: email, referToId: referToId, referById: referById, breakdown: data } });
+  }
 
   const axios = require("axios");
 
@@ -209,7 +211,9 @@ function Onboarding(props) {
     referToId = "";
     referById = "";
   }
-
+  if(email=="" || referToId=="") {
+    redirectHome();
+  }
   // Data to be sent to server
   // const [calculatorItems, setCalculatorItems] = useState({});
   // const updateCalcData = (d) => {

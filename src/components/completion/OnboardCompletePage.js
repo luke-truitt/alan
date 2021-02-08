@@ -4,13 +4,17 @@ import {
   Typography,
   Button,
   ThemeProvider,
+  Dialog,
+  DialogTitle,
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./onboard-complete.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import whiteArrow from "./../../images/white-arrow.svg";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+
 function numberWithCommas(x) {
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -19,18 +23,48 @@ function numberWithCommas(x) {
 
 function OnboardCompletePage(props) {
   let location = useLocation();
+  const history = useHistory();
 
+  let email = "";
+  let referToId = "";
+  let referById = "";
+  try {
+    email = location.state["email"];
+    referToId = location.state["referToId"];
+    referById = location.state["referById"];
+  } catch {
+    email = "";
+    referToId = "";
+    referById = "";
+  }
+
+  if (email == "" || referToId == "") {
+    redirectHome();
+  }
+
+  const redirectHome = () => {
+    history.push({ pathname: "/" });
+  };
+  const navTo = () => {
+    history.push({
+      pathname: "/join",
+      state: { email: email, referToId: referToId, referById: referById },
+    });
+  };
   try {
     props = location.state["breakdown"];
   } catch {
-    props = {};
+    redirectHome();
   }
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0-top">
         {/* <div className="header" /> */}
         <div className="onboard-complete-help-button-container">
-          <div className="onboard-complete-help-button row-container ">
+          <div
+            className="onboard-complete-help-button row-container "
+            onClick={navTo}
+          >
             <Typography variant="h6" className="onboard-complete-help-text">
               Help me file
             </Typography>
