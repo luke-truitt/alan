@@ -461,7 +461,7 @@ export function EmbeddedEmailInput(props) {
           className="form-item-text-field embedded-email-input-field"
           variant={props.invalid ? "standard" : "outlined"}
           value={props.emailValue}
-          onKeyDown={props.onKeyDown}
+          onKeyPress={(e) => props.onKeyPress(e, valid)}
           style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
           InputProps={{ disableUnderline: true }}
           onChange={(e) => {

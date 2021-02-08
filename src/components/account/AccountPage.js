@@ -7,6 +7,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
+import {AuthContext} from "../../providers/AuthProvider";
+import {useContext} from "react";
+
 import "./../../styles.css";
 import "./account-page.css";
 import giftIcon from "./../../images/account/gift-icon.svg";
@@ -214,6 +217,7 @@ function InvestCard(props) {
   );
 }
 function AccountPage(props) {
+  const user = useContext(AuthContext);
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
