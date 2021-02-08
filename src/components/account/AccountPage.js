@@ -96,7 +96,7 @@ function ReferralCard(props) {
   return (
     <Card className="account-page-card referral-card">
       <CardContent className="referral-card-content column-container">
-        <img className="referral-card-content-icon" src={giftIcon}></img>
+        <img className="account-page-card-icon" src={giftIcon}></img>
         <div className="referral-card-content-text row-container">
           <Typography variant="h6" color="textPrimary">
             Invite a friend to Alan and we'll file both of your taxes for free.
@@ -122,7 +122,7 @@ function ReferralCard(props) {
             </div>
             <div className="referral-card-btns-right column-container">
               <Button
-                className="copy-link-button"
+                className="referral-button"
                 variant="container"
                 color="primary"
               >
@@ -130,7 +130,7 @@ function ReferralCard(props) {
                 Link
               </Button>
               <Button
-                className="share-button"
+                className="referral-button"
                 variant="container"
                 color="primary"
               >
@@ -149,7 +149,7 @@ function ReviewCard(props) {
   return (
     <Card className="account-page-card review-card">
       <CardContent className="review-card-content column-container">
-        <img src={reviewIcon} className="review-card-icon" />
+        <img src={reviewIcon} className="account-page-card-icon" />
         <Typography variant="body2" className="review-card-text">
           Our team is reviewing your initial information. We’ll be sure to text
           and email you once they’re done!
@@ -163,7 +163,7 @@ function UploadCard(props) {
   return (
     <Card className="account-page-card upload-card">
       <CardContent className="disabled-card-content column-container">
-        <img src={uploadIcon} className="disabled-icon" />
+        <img src={uploadIcon} className="account-page-card-icon" />
         <img src={placeholderText} className="placeholder-text" />
       </CardContent>
     </Card>
@@ -174,7 +174,7 @@ function SubmitCard(props) {
     <Card className="account-page-card submit-card">
       {" "}
       <CardContent className="disabled-card-content column-container">
-        <img src={submitIcon} className="disabled-icon" />
+        <img src={submitIcon} className="account-page-card-icon" />
         <img src={placeholderText} className="placeholder-text" />
       </CardContent>
     </Card>
@@ -183,12 +183,12 @@ function SubmitCard(props) {
 function TrackCard(props) {
   return (
     <Card className="account-page-card track-card">
-      <CardContent className="track-card-content">
+      <CardContent className="disabled-card-content">
         <Typography className="disabled-card-title" variant="body1">
           Track your refund
         </Typography>
         <div className="column-container">
-          <img src={trackImg} className="track-card-img" />
+          <img src={trackImg} className="disabled-card-img" />
 
           <img src={placeholderBlock} className="placeholder-block" />
         </div>
@@ -199,13 +199,13 @@ function TrackCard(props) {
 function InvestCard(props) {
   return (
     <Card className="account-page-card invest-card">
-      <CardContent className="invest-card-content">
+      <CardContent className="disabled-card-content">
         <Typography className="disabled-card-title" variant="body1">
           Invest your refund
         </Typography>
 
         <div className="column-container">
-          <img src={investImg} className="invest-card-img" />
+          <img src={investImg} className="disabled-card-img" />
 
           <img src={placeholderBlock} className="placeholder-block" />
         </div>

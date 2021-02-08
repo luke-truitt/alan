@@ -37,16 +37,11 @@
 
 .account-page-c1-right-content {
   width: 80%;
-  height: 95%;
+  height: 90%;
   margin: auto;
   justify-content: space-between;
 }
-.review-card-icon {
-  height: 40px;
-  width: 40px;
-  margin-right: 2rem;
-}
-.disabled-icon {
+.account-page-card-icon {
   height: 40px;
   width: 40px;
   margin-right: 2rem;
@@ -62,7 +57,6 @@
 }
 .referral-card-content {
   margin-top: 0.7rem;
-
   margin-bottom: 0.7rem;
 }
 
@@ -93,19 +87,13 @@ button > * > img {
   padding: 10px;
 }
 
-button.share-button {
+button.referral-button {
   border: 1px solid #ececec;
   height: 100%;
   width: 100%;
   margin-left: 2px;
 }
 
-button.copy-link-button {
-  border: 1px solid #ececec;
-  height: 100%;
-  width: 100%;
-  margin-right: 1px;
-}
 button.send-invites-button {
   height: 100%;
   min-width: 35%;
@@ -115,11 +103,6 @@ button.send-invites-button {
   line-height: 1rem;
   letter-spacing: 80%;
   margin-bottom: 2rem;
-}
-.referral-card-content-icon {
-  height: 40px;
-  width: 40px;
-  margin-right: 2rem;
 }
 .referral-card-btn-container {
   height: 50px;
@@ -161,38 +144,23 @@ p.account-timeline-step-text {
   opacity: 100%;
 }
 
-.track-card {
-  width: 50%;
-}
-.invest-card {
-  width: 50%;
-}
-
 p.disabled-card-title {
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: 1rem;
 }
 
-.invest-card-content {
-  opacity: 30%;
-}
-
-.invest-card-img {
+.disabled-card-img {
   height: 120px;
   margin-right: 1rem;
   box-shadow: -1px 1px 3px gray;
 }
-.track-card-content {
-  opacity: 30%;
-}
 
-.track-card-img {
-  height: 120px;
-  margin-right: 1rem;
-  box-shadow: -1px 1px 3px gray;
-}
 img.placeholder-block {
   height: 80px;
   width: 100%;
+}
+
+.account-page-c2 > * {
+  width: 50%;
 }
