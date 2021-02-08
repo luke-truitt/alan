@@ -6,7 +6,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
-import "./join-form.css";
+import "./resetpassword.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
@@ -79,81 +79,49 @@ function JoinTimeline() {
   );
 }
 
-function JoinForm(props) {
+function ResetForm(props) {
   const history = useHistory();
   let location = useLocation();
   const [email, setEmail] = useState(location.state == null ? "" : location.state["email"]);
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [error, setError] = useState(null);
-  const [referToId, setReferToId] = useState(location.state == null ? "" : location.state["referToId"]);
-  const [referById, setReferById] = useState(location.state == null ? "" : location.state["referById"]);
-  const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
-
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
   
+  const sendResetEmail = event => {
+    event.preventDefault();
+    setSending(true);
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        navTo();
+        setSending(false);
+      })
+      .catch(() => {
+        setError("Error resetting password");
+      });
+  };
 
   const navTo = () => {
     history.push({
-      pathname: "/account",
-      state: { email: email, referToId: referToId, referById: referById },
+      pathname: "/signin",
     });
   };
+
   const checkValid = (d) => {
     // TODO
   };
-  const createUserWithEmailAndPasswordHandler = async (event) => {
-    setLoading(true);
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, { firstName, lastName, phone });
-      navTo();
-      setLoading(false);
-      setPassword("");
-      setFirstName("");
-      setLastName("");
-      setPhone("");
-    } catch (error) {
-      setLoading(false);
-      setError("Error Signing up with email and password");
-    }
-  };
 
   const onChange = (e, val) => {
-    if (val.stateName == "firstName") {
-      setFirstName(e);
-    } else if (val.stateName == "lastName") {
-      setLastName(e);
-    } else if (val.stateName == "phone") {
-      setPhone(e);
-    } else if (val.stateName == "email") {
+    if (val.stateName == "email") {
       setEmail(e);
-    } else if (val.stateName == "password") {
-      setPassword(e);
-    }
+    } 
   };
 
   return (
     <div className="join-form row-container">
-      <NameInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        fields={{ firstName: firstName, lastName: lastName }}
-      />
-      <PhoneNumberInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        placeholder="Enter Phone Number"
-        fields={{ phone: phone }}
-      />
-      <Typography variant="caption" className="join-phone-explainer">
-        So we can text you when the review is complete!
-      </Typography>
+      {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
       <TextInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -162,22 +130,13 @@ function JoinForm(props) {
         placeholder="Enter Email"
         type="email"
       />
-      <TextInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        stateName="password"
-        value={password}
-        placeholder="Enter Password"
-        type="password"
-      />
-
       <Button
         className="join-button"
         variant="contained"
         color="secondary"
-        onClick={(e) => createUserWithEmailAndPasswordHandler(e)}
+        onClick={(e) => sendResetEmail(e)}
       >
-        {loading ? <CircularProgress /> : "Join"}
+        {sending ? <CircularProgress/> : "Reset Password"}
       </Button>
       <div className="join-or-container column-container">
         <div className="join-or-horizontal-line" />
@@ -187,37 +146,25 @@ function JoinForm(props) {
 
         <div className="join-or-horizontal-line" />
       </div>
-      <Button
-        className="google-sign-button"
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          try {
-            setGoogleLoading(true);
-            signInWithGoogle();
-            navTo();
-            setGoogleLoading(false);
-          } catch (error) {
-            console.error("Error signing in with Google", error);
-          }
-        }}
-      >
-        {googleLoading ? <CircularProgress /> : "Sign in with Google"}
+      <div className="join-or-horizontal-line" />
+        <Typography variant="caption" className="join-or">
+          Remembered your password?
+        </Typography>
+      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/signin"})}>
+        Sign In
       </Button>
       <div className="join-or-horizontal-line" />
         <Typography variant="caption" className="join-or">
-          Already have an Account?
+          Need to Make and Account?
         </Typography>
-
-      <div className="join-or-horizontal-line" />
-      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/signin"})}>
-        Sign In
+      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/join"})}>
+        Set Up Account
       </Button>
     </div>
   );
 }
 
-function JoinPage() {
+function ResetPassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="join-page-c0 column-container">
@@ -239,9 +186,9 @@ function JoinPage() {
               variant="h2"
               className="join-page-title purple-highlight"
             >
-              Join
+              Sign In
             </Typography>
-            <JoinForm />
+            <ResetForm/>
           </div>
         </div>
       </div>
@@ -249,4 +196,4 @@ function JoinPage() {
   );
 }
 
-export default JoinPage;
+export default ResetPassword;

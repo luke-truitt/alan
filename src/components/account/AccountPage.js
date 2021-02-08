@@ -7,8 +7,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
-import { AuthContext } from "../../providers/AuthProvider";
-import { useContext } from "react";
+import {AuthContext} from "../../providers/AuthProvider";
+import {useContext, useEffect, useState} from "react";
+import {auth, getUserDoc} from "../../firebase";
 
 import "./../../styles.css";
 import "./account-page.css";
@@ -27,6 +28,7 @@ import accountTimeline2 from "./../../images/timeline/timeline-2-active.svg";
 import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
 import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import { useLocation, useHistory } from "react-router-dom";
 
 const timelineNumbers = {
   1: accountTimeline1,
@@ -37,9 +39,10 @@ const timelineNumbers = {
 };
 
 const mockProps = {
-  firstName: "Mary",
   activeStep: 2,
 };
+
+const BASE_URL = "http://localhost:3000";
 
 const timelineData = [
   { number: 1, text: "Join Us" },
@@ -128,6 +131,7 @@ function ReferralCard(props) {
                 className="referral-button"
                 variant="container"
                 color="primary"
+                onClick={() =>  navigator.clipboard.writeText(BASE_URL+'/?referId='+props.referToId)}
               >
                 <img src={copyIcon} className="copy-button-icon" />
                 Link
@@ -218,22 +222,50 @@ function InvestCard(props) {
 }
 function AccountPage(props) {
   const user = useContext(AuthContext);
+  const location = useLocation();
+  const history = useHistory();
+  const [userData, setUserData] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? {"firstName": user.user.displayName} : {});
+  const [dataLoaded, setDataLoaded] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? true : false);
+  const [referToId, setReferToId] = useState(location.state == null ? "" : location.state["referToId"]);
+  const [referById, setReferById] = useState(location.state == null ? "" : location.state["referById"]);
+  setTimeout(() => {
+    if((user.user && user.user.displayName != null && user.user.displayName != "")){
+      setUserData({firstName: user.user.displayName});
+      setDataLoaded(true);
+    }
+  },1000);
+  useEffect(() => {
+    if(user.user && !dataLoaded) {
+      setTimeout(() => {
+        getUserDoc(user).then((result) => {
+          if(result==null) {
+            console.log("Null")
+            setDataLoaded(false);
+            return;
+          }
+          setUserData(result);
+          setDataLoaded(true);
+        }).catch(() => console.log("ERROR GETTING USER"));
+      },1000);
+    } 
+  });
+  
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="account-page-c0 column-container">
+      <div className="account-page-c0 column-container"> 
         <div className="account-page-c1-left-shadow" />
         <div className="account-page-c1-left row-container">
           <div className="account-page-c1-left-content">
             <AccountTimeline
               activeStep={props.activeStep}
-              firstName={props.firstName}
+              firstName={Object.keys(userData).length > 0 ? userData['firstName'] : ""}
             />
           </div>
         </div>
         <div className="account-page-c1-right">
           <div className="account-page-c1-right-content row-container">
-            <ReferralCard />
+            <ReferralCard referToId={referToId}/>
             <ReviewCard />
             <UploadCard />
             <SubmitCard />

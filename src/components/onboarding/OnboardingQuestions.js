@@ -24,6 +24,14 @@ export const educationCredits = {
   stateName: "taxCredits",
 };
 
+export const covidCredits = {
+  type: "DollarInput",
+  question: "How much did you get from government stimulus checks for COVID?",
+  description: "The most you could get is $1,800, if you got anything less than that and file as an independent you can get the difference back in your taxes!",
+  options: {},
+  stateName: "covidCredits",
+};
+
 export const taxMethod = {
   type: "Dropdown",
   question: "How did you file your taxes last year?",

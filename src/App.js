@@ -11,8 +11,8 @@ import Onboarding from "./components/onboarding/Onboarding.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignUp from "./components/authentication/SignUp";
-import SignIn from "./components/authentication/SignIn";
-import PasswordReset from "./components/authentication/PasswordReset";
+import SignIn from "./components/signin/SignIn";
+import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
 import ProfilePage from "./components/authentication/ProfilePage";
 import { AuthProvider } from "./providers/AuthProvider";
 
@@ -56,7 +56,7 @@ function App() {
               <SignIn />
             </Route>
             <Route path="/resetpassword">
-              <PasswordReset />
+              <ResetPassowrd />
             </Route>
             <Route path="/userprofile">
               <ProfilePage />

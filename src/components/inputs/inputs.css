@@ -68,7 +68,8 @@ div.form-item-container > .form-item-text-field {
 }
 div.form-container {
   width: 100%;
-  min-height: 90%;
+  height: 90%;
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 900px) {
