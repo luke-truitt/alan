@@ -67,10 +67,27 @@ function JoinForm(props) {
     <div className="join-form row-container">
       <NameInput fields={props} />
       <PhoneNumberInput fields={props} />
-      <Button>Join</Button>
-      <Typography variant="caption">OR</Typography>
-      <Button>Sign in with Google</Button>
-      <Button>Sign in Apple</Button>
+      <Button className="join-button" variant="contained" color="secondary">
+        Join
+      </Button>
+      <div className="join-or-container column-container">
+        <div className="join-or-horizontal-line" />
+        <Typography variant="caption" className="join-or">
+          OR
+        </Typography>
+
+        <div className="join-or-horizontal-line" />
+      </div>
+      <Button
+        className="google-sign-button"
+        variant="contained"
+        color="primary"
+      >
+        Sign in with Google
+      </Button>
+      <Button className="apple-sign-button" variant="contained" color="primary">
+        Sign in Apple
+      </Button>
     </div>
   );
 }
@@ -86,7 +103,7 @@ function JoinPage() {
         <div className="join-page-c1-right row-container">
           <div className="join-page-c1-right-content row-container">
             <Typography
-              color="text-primary"
+              color="textPrimary"
               variant="h2"
               className="join-page-title purple-highlight"
             >
