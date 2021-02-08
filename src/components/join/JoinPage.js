@@ -93,14 +93,19 @@ function JoinForm(props) {
   const redirectHome = () => {
     history.push({ pathname: "/"});
   }
+  let em = "";
+  let referToId = "";
+  let referById = "";
   try {
-    props = location.state["email"];
+    em = location.state["email"];
+    referToId = location.state["referToId"];
+    referById = location.state["referById"];
   } catch {
     redirectHome();
   }
 
   const navTo = () => {
-    history.push({ pathname: "/account" });
+    history.push({ pathname: "/account", state: { email: em, referToId: referToId, referById: referById } });
   };
   const checkValid = (d) => {
     // TODO
@@ -109,14 +114,12 @@ function JoinForm(props) {
     setLoading(true);
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
-        email,
+        em,
         password
       );
-      console.log(user);
       generateUserDocument(user, { firstName, lastName, phone });
       navTo();
       setLoading(false);
-      setEmail("");
       setPassword("");
       setFirstName("");
       setLastName("");
@@ -143,6 +146,9 @@ function JoinForm(props) {
 
   return (
     <div className="join-form row-container">
+      <Typography variant="caption" className="join-phone-explainer">
+        We'll Use {em} as your email!
+      </Typography>
       <NameInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -157,14 +163,14 @@ function JoinForm(props) {
       <Typography variant="caption" className="join-phone-explainer">
         So we can text you when the review is complete!
       </Typography>
-      <TextInput
+      {/* <TextInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
         stateName="email"
         value={email}
         placeholder="Enter Email"
         type="email"
-      />
+      /> */}
       <TextInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}

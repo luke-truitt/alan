@@ -38,9 +38,9 @@ function OnboardCompletePage(props) {
     referById = "";
   }
 
-  if (email == "" || referToId == "") {
-    redirectHome();
-  }
+  // if(email=="" || referToId=="") {
+  //   redirectHome();
+  // }
 
   const redirectHome = () => {
     history.push({ pathname: "/" });
