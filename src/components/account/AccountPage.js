@@ -12,6 +12,13 @@ import "./account-page.css";
 import giftIcon from "./../../images/account/gift-icon.svg";
 import shareIcon from "./../../images/account/share-icon.svg";
 import copyIcon from "./../../images/account/copy-icon.svg";
+import reviewIcon from "./../../images/account/review-icon.svg";
+import placeholderText from "./../../images/account/placeholder-text.svg";
+import uploadIcon from "./../../images/account/upload-icon.svg";
+import submitIcon from "./../../images/account/submit-icon.svg";
+import investImg from "./../../images/account/invest-img.svg";
+import trackImg from "./../../images/account/track-img.svg";
+import placeholderBlock from "./../../images/account/placeholder-block.svg";
 import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
 import joinTimeline2 from "./../../images/account/account-timeline-2.svg";
 import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
@@ -89,7 +96,7 @@ function ReferralCard(props) {
   return (
     <Card className="account-page-card referral-card">
       <CardContent className="referral-card-content column-container">
-        <img className="referral-card-content-icon" src={giftIcon}></img>
+        <img className="account-page-card-icon" src={giftIcon}></img>
         <div className="referral-card-content-text row-container">
           <Typography variant="h6" color="textPrimary">
             Invite a friend to Alan and we'll file both of your taxes for free.
@@ -115,7 +122,7 @@ function ReferralCard(props) {
             </div>
             <div className="referral-card-btns-right column-container">
               <Button
-                className="copy-link-button"
+                className="referral-button"
                 variant="container"
                 color="primary"
               >
@@ -123,7 +130,7 @@ function ReferralCard(props) {
                 Link
               </Button>
               <Button
-                className="share-button"
+                className="referral-button"
                 variant="container"
                 color="primary"
               >
@@ -140,8 +147,14 @@ function ReferralCard(props) {
 
 function ReviewCard(props) {
   return (
-    <Card className="account-page-card status-card">
-      <CardContent className="status-card-content">Review Card</CardContent>
+    <Card className="account-page-card review-card">
+      <CardContent className="review-card-content column-container">
+        <img src={reviewIcon} className="account-page-card-icon" />
+        <Typography variant="body2" className="review-card-text">
+          Our team is reviewing your initial information. We’ll be sure to text
+          and email you once they’re done!
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
@@ -149,28 +162,54 @@ function ReviewCard(props) {
 function UploadCard(props) {
   return (
     <Card className="account-page-card upload-card">
-      <CardContent className="upload-card-content">Upload Card</CardContent>
+      <CardContent className="disabled-card-content column-container">
+        <img src={uploadIcon} className="account-page-card-icon" />
+        <img src={placeholderText} className="placeholder-text" />
+      </CardContent>
     </Card>
   );
 }
 function SubmitCard(props) {
   return (
     <Card className="account-page-card submit-card">
-      <CardContent className="submit-card-content">Submit Card</CardContent>
+      {" "}
+      <CardContent className="disabled-card-content column-container">
+        <img src={submitIcon} className="account-page-card-icon" />
+        <img src={placeholderText} className="placeholder-text" />
+      </CardContent>
     </Card>
   );
 }
 function TrackCard(props) {
   return (
     <Card className="account-page-card track-card">
-      <CardContent className="track-card-content">Track Card</CardContent>
+      <CardContent className="disabled-card-content">
+        <Typography className="disabled-card-title" variant="body1">
+          Track your refund
+        </Typography>
+        <div className="column-container">
+          <img src={trackImg} className="disabled-card-img" />
+
+          <img src={placeholderBlock} className="placeholder-block" />
+        </div>
+      </CardContent>
     </Card>
   );
 }
 function InvestCard(props) {
   return (
     <Card className="account-page-card invest-card">
-      <CardContent className="submit-card-content">Invest Card</CardContent>
+      <CardContent className="disabled-card-content">
+        <Typography className="disabled-card-title" variant="body1">
+          Invest your refund
+        </Typography>
+
+        <div className="column-container">
+          <img src={investImg} className="disabled-card-img" />
+
+          <img src={placeholderBlock} className="placeholder-block" />
+        </div>
+      </CardContent>
     </Card>
   );
 }

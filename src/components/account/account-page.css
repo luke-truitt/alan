@@ -41,14 +41,37 @@
   margin: auto;
   justify-content: space-between;
 }
+.account-page-card-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 2rem;
+}
+.placeholder-text {
+  width: 100%;
+}
 .account-page-card {
   box-shadow: none;
   border: 1px solid #c4c4c4;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
 }
 .referral-card-content {
-  margin: 0.8rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
 }
 
+.review-card {
+  border: 1px solid #444e9e;
+}
+.disabled-card-content {
+  opacity: 30%;
+}
+
+p.review-card-text {
+  color: #444e9e;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
 .referral-card-email-container {
   width: 70%;
   margin-right: 10px;
@@ -64,19 +87,13 @@ button > * > img {
   padding: 10px;
 }
 
-button.share-button {
+button.referral-button {
   border: 1px solid #ececec;
   height: 100%;
   width: 100%;
   margin-left: 2px;
 }
 
-button.copy-link-button {
-  border: 1px solid #ececec;
-  height: 100%;
-  width: 100%;
-  margin-right: 1px;
-}
 button.send-invites-button {
   height: 100%;
   min-width: 35%;
@@ -86,11 +103,6 @@ button.send-invites-button {
   line-height: 1rem;
   letter-spacing: 80%;
   margin-bottom: 2rem;
-}
-.referral-card-content-icon {
-  height: 50px;
-  width: 50px;
-  margin-right: 2rem;
 }
 .referral-card-btn-container {
   height: 50px;
@@ -113,7 +125,7 @@ h4.account-timeline-title {
   vertical-align: center;
   align-content: center;
   vertical-align: middle;
-  opacity: 20%;
+  opacity: 30%;
 }
 p.account-timeline-step-text {
   align-self: baseline;
@@ -130,4 +142,25 @@ p.account-timeline-step-text {
 
 #active-account-timeline-step {
   opacity: 100%;
+}
+
+p.disabled-card-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.disabled-card-img {
+  height: 120px;
+  margin-right: 1rem;
+  box-shadow: -1px 1px 3px gray;
+}
+
+img.placeholder-block {
+  height: 80px;
+  width: 100%;
+}
+
+.account-page-c2 > * {
+  width: 50%;
 }

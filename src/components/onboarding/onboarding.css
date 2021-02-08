@@ -6,7 +6,7 @@
 .onboarding-c1-left {
   width: 30vw;
   background-image: url(../../images/onboarding-left-div-bg.svg);
-
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
@@ -20,16 +20,17 @@
 
 .onboarding-c1-left-subtitle {
   line-height: 1.2rem;
+  margin-bottom: 2rem;
 }
 .onboarding-c1-left-img {
-  position: absolute;
-  bottom: 0;
-  left: -2;
+  float: bottom left;
   width: 15vw;
+  margin-top: 2rem;
 }
 
 .onboarding-c1-left-div {
   width: 80%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 35%;
@@ -43,6 +44,11 @@
   position: relative;
 }
 
+button.onboarding-back {
+  color: #c3c3c3;
+
+  width: 100%;
+}
 .onboarding-form-item {
   margin-bottom: 1rem;
 }
@@ -81,7 +87,6 @@ h4.onboarding.form-title {
 @media only screen and (max-width: 900px) {
   .onboarding-back-div {
     font-size: 10px;
-    
   }
   .onboarding-next-div {
     font-size: 10px;
@@ -106,7 +111,7 @@ h4.onboarding.form-title {
     margin-right: auto;
     background-color: #f6f6f6;
     padding: 30px;
-    box-shadow: -0.1em 0.1em 2em ;
+    box-shadow: -0.1em 0.1em 2em;
   }
   .onboarding-button-div {
     background-color: #f6f6f6;

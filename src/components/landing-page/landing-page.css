@@ -62,3 +62,7 @@ div.landing-c1.row-container > div > button {
   right: -10px;
   max-width: 50%;
 }
+
+span.email-validation-text {
+  margin-top: -1rem;
+}
