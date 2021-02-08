@@ -125,7 +125,7 @@ function Onboarding(props) {
   };
 
   const navToRefund = () => {
-    const refund = getRefund();
+    const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
     if (taxableIncome > 0) {
