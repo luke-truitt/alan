@@ -25,25 +25,23 @@ function RefundBreakdownRow(props) {
             src={SYMBOLS[props.symbol]}
             className="refund-breakdown-row-symbol"
           ></img>
-          {
-            props.type == "dollar" ? 
+          {props.type == "dollar" ? (
             <Typography
-            variant="body2"
-            color="secondary"
-            className="refund-breakdown-row-amount"
+              variant="body2"
+              color="secondary"
+              className="refund-breakdown-row-amount"
             >
-            ${numberWithCommas(props.amount)}
-          </Typography>
-          :
-          <Typography
-            variant="body2"
-            color="secondary"
-            className="refund-breakdown-row-amount"
+              ${numberWithCommas(props.amount)}
+            </Typography>
+          ) : (
+            <Typography
+              variant="body2"
+              color="secondary"
+              className="refund-breakdown-row-amount"
             >
-            {props.amount * 100}%
-          </Typography>
-          }
-          
+              {props.amount * 100}%
+            </Typography>
+          )}
         </div>
         <Link
           variant="body1"

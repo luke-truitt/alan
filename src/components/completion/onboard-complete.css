@@ -17,19 +17,35 @@ button.onboard-complete-apply-button {
   font-size: 2rem;
   padding: 2rem;
   margin-top: 5rem;
+  width: 100%;
 }
 
 .onboard-complete-c1 {
   padding-top: 7rem;
-  width: 60%;
+  width: 55%;
   margin: auto;
-  padding-bottom: 7rem;
+  margin-bottom: 4rem;
+  padding-bottom: 6rem;
+  background-color: white;
+  box-shadow: -0.3rem 0.3rem 2rem black;
 }
 
-.onboard-complete-c0 {
+.onboard-complete-c0-top {
+  margin: auto;
+  text-align: center;
+  background-image: url("./../../images/full-background-pattern.svg");
+  background-size: cover;
+}
+.onboard-complete-c0-bottom {
   margin: auto;
   text-align: center;
   background-color: #f6f6f6;
+  width: 100%;
+}
+.onboard-complete-c0-bottom-content {
+  max-width: 55%;
+  margin: auto;
+  padding-bottom: 5rem;
 }
 
 p.refund-breakdown-row-amount {
@@ -83,7 +99,7 @@ h6.onboard-complete-fee-text {
 }
 .onboard-complete-fee-text-container {
   max-width: 80%;
-  text-align: left;
+  text-align: center;
   margin: auto;
 }
 
@@ -99,17 +115,17 @@ h6.onboard-complete-fee-text {
 .onboard-complete-help-button {
   margin: auto;
   position: absolute;
-  bottom: -5%;
-  left: 75%;
+  bottom: 0%;
+  left: 80%;
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   align-items: center;
-  border: double 4px transparent;
-  background-image: linear-gradient(#f6f6f6, #f6f6f6),
+
+  /* background-image: linear-gradient(#f6f6f6, #f6f6f6),
     radial-gradient(circle at top left, #744fc2, #002e72);
   background-origin: border-box;
-  background-clip: content-box, border-box, padding-box;
+  background-clip: content-box, border-box, padding-box; */
   /* background: linear-gradient(to right, #744fc2, 60%, #002e72);
   background-clip: padding-box;
   /* border: solid 5px transparent;
@@ -117,16 +133,17 @@ h6.onboard-complete-fee-text {
 }
 
 h6.onboard-complete-help-text {
-  background: linear-gradient(to right, #744fc2, 60%, #002e72);
+  /* background: linear-gradient(to right, #744fc2, 60%, #002e72); */
+  color: white;
   font-size: 1.5rem;
   padding-bottom: 10px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
   padding-top: 50px;
 }
 
 img.onboard-complete-help-arrow {
-  width: 100px;
+  width: 75px;
 }
 
 .refund-breakdown-highlight-red > *:first-child > *:first-child > *:last-child {

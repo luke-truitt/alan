@@ -9,8 +9,8 @@ import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./onboard-complete.css";
 import RefundBreakdown from "./RefundBreakdown.js";
-import purpleArrow from "./../../images/purple-arrow.svg";
-import {useLocation} from "react-router-dom";
+import whiteArrow from "./../../images/white-arrow.svg";
+import { useLocation } from "react-router-dom";
 function numberWithCommas(x) {
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -18,9 +18,8 @@ function numberWithCommas(x) {
 }
 
 function OnboardCompletePage(props) {
-  
   let location = useLocation();
-  
+
   try {
     props = location.state["breakdown"];
   } catch {
@@ -28,20 +27,17 @@ function OnboardCompletePage(props) {
   }
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="onboard-complete-c0">
+      <div className="onboard-complete-c0-top">
         <div className="header" />
         <div className="onboard-complete-help-button-container">
-          <div className="onboard-complete-help-button row-container">
+          <div className="onboard-complete-help-button row-container ">
             <Typography variant="h6" className="onboard-complete-help-text">
               Help me file
             </Typography>
-            <img
-              src={purpleArrow}
-              className="onboard-complete-help-arrow"
-            ></img>
+            <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
         </div>
-        <div className="onboard-complete-c1 row-container">
+        <div className="onboard-complete-c1">
           <Typography className="onboard-complete-title" variant="h6">
             Your estimated refund amount
           </Typography>

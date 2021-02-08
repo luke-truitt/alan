@@ -30,7 +30,7 @@ button.selected {
   padding-bottom: 1rem;
 }
 .form-item-container {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .form-title {
@@ -47,6 +47,18 @@ div.form-item-container.column-container > * {
   width: 50%;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
+}
+div.form-item-container.column-container > *:only-child {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+div.form-item-container.column-container > *:first-child {
+  margin-right: 0.5rem;
+  margin-left: 0rem;
+}
+div.form-item-container.column-container > *:last-child {
+  margin-left: 0.5rem;
+  margin-right: 0rem;
 }
 
 div.form-item-container > .form-item-text-field {
@@ -73,10 +85,10 @@ div.form-container {
     align-items: center;
     justify-content: space-between;
   }
-  .single-select-button-container > button:first-child{
+  .single-select-button-container > button:first-child {
     margin-right: 0px;
   }
-  .single-select-button-container > button:last-child{
+  .single-select-button-container > button:last-child {
     margin-left: 0px;
   }
 }

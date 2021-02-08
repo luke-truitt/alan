@@ -12,9 +12,9 @@ import {
   CircularProgress,
   InputLabel,
 } from "@material-ui/core";
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
-import {schools} from "../../data/Schools.js";
+import { schools } from "../../data/Schools.js";
 import { primaryTheme } from "../../utils/constants.js";
 import "./inputs.css";
 import "../../styles.css";
@@ -27,14 +27,14 @@ const InputTypes = {
   PhoneNumberInput,
   SchoolInput,
   JobInput,
-  Refund
+  Refund,
 };
 
 export function PhoneNumberInput(props) {
   const checkValid = (val, name) => {
-    props.validData({[name]: (val.length > 9)});
-  }
-  
+    props.validData({ [name]: val.length > 9 });
+  };
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
@@ -44,7 +44,10 @@ export function PhoneNumberInput(props) {
           autoComplete
           variant="outlined"
           value={props.fields["phone"]}
-          onChange={(e) => {props.onChange(e.target.value, {"stateName": "phone"}); checkValid(e.target.value, "phone");}}
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "phone" });
+            checkValid(e.target.value, "phone");
+          }}
         />
       </div>
     </ThemeProvider>
@@ -58,77 +61,124 @@ export const Input = (props) => {
 
 export function NameInput(props) {
   const checkValid = (val, name) => {
-    props.validData({[name]: (val.length > 0)});
-  }
+    props.validData({ [name]: val.length > 0 });
+  };
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container">
-        <TextField className="form-item-text-field" label="First Name" 
-          value={props.fields["firstName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "firstName"}); checkValid(e.target.value, "firstName");}}/>
-        <TextField className="form-item-text-field" label="Last Name" 
-          value={props.fields["lastName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "lastName"}); checkValid(e.target.value, "lastName");}}/>
+        <TextField
+          className="form-item-text-field"
+          label="First Name"
+          value={props.fields["firstName"]}
+          autoComplete
+          variant="outlined"
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "firstName" });
+            checkValid(e.target.value, "firstName");
+          }}
+        />
+        <TextField
+          className="form-item-text-field"
+          label="Last Name"
+          value={props.fields["lastName"]}
+          autoComplete
+          variant="outlined"
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "lastName" });
+            checkValid(e.target.value, "lastName");
+          }}
+        />
       </div>
     </ThemeProvider>
   );
 }
 
 export function SchoolInput(props) {
-
   const checkValid = (value, name) => {
-    let res = ""
-    if(value==null) {
+    let res = "";
+    if (value == null) {
       res = "";
     } else {
       res = value.name;
     }
-    props.validData({[name]: (res.length > 0)});
-  }
+    props.validData({ [name]: res.length > 0 });
+  };
 
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container column-container school-input">
         <Autocomplete
-              id="combo-box-demo"
-              className="form-item-text-field"
-              options={schools}
-              getOptionLabel={(option) => option.name}
-              // inputValue = {props.fields["school"]}
-              onChange={(e, value) => {props.onChange(value, {"stateName": "school"}); checkValid(value, "school");}}
-              renderInput={(params) => <TextField {...params} label="School" variant="outlined" />}
+          id="combo-box-demo"
+          className="form-item-text-field"
+          options={schools}
+          getOptionLabel={(option) => option.name}
+          // inputValue = {props.fields["school"]}
+          onChange={(e, value) => {
+            props.onChange(value, { stateName: "school" });
+            checkValid(value, "school");
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="School" variant="outlined" />
+          )}
         />
-        <TextField className="form-item-text-field" label="Graduation Year" 
-          value={props.fields["classYear"]} variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "classYear"}); checkValid({"name": e.target.value}, "classYear");}}/>
+        <TextField
+          className="form-item-text-field"
+          label="Graduation Year"
+          value={props.fields["classYear"]}
+          variant="outlined"
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "classYear" });
+            checkValid({ name: e.target.value }, "classYear");
+          }}
+        />
       </div>
     </ThemeProvider>
   );
 }
 
 export function JobInput(props) {
-
   const checkValid = (val, name) => {
-    props.validData({[name]: (val.length > 0)});
-  }
+    props.validData({ [name]: val.length > 0 });
+  };
   return (
     <ThemeProvider theme={primaryTheme}>
       <Typography
-          variant="h6"
-          color="textPrimary"
-          className="form-item-question"
-        >
-          {props.question}
-        </Typography>
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          className="form-item-description"
-        >
-          {props.description}
+        variant="h6"
+        color="textPrimary"
+        className="form-item-question"
+      >
+        {props.question}
+      </Typography>
+      <Typography
+        variant="caption"
+        color="textSecondary"
+        className="form-item-description"
+      >
+        {props.description}
       </Typography>
       <div className="form-item-container column-container">
-        <TextField className="form-item-text-field" label="Company Name" 
-          value={props.fields["companyName"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "companyName"}); checkValid(e.target.value, "companyName");}}/>
-        <TextField className="form-item-text-field" label="Job Title" 
-          value={props.fields["jobTitle"]} autoComplete variant="outlined" onChange={(e) => {props.onChange(e.target.value, {"stateName": "jobTitle"}); checkValid(e.target.value, "jobTitle");}}/>
+        <TextField
+          className="form-item-text-field"
+          label="Company Name"
+          value={props.fields["companyName"]}
+          autoComplete
+          variant="outlined"
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "companyName" });
+            checkValid(e.target.value, "companyName");
+          }}
+        />
+        <TextField
+          className="form-item-text-field"
+          label="Job Title"
+          value={props.fields["jobTitle"]}
+          autoComplete
+          variant="outlined"
+          onChange={(e) => {
+            props.onChange(e.target.value, { stateName: "jobTitle" });
+            checkValid(e.target.value, "jobTitle");
+          }}
+        />
       </div>
     </ThemeProvider>
   );
@@ -140,7 +190,7 @@ export function Dropdown(props) {
   ));
 
   const checkValid = (val) => {
-    props.validData({[props.stateName]: (val.length > 0)});
+    props.validData({ [props.stateName]: val.length > 0 });
   };
 
   return (
@@ -161,8 +211,15 @@ export function Dropdown(props) {
           {props.description}
         </Typography>
         <FormControl variant="outlined">
-          <Select 
-          value={props.fields[props.stateName]} onChange={(e) => {props.onChange(e.target.value, {"stateName": props.stateName});; checkValid(e.target.value);}}>{items}</Select>
+          <Select
+            value={props.fields[props.stateName]}
+            onChange={(e) => {
+              props.onChange(e.target.value, { stateName: props.stateName });
+              checkValid(e.target.value);
+            }}
+          >
+            {items}
+          </Select>
         </FormControl>
       </div>
     </ThemeProvider>
@@ -170,20 +227,19 @@ export function Dropdown(props) {
 }
 
 export function SingleSelect(props) {
-  
   const checkValid = (index) => {
-    props.validData({[props.stateName]: true})
-  }
+    props.validData({ [props.stateName]: true });
+  };
   const updateButtons = (index) => {
-    props.onChange(
-      index,
-      { stateName: props.stateName }
-    );
+    props.onChange(index, { stateName: props.stateName });
   };
   const buttons = Object.entries(props.options).map(([option, index]) => (
     <Button
       variant="contained"
-      onClick={() => {updateButtons(index); checkValid(index);}}
+      onClick={() => {
+        updateButtons(index);
+        checkValid(index);
+      }}
       className={
         props.fields[props.stateName] == index
           ? "single-select-button selected"
@@ -223,9 +279,9 @@ export function SingleSelect(props) {
 
 export function DollarInput(props) {
   const checkValid = (val) => {
-    props.validData({[props.stateName]: !isNaN(val)});
+    props.validData({ [props.stateName]: !isNaN(val) });
   };
-  
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-item-container row-container">
@@ -246,8 +302,18 @@ export function DollarInput(props) {
         <FormControl variant="outlined">
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
-            placeholder="0" 
-            value={isNaN(props.fields[props.stateName]) ? '' : props.fields[props.stateName]} onChange={(e) => {props.onChange(parseInt(e.target.value), {"stateName": props.stateName}); checkValid(e.target.value);}}
+            placeholder="0"
+            value={
+              isNaN(props.fields[props.stateName])
+                ? ""
+                : props.fields[props.stateName]
+            }
+            onChange={(e) => {
+              props.onChange(parseInt(e.target.value), {
+                stateName: props.stateName,
+              });
+              checkValid(e.target.value);
+            }}
           />
         </FormControl>
       </div>
@@ -257,27 +323,25 @@ export function DollarInput(props) {
 export function Refund(props) {
   const dataLabels = Object.entries(props.data).map(([name, value]) => (
     <div>
-    <Typography
-          variant="h6"
-          color="textPrimary"
-          className="form-item-question"
-        >
-          {name}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          className="form-item-description"
-        >
-          {value}
+      <Typography
+        variant="h6"
+        color="textPrimary"
+        className="form-item-question"
+      >
+        {name}
       </Typography>
-      </div>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        className="form-item-description"
+      >
+        {value}
+      </Typography>
+    </div>
   ));
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="form-item-container row-container">
-        {dataLabels}
-      </div>
+      <div className="form-item-container row-container">{dataLabels}</div>
     </ThemeProvider>
   );
 }
@@ -285,7 +349,7 @@ let dataChange = false;
 export function Form(props) {
   const [fields, setFields] = useState({});
   const [isValid, setIsValid] = useState({});
-  
+
   useEffect(() => {
     if (dataChange) {
       props.onUpdate(fields);
@@ -293,7 +357,7 @@ export function Form(props) {
       dataChange = false;
     }
   });
-  
+
   const onChange = (e, formItem) => {
     const dic = { [formItem.stateName]: e };
     updateDict(dic);
@@ -310,7 +374,7 @@ export function Form(props) {
     for (const [key, value] of Object.entries(item)) {
       setIsValid((isValid) => ({ ...isValid, [key]: value }));
     }
-  }
+  };
 
   const inputs = props.formItems.map((formItem) => (
     <Input
@@ -365,7 +429,10 @@ export function EmbeddedEmailInput(props) {
           onKeyDown={props.onKeyDown}
           style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
           InputProps={{ disableUnderline: true }}
-          onChange={(e) => {props.setEmail(e.target.value); checkValid(e.target.value);}}
+          onChange={(e) => {
+            props.setEmail(e.target.value);
+            checkValid(e.target.value);
+          }}
         />
         <Button
           className="embedded-email-input-button"

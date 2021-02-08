@@ -11,22 +11,25 @@ import Onboarding from "./components/onboarding/Onboarding.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 
-import {useEffect} from 'react';
+import { useEffect } from "react";
 import "./global.css";
+import JoinPage from "./components/onboarding/JoinPage";
 import OnboardCompletePage from "./components/completion/OnboardCompletePage.js";
 
-import {PageView, initGA, Event} from './components/tracking/Tracking';
-const trackingId = 'UA-189058741-1';
+import { PageView, initGA, Event } from "./components/tracking/Tracking";
+const trackingId = "UA-189058741-1";
 initGA(trackingId);
 
 function App() {
-  
   return (
     <div>
       <Router>
         <Switch>
           <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route path="/join">
+            <JoinPage />
           </Route>
           <Route path="/onboard">
             <Onboarding />
@@ -38,7 +41,7 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
-        <RouteChangeTracker/>
+        <RouteChangeTracker />
       </Router>
     </div>
   );

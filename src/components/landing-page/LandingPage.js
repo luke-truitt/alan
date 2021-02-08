@@ -50,7 +50,7 @@ function LandingPage(props) {
 
   const location = useLocation();
   let referById = "";
-  const searchParams = location.search.split("?")[1].split("&");
+  const searchParams = (location.search.split("?").length==1 ? [] : location.search.split("?")[1].split("&"));
   let i;
   for (i = 0; i < searchParams.length; i++) { 
     const paramName = searchParams[i].split("=")[0];

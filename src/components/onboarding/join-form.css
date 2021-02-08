@@ -1,0 +1,82 @@
+.join-page-c1-left {
+  width: 50%;
+  background-image: url("./../../images/bg-pattern-half.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.join-page-c1-right {
+  width: 50%;
+  background-color: #f6f6f6;
+}
+
+.join-page-c0 {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.join-page-c1-right-content {
+  width: 90%;
+  max-width: 420px;
+  margin: auto;
+}
+.join-page-c1-left-shadow {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  box-shadow: inset -2px 2px 4px black;
+}
+h2.purple-highlight {
+  background-image: url("./../../images/purple-highlight.svg");
+  background-position: left bottom;
+  background-size: 6.5rem;
+  background-repeat: no-repeat;
+  margin-bottom: 4rem;
+}
+
+/* #root > div > div.join-page-c0.column-container > div.join-page-c1-right.row-container > div > h2 */
+
+.join-form > button {
+  margin-bottom: 1rem;
+}
+.join-or-horizontal-line {
+  height: 1px;
+  width: 100%;
+  background-color: #c6cacc;
+  vertical-align: center;
+  margin: auto;
+}
+
+span.join-or {
+  display: flex;
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.join-or-container {
+  margin-bottom: 1rem;
+}
+
+button.google-sign-button {
+  background-color: white;
+  border: 1px solid #d1d3d4;
+  color: #4056a1;
+}
+button.apple-sign-button {
+  background-color: white;
+  border: 1px solid #d1d3d4;
+  color: #4056a1;
+}
+
+span.join-phone-explainer {
+  position: relative;
+  top: -1rem;
+  font-weight: 500;
+  color: #6d6d6d;
+  font-size: 0.75rem;
+}
