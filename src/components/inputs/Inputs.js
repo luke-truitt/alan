@@ -43,6 +43,7 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
+          placeholder={props.placeholder}
           value={props.fields["phone"]}
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "phone" });
@@ -401,7 +402,41 @@ export function Form(props) {
     </ThemeProvider>
   );
 }
+export function TextInput(props) {
+  const [valid, setValid] = useState(false);
 
+  const checkValid = (val) =>
+    {
+     if (val.length>0)
+      {
+        console.log("Good");
+        setValid(true);
+      } else {
+        console.log("Bad");
+        setValid(false);
+      }
+    }
+  
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <div className="embedded-email-input-container form-item-container column-container">
+        <TextField
+          type={props.type}
+          className="form-item-text-field embedded-email-input-field"
+          variant={props.invalid ? "standard" : "outlined"}
+          value={props.value}
+          placeholder={props.placeholder}
+          style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
+          InputProps={{ disableUnderline: true }}
+          onChange={(e) => {
+            props.onChange(e.target.value, {"stateName": props.stateName});
+            checkValid(e.target.value);
+          }}
+        />
+      </div>
+    </ThemeProvider>
+  );
+}
 export function EmbeddedEmailInput(props) {
   const [valid, setValid] = useState(false);
 
