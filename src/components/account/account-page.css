@@ -37,18 +37,47 @@
 
 .account-page-c1-right-content {
   width: 80%;
-  height: 90%;
+  height: 95%;
   margin: auto;
   justify-content: space-between;
+}
+.review-card-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 2rem;
+}
+.disabled-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 2rem;
+}
+.placeholder-text {
+  width: 100%;
 }
 .account-page-card {
   box-shadow: none;
   border: 1px solid #c4c4c4;
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
 }
 .referral-card-content {
-  margin: 0.8rem;
+  margin-top: 0.7rem;
+
+  margin-bottom: 0.7rem;
 }
 
+.review-card {
+  border: 1px solid #444e9e;
+}
+.disabled-card-content {
+  opacity: 30%;
+}
+
+p.review-card-text {
+  color: #444e9e;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
 .referral-card-email-container {
   width: 70%;
   margin-right: 10px;
@@ -88,8 +117,8 @@ button.send-invites-button {
   margin-bottom: 2rem;
 }
 .referral-card-content-icon {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   margin-right: 2rem;
 }
 .referral-card-btn-container {
@@ -113,7 +142,7 @@ h4.account-timeline-title {
   vertical-align: center;
   align-content: center;
   vertical-align: middle;
-  opacity: 20%;
+  opacity: 30%;
 }
 p.account-timeline-step-text {
   align-self: baseline;
@@ -130,4 +159,40 @@ p.account-timeline-step-text {
 
 #active-account-timeline-step {
   opacity: 100%;
+}
+
+.track-card {
+  width: 50%;
+}
+.invest-card {
+  width: 50%;
+}
+
+p.disabled-card-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.invest-card-content {
+  opacity: 30%;
+}
+
+.invest-card-img {
+  height: 120px;
+  margin-right: 1rem;
+  box-shadow: -1px 1px 3px gray;
+}
+.track-card-content {
+  opacity: 30%;
+}
+
+.track-card-img {
+  height: 120px;
+  margin-right: 1rem;
+  box-shadow: -1px 1px 3px gray;
+}
+img.placeholder-block {
+  height: 80px;
+  width: 100%;
 }
