@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
 import {AuthContext} from "../../providers/AuthProvider";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
+import {auth, getUserDoc} from "../../firebase";
 
 import "./../../styles.css";
 import "./account-page.css";
@@ -218,6 +219,17 @@ function InvestCard(props) {
 }
 function AccountPage(props) {
   const user = useContext(AuthContext);
+  const [userData, setUserData] = useState({});
+  const [dataLoaded, setDataLoaded] = useState(false);
+  useEffect(() => {
+    if(user.user && !dataLoaded) {
+      getUserDoc(user).then((result) => {
+        setUserData(result);
+        setDataLoaded(true);
+      }).catch(() => console.log("ERROR GETTING USER"));
+    }
+  });
+  
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -227,7 +239,7 @@ function AccountPage(props) {
           <div className="account-page-c1-left-content">
             <AccountTimeline
               activeStep={props.activeStep}
-              firstName={props.firstName}
+              firstName={userData['firstName']}
             />
           </div>
         </div>

@@ -21,10 +21,26 @@ export const signInWithGoogle = () => {
   auth.signInWithPopup(provider);
 };
 
+export const getUserDoc = async (user) => {
+  if (!user || !user.user) return;
+  
+  const userRef = firestore.collection('users').doc(user.user.uid);
+  
+  const doc = await userRef.get();
+  if (!doc.exists) {
+    console.log('No such document!');
+    return null;
+  } else {
+    console.log('Document data:', doc.data());
+    return doc.data()
+  }
+}
+
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
 
   const userRef = firestore.doc(`users/${user.uid}`);
+  
   const snapshot = await userRef.get();
   
   if (!snapshot.exists) {
