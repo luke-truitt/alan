@@ -29,6 +29,7 @@ import {
   job,
   state,
   refund,
+  covidCredits
 } from "./OnboardingQuestions.js";
 import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
@@ -48,8 +49,8 @@ const forms = [
   // { title: "Personal", items: [name, phoneNumber, school, intlStudent], formFields: ["firstName", "lastName", "phone", "school", "classYear", "international"] },
   {
     title: "Income",
-    items: [income, state],
-    formFields: ["estimatedIncome", "state"],
+    items: [income, state, covidCredits],
+    formFields: ["estimatedIncome", "state", "covidCredits"],
   },
   {
     title: "Dependent",
@@ -91,9 +92,12 @@ function ProgressBar(props) {
 
 function Onboarding(props) {
   const [step, setStep] = useState(1);
+  const [panelActive, setPanelActive] = useState(false);
   const [fields, setFields] = useState({});
   const [formValid, setFormValid] = useState({});
   const history = useHistory();
+
+  setTimeout(() => setPanelActive(true),4000);
 
   const redirectHome = () => {
     // history.push({ pathname: "/"});
@@ -296,19 +300,32 @@ function Onboarding(props) {
 
   // Getting the estimated credits based on their student status
   function getCredits() {
+    return getRefundableCredits() + getNonRefundableCredits();
+  }
+
+  function getNonRefundableCredits() {
     if (fields["student"] == "No" || fields["student"] == "") {
       return 0;
     }
-    return Math.min(2500, fields["educationExpenses"]);
+    return Math.max(Math.min(2500, fields["educationExpenses"]) - 1000,0);
+  }
+
+  function getRefundableCredits() {
+    let creds = Math.max(1800 - fields["covidCredits"], 0);
+    if (fields["student"] == "No" || fields["student"] == "") {
+      return creds;
+    }
+    return creds + Math.min(1000, fields["educationExpenses"]);
   }
 
   // Getting their refund based on all data
   function getRefund() {
-    const credits = getCredits();
+    const nonRefundable = getNonRefundableCredits();
+    const refundableCredits = getRefundableCredits();
     const taxBill = getTaxBill();
-    const tempVal = Math.min(credits - taxBill, 1000);
+    const tempVal = Math.min(nonRefundable - taxBill, 0);
     const withholdings = getWithholdings();
-    const refund = tempVal + withholdings;
+    const refund = tempVal + withholdings + refundableCredits;
     return refund;
   }
 
@@ -332,7 +349,7 @@ function Onboarding(props) {
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
-        <OnboardingTimeline activeStep={step} />
+        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel/>}
         <div className="onboarding-c1-right row-container">
           <ProgressBar
             value={step * (100 / forms.length)}

@@ -45,6 +45,7 @@ export const generateUserDocument = async (user, additionalData) => {
   
   if (!snapshot.exists) {
     const { email, firstName, lastName, phone } = user;
+    // const displayName = firstName;
     try {
       await userRef.set({
         firstName,

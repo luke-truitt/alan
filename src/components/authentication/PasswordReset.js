@@ -22,7 +22,6 @@ const PasswordReset = () => {
       .sendPasswordResetEmail(email)
       .then(() => {
           setEmailHasBeenSent(true);
-        setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
       })
       .catch(() => {
         setError("Error resetting password");
