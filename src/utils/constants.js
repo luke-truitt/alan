@@ -25,6 +25,7 @@ export const primaryTheme = createMuiTheme({
   overrides: {
     body2: { color: "#6D6D6D" },
   },
+  shadows: "none",
   shape: { borderRadius: "0px" },
   typography: {
     fontFamily: ["-apple-system, BlinkMacSystemFont, sans-serif;"],

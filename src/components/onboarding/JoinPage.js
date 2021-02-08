@@ -7,6 +7,19 @@ import {
 import { primaryTheme } from "./../../utils/constants.js";
 import "./join-form.css";
 import { NameInput, PhoneNumberInput } from "./../inputs/Inputs.js";
+import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
+import joinTimeline2 from "./../../images/join-timeline/join-timeline-2.svg";
+import joinTimeline3 from "./../../images/join-timeline/join-timeline-3.svg";
+import joinTimeline4 from "./../../images/join-timeline/join-timeline-4.svg";
+import joinTimeline5 from "./../../images/join-timeline/join-timeline-5.svg";
+
+const timelineNumbers = {
+  1: joinTimeline1,
+  2: joinTimeline2,
+  3: joinTimeline3,
+  4: joinTimeline4,
+  5: joinTimeline5,
+};
 
 const mockProps = {
   fields: {
@@ -38,12 +51,18 @@ const timelineData = [
 ];
 
 function JoinTimelineStep(props) {
+  const isLast = props.number === 5;
   return (
     <div className="column-container join-timeline-step">
-      <Typography variant="h4" className="join-timeline-step-number">
-        {props.number}
-      </Typography>
-      <Typography variant="body1" className="join-timeline-step-text">
+      <img
+        src={timelineNumbers[props.number]}
+        className="join-timeline-step-number"
+      />
+      <Typography
+        variant="body2"
+        color="primary"
+        className="join-timeline-step-text"
+      >
         {props.text}
       </Typography>
     </div>
@@ -51,12 +70,15 @@ function JoinTimelineStep(props) {
 }
 
 function JoinTimeline() {
+  const timelineSteps = timelineData.map((data) => (
+    <JoinTimelineStep number={data.number} text={data.text} />
+  ));
   return (
     <div className="row-container join-timeline">
-      <Typography className="join-timeline-title">How does it work?</Typography>
-      {timelineData.map((data) => (
-        <JoinTimelineStep number={data.number} text={data.text} />
-      ))}
+      <Typography variant="h5" color="primary" className="join-timeline-title">
+        How does it work?
+      </Typography>
+      {timelineSteps}
     </div>
   );
 }
@@ -102,6 +124,14 @@ function JoinPage() {
         <div className="join-page-c1-left-shadow" />
         <div className="join-page-c1-left row-container">
           <JoinTimeline></JoinTimeline>
+
+          <Typography
+            variant="caption"
+            color="primary"
+            className="join-disclaimer-text"
+          >
+            *Review process takes about 2-4 business days
+          </Typography>
         </div>
         <div className="join-page-c1-right row-container">
           <div className="join-page-c1-right-content row-container">
