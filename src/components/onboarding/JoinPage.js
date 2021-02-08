@@ -67,6 +67,9 @@ function JoinForm(props) {
     <div className="join-form row-container">
       <NameInput fields={props} />
       <PhoneNumberInput fields={props} />
+      <Typography variant="caption" className="join-phone-explainer">
+        So we can text you when the review is complete!
+      </Typography>
       <Button className="join-button" variant="contained" color="secondary">
         Join
       </Button>

@@ -72,3 +72,11 @@ button.apple-sign-button {
   border: 1px solid #d1d3d4;
   color: #4056a1;
 }
+
+span.join-phone-explainer {
+  position: relative;
+  top: -1rem;
+  font-weight: 500;
+  color: #6d6d6d;
+  font-size: 0.75rem;
+}
