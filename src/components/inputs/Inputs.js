@@ -373,7 +373,7 @@ export function EmbeddedEmailInput(props) {
           color="secondary"
           onClick={valid ? props.navTo : props.invalidClick}
         >
-          {props.loading ? "Calculate my refund" : <CircularProgress />}
+          {props.loading ? <CircularProgress /> : "Calculate my refund"}
         </Button>
       </div>
     </ThemeProvider>

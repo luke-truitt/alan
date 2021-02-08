@@ -11,7 +11,7 @@ import {
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme } from "../../utils/constants.js";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import React, {useRef, useState, useEffect} from "react";
 import {PageView, initGA, Event} from '../tracking/Tracking';
 
@@ -47,6 +47,19 @@ function LandingPage(props) {
   const invalidClick = () => {
     setInvalid(true);
   };
+
+  const location = useLocation();
+  let referById = "";
+  const searchParams = location.search.split("?")[1].split("&");
+  let i;
+  for (i = 0; i < searchParams.length; i++) { 
+    const paramName = searchParams[i].split("=")[0];
+    console.log(paramName);
+    if(paramName == "referId") {
+      referById = searchParams[i].split("=")[1];
+    }
+  }
+
   const axios = require("axios");
   const emailInput = useRef(null);
   function addEmail(email) {
@@ -55,8 +68,8 @@ function LandingPage(props) {
         email: email,
       })
       .then(function (response) {
-        const referToId = response.referId;
-        history.push({ pathname: "/onboard", state: { email: email, referToId: referToId } });
+        const referToId = response.data.referId;
+        history.push({ pathname: "/onboard", state: { email: email, referToId: referToId, referById: referById } });
         console.log(response);
         setLoading(false);
       })
