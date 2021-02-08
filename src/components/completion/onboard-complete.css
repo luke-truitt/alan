@@ -37,7 +37,7 @@ button.onboard-complete-apply-button {
   position: relative;
   text-align: center;
 }
-body {
+.onboard-complete-c0-top {
   margin: auto;
   background-image: url("./../../images/bg-pattern-double.svg");
   background-size: cover;
