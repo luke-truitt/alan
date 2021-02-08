@@ -11,9 +11,10 @@ import {
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme } from "../../utils/constants.js";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import React, {useRef, useState, useEffect} from "react";
 import {PageView, initGA, Event} from '../tracking/Tracking';
+
 const trackingId = 'UA-189058741-1';
 const {
   REACT_APP_API_BASE_URL,
@@ -24,7 +25,7 @@ const {
 function LandingPage(props) {
   const [email, setEmail] = useState("");
   const [invalid, setInvalid] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   // const keyDown = (e) => {
   //   var code = e.keyCode || e.which;
@@ -40,12 +41,25 @@ function LandingPage(props) {
   });
   const navTo = () => {
     Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
+    setLoading(true);
     addEmail(email);
-    history.push({ pathname: "/onboard", state: { email: email } });
   };
   const invalidClick = () => {
     setInvalid(true);
   };
+
+  const location = useLocation();
+  let referById = "";
+  const searchParams = (location.search.split("?").length==1 ? [] : location.search.split("?")[1].split("&"));
+  let i;
+  for (i = 0; i < searchParams.length; i++) { 
+    const paramName = searchParams[i].split("=")[0];
+    console.log(paramName);
+    if(paramName == "referId") {
+      referById = searchParams[i].split("=")[1];
+    }
+  }
+
   const axios = require("axios");
   const emailInput = useRef(null);
   function addEmail(email) {
@@ -54,7 +68,10 @@ function LandingPage(props) {
         email: email,
       })
       .then(function (response) {
+        const referToId = response.data.referId;
+        history.push({ pathname: "/onboard", state: { email: email, referToId: referToId, referById: referById } });
         console.log(response);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -85,11 +102,13 @@ function LandingPage(props) {
             className="landing-input"
             emailValue={email}
             setEmail={setEmail}
+            invalid={invalid}
             // keyDown={keyDown}
             navTo={navTo}
             invalidClick={invalidClick}
+            loading={loading}
           />
-<Typography
+          <Typography
             variant="body2"
             color="text-secondary"
             className="landing-subtitle"

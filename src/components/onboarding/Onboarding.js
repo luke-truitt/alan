@@ -125,7 +125,6 @@ function Onboarding(props) {
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
     if(taxableIncome > 0) {
-      console.log(taxableIncome);
       taxRate = Number((getTaxBill() / getTaxableIncome()).toFixed(2));
     }
     const taxBill = Number(getTaxBill().toFixed(2));
@@ -154,15 +153,12 @@ function Onboarding(props) {
         console.log(error);
       });
   }
+
   /*
     Functions for controlling UI Elements and Interacting with DOM
   */
-
   // Logic for determining whether or not the "Next" button should be disabled
   const nextDisabled = () => {
-    console.log("Step: " + String(step) + " State: " + String(formValid))
-    console.log(formValid);
-    console.log(!formValid[step])
     return !formValid[step];
   }
 
@@ -179,7 +175,7 @@ function Onboarding(props) {
   const forwardClick = () => {
     if (step == 1) {
       onDataUpdate({
-        "email": email
+        "email": email, "referToId": referToId, "referById": referById
       });
     } 
     if (step >= 2) {
@@ -194,11 +190,18 @@ function Onboarding(props) {
     State control for managing data on this page
   */
   let location = useLocation();
+  
   let email = "";
+  let referToId = "";
+  let referById = "";
   try {
     email = location.state["email"];
+    referToId = location.state["referToId"];
+    referById = location.state["referById"];
   } catch {
     email = "";
+    referToId = "";
+    referById = "";
   }
 
   // Data to be sent to server

@@ -52,11 +52,13 @@ p.refund-breakdown-row-amount {
   width: 100%;
   font-size: 2rem;
 }
+
 .refund-breakdown-row-c0 {
   width: 100%;
   text-align: right;
   margin-bottom: 1.5rem;
 }
+
 a.refund-breakdown-row-label {
   padding-top: 0.3rem;
   text-decoration: underline;
