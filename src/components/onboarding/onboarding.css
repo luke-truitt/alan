@@ -6,7 +6,7 @@
 .onboarding-c1-left {
   width: 30vw;
   background-image: url(../../images/onboarding-left-div-bg.svg);
-
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
@@ -20,16 +20,17 @@
 
 .onboarding-c1-left-subtitle {
   line-height: 1.2rem;
+  margin-bottom: 2rem;
 }
 .onboarding-c1-left-img {
-  position: absolute;
-  bottom: 0;
-  left: -2;
+  float: bottom left;
   width: 15vw;
+  margin-top: 2rem;
 }
 
 .onboarding-c1-left-div {
   width: 80%;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 35%;
