@@ -110,9 +110,9 @@ function LandingPage(props) {
               loading={loading}
             />
             <Typography
-              variant="body2"
-              className="landing-subtitle"
-              style={{ display: invalid ? "" : "none", color: "#4056a1" }}
+              variant="caption"
+              className="email-validation-text"
+              style={{ display: invalid ? "" : "none", color: "red" }}
             >
               Make sure you use a valid email!
             </Typography>

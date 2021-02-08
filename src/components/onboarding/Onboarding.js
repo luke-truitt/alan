@@ -28,15 +28,15 @@ import {
   intlStudent,
   job,
   state,
-  refund
+  refund,
 } from "./OnboardingQuestions.js";
 import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
 
 import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {PageView, initGA, Event} from '../tracking/Tracking';
-const trackingId = 'UA-189058741-1';
+import { PageView, initGA, Event } from "../tracking/Tracking";
+const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
   REACT_APP_WAITLIST_URL,
@@ -48,12 +48,12 @@ const forms = [
   {
     title: "Income",
     items: [income, state],
-    formFields: ["estimatedIncome", "state"]
+    formFields: ["estimatedIncome", "state"],
   },
   {
     title: "Dependent",
     items: [dependence],
-    formFields: ["dependent"]
+    formFields: ["dependent"],
   },
   // {
   //   title: "History",
@@ -63,7 +63,7 @@ const forms = [
   {
     title: "Education",
     items: [educationExpenses, studentLoans, studentStatus],
-    formFields: ["educationExpenses", "loanPayments", "student"]
+    formFields: ["educationExpenses", "loanPayments", "student"],
   },
   // {
   //   title: "Refund",
@@ -94,9 +94,7 @@ function Onboarding(props) {
   const [formValid, setFormValid] = useState({});
   const history = useHistory();
 
-  useEffect(() => {
-    
-  });
+  useEffect(() => {});
 
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
@@ -105,19 +103,19 @@ function Onboarding(props) {
   };
 
   const checkValid = (d) => {
-    const availableFields = forms[step-1].formFields;
+    const availableFields = forms[step - 1].formFields;
     let validData = true;
     availableFields.map((field) => {
-    try {
-      if(d[field]==null || !d[field]) {
-        validData = false;
-      }
+      try {
+        if (d[field] == null || !d[field]) {
+          validData = false;
+        }
       } catch {
         validData = false;
       }
     });
-    updateValid({[step]: validData});
-  }
+    updateValid({ [step]: validData });
+  };
   const updateValid = (d) => {
     for (const [key, value] of Object.entries(d)) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
@@ -125,29 +123,30 @@ function Onboarding(props) {
   };
 
   const navToRefund = () => {
-    
     const refund = getRefund();
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
-    if(taxableIncome > 0) {
+    if (taxableIncome > 0) {
       taxRate = Number((getTaxBill() / getTaxableIncome()).toFixed(2));
     }
     const taxBill = Number(getTaxBill().toFixed(2));
-    const creditsAndWitholdings = Number((getCredits() + getWithholdings()).toFixed(2));
+    const creditsAndWitholdings = Number(
+      (getCredits() + getWithholdings()).toFixed(2)
+    );
     const data = {
       netRefund: refund,
       taxableIncome: taxableIncome,
       taxRate: taxRate,
       taxBill: taxBill,
       creditsAndWitholdings: creditsAndWitholdings,
-    }
-    
+    };
+
     sendData();
     history.push({ pathname: "/refund", state: { breakdown: data } });
-  }
+  };
 
   const axios = require("axios");
-  
+
   function sendData() {
     axios
       .post(REACT_APP_API_BASE_URL + REACT_APP_CALCULATOR_URL, fields)
@@ -165,7 +164,7 @@ function Onboarding(props) {
   // Logic for determining whether or not the "Next" button should be disabled
   const nextDisabled = () => {
     return !formValid[step];
-  }
+  };
 
   // Click Back Logic
   const backClick = () => {
@@ -180,9 +179,11 @@ function Onboarding(props) {
   const forwardClick = () => {
     if (step == 1) {
       onDataUpdate({
-        "email": email, "referToId": referToId, "referById": referById
+        email: email,
+        referToId: referToId,
+        referById: referById,
       });
-    } 
+    }
     if (step >= forms.length) {
       navToRefund();
       setStep(forms.length);
@@ -195,7 +196,7 @@ function Onboarding(props) {
     State control for managing data on this page
   */
   let location = useLocation();
-  
+
   let email = "";
   let referToId = "";
   let referById = "";
@@ -282,10 +283,10 @@ function Onboarding(props) {
 
   // Getting the estimated credits based on their student status
   function getCredits() {
-    if(fields["student"]=="No" || fields["student"] == "") {
+    if (fields["student"] == "No" || fields["student"] == "") {
       return 0;
     }
-    return Math.min(2500, fields['educationExpenses']);
+    return Math.min(2500, fields["educationExpenses"]);
   }
 
   // Getting their refund based on all data
@@ -314,7 +315,7 @@ function Onboarding(props) {
         </div>
         <div className="onboarding-c1-right row-container">
           <ProgressBar
-            value={step * (100/forms.length)}
+            value={step * (100 / forms.length)}
             className="onboarding-c1-right-progress-bar"
           />
           <div container className="onboarding-c1-right-div">
@@ -332,10 +333,10 @@ function Onboarding(props) {
                 <Button
                   variant="contained"
                   color="primary"
-                  className="onboarding-next"
+                  className="onboarding-back"
                   onClick={backClick}
                 >
-                  Back
+                  Previous
                 </Button>
               </div>
               <div className="onboarding-next-div">
