@@ -32,11 +32,7 @@ div.header {
 }
 
 body {
-  overflow-x: hidden;
+  max-width: 100%;
   background-color: #ffffff;
-  transition: 0.3s ease all;
-}
-
-html {
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }

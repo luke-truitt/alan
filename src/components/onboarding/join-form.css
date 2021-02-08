@@ -1,0 +1,31 @@
+.join-page-c1-left {
+  width: 50%;
+  background-image: url("./../../images/bg-pattern-half.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.join-page-c1-right {
+  width: 50%;
+  background-color: #f6f6f6;
+}
+
+.join-page-c0 {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.join-page-c1-right-content {
+  width: 90%;
+  max-width: 420px;
+  margin: auto;
+}
+.join-page-c1-left-shadow {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  box-shadow: inset -2px 2px 4px black;
+}

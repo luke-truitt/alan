@@ -12,6 +12,7 @@ import ErrorPage from "./components/error/ErrorPage";
 
 import "./global.css";
 import OnboardCompletePage from "./components/onboarding/OnboardCompletePage.js";
+import JoinPage from "./components/onboarding/JoinPage";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <LandingPage />
+          </Route>
+          <Route path="/join">
+            <JoinPage />
           </Route>
           <Route path="/onboard">
             <Onboarding />

@@ -51,7 +51,7 @@ function RefundBreakdown(props) {
       <RefundBreakdownRow
         symbol="multiply"
         amount={props.breakdown.taxRate}
-        label="Taxable Income"
+        label="Tax Rate"
       />{" "}
       <div className="refund-breakdown-highlight-red">
         <RefundBreakdownRow
