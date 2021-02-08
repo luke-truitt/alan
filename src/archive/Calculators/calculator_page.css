@@ -10,9 +10,6 @@ body {
   color: #002e72;
 }
 
-.calc-root {
-  background-image: url("../../images/background-pattern.svg");
-}
 .form-item {
   display: flex;
   flex-direction: column;

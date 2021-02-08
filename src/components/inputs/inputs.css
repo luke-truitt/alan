@@ -15,7 +15,9 @@ button.single-select-button {
   /* margin-left: 20px;
   margin-right: 20px; */
 }
-
+.form-container > .form-item-container {
+  margin-bottom: 1rem;
+}
 button.single-select-button:hover {
   background-color: #d8dbe8;
 }

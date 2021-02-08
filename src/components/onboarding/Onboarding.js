@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import "./onboarding.css";
 import "../../styles.css";
-import snap from "../../images/snap.svg";
+import snap from "../../images/onboarding-page/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -36,6 +36,7 @@ import { Form } from "../inputs/Inputs.js";
 import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
+import OnboardingTimeline from "./OnboardingTimeline";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -96,7 +97,7 @@ function Onboarding(props) {
 
   const redirectHome = () => {
     // history.push({ pathname: "/"});
-  }
+  };
 
   const onDataUpdate = (d) => {
     for (const [key, value] of Object.entries(d)) {
@@ -144,8 +145,16 @@ function Onboarding(props) {
     };
 
     sendData();
-    history.push({ pathname: "/refund", state: { email: email, referToId: referToId, referById: referById, breakdown: data } });
-  }
+    history.push({
+      pathname: "/refund",
+      state: {
+        email: email,
+        referToId: referToId,
+        referById: referById,
+        breakdown: data,
+      },
+    });
+  };
 
   const axios = require("axios");
 
@@ -211,7 +220,7 @@ function Onboarding(props) {
     referToId = "";
     referById = "";
   }
-  if(email=="" || referToId=="") {
+  if (email == "" || referToId == "") {
     redirectHome();
   }
   // Data to be sent to server
@@ -303,20 +312,27 @@ function Onboarding(props) {
     return refund;
   }
 
+  function InitPanel() {
+    return (
+      <div className="onboarding-c1-left row-container">
+        <div container className="onboarding-c1-left-div">
+          <Typography variant="h3" className="onboarding-c1-left-title">
+            A few clicks from a bigger refund
+          </Typography>
+          <Typography variant="body2" className="onboarding-c1-left-subtitle">
+            File for your tax refund in minutes. Get back money and time.
+          </Typography>
+        </div>
+
+        <img className="onboarding-c1-left-img" src={snap} />
+      </div>
+    );
+  }
+
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
-        <div className="onboarding-c1-left row-container">
-          <div container className="onboarding-c1-left-div">
-            <Typography variant="h3" className="onboarding-c1-left-title">
-              A few clicks from a bigger refund
-            </Typography>
-            <Typography variant="body2" className="onboarding-c1-left-subtitle">
-              File for your tax refund in minutes. Get back money and time.
-            </Typography>
-          </div>
-          <img className="onboarding-c1-left-img" src={snap}></img>
-        </div>
+        <OnboardingTimeline activeStep={step} />
         <div className="onboarding-c1-right row-container">
           <ProgressBar
             value={step * (100 / forms.length)}

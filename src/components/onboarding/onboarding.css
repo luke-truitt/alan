@@ -5,14 +5,24 @@
 }
 .onboarding-c1-left {
   width: 30vw;
-  background-image: url(../../images/onboarding-left-div-bg.svg);
+  background-image: url("./../../images/bg/bg-pattern-third.svg");
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
 }
+
+.onboarding-timeline {
+  height: 80%;
+  vertical-align: center;
+  margin: auto;
+  text-align: center;
+}
+.onboarding-timeline-step {
+  margin-bottom: 0.5rem;
+}
 .onboarding-c1-right {
-  width: 70vw;
+  width: 65vw;
 }
 .onboarding-c1-left-title {
   padding-bottom: 1.8rem;
@@ -100,7 +110,7 @@ h4.onboarding.form-title {
     align-items: center;
   }
   .onboarding-c0 {
-    background-image: url(../../images/onboarding-left-div-bg.svg);
+    background-image: url("./../../images/bg/bg-pattern-third.svg");
     background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;
