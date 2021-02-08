@@ -5,7 +5,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants.js";
-import "./join-form.css";
+import "./join-page.css";
 import { NameInput, PhoneNumberInput } from "./../inputs/Inputs.js";
 import joinTimeline1 from "./../../images/join-timeline/join-timeline-1.svg";
 import joinTimeline2 from "./../../images/join-timeline/join-timeline-2.svg";

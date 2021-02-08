@@ -1,0 +1,133 @@
+.account-page-c0 {
+  width: 100vw;
+  height: 100vh;
+}
+.account-page-c1-left {
+  background-image: url("./../../images/bg-gradient-third.svg");
+  width: 30%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+.account-page-c1-right {
+  background-image: url("./../../images/bg-pattern-full-light.svg");
+  width: 70%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+}
+
+.account-page-c1-left-shadow {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  box-shadow: inset -2px 2px 4px black;
+}
+.account-page-c1-left-content {
+  width: 90%;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.account-page-c1-right-content {
+  width: 80%;
+  height: 90%;
+  margin: auto;
+  justify-content: space-between;
+}
+.account-page-card {
+  box-shadow: none;
+  border: 1px solid #c4c4c4;
+}
+.referral-card-content {
+  margin: 0.8rem;
+}
+
+.referral-card-email-container {
+  width: 70%;
+  margin-right: 10px;
+}
+.referral-card-email-field > *:last-child {
+  height: 100%;
+}
+.referral-card-email-field {
+  width: 65%;
+}
+
+button > * > img {
+  padding: 10px;
+}
+
+button.share-button {
+  border: 1px solid #ececec;
+  height: 100%;
+  width: 100%;
+  margin-left: 2px;
+}
+
+button.copy-link-button {
+  border: 1px solid #ececec;
+  height: 100%;
+  width: 100%;
+  margin-right: 1px;
+}
+button.send-invites-button {
+  height: 100%;
+  min-width: 35%;
+  margin-left: 0.2rem;
+}
+.referral-card-content-text > span {
+  line-height: 1rem;
+  letter-spacing: 80%;
+  margin-bottom: 2rem;
+}
+.referral-card-content-icon {
+  height: 50px;
+  width: 50px;
+  margin-right: 2rem;
+}
+.referral-card-btn-container {
+  height: 50px;
+}
+.referral-card-btns-right {
+  width: 40%;
+  margin-left: 0;
+  justify-content: space-between;
+}
+
+.account-timeline {
+  max-width: 80%;
+  margin: auto;
+}
+h4.account-timeline-title {
+  padding-bottom: 2rem;
+}
+.account-timeline-step {
+  margin-bottom: 0.25rem;
+  vertical-align: center;
+  align-content: center;
+  vertical-align: middle;
+  opacity: 20%;
+}
+p.account-timeline-step-text {
+  align-self: baseline;
+  justify-items: flex-end;
+  font-size: 1.5rem;
+  line-height: 4rem;
+  vertical-align: middle;
+  font-weight: 400;
+}
+.account-timeline-step-number {
+  width: 4rem;
+  margin-right: 2rem;
+}
+
+#active-account-timeline-step {
+  opacity: 100%;
+}

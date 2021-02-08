@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import "./global.css";
 import JoinPage from "./components/onboarding/JoinPage";
 import OnboardCompletePage from "./components/completion/OnboardCompletePage.js";
-
+import AccountPage from "./components/account/AccountPage.js";
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";
 initGA(trackingId);
@@ -36,6 +36,9 @@ function App() {
           </Route>
           <Route path="/refund">
             <OnboardCompletePage />
+          </Route>
+          <Route path="/account">
+            <AccountPage></AccountPage>
           </Route>
           <Route>
             <ErrorPage />

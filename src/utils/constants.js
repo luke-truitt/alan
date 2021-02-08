@@ -22,10 +22,10 @@ export const primaryTheme = createMuiTheme({
       secondary: "#86868B",
     },
   },
+  shadows: ["none"],
   overrides: {
     body2: { color: "#6D6D6D" },
   },
-  shadows: "none",
   shape: { borderRadius: "0px" },
   typography: {
     fontFamily: ["-apple-system, BlinkMacSystemFont, sans-serif;"],
@@ -54,23 +54,25 @@ export const primaryTheme = createMuiTheme({
       fontWeight: 600,
     },
     body1: {
-      fontSize: "1rem",
+      fontSize: ".9rem",
     },
     body2: {
-      fontSize: "1.375rem",
+      fontSize: "1.2rem",
     },
     caption: {
       fontSize: "0.8rem",
+      letterSpacing: 0.1,
     },
     button: {
-      fontWeight: 600,
+      fontWeight: 500,
       textTransform: "none",
       boxShadow: "none",
       height: "60px",
-      fontSize: "1rem",
+      fontSize: ".9rem",
+      letterSpacing: 0.05,
     },
-    input: {
-      fontSize: ".5rem",
+    label: {
+      fontSize: ".8rem",
     },
   },
 });
