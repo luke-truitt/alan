@@ -1,7 +1,10 @@
 .landing-c1 {
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   display: flex;
+  margin-left: 5rem;
+  margin-right: -10rem;
+  justify-content: center;
 }
 h2.landing-title {
   margin-bottom: 3rem;
@@ -19,48 +22,66 @@ p.landing-subtitle {
   line-height: 120%;
   font-size: 1.2rem;
 }
-.landing-input {
-  padding-bottom: 2rem;
-}
-.landing-c0-overlay {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
+
 .landing-c0 {
-  width: 70%;
+  width: 100vw;
   margin: auto;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
   height: 100vh;
-  justify-content: center;
   display: flex;
   flex-direction: column;
 }
 
 @media only screen and (max-width: 800px) {
-  .landing-c0 {
+  div.landing-c1 {
+    max-width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+    height: 100%;
+  }
+  h2.landing-title {
+    text-align: center;
+    font-size: 2rem;
+  }
+  p.landing-subtitle {
+    font-size: 1rem;
+    text-align: center;
+  }
+  div.landing-c0 {
     overflow: scroll;
-    height: 110vh;
+    height: 100vh;
+    flex-direction: column;
+  }
+  span.landing-page-button-text {
+    margin-top: 1rem;
+  }
+  span.landing-page-web-button-text {
+    visibility: hidden;
   }
   .landing-ben {
-    visibility: hidden;
+    margin: auto;
+    margin-top: 2rem;
+    height: 100%;
+
+    /* visibility: hidden; */
+  }
+  img.landing-ben {
+    min-width: 100%;
+    height: auto;
+    float: bottom;
+    align-self: flex-end;
   }
 }
 div.landing-c1.row-container > div > button {
   line-height: 1.25rem;
 }
 
-.landing-animation-container {
-  padding-top: 1rem;
-  z-index: 0;
-}
-.landing-ben {
+img.landing-ben {
   z-index: -2;
-  position: absolute;
-  bottom: -15%;
-  right: -10px;
+  height: auto;
   max-width: 50%;
+  align-self: flex-end;
 }
 
 span.email-validation-text {

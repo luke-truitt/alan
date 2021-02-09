@@ -1,29 +1,33 @@
 .account-page-c0 {
   width: 100vw;
   height: 100vh;
+  overflow-y: hidden;
 }
 .account-page-c1-left {
   background-image: url("./../../images/bg/bg-gradient-third.svg");
-  width: 30%;
-  height: 100%;
+  width: 30vw;
+  min-height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: -2;
 }
 .account-page-c1-right {
   background-image: url("./../../images/bg/bg-pattern-full-light.svg");
-  width: 70%;
+  width: 70vw;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
   display: flex;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   justify-items: center;
+  overflow-y: scroll;
 }
 
 .account-page-c1-left-shadow {
   position: absolute;
-  width: 30%;
-  height: 100%;
+  min-height: 100%;
+  width: 30vw;
   z-index: 9;
   top: 0;
   left: 0;
@@ -32,12 +36,10 @@
 .account-page-c1-left-content {
   width: 90%;
   margin: auto;
-  margin-top: 5rem;
 }
 
 .account-page-c1-right-content {
   width: 80%;
-  height: 90%;
   margin: auto;
   justify-content: space-between;
 }
@@ -46,18 +48,21 @@
   width: 40px;
   margin-right: 2rem;
 }
+
 .placeholder-text {
   width: 100%;
 }
+
 .account-page-card {
   box-shadow: none;
   border: 1px solid #c4c4c4;
   margin-left: 0.8rem;
   margin-right: 0.8rem;
+  margin-bottom: 1.5rem;
 }
 .referral-card-content {
-  margin-top: 0.7rem;
-  margin-bottom: 0.7rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .review-card {
@@ -131,13 +136,14 @@ p.account-timeline-step-text {
   align-self: baseline;
   justify-items: flex-end;
   font-size: 1.5rem;
-  line-height: 4rem;
+  line-height: 3rem;
   vertical-align: middle;
   font-weight: 400;
 }
 .account-timeline-step-number {
-  width: 4rem;
+  max-width: 3rem;
   margin-right: 2rem;
+  padding: 0;
 }
 
 #active-account-timeline-step {

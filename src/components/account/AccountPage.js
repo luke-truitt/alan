@@ -133,7 +133,11 @@ function ReferralCard(props) {
                 className="referral-button"
                 variant="container"
                 color="primary"
-                onClick={() =>  navigator.clipboard.writeText(BASE_URL+'/?referId='+props.referToId)}
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    BASE_URL + "/?referId=" + props.referToId
+                  )
+                }
               >
                 <img src={copyIcon} className="copy-button-icon" />
                 Link
@@ -241,13 +245,17 @@ function AccountPage(props) {
   const [referToId, setReferToId] = useState((user.user && user.user.referToId != null && user.user.referToId != "") ? user.user.referToId : uuidv4());
   const [referById, setReferById] = useState((user.user && user.user.referById != null && user.user.referById != "") ? user.user.referById : "");
   setTimeout(() => {
-    if((user.user && user.user.displayName != null && user.user.displayName != "")){
-      setUserData({firstName: user.user.displayName});
+    if (
+      user.user &&
+      user.user.displayName != null &&
+      user.user.displayName != ""
+    ) {
+      setUserData({ firstName: user.user.displayName });
       setDataLoaded(true);
     }
-  },1000);
+  }, 1000);
   useEffect(() => {
-    if(user.user && !dataLoaded) {
+    if (user.user && !dataLoaded) {
       setTimeout(() => {
         getUserDoc(user).then((result) => {
           if(result==null) {
@@ -260,17 +268,19 @@ function AccountPage(props) {
       },1000);
     } 
   });
-  
+
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="account-page-c0 column-container"> 
+      <div className="account-page-c0 column-container">
         <div className="account-page-c1-left-shadow" />
         <div className="account-page-c1-left row-container">
           <div className="account-page-c1-left-content">
             <AccountTimeline
               activeStep={props.activeStep}
-              firstName={Object.keys(userData).length > 0 ? userData['firstName'] : ""}
+              firstName={
+                Object.keys(userData).length > 0 ? userData["firstName"] : ""
+              }
             />
           </div>
         </div>

@@ -4,7 +4,7 @@
   background-color: #f6f6f6;
 }
 .onboarding-c1-left {
-  width: 30vw;
+  width: 35vw;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
   height: 100vh;
   background-repeat: no-repeat;
@@ -126,4 +126,29 @@ h4.onboarding.form-title {
   .onboarding-button-div {
     background-color: #f6f6f6;
   }
+}
+
+.onboard-loading-container {
+  height: 80%;
+  width: 100%;
+  margin: auto;
+  margin-top: 1rem;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+h4.onboard-loading-title {
+  width: 300px;
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+svg.onboard-loading-lottie {
+}
+
+div.onboard-loading-subtitle {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
