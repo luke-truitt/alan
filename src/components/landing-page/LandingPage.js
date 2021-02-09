@@ -92,47 +92,47 @@ function LandingPage(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="landing-c0-overlay">
-        <div className="landing-c0">
-          <div className="landing-c1 row-container">
-            <Typography
-              variant="h2"
-              color="textPrimary"
-              className="landing-title"
-            >
-              Get up to a <span className="word-highlight">$5,000</span> tax
-              refund in <span className="word-highlight">10 minutes</span>.
-            </Typography>
-            <EmbeddedEmailInput
-              className="landing-input"
-              emailValue={email}
-              setEmail={setEmail}
-              invalid={invalid}
-              onKeyPress={(e, val) => keyDown(e, val)}
-              navTo={navTo}
-              invalidClick={invalidClick}
-              loading={loading}
-            />
-            <Typography
-              variant="caption"
-              className="email-validation-text"
-              style={{ display: invalid ? "" : "none", color: "red" }}
-            >
-              Make sure you use a valid email!
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textPrimary"
-              className="landing-subtitle"
-            >
-              The government owes students money. Alan will find you the credits
-              you qualify for, maximize your refund, explain why. All in under
-              10 minutes.
-            </Typography>
-          </div>
+      {/* <div className="landing-c0-overlay"> */}
+      <div className="landing-c0 column-container">
+        <div className="landing-c1 row-container">
+          <Typography
+            variant="h2"
+            color="textPrimary"
+            className="landing-title"
+          >
+            Get up to a <span className="word-highlight">$5,000</span> tax
+            refund in <span className="word-highlight">10 minutes</span>.
+          </Typography>
+          <EmbeddedEmailInput
+            className="landing-input"
+            emailValue={email}
+            setEmail={setEmail}
+            invalid={invalid}
+            onKeyPress={(e, val) => keyDown(e, val)}
+            navTo={navTo}
+            invalidClick={invalidClick}
+            loading={loading}
+          />
+          <Typography
+            variant="caption"
+            className="email-validation-text"
+            style={{ display: invalid ? "" : "none", color: "red" }}
+          >
+            Make sure you use a valid email!
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textPrimary"
+            className="landing-subtitle"
+          >
+            The government owes students money. Alan will find you the credits
+            you qualify for, maximize your refund, explain why. All in under 10
+            minutes.
+          </Typography>
         </div>
         <img src={ben} className="landing-ben"></img>
       </div>
+      {/* </div> */}
     </ThemeProvider>
   );
 }

@@ -405,18 +405,16 @@ export function Form(props) {
 export function TextInput(props) {
   const [valid, setValid] = useState(false);
 
-  const checkValid = (val) =>
-    {
-     if (val.length>0)
-      {
-        console.log("Good");
-        setValid(true);
-      } else {
-        console.log("Bad");
-        setValid(false);
-      }
+  const checkValid = (val) => {
+    if (val.length > 0) {
+      console.log("Good");
+      setValid(true);
+    } else {
+      console.log("Bad");
+      setValid(false);
     }
-  
+  };
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
@@ -426,10 +424,16 @@ export function TextInput(props) {
           variant={props.invalid ? "standard" : "outlined"}
           value={props.value}
           placeholder={props.placeholder}
-          style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
+          style={{
+            borderColor: "red",
+            borderWidth: props.invalid ? "1px" : "0px",
+            borderStyle: "solid",
+            borderRadius: "2px",
+            paddingLeft: "3px",
+          }}
           InputProps={{ disableUnderline: true }}
           onChange={(e) => {
-            props.onChange(e.target.value, {"stateName": props.stateName});
+            props.onChange(e.target.value, { stateName: props.stateName });
             checkValid(e.target.value);
           }}
         />
@@ -440,29 +444,43 @@ export function TextInput(props) {
 export function EmbeddedEmailInput(props) {
   const [valid, setValid] = useState(false);
 
-  const checkValid = (mail) =>
-    {
-     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
-      {
-        console.log("Good");
-        setValid(true);
-      } else {
-        console.log("Bad");
-        setValid(false);
-      }
+  const checkValid = (mail) => {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        mail
+      )
+    ) {
+      console.log("Good");
+      setValid(true);
+    } else {
+      console.log("Bad");
+      setValid(false);
     }
-  
-  
+  };
+
+  const ButtonText = (
+    <span className="landing-page-button-text">
+      Calculate <span className="landing-page-web-button-text"> my refund</span>
+    </span>
+  );
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
         <TextField
           type="email"
+          label="Enter email"
           className="form-item-text-field embedded-email-input-field"
           variant={props.invalid ? "standard" : "outlined"}
           value={props.emailValue}
           onKeyPress={(e) => props.onKeyPress(e, valid)}
-          style={{borderColor: "red", borderWidth: props.invalid ? "1px" : "0px", borderStyle: "solid", borderRadius: "2px", paddingLeft: "3px"}}
+          style={{
+            borderColor: "red",
+            borderWidth: props.invalid ? "1px" : "0px",
+            borderStyle: "solid",
+            borderRadius: "2px",
+            paddingLeft: "3px",
+          }}
           InputProps={{ disableUnderline: true }}
           onChange={(e) => {
             props.setEmail(e.target.value);
@@ -475,7 +493,7 @@ export function EmbeddedEmailInput(props) {
           color="secondary"
           onClick={valid ? props.navTo : props.invalidClick}
         >
-          {props.loading ? <CircularProgress /> : "Calculate my refund"}
+          {props.loading ? <CircularProgress /> : ButtonText}
         </Button>
       </div>
     </ThemeProvider>
