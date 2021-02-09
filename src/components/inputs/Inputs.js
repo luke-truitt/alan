@@ -397,7 +397,7 @@ export function Form(props) {
         <Typography variant="h4" color="textPrimary" className="form-title">
           <span className="word-highlight">{props.title}</span>
         </Typography>
-        {inputs}
+        <div className="form-inputs">{inputs}</div>
       </div>
     </ThemeProvider>
   );

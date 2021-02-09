@@ -1,31 +1,30 @@
 .onboarding-c0 {
   width: 100vw;
   height: 100vh;
-  background-color: #f6f6f6;
 }
 .onboarding-c1-left {
   width: 35vw;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
-  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
-  color: white;
+  justify-items: center;
+  display: flex;
 }
 
 .onboarding-timeline {
-  height: 80%;
   vertical-align: center;
   margin: auto;
   text-align: center;
+  display: flex;
 }
 .onboarding-timeline-step {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 .onboarding-c1-right {
   width: 65vw;
-
   overflow-y: scroll;
 }
+
 .onboarding-c1-left-title {
   padding-bottom: 1.8rem;
 }
@@ -50,84 +49,35 @@
 }
 
 .onboarding-c1-right-div {
-  width: 60%;
-  height: 80%;
+  padding-top: 5rem;
   margin-left: 10%;
-  position: relative;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+  width: 90%;
+  max-width: 500px;
 }
 
-button.onboarding-back {
-  color: #c3c3c3;
+div.onboarding-button-div {
+  float: bottom;
+  justify-content: space-between;
+  vertical-align: middle;
+  height: 60px;
+  margin-top: 2rem;
+}
 
-  width: 100%;
-}
-.onboarding-form-item {
-  margin-bottom: 1rem;
-}
-.onboarding-back-div {
-  margin-top: 30px;
-  float: left;
-  width: 30%;
-  display: flex;
-}
-.onboarding-next-div {
-  margin-top: 30px;
+div.onboarding-button {
   float: right;
-  width: 30%;
-  display: flex;
+  width: 100px;
 }
-button.onboarding-next {
-  float: right;
+div.onboarding-button > button {
   width: 100%;
-}
-
-.onboarding-c1-right-form.form-container {
-  padding: 100px;
 }
 
 .onboarding-c1-right-progress-bar {
   width: 100%;
-  padding-bottom: 20%;
 }
-h4.onboarding.form-title {
-  padding: 100px;
-}
-
-.onboarding-c1-right.row-container > div > div.form-container {
-  margin-top: 10%;
-}
-@media only screen and (max-width: 900px) {
-  .onboarding-back-div {
-    font-size: 10px;
-  }
-  .onboarding-next-div {
-    font-size: 10px;
-  }
-
-  .onboarding-c1-left {
-    display: none !important;
-  }
-  .onboarding-c1-right {
-    width: 100vw;
-    align-items: center;
-  }
-  .onboarding-c0 {
-    background-image: url("./../../images/bg/bg-pattern-third.svg");
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-size: cover;
-  }
-  .onboarding-c1-right-div {
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #f6f6f6;
-    padding: 30px;
-    box-shadow: -0.1em 0.1em 2em;
-  }
-  .onboarding-button-div {
-    background-color: #f6f6f6;
-  }
+h4.form-title {
+  padding-bottom: 3rem;
 }
 
 .onboard-loading-container {
@@ -146,11 +96,46 @@ h4.onboard-loading-title {
   margin-bottom: 2rem;
 }
 
-svg.onboard-loading-lottie {
+.form-container {
+  margin-bottom: 2rem;
 }
-
 div.onboard-loading-subtitle {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@media only screen and (max-width: 900px) {
+  h6.form-item-question {
+    font-size: 1rem;
+    line-height: 1.2rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .onboarding-c1-left {
+    display: none !important;
+  }
+  .onboarding-c1-right {
+    width: 100vw;
+    align-items: center;
+  }
+  .onboarding-c0 {
+    background-image: url("./../../images/bg/bg-pattern-third.svg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: cover;
+  }
+  .onboarding-c1-right {
+    margin: 0rem;
+    margin-top: 5rem;
+    width: 100%;
+    padding: 2rem;
+    background-color: #f6f6f6;
+    box-shadow: -0.1em 0.1em 2em;
+  }
+  .onboarding-c1-right-div {
+    width: 90%;
+    margin-bottom: 5rem;
+    margin: auto;
+  }
 }

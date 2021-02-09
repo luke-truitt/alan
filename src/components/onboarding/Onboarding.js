@@ -334,10 +334,18 @@ function Onboarding(props) {
     return (
       <div className="onboarding-c1-left row-container">
         <div container className="onboarding-c1-left-div">
-          <Typography variant="h3" className="onboarding-c1-left-title">
+          <Typography
+            variant="h3"
+            color="primary"
+            className="onboarding-c1-left-title"
+          >
             A few clicks from a bigger refund
           </Typography>
-          <Typography variant="body2" className="onboarding-c1-left-subtitle">
+          <Typography
+            variant="body2"
+            color="primary"
+            className="onboarding-c1-left-subtitle"
+          >
             File for your tax refund in minutes. Get back money and time.
           </Typography>
         </div>
@@ -401,7 +409,6 @@ function Onboarding(props) {
           />
           <div container className="onboarding-c1-right-div">
             <Form
-              id="onboarding-c1-right-form"
               title={forms[step - 1].title}
               formItems={forms[step - 1].items}
               fields={fields}
@@ -409,22 +416,16 @@ function Onboarding(props) {
               validForm={(d) => checkValid(d)}
               onUpdate={onDataUpdate}
             />
-            <div className="onboarding-button-div">
-              <div className="onboarding-back-div">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="onboarding-back"
-                  onClick={backClick}
-                >
+            <div className="onboarding-button-div column-container">
+              <div className="onboarding-button">
+                <Button variant="contained" color="primary" onClick={backClick}>
                   Previous
                 </Button>
               </div>
-              <div className="onboarding-next-div">
+              <div className="onboarding-button">
                 <Button
                   variant="contained"
                   color="secondary"
-                  className="onboarding-next"
                   disabled={nextDisabled()}
                   onClick={forwardClick}
                 >

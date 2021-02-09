@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "firebase": "^8.2.6",
+    "jquery": "^3.5.1",
     "material-ui-phone-number": "^2.2.6",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
@@ -28,8 +29,8 @@
     "react-scripts": "4.0.2",
     "react-select": "^4.0.2",
     "react-transition-group": "^4.4.1",
-    "uuid": "^8.3.2",
     "react-typist": "^2.0.5",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

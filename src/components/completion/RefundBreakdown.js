@@ -2,14 +2,11 @@ import add_icon from "../../images/icons/add-outline-white.svg";
 import subtract_icon from "../../images/icons/subtract-outline-white.svg";
 import multiply_icon from "../../images/icons/multiply-outline-dark.svg";
 import equal_icon from "../../images/icons/equal-outline-purple.svg";
-import {
-  ThemeProvider,
-  Link,
-  Typography,
-  Dialog,
-  DialogTitle,
-} from "@material-ui/core";
+import { ThemeProvider, Typography, Tooltip } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+
+import Zoom from "@material-ui/core/Zoom";
 import { useState } from "react";
 import {
   taxable_income_description,
@@ -25,6 +22,18 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
+const Explanation = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: "white",
+    border: "1px solid #F6F6F6",
+    color: "#2d2d2d",
+    fontSize: ".9rem",
+    fontWeight: 300,
+    lineHeight: "1rem",
+    padding: ".75rem",
+  },
+}))(Tooltip);
+
 function RefundBreakdownRow(props) {
   const SYMBOLS = {
     add: add_icon,
@@ -32,15 +41,7 @@ function RefundBreakdownRow(props) {
     multiply: multiply_icon,
     subtract: subtract_icon,
   };
-  const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="refund-breakdown-row-c0 row-container">
@@ -67,39 +68,25 @@ function RefundBreakdownRow(props) {
             </Typography>
           )}
         </div>
-        <Link
-          variant="body1"
-          color="secondary"
-          className="refund-breakdown-row-label"
-          onClick={() => handleOpen()}
+        <Explanation
+          width={"900px"}
+          placement="right-start"
+          enterDelay={200}
+          leaveDelay={500}
+          TransitionComponent={Zoom}
+          disableFocusListener
+          title={props.description}
+          className="refund-tooltip"
         >
-          {props.label}
-        </Link>
+          <Typography
+            variant="body1"
+            color="secondary"
+            className="refund-breakdown-row-label"
+          >
+            {props.label}
+          </Typography>
+        </Explanation>
       </div>
-      <Dialog
-        onClose={handleClose}
-        aria-labelledby="simple-dialog-title"
-        style={{ backgroundColor: "white", padding: "10px" }}
-        open={open}
-      >
-        <Typography
-          variant="body2"
-          color="secondary"
-          className="refund-breakdown-row-amount"
-          id="simple-dialog-title"
-          style={{ marginLeft: "auto", padding: "10px" }}
-        >
-          {props.label}
-        </Typography>
-        <Typography
-          variant="h6"
-          className="onboard-complete-fee-text"
-          color="secondary"
-          style={{ marginLeft: "auto", padding: "10px" }}
-        >
-          {props.description}
-        </Typography>
-      </Dialog>
     </ThemeProvider>
   );
 }
