@@ -7,11 +7,14 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./join-form.css";
+import Typist from "react-typist";
+import Lottie from "react-lottie";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState, useContext } from "react";
 import { AuthContext} from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
+import loadingAnimation from "./../../lotties/coin-loading.json";
 import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
 import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
@@ -130,18 +133,21 @@ function JoinForm(props) {
 
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
       if(referToId=="") {
-        referToId = uuidv4();
+        setReferToId(uuidv4());
       }
-      console.log(referToId);
-      generateUserDocument(user, { firstName, lastName, phone, referToId, referById });
-      navTo();
-      setLoading(false);
-      setPassword("");
-      setFirstName("");
-      setLastName("");
-      setPhone("");
+      generateUserDocument(user, { firstName, lastName, phone, referToId, referById }).then((res) => {
+        console.log(res);
+        navTo();
+        setLoading(false);
+        setPassword("");
+        setFirstName("");
+        setLastName("");
+        setPhone("");
+      })
     } catch (error) {
+      console.log("error ")
       setLoading(false);
       setError("Error Signing up with email and password");
     }
@@ -160,9 +166,50 @@ function JoinForm(props) {
       setPassword(e);
     }
   };
+  const loadingText = [
+    "Yes we're using this animation again",
+    "Cuz it's cool",
+    "Ok, we're ready.",
+  ];
+  function Loading() {
+    const defaultOptions = {
+      loop: 1,
+      autoplay: true,
+      animationData: loadingAnimation,
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    };
+    return (
+      <div className="onboard-loading-container row-container">
+        <Typography
+          className="onboard-loading-title"
+          variant="h4"
+          color="textPrimary"
+        >
+          Setting Up Your New Account
+        </Typography>
+        <Lottie
+          className="onboard-loading-lottie"
+          width={100}
+          height={100}
+          options={defaultOptions}
+        />
+        <Typist className="onboard-loading-subtitle" avgTypingDelay={50}>
+          {" "}
+          <span>{loadingText[0]}</span>
+          <Typist.Backspace count={loadingText[0].length} delay={200} />
+          <span>{loadingText[1]}</span>
+          <Typist.Backspace count={loadingText[1].length} delay={200} />
+          <span>{loadingText[2]}</span>
+        </Typist>
+      </div>
+
+    );
+  }
 
   return (
-    <div className="join-form row-container">
+    <div> {googleLoading||loading ? <Loading/> : <div className="join-form row-container">
       <NameInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -243,7 +290,7 @@ function JoinForm(props) {
       }}>
         Sign In
       </Button>
-    </div>
+    </div>}</div>
   );
 }
 
