@@ -230,13 +230,6 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
   const location = useLocation();
   const history = useHistory();
-  setTimeout(checkUser, 1500);
-  const checkUser = () => {
-    if(!(user.user)) {
-      history.push({pathname: "/join"});
-    }
-    setAccountLoading(false);
-  }
   
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);

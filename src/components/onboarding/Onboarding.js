@@ -96,6 +96,7 @@ function Onboarding(props) {
   const [panelActive, setPanelActive] = useState(false);
   const [fields, setFields] = useState({});
   const [formValid, setFormValid] = useState({});
+  const [loadingScreen, setLoadingScreen] = useState(false);
   const history = useHistory();
 
   setTimeout(() => setPanelActive(true), 4000);
@@ -397,13 +398,17 @@ function Onboarding(props) {
     );
   }
 
+  const loadScreen = () => {
+    setLoadingScreen(true);
+  }
+  setTimeout(() => loadScreen(), 5000);
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
         {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
         <div className="onboarding-c1-right row-container">
-          {/* <Loading /> */}
-          <ProgressBar
+          { loadingScreen ? 
+          <div><ProgressBar
             value={step * (100 / forms.length)}
             className="onboarding-c1-right-progress-bar"
           />
@@ -434,6 +439,7 @@ function Onboarding(props) {
               </div>
             </div>
           </div>
+          </div> : <Loading />}
         </div>
       </div>
     </ThemeProvider>

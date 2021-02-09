@@ -1,7 +1,7 @@
 import "./landing-page.css";
 import "../../styles.css";
 import animationData from "../../lotties/landing-page-animation.json";
-import { ThemeProvider, Typography } from "@material-ui/core/";
+import { ThemeProvider, Typography, Button } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme } from "../../utils/constants.js";
 
@@ -103,6 +103,14 @@ function LandingPage(props) {
             Get up to a <span className="word-highlight">$5,000</span> tax
             refund in <span className="word-highlight">10 minutes</span>.
           </Typography>
+          <Button
+              className="join-button"
+              variant="contained"
+              color="secondary"
+              onClick = {() => {history.push({pathname: "/join"})}}
+            >
+              Sign In
+          </Button>
           <EmbeddedEmailInput
             className="landing-input"
             emailValue={email}
