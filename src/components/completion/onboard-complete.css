@@ -41,8 +41,8 @@ button.onboard-complete-apply-button {
   margin: auto;
   background-image: url("./../../images/bg/bg-pattern-double.svg");
   background-size: cover;
-}
-.onboard-complete-c0-top {
+  background-position: top;
+  display: flex;
 }
 .onboard-complete-c0-bottom {
   margin: auto;
