@@ -163,9 +163,10 @@ function SignInForm(props) {
         onClick={() => {
           try {
             setGoogleLoading(true);
-            signInWithGoogle();
-            navTo();
-            setGoogleLoading(false);
+            signInWithGoogle("", "").then(() => {
+              navTo();
+              setGoogleLoading(false);
+            });
           } catch (error) {
             console.error("Error signing in with Google", error);
           }
