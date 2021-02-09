@@ -5,11 +5,13 @@ import {
   CardContent,
   TextField,
   Button,
+  CircularProgress
 } from "@material-ui/core";
 import { primaryTheme } from "./../../utils/constants";
 import {AuthContext} from "../../providers/AuthProvider";
 import {useContext, useEffect, useState} from "react";
 import {auth, getUserDoc} from "../../firebase";
+import { v4 as uuidv4 } from 'uuid';
 
 import "./../../styles.css";
 import "./account-page.css";
@@ -224,10 +226,20 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
   const location = useLocation();
   const history = useHistory();
+  setTimeout(checkUser, 1500);
+  const checkUser = () => {
+    if(!(user.user)) {
+      history.push({pathname: "/join"});
+    }
+    setAccountLoading(false);
+  }
+  
+  const [loading, setLoading] = useState(false);
+  const [accountLoading, setAccountLoading] = useState(true);
   const [userData, setUserData] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? {"firstName": user.user.displayName} : {});
   const [dataLoaded, setDataLoaded] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? true : false);
-  const [referToId, setReferToId] = useState(location.state == null ? "" : location.state["referToId"]);
-  const [referById, setReferById] = useState(location.state == null ? "" : location.state["referById"]);
+  const [referToId, setReferToId] = useState((user.user && user.user.referToId != null && user.user.referToId != "") ? user.user.referToId : uuidv4());
+  const [referById, setReferById] = useState((user.user && user.user.referById != null && user.user.referById != "") ? user.user.referById : "");
   setTimeout(() => {
     if((user.user && user.user.displayName != null && user.user.displayName != "")){
       setUserData({firstName: user.user.displayName});
@@ -239,7 +251,6 @@ function AccountPage(props) {
       setTimeout(() => {
         getUserDoc(user).then((result) => {
           if(result==null) {
-            console.log("Null")
             setDataLoaded(false);
             return;
           }
@@ -265,6 +276,14 @@ function AccountPage(props) {
         </div>
         <div className="account-page-c1-right">
           <div className="account-page-c1-right-content row-container">
+            <Button
+              className="join-button"
+              variant="contained"
+              color="secondary"
+              onClick = {() => {setLoading(true); auth.signOut().then(() => {history.push({pathname: "/join"}); setLoading(false);})}}
+            >
+              {loading ? <CircularProgress /> : "Sign Out"}
+            </Button>
             <ReferralCard referToId={referToId}/>
             <ReviewCard />
             <UploadCard />

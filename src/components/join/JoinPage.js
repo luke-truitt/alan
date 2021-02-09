@@ -8,7 +8,8 @@ import {
 import { primaryTheme } from "../../utils/constants.js";
 import "./join-form.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext} from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
@@ -16,6 +17,7 @@ import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import { v4 as uuidv4 } from 'uuid';
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -80,8 +82,24 @@ function JoinTimeline() {
 }
 
 function JoinForm(props) {
+  const user = useContext(AuthContext);
+  
   const history = useHistory();
-  let location = useLocation();
+  const location = useLocation();
+  let referByIdDirect = "";
+  const searchParams =
+    location.search.split("?").length == 1
+      ? []
+      : location.search.split("?")[1].split("&");
+  let i;
+  for (i = 0; i < searchParams.length; i++) {
+    const paramName = searchParams[i].split("=")[0];
+    console.log(paramName);
+    if (paramName == "referId") {
+      referByIdDirect = searchParams[i].split("=")[1];
+    }
+  }
+  
   const [email, setEmail] = useState(location.state == null ? "" : location.state["email"]);
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -89,7 +107,7 @@ function JoinForm(props) {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(null);
   const [referToId, setReferToId] = useState(location.state == null ? "" : location.state["referToId"]);
-  const [referById, setReferById] = useState(location.state == null ? "" : location.state["referById"]);
+  const [referById, setReferById] = useState(referByIdDirect != "" ? referByIdDirect : location.state == null ? "" : location.state["referById"]);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -101,17 +119,22 @@ function JoinForm(props) {
   const navTo = () => {
     history.push({
       pathname: "/account",
-      state: { email: email, referToId: referToId, referById: referById },
     });
   };
+  
   const checkValid = (d) => {
     // TODO
   };
   const createUserWithEmailAndPasswordHandler = async (event) => {
     setLoading(true);
+
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      generateUserDocument(user, { firstName, lastName, phone });
+      if(referToId=="") {
+        referToId = uuidv4();
+      }
+      console.log(referToId);
+      generateUserDocument(user, { firstName, lastName, phone, referToId, referById });
       navTo();
       setLoading(false);
       setPassword("");
@@ -194,9 +217,10 @@ function JoinForm(props) {
         onClick={() => {
           try {
             setGoogleLoading(true);
-            signInWithGoogle();
-            navTo();
-            setGoogleLoading(false);
+            signInWithGoogle(referToId, referById).then(() => {
+              navTo();
+              setGoogleLoading(false);
+            });
           } catch (error) {
             console.error("Error signing in with Google", error);
           }
@@ -210,7 +234,13 @@ function JoinForm(props) {
         </Typography>
 
       <div className="join-or-horizontal-line" />
-      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/signin"})}>
+      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => {
+        if(user.user) {
+          history.push({pathname: "/account"});
+        } else {
+          history.push({pathname: "/signin"});
+        }
+      }}>
         Sign In
       </Button>
     </div>
