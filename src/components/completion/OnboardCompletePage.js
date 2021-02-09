@@ -58,7 +58,7 @@ function OnboardCompletePage(props) {
   }
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="onboard-complete-c0-top">
+      <div className="onboard-complete-c0-top row-container">
         {/* <div className="header" /> */}
         <div className="onboard-complete-help-button-container">
           <div

@@ -29,7 +29,7 @@ import {
   job,
   state,
   refund,
-  covidCredits
+  covidCredits,
 } from "./OnboardingQuestions.js";
 import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
@@ -99,7 +99,7 @@ function Onboarding(props) {
   const [loadingScreen, setLoadingScreen] = useState(false);
   const history = useHistory();
 
-  setTimeout(() => setPanelActive(true),4000);
+  setTimeout(() => setPanelActive(true), 4000);
 
   const redirectHome = () => {
     // history.push({ pathname: "/"});
@@ -309,7 +309,7 @@ function Onboarding(props) {
     if (fields["student"] == "No" || fields["student"] == "") {
       return 0;
     }
-    return Math.max(Math.min(2500, fields["educationExpenses"]) - 1000,0);
+    return Math.max(Math.min(2500, fields["educationExpenses"]) - 1000, 0);
   }
 
   function getRefundableCredits() {
@@ -397,7 +397,7 @@ function Onboarding(props) {
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
       <div className="onboarding-c0 column-container">
-        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel/>}
+        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
         <div className="onboarding-c1-right row-container">
           { loadingScreen ? 
           <div><ProgressBar
