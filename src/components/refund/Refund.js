@@ -12,7 +12,6 @@ import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import { AuthContext } from "../../providers/AuthProvider";
-import whiteArrow from "./../../images/refund-page/arrow-white.svg";
 import { useState, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
