@@ -7,6 +7,7 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
+import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import { primaryTheme } from "./../../utils/constants";
@@ -95,7 +96,7 @@ function AccountTimeline(props) {
       text={data.text}
     />
   ));
-  let valid = props.firstName=="" || props.firstName==null;
+  let valid = props.firstName == "" || props.firstName == null;
 
   return (
     <div className="row-container account-timeline">
@@ -352,11 +353,7 @@ function AccountPage(props) {
       : ""
   );
   setTimeout(() => {
-    if (
-      user.user &&
-      user.user.firstName != null &&
-      user.user.firstName != ""
-    ) {
+    if (user.user && user.user.firstName != null && user.user.firstName != "") {
       setUserData({ firstName: user.user.firstName });
       setDataLoaded(true);
     }
@@ -384,38 +381,38 @@ function AccountPage(props) {
       <div className="account-page-c0 column-container">
         <div className="account-page-c1-left-shadow" />
         <div className="account-page-c1-left row-container">
-          <div className="account-page-c1-left-content">
+          <div className="account-page-c1-left-content row=container">
             <AccountTimeline
               activeStep={props.activeStep}
               firstName={
                 Object.keys(userData).length > 0 ? userData["firstName"] : ""
               }
             />
+            <Button
+              className="sign-out-button"
+              color="primary"
+              onClick={() => {
+                setLoading(true);
+                auth
+                  .signOut()
+                  .then(() => {
+                    history.push({ pathname: "/join" });
+                    setLoading(false);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+            >
+              Sign Out
+              <ExitToAppRoundedIcon />
+            </Button>
           </div>
         </div>
         <div className="account-page-c1-right">
           <div className="account-page-c1-right-content row-container">
-            <Button
-              className="join-button"
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                setLoading(true);
-                auth.signOut().then(() => {
-                  history.push({ pathname: "/join" });
-                  setLoading(false);
-                }).catch((error) => {
-                  console.log(error);
-                });
-              }}
-            >
-              {loading ? <CircularProgress /> : "Sign Out"}
-            </Button>
-            <Typography
-              color="secondary"
-              className="account-title"
-            >
-            Welcome {props.firstName}
+            <Typography color="secondary" className="account-title">
+              Welcome {props.firstName}
             </Typography>
             <ReferralCard
               referToId={referToId}
