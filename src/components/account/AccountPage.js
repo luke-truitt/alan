@@ -388,6 +388,7 @@ function AccountPage(props) {
               className="sign-out-button"
               color="primary"
               onClick={() => {
+                console.log("No dice");
                 setLoading(true);
                 auth
                   .signOut()

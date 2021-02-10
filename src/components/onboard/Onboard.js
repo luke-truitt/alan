@@ -8,6 +8,11 @@ import {
   Slide,
   Button,
   ThemeProvider,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@material-ui/core";
 import "./onboard.css";
 import Header from "./../header/Header";
@@ -45,7 +50,7 @@ import { Form } from "../inputs/Inputs.js";
 import Lottie from "react-lottie";
 import loadingAnimation from "../../lotties/coin-loading.json";
 import { useLocation, useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import OnboardingTimeline from "./OnboardTimeline";
 const trackingId = "UA-189058741-1";
@@ -106,6 +111,8 @@ function Onboard(props) {
   const [fields, setFields] = useState({});
   const [formValid, setFormValid] = useState({});
   const [loadingScreen, setLoadingScreen] = useState(true);
+  const [open, setOpen] = useState(false);
+
   const history = useHistory();
   const keyDown = (e, val) => {
     var code = e.keyCode || e.which;
@@ -150,9 +157,7 @@ function Onboard(props) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
   };
-  const signUp = () => {
-    alert("Finish the calculator so that we can get info on your refund.")
-  }
+  
   const navToRefund = () => {
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
@@ -205,7 +210,14 @@ function Onboard(props) {
   const nextDisabled = () => {
     return !formValid[step];
   };
+  const handleClickOpen = () => {
+    console.log("Hey")
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   // Click Back Logic
   const backClick = () => {
     if (step <= 1) {
@@ -358,6 +370,38 @@ function Onboard(props) {
     "Refund found!",
   ];
 
+  const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  function AlertDialog() {
+    
+  
+    return (
+      <div>
+        <Dialog
+          open={open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">Finish the Calculator</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+            We need your basic tax info so we can make sure we can help you. 
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="secondary">
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+
   function Loading() {
     const defaultOptions = {
       loop: 1,
@@ -402,7 +446,7 @@ function Onboard(props) {
           tabIndex={-1}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
-          <Header signUp={signUp}/>
+          <Header signUp={handleClickOpen}/>
 
           {panelActive ? (
             <OnboardingTimeline activeStep={step} />
@@ -451,6 +495,7 @@ function Onboard(props) {
               <Loading />
             )}
           </div>
+        <AlertDialog/>
         </div>
       </Slide>
     </ThemeProvider>
