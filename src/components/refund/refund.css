@@ -2,13 +2,13 @@ h1.refund-amount {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 7rem;
+  font-size: 8vw;
 }
 h6.onboard-complete-title {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 1.5rem;
+  font-size: 2vw;
 }
 
 button.onboard-complete-apply-button {
@@ -106,7 +106,6 @@ a.refund-breakdown-row-label {
 }
 .refund-card-button-text {
   width: 80%;
-
   vertical-align: middle;
 }
 h4.refund-card-button-text {
@@ -133,9 +132,10 @@ div.refund-card-text {
 }
 .onboard-complete-card {
   display: flex;
-  width: 300px;
+  max-width: 300px;
   height: 200px;
   margin-bottom: 2rem;
+  margin-right: .5rem;
   border: 1px solid #c3c3c3;
 }
 
@@ -173,6 +173,9 @@ h6.onboard-complete-fee-text {
   width: 20vw;
   height: 20vw;
   align-items: center;
+}
+.onboard-complete-card-mobile {
+  display: none;
 }
 
 h6.onboard-complete-help-text {
@@ -218,6 +221,30 @@ img.onboard-complete-help-arrow {
     margin-top: 0px;
     margin-bottom: 0px;
     box-shadow: none;
+    padding-bottom: 0px;
+  }
+  .onboard-complete-card-1-content {
+    width: auto;
+    height: auto;
+    font-size: 3.5vw;
+  }
+  .onboard-complete-card-2-content {
+    width: auto;
+    background-size:cover;
+    height: 200px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .onboard-complete-card-3-content {
+    background-image: none;
+    max-width: 300px;
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  h4.refund-card-button-text {
+    font-size: 1.5em;
   }
   .onboard-complete-help-button-container {
     display: none;
@@ -239,7 +266,33 @@ img.onboard-complete-help-arrow {
     margin-top: 3rem;
     height: auto;
   }
+  h6.onboard-complete-title {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 5vw;
+  }
   .refund-breakdown-c0 {
+    width: auto;
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+  .onboard-complete-card-mobile {
+    display: block;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    background-color: #f6f6f6 !important;
+  }
+  .onboard-complete-c1-breakdown {
     width: 100%;
+  }
+  
+  .onboard-complete-card-container {
+    width: 0px;
+    display: none;
+  }
+  .onboard-complete-footer {
+    display: none;
   }
 }

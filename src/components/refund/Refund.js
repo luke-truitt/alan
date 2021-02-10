@@ -87,7 +87,23 @@ function Refund(props) {
         </div> */}
         <div className="onboard-complete-c1 column-container">
           <div className="onboard-complete-c1-content column-container">
+          
             <div className="onboard-complete-c1-breakdown">
+            <Card className="onboard-complete-card-mobile">
+                <CardContent
+                  onClick={navTo}
+                  className="onboard-complete-card-1-content"
+                  style={{cursor: "pointer"}}
+                >
+                  <Typography
+                    className="refund-card-button-text"
+                    variant="h4"
+                    color="primary"
+                  >
+                    Help me file my taxes  ->
+                  </Typography>
+                </CardContent>
+              </Card>
               <Typography className="onboard-complete-title" variant="h6">
                 Your estimated refund amount
               </Typography>
@@ -99,12 +115,55 @@ function Refund(props) {
                 ${numberWithCommas(props.netRefund)}
               </Typography>
               <RefundBreakdown breakdown={props}></RefundBreakdown>
+              <Card className="onboard-complete-card-mobile">
+                <CardContent className="onboard-complete-card-2-content">
+                  <div className="refund-card-text">
+                    {" "}
+                    <Typography
+                      color="textSecondary"
+                      variant="h5"
+                      className="refund-card-title"
+                    >
+                      $XXX
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much you lose fucker.
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="onboard-complete-card-mobile">
+                <CardContent className="onboard-complete-card-3-content">
+                  {" "}
+                  <div className="refund-card-text row-container">
+                    <Typography
+                      color="textSecondary"
+                      variant="h5"
+                      className="refund-card-title"
+                    >
+                      $XXX
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much you lose fucker.
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
             <div className="row-container onboard-complete-card-container">
               <Card className="onboard-complete-card">
                 <CardContent
                   onClick={navTo}
                   className="onboard-complete-card-1-content"
+                  style={{cursor: "pointer"}}
                 >
                   <Typography
                     className="refund-card-button-text"
