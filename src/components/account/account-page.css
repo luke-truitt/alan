@@ -137,7 +137,7 @@ h4.account-timeline-title {
 button.sign-out-button {
   align-self: flex-end;
   display: flex;
-  z-index: 20;
+  z-index: 10;
 }
 p.account-timeline-step-text {
   align-self: baseline;

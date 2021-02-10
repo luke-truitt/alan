@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   CircularProgress,
+  Avatar
 } from "@material-ui/core";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
@@ -105,7 +106,7 @@ function AccountTimeline(props) {
         color="primary"
         className="account-timeline-title"
       >
-        {valid ? "" : `Welcome ${props.firstName}! Nice work.`}
+        {valid ? "" : `Welcome ${props.firstName}!`}
       </Typography>
       {timelineSteps}
     </div>
@@ -205,11 +206,6 @@ function ReferralCard(props) {
           </Typography>
           <div className="referral-card-btn-container column-container">
             <div className="referral-card-email-container column-container">
-              {/* <TextField
-                className="referral-card-email-field"
-                label="Enter email addresses"
-                variant="outlined"
-              ></TextField> */}
               <EmailChip
                 onAdd={(email) => handleAdd(email)}
                 onDelete={(email) => handleDelete(email)}
@@ -392,6 +388,7 @@ function AccountPage(props) {
               className="sign-out-button"
               color="primary"
               onClick={() => {
+                console.log("No dice");
                 setLoading(true);
                 auth
                   .signOut()
