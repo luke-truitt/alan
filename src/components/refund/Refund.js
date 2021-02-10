@@ -16,6 +16,9 @@ import { useState, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 function numberWithCommas(x) {
+  if(x==null) {
+    return "";
+  }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
@@ -25,7 +28,6 @@ function Refund(props) {
   let location = useLocation();
   const history = useHistory();
   const user = useContext(AuthContext);
-
   let email = "";
   let referToId = "";
   let referById = "";
@@ -38,6 +40,7 @@ function Refund(props) {
     referToId = "";
     referById = "";
   }
+
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
@@ -52,6 +55,10 @@ function Refund(props) {
     redirectHome();
   }
 
+  if(location.state==null || user.user==null) {
+    redirectHome();
+  } 
+  
   const navTo = () => {
     if (user) {
       history.push({
@@ -69,6 +76,7 @@ function Refund(props) {
       });
     }
   };
+  console.log(location.state);
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -100,7 +108,7 @@ function Refund(props) {
                     variant="h4"
                     color="primary"
                   >
-                    Help me file my taxes  ->
+                    Help me file my taxes  
                   </Typography>
                 </CardContent>
               </Card>
@@ -112,7 +120,7 @@ function Refund(props) {
                 variant="h1"
                 color="secondary"
               >
-                ${numberWithCommas(props.netRefund)}
+                {/* ${numberWithCommas(props.netRefund)} */}
               </Typography>
               <RefundBreakdown breakdown={props}></RefundBreakdown>
               <Card className="onboard-complete-card-mobile">

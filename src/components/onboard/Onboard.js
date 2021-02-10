@@ -182,7 +182,7 @@ function Onboard(props) {
 
     sendData();
     setLoadingScreen(true);
-    if(user) {
+    if(user.user) {
       console.log(user);
       console.log(user.user);
       updateUser(user.user.uid, {'refundBreakdown': data});

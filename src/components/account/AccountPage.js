@@ -285,7 +285,7 @@ function ReviewCard(props) {
         <img src={reviewIcon} className="account-page-card-icon" />
         <Typography variant="body2" className="review-card-text">
           Our team is reviewing your initial information. We’ll be sure to text
-          and email you once they’re done! Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>.
+          and email you once they’re done! ${props.userData.refundBreakdown ? `Your refund is going to be upwards of \$${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you want to retake the calculator or haven't taken it yet, you can do so ${<a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>}.` : `Retake the calculator or haven't taken it yet, you can do so ${<a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>}.`}
         </Typography>
       </CardContent>
     </Card>
@@ -348,9 +348,11 @@ function InvestCard(props) {
 }
 function AccountPage(props) {
   const user = useContext(AuthContext);
-  
   const location = useLocation();
   const history = useHistory();
+  if(!user.user) {
+    history.push("/");
+  }
 
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);

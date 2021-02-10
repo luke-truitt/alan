@@ -10,7 +10,8 @@ function Header(props) {
   const history = useHistory();
 
   const user = useContext(AuthContext);
-  const onSignIn = () => { if(user){history.push({ pathname: "/account" })}else{history.push({ pathname: "/signin" })} };
+  console.log(user);
+  const onSignIn = () => { if(user.user){history.push({ pathname: "/account" })}else{history.push({ pathname: "/signin" })} };
   const onSignUp = () => {
     props.signUp();
   }
