@@ -164,7 +164,7 @@ function SignInForm(props) {
           try {
             setGoogleLoading(true);
             signInWithGoogle("", "").then(() => {
-              navTo();
+              setTimeout(navTo, 1000);
               setGoogleLoading(false);
             });
           } catch (error) {
@@ -180,10 +180,10 @@ function SignInForm(props) {
         </Typography>
       <div className="join-or-horizontal-line" />
       <div style={{display: "row"}}>
-      <Button className="apple-sign-button" variant="contained" color="primary" style={{width: "50%"}} onClick={() => history.push({pathname: "/resetpassword"})}>
+      <Button className="reset-button" variant="contained" color="primary" style={{width: "45%", float: "left", marginTop: "20px"}} onClick={() => history.push({pathname: "/resetpassword"})}>
         Reset Password
       </Button>
-      <Button className="apple-sign-button" style={{width: "50%"}} variant="contained" color="primary" onClick={() => history.push({pathname: "/join"})}>
+      <Button className="set-up-button" style={{width: "45%", float: "right", marginTop: "20px"}} variant="contained" color="primary" onClick={() => history.push({pathname: "/join"})}>
         Set Up Account
       </Button>
       </div>

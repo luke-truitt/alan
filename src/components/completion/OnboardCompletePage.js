@@ -100,7 +100,7 @@ function OnboardCompletePage(props) {
           </div>
         </div>
         <div className="onboard-complete-footer">
-          <Button variant="contained" className="onboard-complete-apply-button">
+          <Button variant="contained" className="onboard-complete-apply-button" onClick={navTo}>
             Ready to file? Apply now
           </Button>
         </div>

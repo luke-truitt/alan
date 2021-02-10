@@ -8,13 +8,20 @@ import {
   Typography,
   Button,
   Fade,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme, fadeDefault } from "../../utils/constants.js";
 
+import { findUserByEmail } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import Header from "./Header";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, forwardRef } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import ben from "./../../images/home/ben.png";
 const trackingId = "UA-189058741-1";
@@ -32,6 +39,27 @@ function Home() {
   const location = useLocation();
   const axios = require("axios");
   const emailInput = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
+    const handleClickOpen = (old_user) => {
+      setUser(old_user);
+      setOpen(true);
+    };
+  
+    const handleClose = (choice) => {
+      if(choice=="no") {
+        history.push({
+          pathname: "/onboard",
+          state: { email: user.email, referToId: user.referToId, referById: user.referById },
+        });
+      } else {
+        history.push({
+          pathname: "/signin"
+        });
+      }
+      setOpen(false);
+    };
+
   let referById = "";
 
   const keyDown = (e, val) => {
@@ -74,8 +102,47 @@ function Home() {
     }
   }
 
-  function addEmail(email) {
-    axios
+  const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  
+  function AlertDialog(props) {
+    
+  
+    return (
+      <div>
+        <Dialog
+          open={props.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={props.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+            We have your email associated with an account already, would you like to sign in?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => props.handleClose("no")} color="secondary">
+              No Thanks
+            </Button>
+            <Button onClick={() => props.handleClose("yes")} color="secondary">
+              Sign In
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+  const addEmail = async (email) => {
+    const old_user = await findUserByEmail(email)
+
+      console.log(old_user);
+      if(old_user==null) {
+        axios
       .post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
         email: email,
       })
@@ -91,6 +158,9 @@ function Home() {
       .catch(function (error) {
         console.log(error);
       });
+      } else {
+        handleClickOpen(old_user);
+      }
   }
 
   return (
@@ -138,6 +208,7 @@ function Home() {
             </div>
 
             <img src={ben} className="home-ben"></img>
+            <AlertDialog open={open} handleClose={handleClose}/>
           </div>
         </Fade>
       </div>

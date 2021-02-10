@@ -26,7 +26,7 @@ export const signInWithGoogle = (referToId, referById) => {
     console.log(referToId);
     // The signed-in user info.
     var user = result.user;
-    const firstName = user.displayName;
+    const firstName = user.displayName.split(" ")[0];
     const lastName = "";
     const phone = user.phoneNumber;
     generateUserDocument(user, { firstName, lastName, phone, referToId, referById })
@@ -95,3 +95,23 @@ export const getUserDocument = async uid => {
     console.error("Error fetching user", error);
   }
 };
+
+export const findUserByEmail = async (email) => {
+  if(!email) return null;
+  try {
+    const snapshot = await firestore.collection("users").where('email','==',email).get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }  
+    let user = {}
+    
+    snapshot.forEach(doc => {
+      user = doc.data();
+    });
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching user", error);
+  }
+}

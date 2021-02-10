@@ -200,6 +200,14 @@ function JoinForm(props) {
     "Cuz it's cool",
     "Ok, we're ready.",
   ];
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
+
+    if (code === 13) {
+      //13 is the enter keycode
+      navTo();
+    }
+  };
   function Loading() {
     const defaultOptions = {
       loop: 1,
@@ -238,18 +246,21 @@ function JoinForm(props) {
   }
 
   return (
-    <div> {googleLoading||loading ? <Loading/> : <div className="join-form row-container">
+    <div> {(googleLoading||loading) ? <Loading/> : <div className="join-form row-container" tabIndex={-1}
+    onKeyPress={(e, val) => keyDown(e, val)}>
       {error != "" && <Typography style={{color: "red", marginBottom: "20px"}} variant="caption" className="join-or">
           {error}
         </Typography>}
       <NameInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
+        onKeyPress={(e, val) => keyDown(e, val)}
         fields={{ firstName: firstName, lastName: lastName }}
       />
       <PhoneNumberInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
+        onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Phone Number"
         fields={{ phone: phone }}
       />
@@ -261,6 +272,7 @@ function JoinForm(props) {
         onChange={(e, val) => onChange(e, val)}
         stateName="email"
         value={email}
+        onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Email"
         type="email"
       />
@@ -269,6 +281,7 @@ function JoinForm(props) {
         onChange={(e, val) => onChange(e, val)}
         stateName="password"
         value={password}
+        onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Password"
         type="password"
       />
@@ -297,7 +310,7 @@ function JoinForm(props) {
           try {
             setGoogleLoading(true);
             signInWithGoogle(props.referToId, referById).then(() => {
-              setTimeout(navTo, 3000);
+              navTo();
               setGoogleLoading(false);
             });
           } catch (error) {
@@ -327,6 +340,7 @@ function JoinForm(props) {
 }
 
 function JoinPage(props) {
+  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="join-page-c0 column-container">
