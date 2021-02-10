@@ -97,7 +97,6 @@ function Home() {
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
         <Header />
-
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
@@ -129,7 +128,6 @@ function Home() {
                 in under 10 minutes.
               </Typography>
             </div>
-
             <img src={ben} className="home-ben"></img>
           </div>
         </Fade>
