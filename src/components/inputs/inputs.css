@@ -27,8 +27,15 @@ button.selected {
   font-weight: normal;
   color: #6d6d6d;
 }
-.form-item-description {
-  padding-bottom: 1rem;
+h6.form-item-question {
+  line-height: 1.6rem;
+}
+
+span.form-item-description {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 1.2rem;
 }
 .form-item-container {
   padding-bottom: 2rem;
@@ -37,11 +44,6 @@ button.selected {
 .form-title {
   padding-bottom: 2rem;
 }
-
-h6.form-item-question {
-  padding-bottom: 7.5px;
-}
-
 div.form-item-container.column-container {
   display: flex;
   flex-direction: row;
@@ -90,9 +92,11 @@ div.form-container {
   }
   .single-select-button-container > button:first-child {
     margin-right: 0px;
+    margin-left: 0px;
   }
   .single-select-button-container > button:last-child {
     margin-left: 0px;
+    margin-right: 0px;
   }
 }
 

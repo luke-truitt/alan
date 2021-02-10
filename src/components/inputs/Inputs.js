@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+
 import {
   ThemeProvider,
   Typography,
@@ -9,6 +11,8 @@ import {
   TextField,
   InputAdornment,
   OutlinedInput,
+  Slide,
+  NativeSelect,
   CircularProgress,
   InputLabel,
 } from "@material-ui/core";
@@ -200,6 +204,13 @@ export function Dropdown(props) {
   const checkValid = (val) => {
     props.validData({ [props.stateName]: val.length > 0 });
   };
+  const useStyles = makeStyles((theme) => ({
+    menuPaper: {
+      maxHeight: 180,
+      border: "1px solid #c3c3c3",
+    },
+  }));
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -220,6 +231,7 @@ export function Dropdown(props) {
         </Typography>
         <FormControl variant="outlined">
           <Select
+            MenuProps={{ classes: { paper: classes.menuPaper } }}
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={props.fields[props.stateName]}
             onChange={(e) => {
@@ -400,12 +412,11 @@ export function Form(props) {
       onChange={(e, item) => onChange(e, item)}
     />
   ));
-
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-container">
         <Typography variant="h4" color="textPrimary" className="form-title">
-          <span className="word-highlight">{props.title}</span>
+          <span className="purple-highlight">{props.title}</span>
         </Typography>
         <div className="form-inputs">{inputs}</div>
       </div>

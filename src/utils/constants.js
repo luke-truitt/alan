@@ -22,7 +22,7 @@ export const primaryTheme = createMuiTheme({
       secondary: "#86868B",
     },
   },
-  // shadows: ["none"],
+  shadows: ["none"],
   overrides: {
     body2: { color: "#6D6D6D" },
     MuiInputBase: {
@@ -61,5 +61,17 @@ export const primaryTheme = createMuiTheme({
 export const fadeDefault = {
   timeout: {
     enter: 2000,
+  },
+};
+
+export const slideDefault = {
+  timeout: {
+    enter: 1000,
+  },
+};
+
+export const shortFade = {
+  timeout: {
+    enter: 10000,
   },
 };
