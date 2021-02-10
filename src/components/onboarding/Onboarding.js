@@ -4,6 +4,7 @@ import {
   Select,
   FormControl,
   MenuItem,
+  Slide,
   Button,
   ThemeProvider,
 } from "@material-ui/core";
@@ -105,13 +106,15 @@ function Onboarding(props) {
       //13 is the enter keycode
       if (formValid[step]) {
         forwardClick();
-      } 
+      }
     }
   };
-  setTimeout(() => {setPanelActive(true); }, 3000);
+  setTimeout(() => {
+    setPanelActive(true);
+  }, 3000);
 
   const redirectHome = () => {
-    history.push({ pathname: "/"});
+    history.push({ pathname: "/" });
   };
 
   const onDataUpdate = (d) => {
@@ -208,11 +211,11 @@ function Onboarding(props) {
       onDataUpdate({
         email: email,
         referById: referById,
-        referToId: props.referToId
+        referToId: props.referToId,
       });
     }
     if (step >= forms.length) {
-      setLoadingScreen(false); 
+      setLoadingScreen(false);
       setTimeout(navToRefund, 5000);
       setStep(forms.length);
     } else {
@@ -405,46 +408,58 @@ function Onboarding(props) {
       </div>
     );
   }
-  
+
   return (
-    <ThemeProvider theme={primaryTheme} className="onboarding" >
-      <div className="onboarding-c0 column-container" tabIndex={-1} onKeyPress={(e, val) => keyDown(e, val)}>
+    <ThemeProvider theme={primaryTheme} className="onboarding">
+      <div
+        className="onboarding-c0 column-container"
+        tabIndex={-1}
+        onKeyPress={(e, val) => keyDown(e, val)}
+      >
         {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
-        <div className="onboarding-c1-right row-container" >
-        {loadingScreen ? 
-          <div><ProgressBar
-            value={step * (100 / forms.length)}
-            className="onboarding-c1-right-progress-bar"
-          />
-          <div container className="onboarding-c1-right-div" >
-            <Form
-              title={forms[step - 1].title}
-              formItems={forms[step - 1].items}
-              fields={fields}
-              data={{}}
-              validForm={(d) => checkValid(d)}
-              onUpdate={onDataUpdate}
-              onKeyPress={(e, val) => keyDown(e, val)}
-            />
-            <div className="onboarding-button-div column-container">
-              <div className="onboarding-button">
-                <Button variant="contained" color="primary" onClick={backClick}>
-                  {props.referToId}
-                </Button>
-              </div>
-              <div className="onboarding-button">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  disabled={nextDisabled()}
-                  onClick={forwardClick}
-                >
-                  Next
-                </Button>
+        <div className="onboarding-c1-right row-container">
+          {loadingScreen ? (
+            <div>
+              <ProgressBar
+                value={step * (100 / forms.length)}
+                className="onboarding-c1-right-progress-bar"
+              />
+              <div container className="onboarding-c1-right-div">
+                <Form
+                  title={forms[step - 1].title}
+                  formItems={forms[step - 1].items}
+                  fields={fields}
+                  data={{}}
+                  validForm={(d) => checkValid(d)}
+                  onUpdate={onDataUpdate}
+                  onKeyPress={(e, val) => keyDown(e, val)}
+                />
+                <div className="onboarding-button-div column-container">
+                  <div className="onboarding-button">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={backClick}
+                    >
+                      {props.referToId}
+                    </Button>
+                  </div>
+                  <div className="onboarding-button">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      disabled={nextDisabled()}
+                      onClick={forwardClick}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          </div> : <Loading />}
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
     </ThemeProvider>

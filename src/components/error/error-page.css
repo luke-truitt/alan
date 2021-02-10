@@ -27,7 +27,7 @@
     width: 200px;
     line-height: 1rem;
     margin-left: auto;
-    height: 45px;
+    height: 100%;
   }
   #inner-container-left-mobile {
     padding-top: 4rem;
@@ -73,7 +73,6 @@
 
 .embedded-field-button {
   width: 200px;
-  height: 55px;
 }
 
 .outer-container-error {

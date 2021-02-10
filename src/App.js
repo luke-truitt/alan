@@ -6,7 +6,7 @@ import {
   withRouter,
 } from "react-router-dom";
 
-import LandingPage from "./components/landing-page/LandingPage";
+import Home from "./components/home/Home";
 import Onboarding from "./components/onboarding/Onboarding.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
@@ -23,7 +23,8 @@ import OnboardCompletePage from "./components/completion/OnboardCompletePage.js"
 import AccountPage from "./components/account/AccountPage.js";
 
 import firebase from "firebase";
-
+import Header from "./components/home/Header";
+import { Fade } from "@material-ui/core";
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";
 initGA(trackingId);
@@ -32,36 +33,60 @@ function App() {
   const [referToId, setReferToId] = useState("");
 
   return (
-    <div>
+    <div className="app-c0">
       <AuthProvider>
         <Router>
           <Switch>
             <Route exact path="/">
-              <LandingPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <Home />
             </Route>
             <Route path="/join">
-              <JoinPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <JoinPage
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/onboard">
-              <Onboarding referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <Onboarding
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/refund">
-              <OnboardCompletePage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <OnboardCompletePage
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/account">
-              <AccountPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <AccountPage
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/signup">
-              <SignUp referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <SignUp
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/signin">
-              <SignIn referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <SignIn
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/resetpassword">
-              <ResetPassowrd referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <ResetPassowrd
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/userprofile">
-              <ProfilePage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
+              <ProfilePage
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route>
               <ErrorPage />
