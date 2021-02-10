@@ -62,6 +62,7 @@ export const primaryTheme = createMuiTheme({
     caption: {
       fontSize: "0.8rem",
       letterSpacing: 0.1,
+      lineHeight: "1.0rem",
     },
     button: {
       fontWeight: 500,
