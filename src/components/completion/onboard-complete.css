@@ -77,6 +77,7 @@ p.refund-breakdown-row-amount {
 a.refund-breakdown-row-label {
   padding-top: 0.3rem;
   text-decoration: underline;
+  z-index: 999;
 }
 
 .refund-breakdown-row-c1 {
@@ -151,6 +152,7 @@ h6.onboard-complete-help-text {
   /* background: linear-gradient(to right, #744fc2, 60%, #002e72); */
   color: white;
   font-size: 1.5rem;
+  cursor: pointer;
   padding-bottom: 10px;
   /* -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
@@ -159,6 +161,7 @@ h6.onboard-complete-help-text {
 
 img.onboard-complete-help-arrow {
   width: 75px;
+  cursor: pointer;
 }
 
 .refund-breakdown-highlight-red > *:first-child > *:first-child > *:last-child {

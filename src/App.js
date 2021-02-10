@@ -16,7 +16,7 @@ import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
 import ProfilePage from "./components/authentication/ProfilePage";
 import { AuthProvider } from "./providers/AuthProvider";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./global.css";
 import JoinPage from "./components/join/JoinPage";
 import OnboardCompletePage from "./components/completion/OnboardCompletePage.js";
@@ -29,37 +29,39 @@ const trackingId = "UA-189058741-1";
 initGA(trackingId);
 
 function App() {
+  const [referToId, setReferToId] = useState("");
+
   return (
     <div>
       <AuthProvider>
         <Router>
           <Switch>
             <Route exact path="/">
-              <LandingPage />
+              <LandingPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/join">
-              <JoinPage />
+              <JoinPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/onboard">
-              <Onboarding />
+              <Onboarding referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/refund">
-              <OnboardCompletePage />
+              <OnboardCompletePage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/account">
-              <AccountPage></AccountPage>
+              <AccountPage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/signup">
-              <SignUp />
+              <SignUp referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/signin">
-              <SignIn />
+              <SignIn referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/resetpassword">
-              <ResetPassowrd />
+              <ResetPassowrd referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route path="/userprofile">
-              <ProfilePage />
+              <ProfilePage referToId={referToId} setReferTo={(rid) => setReferToId(rid)}/>
             </Route>
             <Route>
               <ErrorPage />

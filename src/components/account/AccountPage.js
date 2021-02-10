@@ -37,6 +37,8 @@ import * as emailjs from 'emailjs-com';
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66"
 const TEMPLATE_ID = "template_kwxoxb7"
+const SERVICE_ID = "service_784yhvi"
+
 const timelineNumbers = {
   1: accountTimeline1,
   2: accountTimeline2,
@@ -143,16 +145,16 @@ function ReferralCard(props) {
         from_name: props.username,
         send_to: email_to
       }
-      emailjs.send(
-        'service_784yhvi',
-        TEMPLATE_ID,
-        templateParams,
-        USER_ID
-   ).then(function(response) {
-    console.log(email_to, 'SUCCESS!', response.status, response.text);
-  }, function(error) {
-    console.log('FAILED...', error);
-  });
+  //     emailjs.send(
+  //       SERVICE_ID,
+  //       TEMPLATE_ID,
+  //       templateParams,
+  //       USER_ID
+  //  ).then(function(response) {
+  //   console.log(email_to, 'SUCCESS!', response.status, response.text);
+  // }, function(error) {
+  //   console.log('FAILED...', error);
+  // });
     }
     alert("Emails sent successfully!")
     setEmails([]);
@@ -175,6 +177,7 @@ function ReferralCard(props) {
         });
     }
   };
+
   return (
     <Card className="account-page-card referral-card">
       <CardContent className="referral-card-content column-container">

@@ -41,6 +41,10 @@ function LandingPage(props) {
     Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
     setLoading(true);
     addEmail(email);
+    history.push({
+      pathname: "/onboard",
+      state: { email: email, referById: referById },
+    });
   };
   const invalidClick = () => {
     setInvalid(true);
@@ -69,17 +73,14 @@ function LandingPage(props) {
         email: email,
       })
       .then(function (response) {
-        const referToId = response.data.referId;
-        history.push({
-          pathname: "/onboard",
-          state: { email: email, referToId: referToId, referById: referById },
-        });
+        props.setReferTo(response.data.referId);
         console.log(response);
         setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
       });
+      
   }
   const lottieOptions = {
     loop: true,

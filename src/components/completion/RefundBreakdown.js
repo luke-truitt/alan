@@ -82,6 +82,7 @@ function RefundBreakdownRow(props) {
             variant="body1"
             color="secondary"
             className="refund-breakdown-row-label"
+            style={{zIndex: 999, cursor: "pointer"}}
           >
             {props.label}
           </Typography>

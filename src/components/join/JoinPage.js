@@ -21,7 +21,11 @@ import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { v4 as uuidv4 } from 'uuid';
+import * as emailjs from "emailjs-com";
 
+const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66"
+const TEMPLATE_ID = "template_b3u2bhe"
+const SERVICE_ID = "service_784yhvi"
 const timelineNumbers = {
   1: joinTimeline1,
   2: joinTimeline2,
@@ -109,7 +113,6 @@ function JoinForm(props) {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(null);
-  const [referToId, setReferToId] = useState(location.state == null ? "" : location.state["referToId"]);
   const [referById, setReferById] = useState(referByIdDirect != "" ? referByIdDirect : location.state == null ? "" : location.state["referById"]);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -117,9 +120,28 @@ function JoinForm(props) {
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
+
+  const sendWelcomeEmail = () => {
+    const templateParams = {
+      to_name: firstName,
+      to_email: email
+    }
+//     emailjs.send(
+//       SERVICE_ID,
+//       TEMPLATE_ID,
+//       templateParams,
+//       USER_ID
+//  ).then(function(response) {
+//   console.log(email, 'SUCCESS!', response.status, response.text);
+// }, function(error) {
+//   console.log('FAILED...', error);
+// });
+  }
   
 
   const navTo = () => {
+    setLoading(false);
+    sendWelcomeEmail();
     history.push({
       pathname: "/account",
     });
@@ -129,27 +151,34 @@ function JoinForm(props) {
     // TODO
   };
   const createUserWithEmailAndPasswordHandler = async (event) => {
+    console.log("loading");
     setLoading(true);
 
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
-
-      if(referToId=="") {
-        setReferToId(uuidv4());
+      if(props.referToId==null||props.referToId=="") {
+        console.log("IDK");
+        props.setReferTo(uuidv4());
+        setTimeout(() => {}, 200);
       }
+      const referToId = props.referToId;
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      
       generateUserDocument(user, { firstName, lastName, phone, referToId, referById }).then((res) => {
         console.log(res);
-        navTo();
-        setLoading(false);
+        setTimeout(navTo, 3000);
         setPassword("");
         setFirstName("");
         setLastName("");
         setPhone("");
       })
     } catch (error) {
-      console.log("error ")
+      console.log("error ", error);
+      if(error.message) {
+        setError(error.message);
+      } else {
+        setError("Something went wrong creating your account, try a different password... If you've already created an account with us, sign in.")
+      }
       setLoading(false);
-      setError("Error Signing up with email and password");
     }
   };
 
@@ -210,6 +239,9 @@ function JoinForm(props) {
 
   return (
     <div> {googleLoading||loading ? <Loading/> : <div className="join-form row-container">
+      {error != "" && <Typography style={{color: "red", marginBottom: "20px"}} variant="caption" className="join-or">
+          {error}
+        </Typography>}
       <NameInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -264,23 +296,23 @@ function JoinForm(props) {
         onClick={() => {
           try {
             setGoogleLoading(true);
-            signInWithGoogle(referToId, referById).then(() => {
-              navTo();
+            signInWithGoogle(props.referToId, referById).then(() => {
+              setTimeout(navTo, 3000);
               setGoogleLoading(false);
             });
           } catch (error) {
+            setError(error.message);
             console.error("Error signing in with Google", error);
           }
         }}
       >
         {googleLoading ? <CircularProgress /> : "Sign in with Google"}
       </Button>
-      <div className="join-or-horizontal-line" />
+      
         <Typography variant="caption" className="join-or">
           Already have an Account?
         </Typography>
 
-      <div className="join-or-horizontal-line" />
       <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => {
         if(user.user) {
           history.push({pathname: "/account"});
@@ -294,7 +326,7 @@ function JoinForm(props) {
   );
 }
 
-function JoinPage() {
+function JoinPage(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="join-page-c0 column-container">
@@ -318,7 +350,7 @@ function JoinPage() {
             >
               Join
             </Typography>
-            <JoinForm />
+            <JoinForm referToId={props.referToId} setReferTo={(rid) => props.setReferTo(rid)}/>
           </div>
         </div>
       </div>
