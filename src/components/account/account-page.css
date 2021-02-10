@@ -9,7 +9,6 @@
   min-height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  z-index: -2;
 }
 .account-page-c1-right {
   background-image: url("./../../images/bg/bg-pattern-full-light.svg");
@@ -126,9 +125,29 @@ button.send-invites-button {
   max-width: 80%;
   margin: auto;
 }
-h4.account-timeline-title {
-  padding-bottom: 2rem;
+.avatar-container{
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  padding-left: 10px;
 }
+.account-timeline-user-name {
+  padding: 10px;
+}
+.user-profile {
+  margin-bottom: 2rem;
+  border: #d2d2d2 0.5px solid;
+  border-radius: 3px;
+  text-align: left;
+  box-shadow: -3px 0px 6px;
+  width: 90%;
+  margin-left:auto;
+  margin-right: auto;
+}
+.avatar {
+  margin-right: 0px;
+}
+
 .account-timeline-step {
   opacity: 20%;
   align-items: center;
