@@ -184,3 +184,13 @@ img.onboard-complete-help-arrow {
   vertical-align: center;
   display: flex;
 }
+
+@media only screen and (max-width: 750px) {
+  .onboard-complete-c1 {
+    width: 100%;
+    margin-top: 0px;
+  }
+  .onboard-complete-help-button-container {
+    display: none;
+  }
+}
