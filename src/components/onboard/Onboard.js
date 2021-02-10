@@ -8,12 +8,13 @@ import {
   Button,
   ThemeProvider,
 } from "@material-ui/core";
-import "./onboarding.css";
+import "./onboard.css";
 import "../../styles.css";
-import snap from "../../images/onboarding-page/snap.svg";
+import snap from "../../images/onboard/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
 import Typist from "react-typist";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import OnboardingInitialPanel from "./OnboardInitialPanel";
 import {
   income,
   dependence,
@@ -31,15 +32,15 @@ import {
   state,
   refund,
   covidCredits,
-} from "./OnboardingQuestions.js";
+} from "./OnboardQuestions.js";
 import { primaryTheme } from "../../utils/constants.js";
 import { Form } from "../inputs/Inputs.js";
 import Lottie from "react-lottie";
-import loadingAnimation from "./../../lotties/coin-loading.json";
+import loadingAnimation from "../../lotties/coin-loading.json";
 import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
-import OnboardingTimeline from "./OnboardingTimeline";
+import OnboardingTimeline from "./OnboardTimeline";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -92,7 +93,7 @@ function ProgressBar(props) {
   return <LinearProgressBar variant="determinate" value={props.value} />;
 }
 
-function Onboarding(props) {
+function Onboard(props) {
   const [step, setStep] = useState(1);
   const [panelActive, setPanelActive] = useState(false);
   const [fields, setFields] = useState({});
@@ -342,31 +343,6 @@ function Onboarding(props) {
     return refund;
   }
 
-  function InitPanel() {
-    return (
-      <div className="onboarding-c1-left row-container">
-        <div container className="onboarding-c1-left-div">
-          <Typography
-            variant="h3"
-            color="primary"
-            className="onboarding-c1-left-title"
-          >
-            A few clicks from a bigger refund
-          </Typography>
-          <Typography
-            variant="body2"
-            color="primary"
-            className="onboarding-c1-left-subtitle"
-          >
-            File for your tax refund in minutes. Get back money and time.
-          </Typography>
-        </div>
-
-        <img className="onboarding-c1-left-img" src={snap} />
-      </div>
-    );
-  }
-
   const loadingText = [
     "Calculating witholdings",
     "Checking credit eligibility",
@@ -410,21 +386,25 @@ function Onboarding(props) {
   }
 
   return (
-    <ThemeProvider theme={primaryTheme} className="onboarding">
+    <ThemeProvider theme={primaryTheme} className="onboard">
       <div
-        className="onboarding-c0 column-container"
+        className="onboard-c0 column-container"
         tabIndex={-1}
         onKeyPress={(e, val) => keyDown(e, val)}
       >
-        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
-        <div className="onboarding-c1-right row-container">
+        {panelActive ? (
+          <OnboardingTimeline activeStep={step} />
+        ) : (
+          <OnboardingInitialPanel />
+        )}
+        <div className="onboard-c1-right row-container">
           {loadingScreen ? (
             <div>
               <ProgressBar
                 value={step * (100 / forms.length)}
-                className="onboarding-c1-right-progress-bar"
+                className="onboard-c1-right-progress-bar"
               />
-              <div container className="onboarding-c1-right-div">
+              <div container className="onboard-c1-right-div">
                 <Form
                   title={forms[step - 1].title}
                   formItems={forms[step - 1].items}
@@ -434,8 +414,8 @@ function Onboarding(props) {
                   onUpdate={onDataUpdate}
                   onKeyPress={(e, val) => keyDown(e, val)}
                 />
-                <div className="onboarding-button-div column-container">
-                  <div className="onboarding-button">
+                <div className="onboard-button-div column-container">
+                  <div className="onboard-button">
                     <Button
                       variant="contained"
                       color="primary"
@@ -444,7 +424,7 @@ function Onboarding(props) {
                       {props.referToId}
                     </Button>
                   </div>
-                  <div className="onboarding-button">
+                  <div className="onboard-button">
                     <Button
                       variant="contained"
                       color="secondary"
@@ -466,4 +446,4 @@ function Onboarding(props) {
   );
 }
 
-export default Onboarding;
+export default Onboard;

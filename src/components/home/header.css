@@ -8,6 +8,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 10;
 }
 
 .header-button-container {
@@ -18,7 +19,7 @@
 
 .header-button-container > button {
   height: 50px;
-  width: 10vw;
+  min-width: 10vw;
   margin-right: 2rem;
 }
 

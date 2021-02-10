@@ -1,8 +1,8 @@
-.onboarding-c0 {
+.onboard-c0 {
   width: 100vw;
   height: 100vh;
 }
-.onboarding-c1-left {
+.onboard-c1-left {
   width: 35vw;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
   background-repeat: no-repeat;
@@ -11,35 +11,35 @@
   display: flex;
 }
 
-.onboarding-timeline {
+.onboard-timeline {
   vertical-align: center;
   margin: auto;
   text-align: center;
   display: flex;
 }
-.onboarding-timeline-step {
+.onboard-timeline-step {
   margin-bottom: 8px;
 }
-.onboarding-c1-right {
+.onboard-c1-right {
   width: 65vw;
   overflow-y: scroll;
 }
 
-.onboarding-c1-left-title {
+.onboard-c1-left-title {
   padding-bottom: 1.8rem;
 }
 
-.onboarding-c1-left-subtitle {
+.onboard-c1-left-subtitle {
   line-height: 1.2rem;
   margin-bottom: 2rem;
 }
-.onboarding-c1-left-img {
+.onboard-c1-left-img {
   float: bottom left;
   width: 15vw;
   margin-top: 2rem;
 }
 
-.onboarding-c1-left-div {
+.onboard-c1-left-div {
   width: 80%;
   height: 100%;
   margin-left: auto;
@@ -48,7 +48,7 @@
   position: relative;
 }
 
-.onboarding-c1-right-div {
+.onboard-c1-right-div {
   padding-top: 5rem;
   margin-left: 10%;
   margin-bottom: 2rem;
@@ -57,7 +57,7 @@
   max-width: 500px;
 }
 
-div.onboarding-button-div {
+div.onboard-button-div {
   float: bottom;
   justify-content: space-between;
   vertical-align: middle;
@@ -65,15 +65,15 @@ div.onboarding-button-div {
   margin-top: 2rem;
 }
 
-div.onboarding-button {
+div.onboard-button {
   float: right;
   width: 100px;
 }
-div.onboarding-button > button {
+div.onboard-button > button {
   width: 100%;
 }
 
-.onboarding-c1-right-progress-bar {
+.onboard-c1-right-progress-bar {
   width: 100%;
 }
 h4.form-title {
@@ -113,20 +113,20 @@ div.onboard-loading-subtitle {
     padding-bottom: 0.2rem;
   }
 
-  .onboarding-c1-left {
+  .onboard-c1-left {
     display: none !important;
   }
-  .onboarding-c1-right {
+  .onboard-c1-right {
     width: 100vw;
     align-items: center;
   }
-  .onboarding-c0 {
+  .onboard-c0 {
     background-image: url("./../../images/bg/bg-pattern-third.svg");
     background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;
   }
-  .onboarding-c1-right {
+  .onboard-c1-right {
     margin: 0rem;
     margin-top: 5rem;
     width: 100%;
@@ -134,7 +134,7 @@ div.onboard-loading-subtitle {
     background-color: #f6f6f6;
     box-shadow: -0.1em 0.1em 2em;
   }
-  .onboarding-c1-right-div {
+  .onboard-c1-right-div {
     width: 90%;
     margin-bottom: 5rem;
     margin: auto;

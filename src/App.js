@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from "./components/home/Home";
-import Onboarding from "./components/onboarding/Onboarding.js";
+import Onboard from "./components/onboard/Onboard.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignUp from "./components/authentication/SignUp";
@@ -47,7 +47,7 @@ function App() {
               />
             </Route>
             <Route path="/onboard">
-              <Onboarding
+              <Onboard
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />
