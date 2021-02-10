@@ -125,22 +125,20 @@ h4.account-timeline-title {
   padding-bottom: 2rem;
 }
 .account-timeline-step {
-  margin-bottom: 0.25rem;
-  vertical-align: center;
-  align-content: center;
-  vertical-align: middle;
   opacity: 20%;
+  align-items: center;
+  padding-bottom: 2px;
 }
 p.account-timeline-step-text {
   align-self: baseline;
   justify-items: flex-end;
   font-size: 1.5rem;
-  line-height: 3rem;
   vertical-align: middle;
   font-weight: 400;
 }
 .account-timeline-step-number {
   max-width: 3rem;
+  width: 3rem;
   margin-right: 2rem;
   padding: 0;
 }
@@ -218,7 +216,7 @@ img.placeholder-block {
     flex-direction: row;
   }
   .account-title {
-    display: block; 
+    display: block;
     text-align: center;
     color: #2d2d2d;
     font-size: 7vw !important;
