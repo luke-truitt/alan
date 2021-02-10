@@ -22,7 +22,7 @@ export const primaryTheme = createMuiTheme({
       secondary: "#86868B",
     },
   },
-  // shadows: ["none"],
+  shadows: ["none"],
   overrides: {
     body2: { color: "#6D6D6D" },
     MuiInputBase: {
