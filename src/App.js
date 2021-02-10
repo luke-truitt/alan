@@ -23,7 +23,7 @@ import OnboardCompletePage from "./components/completion/OnboardCompletePage.js"
 import AccountPage from "./components/account/AccountPage.js";
 
 import firebase from "firebase";
-import Header from "./components/home/Header";
+import Header from "./components/header/Header";
 import { Fade } from "@material-ui/core";
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";

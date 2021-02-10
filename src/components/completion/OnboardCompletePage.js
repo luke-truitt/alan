@@ -61,7 +61,7 @@ function OnboardCompletePage(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0-top row-container">
         {/* <div className="header" /> */}
-        <div className="onboard-complete-help-button-container">
+        {/* <div className="onboard-complete-help-button-container">
           <div
             className="onboard-complete-help-button row-container "
             onClick={navTo}
@@ -71,7 +71,7 @@ function OnboardCompletePage(props) {
             </Typography>
             <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
-        </div>
+        </div> */}
         <div className="onboard-complete-c1">
           <div className="onboard-complete-c1-content">
             <Typography className="onboard-complete-title" variant="h6">

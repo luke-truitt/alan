@@ -1,6 +1,6 @@
 import "./home.css";
 import "../../styles.css";
-import "./header.css";
+import "../header/header.css";
 import {
   ThemeProvider,
   AppBar,
@@ -20,7 +20,7 @@ import { primaryTheme, fadeDefault } from "../../utils/constants.js";
 
 import { findUserByEmail } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
-import Header from "./Header";
+import Header from "../header/Header";
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import ben from "./../../images/home/ben.png";
@@ -73,7 +73,13 @@ function Home() {
       }
     }
   };
-
+  const signUp = () => {
+    if(email.includes("@") && email.length > 5) {
+      navTo();
+    } else {
+      invalidClick();
+    }
+  }
   useEffect(() => {
     initGA(trackingId);
     PageView();
@@ -137,6 +143,7 @@ function Home() {
       </div>
     );
   }
+
   const addEmail = async (email) => {
     const old_user = await findUserByEmail(email)
 
@@ -166,7 +173,7 @@ function Home() {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
-        <Header />
+        <Header signUp={signUp}/>
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
