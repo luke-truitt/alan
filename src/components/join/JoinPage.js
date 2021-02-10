@@ -7,11 +7,12 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./join-form.css";
+import "./../../styles.css";
 import Typist from "react-typist";
 import Lottie from "react-lottie";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState, useContext } from "react";
-import { AuthContext} from "../../providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import loadingAnimation from "./../../lotties/coin-loading.json";
@@ -20,12 +21,12 @@ import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
 
-const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66"
-const TEMPLATE_ID = "template_b3u2bhe"
-const SERVICE_ID = "service_784yhvi"
+const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
+const TEMPLATE_ID = "template_b3u2bhe";
+const SERVICE_ID = "service_784yhvi";
 const timelineNumbers = {
   1: joinTimeline1,
   2: joinTimeline2,
@@ -90,7 +91,7 @@ function JoinTimeline() {
 
 function JoinForm(props) {
   const user = useContext(AuthContext);
-  
+
   const history = useHistory();
   const location = useLocation();
   let referByIdDirect = "";
@@ -106,14 +107,22 @@ function JoinForm(props) {
       referByIdDirect = searchParams[i].split("=")[1];
     }
   }
-  
-  const [email, setEmail] = useState(location.state == null ? "" : location.state["email"]);
+
+  const [email, setEmail] = useState(
+    location.state == null ? "" : location.state["email"]
+  );
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(null);
-  const [referById, setReferById] = useState(referByIdDirect != "" ? referByIdDirect : location.state == null ? "" : location.state["referById"]);
+  const [referById, setReferById] = useState(
+    referByIdDirect != ""
+      ? referByIdDirect
+      : location.state == null
+      ? ""
+      : location.state["referById"]
+  );
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -124,20 +133,19 @@ function JoinForm(props) {
   const sendWelcomeEmail = () => {
     const templateParams = {
       to_name: firstName,
-      to_email: email
-    }
-//     emailjs.send(
-//       SERVICE_ID,
-//       TEMPLATE_ID,
-//       templateParams,
-//       USER_ID
-//  ).then(function(response) {
-//   console.log(email, 'SUCCESS!', response.status, response.text);
-// }, function(error) {
-//   console.log('FAILED...', error);
-// });
-  }
-  
+      to_email: email,
+    };
+    //     emailjs.send(
+    //       SERVICE_ID,
+    //       TEMPLATE_ID,
+    //       templateParams,
+    //       USER_ID
+    //  ).then(function(response) {
+    //   console.log(email, 'SUCCESS!', response.status, response.text);
+    // }, function(error) {
+    //   console.log('FAILED...', error);
+    // });
+  };
 
   const navTo = () => {
     setLoading(false);
@@ -146,7 +154,7 @@ function JoinForm(props) {
       pathname: "/account",
     });
   };
-  
+
   const checkValid = (d) => {
     // TODO
   };
@@ -155,28 +163,39 @@ function JoinForm(props) {
     setLoading(true);
 
     try {
-      if(props.referToId==null||props.referToId=="") {
+      if (props.referToId == null || props.referToId == "") {
         console.log("IDK");
         props.setReferTo(uuidv4());
         setTimeout(() => {}, 200);
       }
       const referToId = props.referToId;
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      
-      generateUserDocument(user, { firstName, lastName, phone, referToId, referById }).then((res) => {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      generateUserDocument(user, {
+        firstName,
+        lastName,
+        phone,
+        referToId,
+        referById,
+      }).then((res) => {
         console.log(res);
         setTimeout(navTo, 3000);
         setPassword("");
         setFirstName("");
         setLastName("");
         setPhone("");
-      })
+      });
     } catch (error) {
       console.log("error ", error);
-      if(error.message) {
+      if (error.message) {
         setError(error.message);
       } else {
-        setError("Something went wrong creating your account, try a different password... If you've already created an account with us, sign in.")
+        setError(
+          "Something went wrong creating your account, try a different password... If you've already created an account with us, sign in."
+        );
       }
       setLoading(false);
     }
@@ -241,106 +260,122 @@ function JoinForm(props) {
           <span>{loadingText[2]}</span>
         </Typist>
       </div>
-
     );
   }
 
   return (
-    <div> {(googleLoading||loading) ? <Loading/> : <div className="join-form row-container" tabIndex={-1}
-    onKeyPress={(e, val) => keyDown(e, val)}>
-      {error != "" && <Typography style={{color: "red", marginBottom: "20px"}} variant="caption" className="join-or">
-          {error}
-        </Typography>}
-      <NameInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        onKeyPress={(e, val) => keyDown(e, val)}
-        fields={{ firstName: firstName, lastName: lastName }}
-      />
-      <PhoneNumberInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        onKeyPress={(e, val) => keyDown(e, val)}
-        placeholder="Enter Phone Number"
-        fields={{ phone: phone }}
-      />
-      <Typography variant="caption" className="join-phone-explainer">
-        So we can text you when the review is complete!
-      </Typography>
-      <TextInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        stateName="email"
-        value={email}
-        onKeyPress={(e, val) => keyDown(e, val)}
-        placeholder="Enter Email"
-        type="email"
-      />
-      <TextInput
-        validData={(d) => checkValid(d)}
-        onChange={(e, val) => onChange(e, val)}
-        stateName="password"
-        value={password}
-        onKeyPress={(e, val) => keyDown(e, val)}
-        placeholder="Enter Password"
-        type="password"
-      />
+    <div>
+      {" "}
+      {googleLoading || loading ? (
+        <Loading />
+      ) : (
+        <div
+          className="join-form row-container"
+          tabIndex={-1}
+          onKeyPress={(e, val) => keyDown(e, val)}
+        >
+          {error != "" && (
+            <Typography
+              style={{ color: "red", marginBottom: "20px" }}
+              variant="caption"
+              className="join-or"
+            >
+              {error}
+            </Typography>
+          )}
+          <NameInput
+            validData={(d) => checkValid(d)}
+            onChange={(e, val) => onChange(e, val)}
+            onKeyPress={(e, val) => keyDown(e, val)}
+            fields={{ firstName: firstName, lastName: lastName }}
+          />
+          <PhoneNumberInput
+            validData={(d) => checkValid(d)}
+            onChange={(e, val) => onChange(e, val)}
+            onKeyPress={(e, val) => keyDown(e, val)}
+            placeholder="Enter Phone Number"
+            fields={{ phone: phone }}
+          />
+          <Typography variant="caption" className="join-phone-explainer">
+            So we can text you when the review is complete!
+          </Typography>
+          <TextInput
+            validData={(d) => checkValid(d)}
+            onChange={(e, val) => onChange(e, val)}
+            stateName="email"
+            value={email}
+            onKeyPress={(e, val) => keyDown(e, val)}
+            placeholder="Enter Email"
+            type="email"
+          />
+          <TextInput
+            validData={(d) => checkValid(d)}
+            onChange={(e, val) => onChange(e, val)}
+            stateName="password"
+            value={password}
+            onKeyPress={(e, val) => keyDown(e, val)}
+            placeholder="Enter Password"
+            type="password"
+          />
 
-      <Button
-        className="join-button"
-        variant="contained"
-        color="secondary"
-        onClick={(e) => createUserWithEmailAndPasswordHandler(e)}
-      >
-        {loading ? <CircularProgress /> : "Join"}
-      </Button>
-      <div className="join-or-container column-container">
-        <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
-          OR
-        </Typography>
+          <Button
+            className="join-button"
+            variant="contained"
+            color="secondary"
+            onClick={(e) => createUserWithEmailAndPasswordHandler(e)}
+          >
+            {loading ? <CircularProgress /> : "Join"}
+          </Button>
+          <div className="join-or-container column-container">
+            <div className="join-or-horizontal-line" />
+            <Typography variant="caption" className="join-or">
+              OR
+            </Typography>
 
-        <div className="join-or-horizontal-line" />
-      </div>
-      <Button
-        className="google-sign-button"
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          try {
-            setGoogleLoading(true);
-            signInWithGoogle(props.referToId, referById).then(() => {
-              navTo();
-              setGoogleLoading(false);
-            });
-          } catch (error) {
-            setError(error.message);
-            console.error("Error signing in with Google", error);
-          }
-        }}
-      >
-        {googleLoading ? <CircularProgress /> : "Sign in with Google"}
-      </Button>
-      
-        <Typography variant="caption" className="join-or">
-          Already have an Account?
-        </Typography>
-
-      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => {
-        if(user.user) {
-          history.push({pathname: "/account"});
-        } else {
-          history.push({pathname: "/signin"});
-        }
-      }}>
-        Sign In
-      </Button>
-    </div>}</div>
+            <div className="join-or-horizontal-line" />
+          </div>
+          <Button
+            className="google-sign-button"
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              try {
+                setGoogleLoading(true);
+                signInWithGoogle(props.referToId, referById).then(() => {
+                  navTo();
+                  setGoogleLoading(false);
+                });
+              } catch (error) {
+                setError(error.message);
+                console.error("Error signing in with Google", error);
+              }
+            }}
+          >
+            {googleLoading ? <CircularProgress /> : "Sign in with Google"}
+          </Button>
+          <div className="join-or-horizontal-line" />
+          <Typography
+            variant="body1"
+            className="join-sign-in-text"
+            color="textSecondary"
+            onClick={() => {
+              if (user.user) {
+                history.push({ pathname: "/account" });
+              } else {
+                history.push({ pathname: "/signin" });
+              }
+            }}
+          >
+            Already have an Account?{" "}
+            <span className="join-sign-in-button">Sign In</span>
+          </Typography>
+        </div>
+      )}
+    </div>
   );
 }
 
 function JoinPage(props) {
-  
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="join-page-c0 column-container">
@@ -357,14 +392,13 @@ function JoinPage(props) {
         </div>
         <div className="join-page-c1-right row-container">
           <div className="join-page-c1-right-content row-container">
-            <Typography
-              color="textPrimary"
-              variant="h2"
-              className="join-page-title purple-highlight"
-            >
-              Join
+            <Typography color="textPrimary" variant="h2" className="form-title">
+              <span className=" purple-highlight">Join</span>
             </Typography>
-            <JoinForm referToId={props.referToId} setReferTo={(rid) => props.setReferTo(rid)}/>
+            <JoinForm
+              referToId={props.referToId}
+              setReferTo={(rid) => props.setReferTo(rid)}
+            />
           </div>
         </div>
       </div>

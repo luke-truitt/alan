@@ -415,7 +415,7 @@ export function Form(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-container">
-        <Typography variant="h4" color="textPrimary" className="form-title">
+        <Typography variant="h2" color="textPrimary" className="form-title">
           <span className="purple-highlight">{props.title}</span>
         </Typography>
         <div className="form-inputs">{inputs}</div>

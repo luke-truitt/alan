@@ -41,8 +41,22 @@ span.form-item-description {
   padding-bottom: 2rem;
 }
 
-.form-title {
+div.account-page-c1-right
+  > div
+  > div.MuiPaper-root.MuiCard-root.account-page-card.referral-card.MuiPaper-rounded
+  > div
+  > div
+  > div
+  > div.referral-card-email-container.column-container
+  > div
+  > label {
+  top: 0;
+  font-size: 0.875rem;
+}
+
+h2.form-title {
   padding-bottom: 2rem;
+  font-size: 2.5em;
 }
 div.form-item-container.column-container {
   display: flex;

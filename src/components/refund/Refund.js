@@ -13,7 +13,7 @@ import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-
+import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 function numberWithCommas(x) {
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -87,7 +87,18 @@ function Refund(props) {
             </div>
             <div className="row-container onboard-complete-card-container">
               <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-1-content"></CardContent>
+                <CardContent
+                  onClick={navTo}
+                  className="onboard-complete-card-1-content"
+                >
+                  <Typography
+                    className="refund-card-button-text"
+                    variant="h4"
+                    color="primary"
+                  >
+                    Help me file my taxes <ArrowForwardIosRoundedIcon />
+                  </Typography>
+                </CardContent>
               </Card>
               <Card className="onboard-complete-card">
                 <CardContent className="onboard-complete-card-2-content">

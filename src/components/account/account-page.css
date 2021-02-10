@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 .account-page-c1-left {
   background-image: url("./../../images/bg/bg-gradient-third.svg");
@@ -22,6 +23,7 @@
   padding-bottom: 2rem;
   justify-items: center;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .account-page-c1-left-shadow {
@@ -183,13 +185,19 @@ img.placeholder-block {
 }
 
 @media only screen and (max-width: 800px) {
-  .account-page-c1-left {
+  div.account-page-c1-left {
     display: none;
   }
-  .account-page-c1-right {
+  div.account-page-c1-right {
     width: 100%;
+    overflow-x: hidden;
   }
-  .account-page-c1-left-shadow {
+  div.account-page-c0 {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  div.account-page-c1-left-shadow {
     display: none;
   }
   .account-page-card-icon {
