@@ -14,9 +14,10 @@ import RefundBreakdown from "./RefundBreakdown.js";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useState, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import { getUserDoc } from "../../firebase";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 function numberWithCommas(x) {
-  if(x==null) {
+  if(x==null){
     return "";
   }
   var parts = x.toString().split(".");
@@ -55,7 +56,7 @@ function Refund(props) {
     redirectHome();
   }
 
-  if(location.state==null || user.user==null) {
+  if(props==null || user.user==null) {
     redirectHome();
   } 
   
@@ -120,7 +121,7 @@ function Refund(props) {
                 variant="h1"
                 color="secondary"
               >
-                {/* ${numberWithCommas(props.netRefund)} */}
+                ${numberWithCommas(props.netRefund)}
               </Typography>
               <RefundBreakdown breakdown={props}></RefundBreakdown>
               <Card className="onboard-complete-card-mobile">
