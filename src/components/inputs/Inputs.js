@@ -43,6 +43,7 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           placeholder={props.placeholder}
           value={props.fields["phone"]}
           onChange={(e) => {
@@ -72,6 +73,7 @@ export function NameInput(props) {
           label="First Name"
           value={props.fields["firstName"]}
           autoComplete
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           variant="outlined"
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "firstName" });
@@ -83,6 +85,7 @@ export function NameInput(props) {
           label="Last Name"
           value={props.fields["lastName"]}
           autoComplete
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           variant="outlined"
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "lastName" });
@@ -112,6 +115,7 @@ export function SchoolInput(props) {
           id="combo-box-demo"
           className="form-item-text-field"
           options={schools}
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           getOptionLabel={(option) => option.name}
           // inputValue = {props.fields["school"]}
           onChange={(e, value) => {
@@ -127,6 +131,7 @@ export function SchoolInput(props) {
           label="Graduation Year"
           value={props.fields["classYear"]}
           variant="outlined"
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "classYear" });
             checkValid({ name: e.target.value }, "classYear");
@@ -163,6 +168,7 @@ export function JobInput(props) {
           label="Company Name"
           value={props.fields["companyName"]}
           autoComplete
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           variant="outlined"
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "companyName" });
@@ -174,6 +180,7 @@ export function JobInput(props) {
           label="Job Title"
           value={props.fields["jobTitle"]}
           autoComplete
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           variant="outlined"
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: "jobTitle" });
@@ -213,6 +220,7 @@ export function Dropdown(props) {
         </Typography>
         <FormControl variant="outlined">
           <Select
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={props.fields[props.stateName]}
             onChange={(e) => {
               props.onChange(e.target.value, { stateName: props.stateName });
@@ -304,6 +312,7 @@ export function DollarInput(props) {
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             placeholder="0"
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={
               isNaN(props.fields[props.stateName])
                 ? ""
@@ -385,6 +394,7 @@ export function Form(props) {
       options={formItem.options}
       stateName={formItem.stateName}
       fields={props.fields}
+      onKeyPress={(e, val) => props.onKeyPress(e, val)}
       data={props.data}
       validData={(item) => setValid(item)}
       onChange={(e, item) => onChange(e, item)}
@@ -431,6 +441,7 @@ export function TextInput(props) {
             borderRadius: "2px",
             paddingLeft: "3px",
           }}
+          onKeyPress={(e, val) => props.onKeyPress(e, val)}
           InputProps={{ disableUnderline: true }}
           onChange={(e) => {
             props.onChange(e.target.value, { stateName: props.stateName });

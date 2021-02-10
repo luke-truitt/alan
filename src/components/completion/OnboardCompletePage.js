@@ -37,14 +37,15 @@ function OnboardCompletePage(props) {
     referToId = "";
     referById = "";
   }
-
-  // if(email=="" || referToId=="") {
-  //   redirectHome();
-  // }
-
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
+
+  if(email=="") {
+    redirectHome();
+  }
+
+  
   const navTo = () => {
     history.push({
       pathname: "/join",

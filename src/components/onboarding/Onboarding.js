@@ -97,13 +97,24 @@ function Onboarding(props) {
   const [panelActive, setPanelActive] = useState(false);
   const [fields, setFields] = useState({});
   const [formValid, setFormValid] = useState({});
-  const [loadingScreen, setLoadingScreen] = useState(false);
+  const [loadingScreen, setLoadingScreen] = useState(true);
   const history = useHistory();
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
 
-  setTimeout(() => setPanelActive(true), 4000);
+    if (code === 13) {
+      //13 is the enter keycode
+      if (formValid[step]) {
+        forwardClick();
+      }
+    }
+  };
+  setTimeout(() => {
+    setPanelActive(true);
+  }, 3000);
 
   const redirectHome = () => {
-    // history.push({ pathname: "/"});
+    history.push({ pathname: "/" });
   };
 
   const onDataUpdate = (d) => {
@@ -152,11 +163,12 @@ function Onboarding(props) {
     };
 
     sendData();
+    setLoadingScreen(true);
     history.push({
       pathname: "/refund",
       state: {
         email: email,
-        referToId: referToId,
+        referToId: props.referToId,
         referById: referById,
         breakdown: data,
       },
@@ -198,12 +210,13 @@ function Onboarding(props) {
     if (step == 1) {
       onDataUpdate({
         email: email,
-        referToId: referToId,
         referById: referById,
+        referToId: props.referToId,
       });
     }
     if (step >= forms.length) {
-      navToRefund();
+      setLoadingScreen(false);
+      setTimeout(navToRefund, 5000);
       setStep(forms.length);
     } else {
       setStep(step + 1);
@@ -216,18 +229,15 @@ function Onboarding(props) {
   let location = useLocation();
 
   let email = "";
-  let referToId = "";
   let referById = "";
   try {
     email = location.state["email"];
-    referToId = location.state["referToId"];
     referById = location.state["referById"];
   } catch {
     email = "";
-    referToId = "";
     referById = "";
   }
-  if (email == "" || referToId == "") {
+  if (email == "") {
     redirectHome();
   }
   // Data to be sent to server
@@ -399,26 +409,16 @@ function Onboarding(props) {
     );
   }
 
-  const loadScreen = () => {
-    setLoadingScreen(true);
-  };
-
-  const fadeProps = {
-    timeout: {
-      enter: 1500,
-    },
-  };
-  setTimeout(() => loadScreen(), 5000);
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
-      <Slide in direction="left" {...fadeProps}>
-        <div className="onboarding-c0 column-container">
-          {panelActive ? (
-            <OnboardingTimeline activeStep={step} />
-          ) : (
-            <InitPanel />
-          )}
-          <div className="onboarding-c1-right row-container">
+      <div
+        className="onboarding-c0 column-container"
+        tabIndex={-1}
+        onKeyPress={(e, val) => keyDown(e, val)}
+      >
+        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
+        <div className="onboarding-c1-right row-container">
+          {loadingScreen ? (
             <div>
               <ProgressBar
                 value={step * (100 / forms.length)}
@@ -432,6 +432,7 @@ function Onboarding(props) {
                   data={{}}
                   validForm={(d) => checkValid(d)}
                   onUpdate={onDataUpdate}
+                  onKeyPress={(e, val) => keyDown(e, val)}
                 />
                 <div className="onboarding-button-div column-container">
                   <div className="onboarding-button">
@@ -440,7 +441,7 @@ function Onboarding(props) {
                       color="primary"
                       onClick={backClick}
                     >
-                      Previous
+                      {props.referToId}
                     </Button>
                   </div>
                   <div className="onboarding-button">
@@ -456,9 +457,11 @@ function Onboarding(props) {
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <Loading />
+          )}
         </div>
-      </Slide>
+      </div>
     </ThemeProvider>
   );
 }

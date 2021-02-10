@@ -65,7 +65,8 @@ h2.purple-highlight {
   background-position: left bottom;
   background-size: 6.5rem;
   background-repeat: no-repeat;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .join-form > button {
@@ -110,4 +111,8 @@ span.join-phone-explainer {
   font-weight: 500;
   color: #6d6d6d;
   font-size: 0.75rem;
+}
+
+.join-form > .form-item-container {
+  padding-bottom: 1rem;
 }
