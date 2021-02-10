@@ -186,7 +186,7 @@ function ResetPassword() {
               variant="h2"
               className="join-page-title purple-highlight"
             >
-              Sign In
+              Reset Password
             </Typography>
             <ResetForm/>
           </div>

@@ -1,13 +1,16 @@
 import { AppBar, ThemeProvider, Button, Typography } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants";
 import { useHistory, useLocation } from "react-router-dom";
-
+import { useContext } from "react";
 import "./../../styles.css";
 import "./header.css";
-
+import { AuthContext} from "../../providers/AuthProvider";
+  
 function Header(props) {
   const history = useHistory();
-  const onSignIn = () => history.push({ pathname: "/signin" });
+
+  const user = useContext(AuthContext);
+  const onSignIn = () => { if(user){history.push({ pathname: "/account" })}else{history.push({ pathname: "/signin" })} };
 
   return (
     <ThemeProvider theme={primaryTheme}>

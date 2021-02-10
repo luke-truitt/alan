@@ -116,3 +116,24 @@ span.join-phone-explainer {
 .join-form > .form-item-container {
   padding-bottom: 1rem;
 }
+
+@media only screen and (max-width: 800px) {
+  .join-page-c1-left {
+    display: none;
+  }
+  .join-page-c1-right {
+    width: 100%;
+  }
+  .join-page-c1-left-shadow {
+    display: none;
+  }
+  h2.purple-highlight {
+    margin-left: 20px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  p.join-timeline-step-text {
+    font-size: 1rem;
+  }
+}

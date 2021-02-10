@@ -16,7 +16,7 @@ import ChipInput from "material-ui-chip-input";
 
 import { auth, getUserDoc } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { isMobile, isSafari } from "react-device-detect";
+import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import "./../../styles.css";
 import "./account-page.css";
 import giftIcon from "./../../images/icons/gift-dark.svg";
@@ -95,6 +95,8 @@ function AccountTimeline(props) {
       text={data.text}
     />
   ));
+  let valid = props.firstName=="" || props.firstName==null;
+
   return (
     <div className="row-container account-timeline">
       <Typography
@@ -102,7 +104,7 @@ function AccountTimeline(props) {
         color="primary"
         className="account-timeline-title"
       >
-        Welcome {props.firstName}! Nice work.
+        {valid ? "" : `Welcome ${props.firstName}! Nice work.`}
       </Typography>
       {timelineSteps}
     </div>
@@ -235,7 +237,7 @@ function ReferralCard(props) {
                 <img src={copyIcon} className="copy-button-icon" />
                 Link
               </Button>
-              {(isSafari || isMobile) && (
+              {(isSafari || isIOS || isAndroid) && (
                 <Button
                   className="referral-button"
                   variant="container"
@@ -330,12 +332,12 @@ function AccountPage(props) {
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);
   const [userData, setUserData] = useState(
-    user.user && user.user.displayName != null && user.user.displayName != ""
-      ? { firstName: user.user.displayName }
+    user.user && user.user.firstName != null && user.user.firstName != ""
+      ? { firstName: user.user.firstName }
       : {}
   );
   const [dataLoaded, setDataLoaded] = useState(
-    user.user && user.user.displayName != null && user.user.displayName != ""
+    user.user && user.user.firstName != null && user.user.firstName != ""
       ? true
       : false
   );
@@ -352,10 +354,10 @@ function AccountPage(props) {
   setTimeout(() => {
     if (
       user.user &&
-      user.user.displayName != null &&
-      user.user.displayName != ""
+      user.user.firstName != null &&
+      user.user.firstName != ""
     ) {
-      setUserData({ firstName: user.user.displayName });
+      setUserData({ firstName: user.user.firstName });
       setDataLoaded(true);
     }
   }, 1000);
@@ -402,11 +404,19 @@ function AccountPage(props) {
                 auth.signOut().then(() => {
                   history.push({ pathname: "/join" });
                   setLoading(false);
+                }).catch((error) => {
+                  console.log(error);
                 });
               }}
             >
               {loading ? <CircularProgress /> : "Sign Out"}
             </Button>
+            <Typography
+              color="secondary"
+              className="account-title"
+            >
+            Welcome {props.firstName}
+            </Typography>
             <ReferralCard
               referToId={referToId}
               username={userData["firstName"]}

@@ -169,3 +169,58 @@ img.placeholder-block {
 .account-page-c2 > * {
   width: 50%;
 }
+
+.account-title {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .account-page-c1-left {
+    display: none;
+  }
+  .account-page-c1-right {
+    width: 100%;
+  }
+  .account-page-c1-left-shadow {
+    display: none;
+  }
+  .account-page-card-icon {
+    margin-bottom: 10px;
+  }
+  .column-container {
+    flex-direction: column;
+  }
+  .referral-card-email-container {
+    display: none;
+  }
+  .referral-card-btns-right {
+    width: 100%;
+  }
+  .referral-card-btns-right.column-container {
+    flex-direction: row;
+  }
+  .account-page-c2 > * {
+    width: auto;
+  }
+  .placeholder-block {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .referral-card-email-container {
+    display: none;
+  }
+  .referral-card-btns-right {
+    width: 100%;
+  }
+  .referral-card-btns-right.column-container {
+    flex-direction: row;
+  }
+  .account-title {
+    display: block; 
+    text-align: center;
+    color: #2d2d2d;
+    font-size: 7vw !important;
+  }
+}
