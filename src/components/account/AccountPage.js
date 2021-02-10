@@ -171,6 +171,9 @@ function ReferralCard(props) {
     }
   };
   const sendInvites = () => {
+    if(emails.length < 1) {
+      return;
+    }
     let i;
     for (i = 0; i < emails.length; i++) {
       const email_to = emails[i];
@@ -190,7 +193,7 @@ function ReferralCard(props) {
       //   console.log('FAILED...', error);
       // });
     }
-    alert("Emails sent successfully!");
+    alert("Invites Sent!");
     setEmails([]);
   };
 

@@ -150,7 +150,7 @@ function JoinForm(props) {
 
   const navTo = () => {
     setLoading(false);
-    sendWelcomeEmail();
+    createUserWithEmailAndPasswordHandler(null);
     history.push({
       pathname: "/account",
     });
@@ -373,7 +373,7 @@ function JoinForm(props) {
             }}
           >
             Already have an Account?{" "}
-            <span className="join-sign-in-button">Sign In</span>
+            <span className="join-sign-in-button" style={{cursor: "pointer"}}>Sign In</span>
           </Typography>
         </div>
       )}
