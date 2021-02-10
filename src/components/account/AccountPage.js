@@ -7,14 +7,16 @@ import {
   Button,
   CircularProgress,
 } from "@material-ui/core";
-import { primaryTheme } from "./../../utils/constants";
-import {AuthContext} from "../../providers/AuthProvider";
-import {useContext, useEffect, useState} from "react";
-import ChipInput from 'material-ui-chip-input';
+import Skeleton from "@material-ui/lab/Skeleton";
 
-import {auth, getUserDoc} from "../../firebase";
-import { v4 as uuidv4 } from 'uuid';
-import {isMobile, isSafari} from 'react-device-detect';
+import { primaryTheme } from "./../../utils/constants";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext, useEffect, useState } from "react";
+import ChipInput from "material-ui-chip-input";
+
+import { auth, getUserDoc } from "../../firebase";
+import { v4 as uuidv4 } from "uuid";
+import { isMobile, isSafari } from "react-device-detect";
 import "./../../styles.css";
 import "./account-page.css";
 import giftIcon from "./../../images/icons/gift-dark.svg";
@@ -33,10 +35,10 @@ import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
 import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { useLocation, useHistory } from "react-router-dom";
-import * as emailjs from 'emailjs-com';
+import * as emailjs from "emailjs-com";
 
-const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66"
-const TEMPLATE_ID = "template_kwxoxb7"
+const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
+const TEMPLATE_ID = "template_kwxoxb7";
 const timelineNumbers = {
   1: accountTimeline1,
   2: accountTimeline2,
@@ -106,57 +108,65 @@ function AccountTimeline(props) {
 }
 
 function EmailChip(props) {
-
   const handleAdd = (chip) => {
     props.onAdd(chip);
-  }
+  };
 
   const handleDelete = (deletedChip) => {
     props.onDelete(deletedChip);
-  }
+  };
 
   return (
-      <ChipInput label="Enter Emails" alwaysShowPlaceholder="true" fullWidth="true" style={{overflowY: "scroll", height: "120%"}} value={props.emails} onAdd={(chip) => handleAdd(chip)} onDelete={(chip) => handleDelete(chip)} variant="outlined"/>
-    );
+    <ChipInput
+      label="Enter Emails"
+      alwaysShowPlaceholder="true"
+      fullWidth="true"
+      style={{ overflowY: "scroll", height: "120%" }}
+      value={props.emails}
+      onAdd={(chip) => handleAdd(chip)}
+      onDelete={(chip) => handleDelete(chip)}
+      variant="outlined"
+    />
+  );
 }
 
 function ReferralCard(props) {
   const [emails, setEmails] = useState([]);
 
   const handleAdd = (chip) => {
-    setEmails([...emails, chip])
-  }
+    setEmails([...emails, chip]);
+  };
 
   const handleDelete = (deletedChip) => {
-    if(emails.length == 1) {
+    if (emails.length == 1) {
       setEmails([]);
     } else {
       setEmails([emails.filter((c) => c !== deletedChip)]);
     }
-  }
+  };
   const sendInvites = () => {
     let i;
-    for(i=0;i<emails.length; i++) {
+    for (i = 0; i < emails.length; i++) {
       const email_to = emails[i];
-      
+
       const templateParams = {
         from_name: props.username,
-        send_to: email_to
-      }
-      emailjs.send(
-        'service_784yhvi',
-        TEMPLATE_ID,
-        templateParams,
-        USER_ID
-   ).then(function(response) {
-    console.log(email_to, 'SUCCESS!', response.status, response.text);
-  }, function(error) {
-    console.log('FAILED...', error);
-  });
+        send_to: email_to,
+      };
+      emailjs
+        .send("service_784yhvi", TEMPLATE_ID, templateParams, USER_ID)
+        .then(
+          function (response) {
+            console.log(email_to, "SUCCESS!", response.status, response.text);
+          },
+          function (error) {
+            console.log("FAILED...", error);
+          }
+        );
     }
-    alert("Emails sent successfully!")
+    alert("Emails sent successfully!");
     setEmails([]);
-  }
+  };
 
   const handleShareClick = () => {
     if (navigator.share) {
@@ -167,11 +177,11 @@ function ReferralCard(props) {
           url: "/",
         })
         .then(() => {
-          console.log('Successfully shared');
-          alert('Successfully shared!')
+          console.log("Successfully shared");
+          alert("Successfully shared!");
         })
-        .catch(error => {
-          console.error('Something went wrong sharing the blog', error);
+        .catch((error) => {
+          console.error("Something went wrong sharing the blog", error);
         });
     }
   };
@@ -194,7 +204,11 @@ function ReferralCard(props) {
                 label="Enter email addresses"
                 variant="outlined"
               ></TextField> */}
-              <EmailChip onAdd={(email) => handleAdd(email)} onDelete={(email) => handleDelete(email)} emails={emails}/>
+              <EmailChip
+                onAdd={(email) => handleAdd(email)}
+                onDelete={(email) => handleDelete(email)}
+                emails={emails}
+              />
               <Button
                 className="send-invites-button"
                 variant="contained"
@@ -218,15 +232,17 @@ function ReferralCard(props) {
                 <img src={copyIcon} className="copy-button-icon" />
                 Link
               </Button>
-              {(isSafari || isMobile) && <Button
-                className="referral-button"
-                variant="container"
-                color="primary"
-                onClick={handleShareClick}
-              >
-                <img src={shareIcon} className="share-button-icon" />
-                Share
-              </Button>}
+              {(isSafari || isMobile) && (
+                <Button
+                  className="referral-button"
+                  variant="container"
+                  color="primary"
+                  onClick={handleShareClick}
+                >
+                  <img src={shareIcon} className="share-button-icon" />
+                  Share
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -252,9 +268,9 @@ function ReviewCard(props) {
 function UploadCard(props) {
   return (
     <Card className="account-page-card upload-card">
-      <CardContent className="disabled-card-content column-container">
+      <CardContent className="column-container">
         <img src={uploadIcon} className="account-page-card-icon" />
-        <img src={placeholderText} className="placeholder-text" />
+        <Skeleton variant="text" style={{ width: "100%" }} />
       </CardContent>
     </Card>
   );
@@ -307,13 +323,29 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
   const location = useLocation();
   const history = useHistory();
-  
+
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);
-  const [userData, setUserData] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? {"firstName": user.user.displayName} : {});
-  const [dataLoaded, setDataLoaded] = useState((user.user && user.user.displayName != null && user.user.displayName != "") ? true : false);
-  const [referToId, setReferToId] = useState((user.user && user.user.referToId != null && user.user.referToId != "") ? user.user.referToId : uuidv4());
-  const [referById, setReferById] = useState((user.user && user.user.referById != null && user.user.referById != "") ? user.user.referById : "");
+  const [userData, setUserData] = useState(
+    user.user && user.user.displayName != null && user.user.displayName != ""
+      ? { firstName: user.user.displayName }
+      : {}
+  );
+  const [dataLoaded, setDataLoaded] = useState(
+    user.user && user.user.displayName != null && user.user.displayName != ""
+      ? true
+      : false
+  );
+  const [referToId, setReferToId] = useState(
+    user.user && user.user.referToId != null && user.user.referToId != ""
+      ? user.user.referToId
+      : uuidv4()
+  );
+  const [referById, setReferById] = useState(
+    user.user && user.user.referById != null && user.user.referById != ""
+      ? user.user.referById
+      : ""
+  );
   setTimeout(() => {
     if (
       user.user &&
@@ -327,16 +359,18 @@ function AccountPage(props) {
   useEffect(() => {
     if (user.user && !dataLoaded) {
       setTimeout(() => {
-        getUserDoc(user).then((result) => {
-          if(result==null) {
-            setDataLoaded(false);
-            return;
-          }
-          setUserData(result);
-          setDataLoaded(true);
-        }).catch(() => console.log("ERROR GETTING USER"));
-      },1000);
-    } 
+        getUserDoc(user)
+          .then((result) => {
+            if (result == null) {
+              setDataLoaded(false);
+              return;
+            }
+            setUserData(result);
+            setDataLoaded(true);
+          })
+          .catch(() => console.log("ERROR GETTING USER"));
+      }, 1000);
+    }
   });
 
   props = mockProps;
@@ -360,11 +394,20 @@ function AccountPage(props) {
               className="join-button"
               variant="contained"
               color="secondary"
-              onClick = {() => {setLoading(true); auth.signOut().then(() => {history.push({pathname: "/join"}); setLoading(false);})}}
+              onClick={() => {
+                setLoading(true);
+                auth.signOut().then(() => {
+                  history.push({ pathname: "/join" });
+                  setLoading(false);
+                });
+              }}
             >
               {loading ? <CircularProgress /> : "Sign Out"}
             </Button>
-            <ReferralCard referToId={referToId} username={userData['firstName']}/>
+            <ReferralCard
+              referToId={referToId}
+              username={userData["firstName"]}
+            />
             <ReviewCard />
             <UploadCard />
             <SubmitCard />

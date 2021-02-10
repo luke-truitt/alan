@@ -38,6 +38,10 @@ button.selected {
   padding-bottom: 2rem;
 }
 
+h6.form-item-question {
+  padding-bottom: 7.5px;
+}
+
 div.form-item-container.column-container {
   display: flex;
   flex-direction: row;
@@ -94,7 +98,4 @@ div.form-container {
 
 .embedded-email-input-container > * {
   align-self: center;
-}
-.embedded-email-input-field > * {
-  height: 60px;
 }

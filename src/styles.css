@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&family=Lato&family=Vollkorn&display=swap");
 .column-container {
   display: flex;
   flex-direction: row;
@@ -21,7 +23,7 @@ span.word-highlight {
   box-shadow: 0px -9px 0px #d8dbe8 inset;
 }
 
-.landing-title span.word-highlight {
+.home-title span.word-highlight {
   border-bottom: 1px solid #d8dbe8;
   box-shadow: 0px -10px 0px #d8dbe8 inset;
 }

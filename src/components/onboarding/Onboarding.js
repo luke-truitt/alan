@@ -4,6 +4,7 @@ import {
   Select,
   FormControl,
   MenuItem,
+  Slide,
   Button,
   ThemeProvider,
 } from "@material-ui/core";
@@ -400,48 +401,64 @@ function Onboarding(props) {
 
   const loadScreen = () => {
     setLoadingScreen(true);
-  }
+  };
+
+  const fadeProps = {
+    timeout: {
+      enter: 1500,
+    },
+  };
   setTimeout(() => loadScreen(), 5000);
   return (
     <ThemeProvider theme={primaryTheme} className="onboarding">
-      <div className="onboarding-c0 column-container">
-        {panelActive ? <OnboardingTimeline activeStep={step} /> : <InitPanel />}
-        <div className="onboarding-c1-right row-container">
-          { loadingScreen ? 
-          <div><ProgressBar
-            value={step * (100 / forms.length)}
-            className="onboarding-c1-right-progress-bar"
-          />
-          <div container className="onboarding-c1-right-div">
-            <Form
-              title={forms[step - 1].title}
-              formItems={forms[step - 1].items}
-              fields={fields}
-              data={{}}
-              validForm={(d) => checkValid(d)}
-              onUpdate={onDataUpdate}
-            />
-            <div className="onboarding-button-div column-container">
-              <div className="onboarding-button">
-                <Button variant="contained" color="primary" onClick={backClick}>
-                  Previous
-                </Button>
-              </div>
-              <div className="onboarding-button">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  disabled={nextDisabled()}
-                  onClick={forwardClick}
-                >
-                  Next
-                </Button>
+      <Slide in direction="left" {...fadeProps}>
+        <div className="onboarding-c0 column-container">
+          {panelActive ? (
+            <OnboardingTimeline activeStep={step} />
+          ) : (
+            <InitPanel />
+          )}
+          <div className="onboarding-c1-right row-container">
+            <div>
+              <ProgressBar
+                value={step * (100 / forms.length)}
+                className="onboarding-c1-right-progress-bar"
+              />
+              <div container className="onboarding-c1-right-div">
+                <Form
+                  title={forms[step - 1].title}
+                  formItems={forms[step - 1].items}
+                  fields={fields}
+                  data={{}}
+                  validForm={(d) => checkValid(d)}
+                  onUpdate={onDataUpdate}
+                />
+                <div className="onboarding-button-div column-container">
+                  <div className="onboarding-button">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={backClick}
+                    >
+                      Previous
+                    </Button>
+                  </div>
+                  <div className="onboarding-button">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      disabled={nextDisabled()}
+                      onClick={forwardClick}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          </div> : <Loading />}
         </div>
-      </div>
+      </Slide>
     </ThemeProvider>
   );
 }

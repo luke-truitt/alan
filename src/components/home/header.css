@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+.header-c0 {
+  background-color: #4056a1;
+  height: 75px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 1px 5px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.header-button-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.header-button-container > button {
+  height: 50px;
+  width: 10vw;
+  margin-right: 2rem;
+}
+
+h4.logo-text {
+  font-family: "Crimson Text", serif;
+  letter-spacing: 2px;
+  color: white;
+  margin-left: 2rem;
+}

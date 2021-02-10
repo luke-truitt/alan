@@ -1,4 +1,4 @@
-.landing-c1 {
+.home-c1 {
   width: 90%;
   max-width: 600px;
   display: flex;
@@ -6,10 +6,11 @@
   margin-right: -10rem;
   justify-content: center;
 }
-h2.landing-title {
+h2.home-title {
   margin-bottom: 3rem;
   text-align: left;
   color: #2d2d2d;
+  letter-spacing: "-5px";
   /* background-color: black;
   color: transparent;
   text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.3);
@@ -17,14 +18,17 @@ h2.landing-title {
   -moz-background-clip: text;
   background-clip: text; */
 }
-p.landing-subtitle {
+p.home-subtitle {
   text-align: left;
   line-height: 120%;
   font-size: 1.2rem;
 }
+.home-root {
+  width: 100%;
+  height: 100vh;
+}
 
-.landing-c0 {
-  width: 100vw;
+.home-c0 {
   margin: auto;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -32,52 +36,59 @@ p.landing-subtitle {
   display: flex;
   flex-direction: column;
 }
+span.home-mobile-button-text {
+  display: none;
+}
 
 @media only screen and (max-width: 800px) {
-  div.landing-c1 {
+  div.home-c1 {
     max-width: 80%;
     margin: auto;
     margin-top: 2rem;
     height: 100%;
   }
-  h2.landing-title {
+  h2.home-title {
     text-align: center;
     font-size: 2rem;
   }
-  p.landing-subtitle {
+  p.home-subtitle {
     font-size: 1rem;
     text-align: center;
   }
-  div.landing-c0 {
+  div.home-c0 {
     overflow: scroll;
     height: 100vh;
     flex-direction: column;
   }
-  span.landing-page-button-text {
-    margin-top: 1rem;
+  span.home-web-button-text {
+    display: none;
   }
-  span.landing-page-web-button-text {
-    visibility: hidden;
+  span.home-mobile-button-text {
+    display: block;
   }
-  .landing-ben {
+  .home-ben {
     margin: auto;
     margin-top: 2rem;
     height: 100%;
 
     /* visibility: hidden; */
   }
-  img.landing-ben {
+  img.home-ben {
     min-width: 100%;
     height: auto;
     float: bottom;
     align-self: flex-end;
   }
 }
-div.landing-c1.row-container > div > button {
-  line-height: 1.25rem;
+
+span.purple-highlight {
+  background-image: url("./../../images/text-decoration/purple-highlight.svg");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  padding-bottom: 0rem;
 }
 
-img.landing-ben {
+img.home-ben {
   z-index: -2;
   height: auto;
   max-width: 50%;
