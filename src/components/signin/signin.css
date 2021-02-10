@@ -60,13 +60,6 @@ p.join-timeline-step-text {
   width: 4rem;
   margin-right: 2rem;
 }
-h2.purple-highlight {
-  background-image: url("./../../images/text-decoration/purple-highlight.svg");
-  background-position: left bottom;
-  background-size: 6.5rem;
-  background-repeat: no-repeat;
-  margin-bottom: 4rem;
-}
 
 .join-form > button {
   margin-bottom: 1rem;
@@ -129,4 +122,16 @@ span.join-phone-explainer {
     width: 100%;
     height: 100%;
   }
+}
+
+span.sign-in-forgot-pass-text {
+  color: #4056a1;
+  margin-top: -0.75rem;
+  padding-bottom: 1rem;
+  text-align: right;
+}
+
+p.sign-in-sign-up-text {
+  padding-top: 0.5rem;
+  font-size: 0.9rem;
 }

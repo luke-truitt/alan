@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./signin.css";
+import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
@@ -16,6 +17,7 @@ import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import "./../inputs/inputs.css";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -82,7 +84,9 @@ function JoinTimeline() {
 function SignInForm(props) {
   const history = useHistory();
   let location = useLocation();
-  const [email, setEmail] = useState(location.state == null ? "" : location.state["email"]);
+  const [email, setEmail] = useState(
+    location.state == null ? "" : location.state["email"]
+  );
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -91,15 +95,18 @@ function SignInForm(props) {
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
-  
+
   const signInWithEmailAndPasswordHandler = (event) => {
     event.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).then(()=> {
-      navTo();
-    }).catch(error => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navTo();
+      })
+      .catch((error) => {
         setError("Error signing in with password and email!");
         console.error("Error signing in with password and email", error);
-    });
+      });
     console.log(auth);
   };
   const navTo = () => {
@@ -122,7 +129,11 @@ function SignInForm(props) {
 
   return (
     <div className="join-form row-container">
-      {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
+      {error !== null && (
+        <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
+          {error}
+        </div>
+      )}
       <TextInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -139,6 +150,13 @@ function SignInForm(props) {
         placeholder="Enter Password"
         type="password"
       />
+      <Typography
+        variant="caption"
+        className="sign-in-forgot-pass-text"
+        onClick={() => history.push({ pathname: "/resetpassword" })}
+      >
+        Forgot your password?
+      </Typography>
 
       <Button
         className="join-button"
@@ -175,18 +193,14 @@ function SignInForm(props) {
         {googleLoading ? <CircularProgress /> : "Sign in with Google"}
       </Button>
       <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
-          Forgot Your Password?
-        </Typography>
-      <div className="join-or-horizontal-line" />
-      <div style={{display: "row"}}>
-      <Button className="reset-button" variant="contained" color="primary" style={{width: "45%", float: "left", marginTop: "20px"}} onClick={() => history.push({pathname: "/resetpassword"})}>
-        Reset Password
-      </Button>
-      <Button className="set-up-button" style={{width: "45%", float: "right", marginTop: "20px"}} variant="contained" color="primary" onClick={() => history.push({pathname: "/join"})}>
-        Set Up Account
-      </Button>
-      </div>
+      <Typography
+        variant="body1"
+        className="sign-in-sign-up-text"
+        color="textSecondary"
+        onClick={() => history.push({ pathname: "/join" })}
+      >
+        Not a member? <span className="join-sign-in-button">Sign Up</span>
+      </Typography>
     </div>
   );
 }
@@ -211,11 +225,11 @@ function SignIn() {
             <Typography
               color="textPrimary"
               variant="h2"
-              className="join-page-title purple-highlight"
+              className="form-title "
             >
-              Sign In
+              <span className="purple-highlight">Sign In</span>
             </Typography>
-            <SignInForm/>
+            <SignInForm />
           </div>
         </div>
       </div>
