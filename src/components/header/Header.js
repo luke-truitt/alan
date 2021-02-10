@@ -11,14 +11,19 @@ function Header(props) {
 
   const user = useContext(AuthContext);
   const onSignIn = () => { if(user){history.push({ pathname: "/account" })}else{history.push({ pathname: "/signin" })} };
-
+  const onSignUp = () => {
+    props.signUp();
+  }
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="header-c0 column-container">
-        <Typography variant="h4" className="logo-text">
+        <Typography variant="h4" className="logo-text" onClick={() => history.push({pathname: "/"})}>
           ALAN
         </Typography>
         <div className="header-button-container">
+          <Button onClick={onSignUp} variant="contained" color="primary">
+            Sign Up
+          </Button>
           <Button onClick={onSignIn} variant="outlined" color="primary">
             Sign in
           </Button>

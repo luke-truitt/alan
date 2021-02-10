@@ -195,7 +195,13 @@ img.placeholder-block {
   .account-page-card-icon {
     margin-bottom: 10px;
   }
-  .column-container {
+  .referral-card-content.column-container {
+    flex-direction: column;
+  }
+  .review-card-content.column-container {
+    flex-direction: column;
+  }
+  .account-page-c2.column-container {
     flex-direction: column;
   }
   .referral-card-email-container {

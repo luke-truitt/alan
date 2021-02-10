@@ -2,7 +2,7 @@ h1.refund-amount {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 8rem;
+  font-size: 7rem;
 }
 h6.onboard-complete-title {
   background: linear-gradient(to right, #744fc2, 60%, #002e72);
@@ -26,7 +26,7 @@ button.onboard-complete-apply-button {
   margin: auto;
 }
 .onboard-complete-c1 {
-  width: 60%;
+  width: 70%;
   margin: auto;
   margin-bottom: 4rem;
   padding-bottom: 6rem;
@@ -138,14 +138,6 @@ h6.onboard-complete-fee-text {
   height: 20vw;
   align-items: center;
 
-  /* background-image: linear-gradient(#f6f6f6, #f6f6f6),
-    radial-gradient(circle at top left, #744fc2, #002e72);
-  background-origin: border-box;
-  background-clip: content-box, border-box, padding-box; */
-  /* background: linear-gradient(to right, #744fc2, 60%, #002e72);
-  background-clip: padding-box;
-  /* border: solid 5px transparent;
-  background-color: #f6f6f6; */
 }
 
 h6.onboard-complete-help-text {
@@ -203,10 +195,18 @@ img.onboard-complete-help-arrow {
     font-size: 5rem;
   }
 
+  .refund-breakdown-row-c1.column-container {
+    flex-direction: row;
+  }
+
   button.onboard-complete-apply-button {
     font-size: 1.5rem;
     margin-top: 3rem;
     height:auto;
   }
+  .refund-breakdown-c0 {
+    width: 100%;
+  }
+  
 }
 

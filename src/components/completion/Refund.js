@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
-import "./onboard-complete.css";
+import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import whiteArrow from "./../../images/refund-page/arrow-white.svg";
 import { useState } from "react";
@@ -21,7 +21,7 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
-function OnboardCompletePage(props) {
+function Refund(props) {
   let location = useLocation();
   const history = useHistory();
 
@@ -61,7 +61,7 @@ function OnboardCompletePage(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0-top row-container">
         {/* <div className="header" /> */}
-        <div className="onboard-complete-help-button-container">
+        {/* <div className="onboard-complete-help-button-container">
           <div
             className="onboard-complete-help-button row-container "
             onClick={navTo}
@@ -71,7 +71,7 @@ function OnboardCompletePage(props) {
             </Typography>
             <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
-        </div>
+        </div> */}
         <div className="onboard-complete-c1">
           <div className="onboard-complete-c1-content">
             <Typography className="onboard-complete-title" variant="h6">
@@ -108,4 +108,4 @@ function OnboardCompletePage(props) {
     </ThemeProvider>
   );
 }
-export default OnboardCompletePage;
+export default Refund;

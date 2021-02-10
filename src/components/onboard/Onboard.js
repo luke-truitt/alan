@@ -10,7 +10,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import "./onboard.css";
-import Header from "./../home/Header";
+import Header from "./../header/Header";
 import "../../styles.css";
 import snap from "../../images/onboard/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
@@ -150,7 +150,9 @@ function Onboard(props) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
   };
-
+  const signUp = () => {
+    alert("Finish the calculator so that we can get info on your refund.")
+  }
   const navToRefund = () => {
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
@@ -400,7 +402,7 @@ function Onboard(props) {
           tabIndex={-1}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
-          <Header />
+          <Header signUp={signUp}/>
 
           {panelActive ? (
             <OnboardingTimeline activeStep={step} />
