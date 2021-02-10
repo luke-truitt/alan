@@ -10,6 +10,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import "./onboard.css";
+import Header from "./../home/Header";
 import "../../styles.css";
 import snap from "../../images/onboard/snap.svg";
 import { withStyles } from "@material-ui/core/styles";
@@ -399,6 +400,8 @@ function Onboard(props) {
           tabIndex={-1}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
+          <Header />
+
           {panelActive ? (
             <OnboardingTimeline activeStep={step} />
           ) : (

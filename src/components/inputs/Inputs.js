@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+
 import {
   ThemeProvider,
   Typography,
@@ -202,6 +204,13 @@ export function Dropdown(props) {
   const checkValid = (val) => {
     props.validData({ [props.stateName]: val.length > 0 });
   };
+  const useStyles = makeStyles((theme) => ({
+    menuPaper: {
+      maxHeight: 180,
+      border: "1px solid #c3c3c3",
+    },
+  }));
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -222,6 +231,7 @@ export function Dropdown(props) {
         </Typography>
         <FormControl variant="outlined">
           <Select
+            MenuProps={{ classes: { paper: classes.menuPaper } }}
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={props.fields[props.stateName]}
             onChange={(e) => {

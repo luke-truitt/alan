@@ -1,10 +1,12 @@
 .onboard-c0 {
   width: 100vw;
   height: 100vh;
+  overflow-y: hidden;
 }
 .onboard-c1-left {
   width: 35vw;
   height: 100vh;
+  padding-top: 75px;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,10 +25,9 @@
 }
 .onboard-c1-right {
   width: 65vw;
-  height: 100vh;
-  overflow: hidden;
+  padding-top: 75px;
   box-shadow: -3px 0px 6px;
-  overflow-y: auto;
+  overflow: auto;
 }
 
 .onboard-c1-left-title {
@@ -57,9 +58,9 @@
 }
 
 .onboard-c1-right-div {
-  padding-top: 5rem;
+  padding-top: 3rem;
   margin-left: 10%;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
   margin-right: 1rem;
   width: 90%;
   max-width: 500px;
@@ -70,7 +71,7 @@ div.onboard-button-div {
   justify-content: space-between;
   vertical-align: middle;
   height: 60px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 div.onboard-button {
@@ -85,7 +86,7 @@ div.onboard-button > button {
   width: 100%;
 }
 h4.form-title {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   letter-spacing: "-10px";
 }
 
@@ -106,7 +107,7 @@ h4.onboard-loading-title {
 }
 
 .form-container {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 div.onboard-loading-subtitle {
   margin-top: 2rem;
