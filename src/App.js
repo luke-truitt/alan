@@ -19,7 +19,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 import { useEffect, useState } from "react";
 import "./global.css";
 import JoinPage from "./components/join/JoinPage";
-import OnboardCompletePage from "./components/completion/OnboardCompletePage.js";
+import OnboardCompletePage from "./components/completion/Refund.js";
 import AccountPage from "./components/account/AccountPage.js";
 
 import firebase from "firebase";

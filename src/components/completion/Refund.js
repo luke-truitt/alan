@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
-import "./onboard-complete.css";
+import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import whiteArrow from "./../../images/refund-page/arrow-white.svg";
 import { useState } from "react";
@@ -21,7 +21,7 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
-function OnboardCompletePage(props) {
+function Refund(props) {
   let location = useLocation();
   const history = useHistory();
 
@@ -108,4 +108,4 @@ function OnboardCompletePage(props) {
     </ThemeProvider>
   );
 }
-export default OnboardCompletePage;
+export default Refund;
