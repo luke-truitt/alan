@@ -3,7 +3,7 @@ import subtract_icon from "../../images/icons/subtract-outline-white.svg";
 import multiply_icon from "../../images/icons/multiply-outline-dark.svg";
 import equal_icon from "../../images/icons/equal-outline-purple.svg";
 import { ThemeProvider, Typography, Tooltip } from "@material-ui/core";
-import { primaryTheme } from "./../../utils/constants";
+import { primaryTheme } from "../../utils/constants";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 import Zoom from "@material-ui/core/Zoom";

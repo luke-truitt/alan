@@ -19,11 +19,12 @@ import { AuthProvider } from "./providers/AuthProvider";
 import { useEffect, useState } from "react";
 import "./global.css";
 import JoinPage from "./components/join/JoinPage";
-import OnboardCompletePage from "./components/completion/Refund.js";
+import OnboardCompletePage from "./components/refund/Refund.js";
 import AccountPage from "./components/account/AccountPage.js";
 
 import firebase from "firebase";
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 import { Fade } from "@material-ui/core";
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";
@@ -94,6 +95,7 @@ function App() {
           </Switch>
           <RouteChangeTracker />
         </Router>
+        <Footer/>
       </AuthProvider>
     </div>
   );
