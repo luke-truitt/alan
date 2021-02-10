@@ -95,9 +95,9 @@ function Home() {
 
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header />
+      <div className="page-root row-container">
+        <Header />
 
-      <div className="home-root-container row-container">
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
@@ -118,14 +118,7 @@ function Home() {
                 navTo={navTo}
                 invalidClick={invalidClick}
                 loading={loading}
-              />{" "}
-              <Typography
-                variant="caption"
-                className="email-validation-text"
-                style={{ display: invalid ? "" : "none", color: "red" }}
-              >
-                Make sure you use a valid email!
-              </Typography>
+              />
               <Typography
                 variant="body2"
                 color="textPrimary"

@@ -477,29 +477,41 @@ export function EmbeddedEmailInput(props) {
     </span>
   );
 
+  const ValidationTextField = props.invalid ? (
+    <TextField
+      error
+      helperText="Please enter a valid email."
+      type="email"
+      label="Enter email"
+      className="form-item-text-field embedded-email-input-field"
+      variant="outlined"
+      value={props.emailValue}
+      onKeyPress={(e) => props.onKeyPress(e, valid)}
+      InputProps={{ disableUnderline: true }}
+      onChange={(e) => {
+        props.setEmail(e.target.value);
+        checkValid(e.target.value);
+      }}
+    />
+  ) : (
+    <TextField
+      type="email"
+      label="Enter email"
+      className="form-item-text-field embedded-email-input-field"
+      variant="outlined"
+      value={props.emailValue}
+      onKeyPress={(e) => props.onKeyPress(e, valid)}
+      InputProps={{ disableUnderline: true }}
+      onChange={(e) => {
+        props.setEmail(e.target.value);
+        checkValid(e.target.value);
+      }}
+    />
+  );
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
-        <TextField
-          type="email"
-          label="Enter email"
-          className="form-item-text-field embedded-email-input-field"
-          variant={props.invalid ? "standard" : "outlined"}
-          value={props.emailValue}
-          onKeyPress={(e) => props.onKeyPress(e, valid)}
-          style={{
-            borderColor: "red",
-            borderWidth: props.invalid ? "1px" : "0px",
-            borderStyle: "solid",
-            borderRadius: "2px",
-            paddingLeft: "3px",
-          }}
-          InputProps={{ disableUnderline: true }}
-          onChange={(e) => {
-            props.setEmail(e.target.value);
-            checkValid(e.target.value);
-          }}
-        />
+        {ValidationTextField}
         <Button
           className="embedded-email-input-button"
           variant="contained"

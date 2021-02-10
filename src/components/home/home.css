@@ -1,84 +1,38 @@
+.home-c0 {
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  margin: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
 .home-c1 {
   width: 90%;
   max-width: 600px;
-  display: flex;
   margin-left: 5rem;
   margin-right: -10rem;
+
   justify-content: center;
 }
 h2.home-title {
   margin-bottom: 3rem;
   text-align: left;
-  color: #2d2d2d;
-  letter-spacing: "-5px";
-  /* background-color: black;
-  color: transparent;
-  text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.3);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text; */
 }
 p.home-subtitle {
   text-align: left;
-  line-height: 120%;
   font-size: 1.2rem;
 }
-.home-root {
-  width: 100%;
-  height: 100vh;
-}
 
-.home-c0 {
-  margin: auto;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 span.home-mobile-button-text {
   display: none;
 }
 
-@media only screen and (max-width: 800px) {
-  div.home-c1 {
-    max-width: 80%;
-    margin: auto;
-    margin-top: 2rem;
-    height: 100%;
-  }
-  h2.home-title {
-    text-align: center;
-    font-size: 2rem;
-  }
-  p.home-subtitle {
-    font-size: 1rem;
-    text-align: center;
-  }
-  div.home-c0 {
-    overflow: scroll;
-    height: 100vh;
-    flex-direction: column;
-  }
-  span.home-web-button-text {
-    display: none;
-  }
-  span.home-mobile-button-text {
-    display: block;
-  }
-  .home-ben {
-    margin: auto;
-    margin-top: 2rem;
-    height: 100%;
-
-    /* visibility: hidden; */
-  }
-  img.home-ben {
-    min-width: 100%;
-    height: auto;
-    float: bottom;
-    align-self: flex-end;
-  }
+img.home-ben {
+  height: auto;
+  max-width: 50%;
+  align-self: flex-end;
+  z-index: -2;
 }
 
 span.purple-highlight {
@@ -88,13 +42,34 @@ span.purple-highlight {
   padding-bottom: 0rem;
 }
 
-img.home-ben {
-  z-index: -2;
-  height: auto;
-  max-width: 50%;
-  align-self: flex-end;
-}
+@media only screen and (max-width: 800px) {
+  div.home-c1 {
+    margin: auto;
+    height: 100%;
+  }
+  div.home-c0 {
+    padding-top: 8rem;
+    overflow: scroll;
+    flex-direction: column;
+  }
 
-span.email-validation-text {
-  margin-top: -1rem;
+  h2.home-title {
+    text-align: center;
+    font-size: 2.3rem;
+  }
+  p.home-subtitle {
+    text-align: center;
+  }
+
+  .home-ben {
+    margin: auto;
+    margin-top: 2rem;
+    min-width: 100%;
+  }
+  span.home-web-button-text {
+    display: none;
+  }
+  span.home-mobile-button-text {
+    display: block;
+  }
 }

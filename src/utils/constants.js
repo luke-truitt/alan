@@ -25,6 +25,16 @@ export const primaryTheme = createMuiTheme({
   // shadows: ["none"],
   overrides: {
     body2: { color: "#6D6D6D" },
+    MuiInputBase: {
+      root: {
+        height: "50px",
+      },
+    },
+    MuiTextField: {
+      root: {
+        height: "50px",
+      },
+    },
     MuiFormLabel: {
       root: {
         "&$focused": {
