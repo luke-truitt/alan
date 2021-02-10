@@ -34,12 +34,8 @@ img.home-ben {
   align-self: flex-end;
   z-index: -2;
 }
-
 span.purple-highlight {
-  background-image: url("./../../images/text-decoration/purple-highlight.svg");
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  padding-bottom: 0rem;
+  padding-bottom: -1rem;
 }
 
 @media only screen and (max-width: 800px) {

@@ -4,6 +4,7 @@
 }
 .onboard-c1-left {
   width: 35vw;
+  height: 100vh;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,7 +23,10 @@
 }
 .onboard-c1-right {
   width: 65vw;
-  overflow-y: scroll;
+  height: 100vh;
+  overflow: hidden;
+  box-shadow: -3px 0px 6px;
+  overflow-y: auto;
 }
 
 .onboard-c1-left-title {
@@ -38,7 +42,11 @@
   width: 15vw;
   margin-top: 2rem;
 }
-
+.form-div > * > *:last-child {
+  height: 500px;
+  width: 100%;
+  padding-right: 2rem;
+}
 .onboard-c1-left-div {
   width: 80%;
   height: 100%;
@@ -116,10 +124,6 @@ div.onboard-loading-subtitle {
   .onboard-c1-left {
     display: none !important;
   }
-  .onboard-c1-right {
-    width: 100vw;
-    align-items: center;
-  }
   .onboard-c0 {
     background-image: url("./../../images/bg/bg-pattern-third.svg");
     background-repeat: no-repeat;
@@ -134,9 +138,15 @@ div.onboard-loading-subtitle {
     background-color: #f6f6f6;
     box-shadow: -0.1em 0.1em 2em;
   }
+  button {
+    margin-left: 0;
+  }
   .onboard-c1-right-div {
     width: 90%;
     margin-bottom: 5rem;
     margin: auto;
+  }
+  .form-div {
+    padding-bottom: 2rem;
   }
 }

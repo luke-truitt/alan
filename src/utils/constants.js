@@ -63,3 +63,15 @@ export const fadeDefault = {
     enter: 2000,
   },
 };
+
+export const slideDefault = {
+  timeout: {
+    enter: 1000,
+  },
+};
+
+export const shortFade = {
+  timeout: {
+    enter: 10000,
+  },
+};

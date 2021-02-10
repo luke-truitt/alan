@@ -9,6 +9,8 @@ import {
   TextField,
   InputAdornment,
   OutlinedInput,
+  Slide,
+  NativeSelect,
   CircularProgress,
   InputLabel,
 } from "@material-ui/core";
@@ -400,12 +402,11 @@ export function Form(props) {
       onChange={(e, item) => onChange(e, item)}
     />
   ));
-
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="form-container">
         <Typography variant="h4" color="textPrimary" className="form-title">
-          <span className="word-highlight">{props.title}</span>
+          <span className="purple-highlight">{props.title}</span>
         </Typography>
         <div className="form-inputs">{inputs}</div>
       </div>

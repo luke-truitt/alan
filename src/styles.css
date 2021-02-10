@@ -15,17 +15,18 @@
   flex-direction: column;
 }
 
+span.purple-highlight {
+  background-image: url("./images/text-decoration/purple-highlight.svg");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  padding-bottom: 0.75rem;
+}
 #menu-
   > div.MuiPaper-root-1121.MuiMenu-paper-1041.MuiPopover-paper-1044.MuiPaper-rounded-1122
   > ul
   > li {
   line-height: 3rem;
   color: #6d6d6d;
-}
-
-span.word-highlight {
-  border-bottom: 1px solid #d8dbe8;
-  box-shadow: 0px -9px 0px #d8dbe8 inset;
 }
 
 .home-title span.word-highlight {
