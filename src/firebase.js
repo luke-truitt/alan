@@ -18,7 +18,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = (referToId, referById) => {
+export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
   return auth.signInWithPopup(provider).then((result) => {
     if(referToId=="") {
       referToId = uuidv4();
@@ -29,7 +29,7 @@ export const signInWithGoogle = (referToId, referById) => {
     const firstName = user.displayName.split(" ")[0];
     const lastName = "";
     const phone = user.phoneNumber;
-    generateUserDocument(user, { firstName, lastName, phone, referToId, referById })
+    generateUserDocument(user, { firstName, lastName, phone, referToId, referById,refundBreakdown })
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -55,6 +55,17 @@ export const getUserDoc = async (user) => {
     console.log('Document data:', doc.data());
     return doc.data()
   }
+}
+
+export const updateUser = async (uid, fields) => {
+  try {
+    const userRef = firestore.collection('users').doc(uid);
+    const res = await userRef.update(fields);
+    return res;
+  } catch (error) {
+    console.log("error updating record", error);
+    return null;
+  };
 }
 
 export const generateUserDocument = async (user, additionalData) => {

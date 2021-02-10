@@ -18,7 +18,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
 import "./global.css";
-import JoinPage from "./components/join/JoinPage";
+import Join from "./components/join/Join";
 import Refund from "./components/refund/Refund.js";
 import AccountPage from "./components/account/AccountPage.js";
 
@@ -42,7 +42,7 @@ function App() {
               <Home />
             </Route>
             <Route path="/join">
-              <JoinPage
+              <Join
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />
