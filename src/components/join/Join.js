@@ -6,7 +6,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
-import "./join-form.css";
+import "./join.css";
 import Typist from "react-typist";
 import Lottie from "react-lottie";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
@@ -14,7 +14,7 @@ import { useState, useContext } from "react";
 import { AuthContext} from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
-import loadingAnimation from "./../../lotties/coin-loading.json";
+import loadingAnimation from "../../lotties/coin-loading.json";
 import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
 import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
@@ -116,7 +116,7 @@ function JoinForm(props) {
   const [referById, setReferById] = useState(referByIdDirect != "" ? referByIdDirect : location.state == null ? "" : location.state["referById"]);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
-
+  const [refundBreakdown, setRefundBreakdown] = useState(location.state == null ? {} : location.state["breakdown"])
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
@@ -163,7 +163,7 @@ function JoinForm(props) {
       const referToId = props.referToId;
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       
-      generateUserDocument(user, { firstName, lastName, phone, referToId, referById }).then((res) => {
+      generateUserDocument(user, { firstName, lastName, phone, referToId, referById, refundBreakdown }).then((res) => {
         console.log(res);
         setTimeout(navTo, 3000);
         setPassword("");
@@ -244,7 +244,7 @@ function JoinForm(props) {
 
     );
   }
-
+  
   return (
     <div> {(googleLoading||loading) ? <Loading/> : <div className="join-form row-container" tabIndex={-1}
     onKeyPress={(e, val) => keyDown(e, val)}>
@@ -309,7 +309,7 @@ function JoinForm(props) {
         onClick={() => {
           try {
             setGoogleLoading(true);
-            signInWithGoogle(props.referToId, referById).then(() => {
+            signInWithGoogle(props.referToId, referById, refundBreakdown).then(() => {
               navTo();
               setGoogleLoading(false);
             });

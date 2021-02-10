@@ -103,7 +103,7 @@ function AccountCard(props) {
   let valid = props.firstName == "" || props.firstName == null;
 return (
   <div className="user-profile">
-    {valid ? <CircularProgress/> : <div className="avatar-container column-container">{(props.photo == ""||props.photo==null) ? <Avatar alt={props.firstName} style={{backgroundColor: "white", color: "#4056a1", height: "2em", width: "2em"}}>{props.firstName.split('')[0]}</Avatar>: <Avatar alt={props.firstName} src={props.photo} style={{height: "2em", width: "2em"}}/>}<Typography
+    {valid ? <CircularProgress/> : <div className="avatar-container column-container">{(props.photo == ""||props.photo==null) ? <Avatar alt={props.firstName} style={{backgroundColor: "white", color: "#4056a1", height: "2em", width: "2em"}}>{props.firstName.split('')[0].toUpperCase()}</Avatar>: <Avatar alt={props.firstName} src={props.photo} style={{height: "2em", width: "2em"}}/>}<Typography
         variant="h6"
         color="primary"
         className="account-timeline-user-name"
@@ -272,15 +272,20 @@ function ReferralCard(props) {
     </Card>
   );
 }
-
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
 function ReviewCard(props) {
+  
   return (
     <Card className="account-page-card review-card">
       <CardContent className="review-card-content column-container">
         <img src={reviewIcon} className="account-page-card-icon" />
         <Typography variant="body2" className="review-card-text">
           Our team is reviewing your initial information. We’ll be sure to text
-          and email you once they’re done!
+          and email you once they’re done! Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>.
         </Typography>
       </CardContent>
     </Card>
@@ -343,7 +348,7 @@ function InvestCard(props) {
 }
 function AccountPage(props) {
   const user = useContext(AuthContext);
-  console.log(user);
+  
   const location = useLocation();
   const history = useHistory();
 
@@ -351,7 +356,7 @@ function AccountPage(props) {
   const [accountLoading, setAccountLoading] = useState(true);
   const [userData, setUserData] = useState(
     user.user && user.user.firstName != null && user.user.firstName != ""
-      ? { firstName: user.user.firstName }
+      ? { firstName: user.user.firstName, photo: user.user.photoURL }
       : {}
   );
   const [dataLoaded, setDataLoaded] = useState(
@@ -391,7 +396,9 @@ function AccountPage(props) {
       }, 500);
     }
   });
-
+  const onCalculator = () => {
+    history.push({pathname: '/onboard', state: { email: userData['email'], referToId: referToId}});
+  }
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -404,7 +411,7 @@ function AccountPage(props) {
               firstName={
                 Object.keys(userData).length > 0 ? userData["firstName"] : ""
               }
-              userPhoto={Object.keys(userData).length > 0 ? user.user.photoURL : ""}
+              userPhoto={Object.keys(userData).length > 0 ? userData["photo"] : ""}
             />
             <Button
               className="sign-out-button"
@@ -433,17 +440,24 @@ function AccountPage(props) {
             <Typography color="secondary" className="account-title">
               Welcome {props.firstName}
             </Typography>
-            <ReferralCard
+            {Object.keys(userData).length > 2 ? <div><ReferralCard
               referToId={referToId}
               username={userData["firstName"]}
             />
-            <ReviewCard />
+            <ReviewCard 
+              userData={
+                userData
+              }
+              onCalculator={() => onCalculator()}
+            />
             <UploadCard />
             <SubmitCard />
             <div className="account-page-c2 column-container">
               <TrackCard />
               <InvestCard />
             </div>
+            </div>
+            : <CircularProgress/>}
           </div>
         </div>
       </div>

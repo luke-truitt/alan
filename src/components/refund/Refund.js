@@ -11,8 +11,9 @@ import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
+import { AuthContext } from "../../providers/AuthProvider";
 import whiteArrow from "./../../images/refund-page/arrow-white.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 function numberWithCommas(x) {
@@ -24,6 +25,7 @@ function numberWithCommas(x) {
 function Refund(props) {
   let location = useLocation();
   const history = useHistory();
+  const user = useContext(AuthContext);
 
   let email = "";
   let referToId = "";
@@ -46,17 +48,27 @@ function Refund(props) {
   }
 
   
-  const navTo = () => {
-    history.push({
-      pathname: "/join",
-      state: { email: email, referToId: referToId, referById: referById },
-    });
-  };
+  
   try {
     props = location.state["breakdown"];
   } catch {
     redirectHome();
   }
+
+  const navTo = () => {
+    if(user) {
+      history.push({
+        pathname: "/account"
+      });
+    } else {
+      history.push({
+        pathname: "/join",
+        state: { email: email, referToId: referToId, referById: referById, breakdown: props },
+      });
+    }
+    
+  };
+
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0-top row-container">
@@ -101,7 +113,7 @@ function Refund(props) {
         </div>
         <div className="onboard-complete-footer">
           <Button variant="contained" className="onboard-complete-apply-button" onClick={navTo}>
-            Ready to file? Apply now
+            {user ? "Save This Refund Data": "Ready to file? Apply now"}
           </Button>
         </div>
       </div>

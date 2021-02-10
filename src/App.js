@@ -18,8 +18,8 @@ import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
 import "./global.css";
-import JoinPage from "./components/join/JoinPage";
-import OnboardCompletePage from "./components/refund/Refund.js";
+import JoinPage from "./components/join/Join";
+import Refund from "./components/refund/Refund.js";
 import AccountPage from "./components/account/AccountPage.js";
 
 import firebase from "firebase";
@@ -54,7 +54,7 @@ function App() {
               />
             </Route>
             <Route path="/refund">
-              <OnboardCompletePage
+              <Refund
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />
@@ -95,7 +95,6 @@ function App() {
           </Switch>
           <RouteChangeTracker />
         </Router>
-        <Footer/>
       </AuthProvider>
     </div>
   );

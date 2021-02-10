@@ -15,6 +15,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import "./onboard.css";
+import { AuthContext } from "../../providers/AuthProvider";
 import Header from "./../header/Header";
 import "../../styles.css";
 import snap from "../../images/onboard/snap.svg";
@@ -50,9 +51,10 @@ import { Form } from "../inputs/Inputs.js";
 import Lottie from "react-lottie";
 import loadingAnimation from "../../lotties/coin-loading.json";
 import { useLocation, useHistory } from "react-router-dom";
-import { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect, forwardRef, useContext } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import OnboardingTimeline from "./OnboardTimeline";
+import {updateUser} from "../../firebase";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -112,6 +114,7 @@ function Onboard(props) {
   const [formValid, setFormValid] = useState({});
   const [loadingScreen, setLoadingScreen] = useState(true);
   const [open, setOpen] = useState(false);
+  const user = useContext(AuthContext);
 
   const history = useHistory();
   const keyDown = (e, val) => {
@@ -179,6 +182,11 @@ function Onboard(props) {
 
     sendData();
     setLoadingScreen(true);
+    if(user) {
+      console.log(user);
+      console.log(user.user);
+      updateUser(user.user.uid, {'refundBreakdown': data});
+    }
     history.push({
       pathname: "/refund",
       state: {
