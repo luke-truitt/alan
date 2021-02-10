@@ -11,7 +11,6 @@ import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
-import whiteArrow from "./../../images/refund-page/arrow-white.svg";
 import { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
@@ -41,11 +40,10 @@ function Refund(props) {
     history.push({ pathname: "/" });
   };
 
-  if(email=="") {
+  if (email == "") {
     redirectHome();
   }
 
-  
   const navTo = () => {
     history.push({
       pathname: "/join",
@@ -72,35 +70,76 @@ function Refund(props) {
             <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
         </div> */}
-        <div className="onboard-complete-c1">
-          <div className="onboard-complete-c1-content">
-            <Typography className="onboard-complete-title" variant="h6">
-              Your estimated refund amount
-            </Typography>
-            <Typography
-              className="refund-amount "
-              variant="h1"
-              color="secondary"
-            >
-              ${numberWithCommas(props.netRefund)}
-            </Typography>
-            <RefundBreakdown breakdown={props}></RefundBreakdown>
-
-            {/* <div className="column-container onboard-complete-card-container">
+        <div className="onboard-complete-c1 column-container">
+          <div className="onboard-complete-c1-content column-container">
+            <div className="onboard-complete-c1-breakdown">
+              <Typography className="onboard-complete-title" variant="h6">
+                Your estimated refund amount
+              </Typography>
+              <Typography
+                className="refund-amount "
+                variant="h1"
+                color="secondary"
+              >
+                ${numberWithCommas(props.netRefund)}
+              </Typography>
+              <RefundBreakdown breakdown={props}></RefundBreakdown>
+            </div>
+            <div className="row-container onboard-complete-card-container">
               <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-content"></CardContent>
+                <CardContent className="onboard-complete-card-1-content"></CardContent>
               </Card>
               <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-content"></CardContent>
+                <CardContent className="onboard-complete-card-2-content">
+                  <div className="refund-card-text">
+                    {" "}
+                    <Typography
+                      color="textSecondary"
+                      variant="h5"
+                      className="refund-card-title"
+                    >
+                      $XXX
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much you lose fucker.
+                    </Typography>
+                  </div>
+                </CardContent>
               </Card>
               <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-content"></CardContent>
+                <CardContent className="onboard-complete-card-3-content">
+                  {" "}
+                  <div className="refund-card-text row-container">
+                    <Typography
+                      color="textSecondary"
+                      variant="h5"
+                      className="refund-card-title"
+                    >
+                      $XXX
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much you lose fucker.
+                    </Typography>
+                  </div>
+                </CardContent>
               </Card>
-            </div> */}
+            </div>
           </div>
         </div>
         <div className="onboard-complete-footer">
-          <Button variant="contained" className="onboard-complete-apply-button" onClick={navTo}>
+          <Button
+            variant="contained"
+            className="onboard-complete-apply-button"
+            onClick={navTo}
+          >
             Ready to file? Apply now
           </Button>
         </div>
