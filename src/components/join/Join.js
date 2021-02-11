@@ -4,8 +4,9 @@ import {
   Typography,
   TextField,
   CircularProgress,
+  Slide,
 } from "@material-ui/core";
-import { primaryTheme } from "../../utils/constants.js";
+import { primaryTheme, slideDefault } from "../../utils/constants.js";
 import "./join.css";
 import Typist from "react-typist";
 import Lottie from "react-lottie";
@@ -384,30 +385,36 @@ function JoinForm(props) {
 function Join(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="join-page-c0 column-container">
-        <div className="join-page-c1-left-shadow" />
-        <div className="join-page-c1-left row-container">
-          <JoinTimeline></JoinTimeline>
-          <Typography
-            variant="caption"
-            color="primary"
-            className="join-disclaimer-text"
-          >
-            *Review process takes about 2-4 business days
-          </Typography>
-        </div>
-        <div className="join-page-c1-right row-container">
-          <div className="join-page-c1-right-content row-container">
-            <Typography color="textPrimary" variant="h2" className="form-title">
-              <span className=" purple-highlight">Join</span>
+      <Slide {...slideDefault} in direction="left">
+        <div className="join-page-c0 column-container">
+          <div className="join-page-c1-left-shadow" />
+          <div className="join-page-c1-left row-container">
+            <JoinTimeline></JoinTimeline>
+            <Typography
+              variant="caption"
+              color="primary"
+              className="join-disclaimer-text"
+            >
+              *Review process takes about 2-4 business days
             </Typography>
-            <JoinForm
-              referToId={props.referToId}
-              setReferTo={(rid) => props.setReferTo(rid)}
-            />
+          </div>
+          <div className="join-page-c1-right row-container">
+            <div className="join-page-c1-right-content row-container">
+              <Typography
+                color="textPrimary"
+                variant="h2"
+                className="form-title"
+              >
+                <span className=" purple-highlight">Join</span>
+              </Typography>
+              <JoinForm
+                referToId={props.referToId}
+                setReferTo={(rid) => props.setReferTo(rid)}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Slide>
     </ThemeProvider>
   );
 }

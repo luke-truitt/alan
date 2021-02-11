@@ -21,8 +21,11 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
   justify-items: center;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+}
+.button-icon {
+  padding-left: 5px;
 }
 
 .account-page-c1-left-shadow {
@@ -38,12 +41,49 @@
   width: 90%;
   margin: auto;
   height: 100%;
+  margin-bottom: 0;
   justify-content: center;
   align-content: center;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 }
 
+.review-card {
+  border: 1px solid #444e9e;
+}
+p.review-card-text {
+  color: #444e9e;
+  font-size: 0.9rem;
+  line-height: 1.15rem;
+}
+.referral-card-email-container {
+  width: 70%;
+  margin-right: 10px;
+}
+.referral-card-email-field > *:last-child {
+  height: 100%;
+}
+.referral-card-email-field {
+  width: 65%;
+}
+
+.referral-card-content-text > span {
+  line-height: 1rem;
+  letter-spacing: 80%;
+  margin-bottom: 2rem;
+}
+.referral-card-btn-container {
+  height: 50px;
+}
+.referral-card-btns-right {
+  width: 40%;
+  margin-left: 0;
+  justify-content: space-between;
+}
+
+h3.welcome-text {
+  margin-bottom: 2em;
+  z-index: 10;
+}
 .account-page-c1-right-content {
   width: 80%;
   margin: auto;
@@ -63,8 +103,8 @@
   box-shadow: none;
   border: 1px solid #c4c4c4;
   margin-left: 0.8rem;
-  margin-right: 0.8rem;
-  margin-bottom: 1.5rem;
+  margin-right: 1rem;
+  margin-bottom: 0.75rem;
 }
 .referral-card-content {
   margin-top: 1rem;
@@ -78,11 +118,6 @@
   opacity: 20%;
 }
 
-p.review-card-text {
-  color: #444e9e;
-  font-size: 1.125rem;
-  font-weight: 400;
-}
 .referral-card-email-container {
   width: 70%;
   margin-right: 10px;
@@ -127,38 +162,22 @@ button.send-invites-button {
   max-width: 80%;
   margin: auto;
 }
-.avatar-container{
-  vertical-align: middle;
-  align-items: center;
-  align-content: center;
-  padding-left: 10px;
-}
 .account-timeline-user-name {
   padding: 10px;
 }
-.user-profile {
-  margin-bottom: 2rem;
-  border: #d2d2d2 0.5px solid;
-  border-radius: 3px;
-  text-align: left;
-  box-shadow: -3px 0px 6px;
-  width: 90%;
-  margin-left:auto;
-  margin-right: auto;
-}
-.avatar {
-  margin-right: 0px;
-}
-
 .account-timeline-step {
   opacity: 20%;
   align-items: center;
   padding-bottom: 2px;
 }
 button.sign-out-button {
-  align-self: flex-end;
-  display: flex;
   z-index: 10;
+  align-self: flex-end;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+div.acct-sign-out {
 }
 p.account-timeline-step-text {
   align-self: baseline;

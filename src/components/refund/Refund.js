@@ -6,9 +6,16 @@ import {
   ThemeProvider,
   Dialog,
   DialogTitle,
-  CircularProgress
+  Fade,
+  Zoom,
+  Slide,
+  CircularProgress,
 } from "@material-ui/core";
-import { primaryTheme } from "../../utils/constants.js";
+import {
+  primaryTheme,
+  slideDefault,
+  shortFade,
+} from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
@@ -18,7 +25,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { getUserDoc } from "../../firebase";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 function numberWithCommas(x) {
-  if(x==null){
+  if (x == null) {
     return "";
   }
   var parts = x.toString().split(".");
@@ -42,9 +49,9 @@ function Refund(props) {
   };
   const loadFromState = () => {
     let em = null;
-  let rtid = null;
-  let rbid = null;
-  let bd = null;
+    let rtid = null;
+    let rbid = null;
+    let bd = null;
     try {
       em = location.state["email"];
     } catch {
@@ -66,74 +73,79 @@ function Refund(props) {
       bd = null;
     }
     return [em, rtid, rbid, bd];
-  }
+  };
   const loadFromUser = async () => {
-  let em = null;
-  let rtid = null;
-  let rbid = null;
-  let bd = null;
-    if(user.user) {
+    let em = null;
+    let rtid = null;
+    let rbid = null;
+    let bd = null;
+    if (user.user) {
       const userData = await getUserDoc(user);
-      em = userData['email'];
-      rtid = userData['referToId'];
-      rbid = userData['referById'];
-      bd = userData['refundBreakdown'];
+      em = userData["email"];
+      rtid = userData["referToId"];
+      rbid = userData["referById"];
+      bd = userData["refundBreakdown"];
     }
-    return {email: em, referToId: rtid, referById: rbid, breakdown: bd};
-  }
+    return { email: em, referToId: rtid, referById: rbid, breakdown: bd };
+  };
   let em, rtid, rbid, bd;
-  useEffect(() => setTimeout(() => {
-    console.log(loadAttempts);
-    console.log("efffectt");
-    if(!user.user && !dataLoaded && loadAttempts > 2) {
-      console.log("no user");
-      if(location.state == null) {
-        console.log('no state');
-        redirect('/',null);
-      }
-      [em, rtid, rbid, bd] = loadFromState();
-      console.log('loaded state', em, bd)
-      if(bd==null) {
-        console.log('no breakdown');
-        redirect('/',null)
-      }
-      console.log('calculator good')
-      setEmail(em);
-      setReferToId(rtid);
-      setReferById(rbid);
-      setBreakdown(bd);
-      setDataLoaded(true);
-    } else if(user.user && !dataLoaded) {
-      console.log('user logged in')
-      loadFromUser().then((res) => {
-        console.log(res)
-        em = res.email;
-        rtid = res.referToId;
-        rbid = res.referById;
-        bd = res.breakdown;
-        if(em == null) {
-          //users not logged in, some bug earlier
-          console.log('bug in log in, email not found')
-          redirect('/',null)
-        } else if(bd == null) {
-          // user hasn't taken calculator, send them to the start of the calculator
-          console.log('no breakdown for user, need to retake quiz')
-          redirect('/onboard', {email: em, referToId: rtid, referById: rbid});
+  useEffect(() =>
+    setTimeout(() => {
+      console.log(loadAttempts);
+      console.log("efffectt");
+      if (!user.user && !dataLoaded && loadAttempts > 2) {
+        console.log("no user");
+        if (location.state == null) {
+          console.log("no state");
+          redirect("/", null);
         }
-        //otherwise they're gtg
-        console.log(bd, 'user ready')
+        [em, rtid, rbid, bd] = loadFromState();
+        console.log("loaded state", em, bd);
+        if (bd == null) {
+          console.log("no breakdown");
+          redirect("/", null);
+        }
+        console.log("calculator good");
         setEmail(em);
         setReferToId(rtid);
         setReferById(rbid);
         setBreakdown(bd);
         setDataLoaded(true);
-      })
-    } else if(!dataLoaded) {
-      setLoadAttempts(loadAttempts + 1);
-    }
-  }, 500));
-  
-  
+      } else if (user.user && !dataLoaded) {
+        console.log("user logged in");
+        loadFromUser().then((res) => {
+          console.log(res);
+          em = res.email;
+          rtid = res.referToId;
+          rbid = res.referById;
+          bd = res.breakdown;
+          if (em == null) {
+            //users not logged in, some bug earlier
+            console.log("bug in log in, email not found");
+            redirect("/", null);
+          } else if (bd == null) {
+            // user hasn't taken calculator, send them to the start of the calculator
+            console.log("no breakdown for user, need to retake quiz");
+            redirect("/onboard", {
+              email: em,
+              referToId: rtid,
+              referById: rbid,
+            });
+          }
+          //otherwise they're gtg
+          console.log(bd, "user ready");
+          setEmail(em);
+          setReferToId(rtid);
+          setReferById(rbid);
+          setBreakdown(bd);
+          setDataLoaded(true);
+        });
+      } else if (!dataLoaded) {
+        setLoadAttempts(loadAttempts + 1);
+      }
+    }, 500)
+  );
+
   const navTo = () => {
     if (user.user) {
       history.push({
@@ -167,41 +179,51 @@ function Refund(props) {
             <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
         </div> */}
-        <div className="onboard-complete-c1 column-container">
-          <div className="onboard-complete-c1-content column-container">
-          
-          {dataLoaded ? <div className="onboard-complete-c1-breakdown">
-            <Card className="onboard-complete-card-mobile">
-                <CardContent
-                  onClick={navTo}
-                  className="onboard-complete-card-1-content"
-                  style={{cursor: "pointer"}}
-                >
-                  <Typography
-                    className="refund-card-button-text"
-                    variant="h4"
-                    color="primary"
-                  >
-                    Help me file my taxes  
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Typography className="onboard-complete-title" variant="h6">
-                Your estimated refund amount
-              </Typography>
-              <Typography
-                className="refund-amount "
-                variant="h1"
-                color="secondary"
-              >
-                ${numberWithCommas(breakdown.netRefund)}
-              </Typography>
-              <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
-              <Card className="onboard-complete-card-mobile">
-                <CardContent className="onboard-complete-card-2-content">
-                  <div className="refund-card-text">
-                    {" "}
-                    <Typography
+
+        <Slide in {...slideDefault} direction="up">
+          <div className="onboard-complete-c1 column-container">
+            <div className="onboard-complete-c1-content column-container">
+              {dataLoaded ? (
+                <div className="onboard-complete-c1-breakdown">
+                  <Card className="onboard-complete-card-mobile">
+                    <CardContent
+                      onClick={navTo}
+                      className="onboard-complete-card-1-content"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <Typography
+                        className="refund-card-button-text"
+                        variant="h4"
+                        color="primary"
+                      >
+                        Help me file my taxes
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  <Zoom in timeout={{ enter: 1000 }}>
+                    <div>
+                      <Typography
+                        className="onboard-complete-title"
+                        variant="h6"
+                      >
+                        Your estimated refund amount
+                      </Typography>
+                      <Typography
+                        className="refund-amount "
+                        variant="h1"
+                        color="secondary"
+                      >
+                        ${numberWithCommas(breakdown.netRefund)}
+                      </Typography>
+
+                      <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
+                    </div>
+                  </Zoom>
+                  <Card className="onboard-complete-card-mobile">
+                    <CardContent className="onboard-complete-card-2-content">
+                      <div className="refund-card-text">
+                        {" "}
+                        <Typography
                       color="textSecondary"
                       variant="h5"
                       className="refund-card-title"
@@ -215,13 +237,76 @@ function Refund(props) {
                     >
                       That's how much the average American college student is owed in a refund.
                     </Typography>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="onboard-complete-card-mobile">
-                <CardContent className="onboard-complete-card-3-content">
-                  {" "}
-                  <div className="refund-card-text row-container">
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="onboard-complete-card-mobile">
+                    <CardContent className="onboard-complete-card-3-content">
+                      {" "}
+                      <div className="refund-card-text row-container">
+                      <Typography
+                      color="textSecondary"
+                      variant="h5"
+                      className="refund-card-title"
+                    >
+                      $473
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
+                    </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : (
+                <CircularProgress />
+              )}
+
+              <div className="row-container onboard-complete-card-container">
+                <Card className="onboard-complete-card">
+                  <CardContent
+                    onClick={navTo}
+                    className="onboard-complete-card-1-content"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Typography
+                      className="refund-card-button-text"
+                      variant="h4"
+                      color="primary"
+                    >
+                      Help me file my taxes <ArrowForwardIosRoundedIcon />
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-2-content">
+                    <div className="refund-card-text">
+                      {" "}
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $2,342
+                    </Typography>
+                    <Typography
+                      color="textSecondary"
+                      variant="caption"
+                      className="refund-card-caption"
+                    >
+                      That's how much the average American college student is owed in a refund.
+                    </Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-3-content">
+                    {" "}
+                    <div className="refund-card-text row-container">
                     <Typography
                       color="textSecondary"
                       variant="h5"
@@ -236,72 +321,14 @@ function Refund(props) {
                     >
                       That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
                     </Typography>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>: <CircularProgress/>}
-            
-            <div className="row-container onboard-complete-card-container">
-              <Card className="onboard-complete-card">
-                <CardContent
-                  onClick={navTo}
-                  className="onboard-complete-card-1-content"
-                  style={{cursor: "pointer"}}
-                >
-                  <Typography
-                    className="refund-card-button-text"
-                    variant="h4"
-                    color="primary"
-                  >
-                    {user ? "Go To Account" : "Help me file"} <ArrowForwardIosRoundedIcon />
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-2-content">
-                  <div className="refund-card-text">
-                    {" "}
-                    <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $2,342
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average American college student is owed in a refund.
-                    </Typography>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-3-content">
-                  {" "}
-                  <div className="refund-card-text row-container">
-                    <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $473
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
-                    </Typography>
-                  </div>
-                </CardContent>
-              </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        </div>
+        </Slide>
+
         <div className="onboard-complete-footer">
           <Button
             variant="contained"

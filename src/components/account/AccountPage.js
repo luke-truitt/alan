@@ -6,13 +6,20 @@ import {
   TextField,
   Button,
   CircularProgress,
-  Avatar
+  Avatar,
+  Slide,
+  Fade,
 } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { DisabledCardFull, DisabledCardHalf, InviteCard } from "./AccountCards";
+import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
-
-import { primaryTheme } from "./../../utils/constants";
+import {
+  primaryTheme,
+  slideDefault,
+  fadeDefault,
+  shortFade,
+} from "./../../utils/constants";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import ChipInput from "material-ui-chip-input";
@@ -91,8 +98,8 @@ function AccountTimelineStep(props) {
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
+    display: "flex",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -100,17 +107,42 @@ const useStyles = makeStyles((theme) => ({
 function AccountCard(props) {
   const classes = useStyles();
   let valid = props.firstName == "" || props.firstName == null;
-return (
-  <div className="user-profile">
-    {valid ? <CircularProgress/> : <div className="avatar-container column-container">{(props.photo == ""||props.photo==null) ? <Avatar alt={props.firstName} style={{backgroundColor: "white", color: "#4056a1", height: "2em", width: "2em"}}>{props.firstName.split('')[0].toUpperCase()}</Avatar>: <Avatar alt={props.firstName} src={props.photo} style={{height: "2em", width: "2em"}}/>}<Typography
-        variant="h6"
-        color="primary"
-        className="account-timeline-user-name"
-      >
-        Welcome {props.firstName}!
-  </Typography></div>}
-  </div>
-)
+  return (
+    <div className="user-profile">
+      {valid ? (
+        <CircularProgress />
+      ) : (
+        <div className="avatar-container column-container">
+          {props.photo == "" || props.photo == null ? (
+            <Avatar
+              alt={props.firstName}
+              style={{
+                backgroundColor: "white",
+                color: "#4056a1",
+                height: "2em",
+                width: "2em",
+              }}
+            >
+              {props.firstName.split("")[0].toUpperCase()}
+            </Avatar>
+          ) : (
+            <Avatar
+              alt={props.firstName}
+              src={props.photo}
+              style={{ height: "2em", width: "2em" }}
+            />
+          )}
+          <Typography
+            variant="h6"
+            color="primary"
+            className="account-timeline-user-name"
+          >
+            Welcome {props.firstName}!
+          </Typography>
+        </div>
+      )}
+    </div>
+  );
 }
 function AccountTimeline(props) {
   const timelineSteps = timelineData.map((data) => (
@@ -123,155 +155,8 @@ function AccountTimeline(props) {
 
   return (
     <div>
-    <AccountCard firstName={props.firstName} photo={props.userPhoto}/>
-    <div className="row-container account-timeline">
-      
-      {timelineSteps}
+      <div className="row-container account-timeline">{timelineSteps}</div>
     </div>
-    </div>
-  );
-}
-
-function EmailChip(props) {
-  const handleAdd = (chip) => {
-    props.onAdd(chip);
-  };
-
-  const handleDelete = (deletedChip) => {
-    props.onDelete(deletedChip);
-  };
-
-  return (
-    <ChipInput
-      label="Enter Emails"
-      alwaysShowPlaceholder="true"
-      fullWidth="true"
-      style={{ overflowY: "scroll", height: "120%" }}
-      value={props.emails}
-      onAdd={(chip) => handleAdd(chip)}
-      onDelete={(chip) => handleDelete(chip)}
-      variant="outlined"
-    />
-  );
-}
-
-function ReferralCard(props) {
-  const [emails, setEmails] = useState([]);
-
-  const handleAdd = (chip) => {
-    setEmails([...emails, chip]);
-  };
-
-  const handleDelete = (deletedChip) => {
-    if (emails.length == 1) {
-      setEmails([]);
-    } else {
-      setEmails([emails.filter((c) => c !== deletedChip)]);
-    }
-  };
-  const sendInvites = () => {
-    if(emails.length < 1) {
-      return;
-    }
-    let i;
-    for (i = 0; i < emails.length; i++) {
-      const email_to = emails[i];
-
-      const templateParams = {
-        from_name: props.username,
-        send_to: email_to,
-      };
-      //     emailjs.send(
-      //       SERVICE_ID,
-      //       TEMPLATE_ID,
-      //       templateParams,
-      //       USER_ID
-      //  ).then(function(response) {
-      //   console.log(email_to, 'SUCCESS!', response.status, response.text);
-      // }, function(error) {
-      //   console.log('FAILED...', error);
-      // });
-    }
-    alert("Invites Sent!");
-    setEmails([]);
-  };
-
-  const handleShareClick = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Alan Will Do Your Taxes",
-          text: `Students lose out on thousands in their refund every year. You don't need to have even worked to get money back. Check it out -- `,
-          url: "/",
-        })
-        .then(() => {
-          console.log("Successfully shared");
-          alert("Successfully shared!");
-        })
-        .catch((error) => {
-          console.error("Something went wrong sharing the blog", error);
-        });
-    }
-  };
-
-  return (
-    <Card className="account-page-card referral-card">
-      <CardContent className="referral-card-content column-container">
-        <img className="account-page-card-icon" src={giftIcon}></img>
-        <div className="referral-card-content-text row-container">
-          <Typography variant="h6" color="textPrimary">
-            Invite a friend to Alan and we'll file both of your taxes for free.
-          </Typography>
-          <Typography variant="caption" color="textSecondary">
-            Know someone missing out on free government $$? We'll waive the $25
-            filing fee for both of you when they file with Alan!
-          </Typography>
-          <div className="referral-card-btn-container column-container">
-            <div className="referral-card-email-container column-container">
-              <EmailChip
-                onAdd={(email) => handleAdd(email)}
-                onDelete={(email) => handleDelete(email)}
-                emails={emails}
-              />
-              <Button
-                className="send-invites-button"
-                variant="contained"
-                color="secondary"
-                onClick={sendInvites}
-              >
-                Send invites
-              </Button>
-            </div>
-            <div className="referral-card-btns-right column-container">
-              <Button
-                className="referral-button"
-                variant="container"
-                color="primary"
-                onClick={() =>
-                  navigator.clipboard.writeText(
-                    BASE_URL + "/?referId=" + props.referToId
-                  )
-                }
-              >
-                <img src={copyIcon} className="copy-button-icon" />
-                Link
-              </Button>
-              {(isSafari || isIOS || isAndroid) && (
-                <Button
-                  className="referral-button"
-                  variant="container"
-                  color="primary"
-                  onClick={handleShareClick}
-                >
-                  <img src={shareIcon} className="share-button-icon" />
-                  Share
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
   );
 }
 function numberWithCommas(x) {
@@ -287,12 +172,22 @@ function ReviewCard(props) {
     <Typography variant="body2" className="review-card-text">Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}, to see a breakdown of this, go <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => history.push({pathname: '/refund'})}>here</a>. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => props.onCalculator()}>here</a>.</Typography>
   </div>
   } else {
-    refundText = <div>
-    <Typography variant="body2" className="review-card-text">Retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>.</Typography>
-  </div>
+    refundText = (
+      <div>
+        <Typography variant="body2" className="review-card-text">
+          Retake the calculator or haven't taken it yet, you can do so{" "}
+          <a
+            style={{ textDecoration: "underline" }}
+            onClick={() => props.onCalculator()}
+          >
+            here
+          </a>
+          .
+        </Typography>
+      </div>
+    );
   }
-    
-  
+
   return (
     <Card className="account-page-card review-card">
       <CardContent className="review-card-content column-container">
@@ -306,62 +201,9 @@ function ReviewCard(props) {
   );
 }
 
-function UploadCard(props) {
-  return (
-    <Card className="account-page-card upload-card">
-      <CardContent className="column-container">
-        <img src={uploadIcon} className="account-page-card-icon" />
-        <Skeleton variant="text" style={{ width: "100%" }} />
-      </CardContent>
-    </Card>
-  );
-}
-function SubmitCard(props) {
-  return (
-    <Card className="account-page-card submit-card">
-      {" "}
-      <CardContent className="disabled-card-content column-container">
-        <img src={submitIcon} className="account-page-card-icon" />
-        <img src={placeholderText} className="placeholder-text" />
-      </CardContent>
-    </Card>
-  );
-}
-function TrackCard(props) {
-  return (
-    <Card className="account-page-card track-card">
-      <CardContent className="disabled-card-content">
-        <Typography className="disabled-card-title" variant="body1">
-          Track your refund
-        </Typography>
-        <div className="column-container">
-          <img src={trackImg} className="disabled-card-img" />
-
-          <img src={placeholderBlock} className="placeholder-block" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-function InvestCard(props) {
-  return (
-    <Card className="account-page-card invest-card">
-      <CardContent className="disabled-card-content">
-        <Typography className="disabled-card-title" variant="body1">
-          Invest your refund
-        </Typography>
-
-        <div className="column-container">
-          <img src={investImg} className="disabled-card-img" />
-
-          <img src={placeholderBlock} className="placeholder-block" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
 function AccountPage(props) {
   const user = useContext(AuthContext);
+
   const location = useLocation();
   const history = useHistory();
   const [loadAttempts, setLoadAttempts] = useState(0);
@@ -395,10 +237,14 @@ function AccountPage(props) {
     }
   }, 1000);
   useEffect(() => {
-    setTimeout(() => {if(!user.user && loadAttempts > 2) {
-      console.log(user)
-      history.push("/signin");
-    } else {setLoadAttempts(loadAttempts + 1)}},500);
+    setTimeout(() => {
+      if (!user.user && loadAttempts > 2) {
+        console.log(user);
+        history.push("/signin");
+      } else {
+        setLoadAttempts(loadAttempts + 1);
+      }
+    }, 500);
     if (user.user && !dataLoaded) {
       setTimeout(() => {
         getUserDoc(user)
@@ -415,22 +261,45 @@ function AccountPage(props) {
     }
   });
   const onCalculator = () => {
-    history.push({pathname: '/onboard', state: { email: userData['email'], referToId: referToId}});
-  }
+    history.push({
+      pathname: "/onboard",
+      state: { email: userData["email"], referToId: referToId },
+    });
+  };
+
+  const welcomeText = (
+    <span>
+      Welcome <span className="purple-highlight"> {userData.firstName}!</span>{" "}
+    </span>
+  );
+  let valid = userData.firstName == "" || userData.firstName == null;
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="account-page-c0 column-container">
-        <div className="account-page-c1-left-shadow" />
-        <div className="account-page-c1-left row-container">
-          <div className="account-page-c1-left-content row=container">
-            <AccountTimeline
-              activeStep={props.activeStep}
-              firstName={
-                Object.keys(userData).length > 0 ? userData["firstName"] : ""
-              }
-              userPhoto={Object.keys(userData).length > 0 ? userData["photo"] : ""}
-            />
+      <Slide {...slideDefault} in direction="left">
+        <div className="account-page-c0 column-container">
+          <div className="account-page-c1-left-shadow" />
+          <div className="account-page-c1-left row-container">
+            <div className="account-page-c1-left-content row-container">
+              <Typography className="welcome-text" variant="h3" color="primary">
+                {valid ? (
+                  <Skeleton />
+                ) : (
+                  <Fade in {...shortFade}>
+                    {welcomeText}
+                  </Fade>
+                )}
+              </Typography>
+              <AccountTimeline
+                activeStep={props.activeStep}
+                firstName={
+                  Object.keys(userData).length > 0 ? userData["firstName"] : ""
+                }
+                userPhoto={
+                  Object.keys(userData).length > 0 ? userData["photo"] : ""
+                }
+              />
+            </div>
             <Button
               className="sign-out-button"
               color="primary"
@@ -449,36 +318,35 @@ function AccountPage(props) {
               }}
             >
               Sign Out
-              <ExitToAppRoundedIcon />
+              <ExitToAppRoundedIcon className="button-icon" />
             </Button>
           </div>
-        </div>
-        <div className="account-page-c1-right">
-          <div className="account-page-c1-right-content row-container">
-            <Typography color="secondary" className="account-title">
-              Welcome {props.firstName}
-            </Typography>
-            {Object.keys(userData).length > 2 ? <div><ReferralCard
-              referToId={referToId}
-              username={userData["firstName"]}
-            />
-            <ReviewCard 
-              userData={
-                userData
-              }
-              onCalculator={() => onCalculator()}
-            />
-            <UploadCard />
-            <SubmitCard />
-            <div className="account-page-c2 column-container">
-              <TrackCard />
-              <InvestCard />
+          <div className="account-page-c1-right">
+            <div className="account-page-c1-right-content row-container">
+              {Object.keys(userData).length > 2 ? (
+                <Fade in {...shortFade}>
+                  <div>
+                    <InviteCard />
+                    <ReviewCard
+                      userData={userData}
+                      onCalculator={() => onCalculator()}
+                    />
+                    <DisabledCardFull icon={uploadIcon} />
+                    <DisabledCardFull icon={submitIcon} />
+
+                    <div className="account-page-c2 column-container">
+                      <DisabledCardHalf image={trackImg} />
+                      <DisabledCardHalf image={investImg} />
+                    </div>
+                  </div>
+                </Fade>
+              ) : (
+                <CircularProgress />
+              )}
             </div>
-            </div>
-            : <CircularProgress/>}
           </div>
         </div>
-      </div>
+      </Slide>
     </ThemeProvider>
   );
 }

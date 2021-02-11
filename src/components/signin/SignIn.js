@@ -4,8 +4,9 @@ import {
   Typography,
   TextField,
   CircularProgress,
+  Slide,
 } from "@material-ui/core";
-import { primaryTheme } from "../../utils/constants.js";
+import { primaryTheme, slideDefault } from "../../utils/constants.js";
 import "./signin.css";
 import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
@@ -219,31 +220,33 @@ function SignInForm(props) {
 function SignIn() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="join-page-c0 column-container">
-        <div className="join-page-c1-left-shadow" />
-        <div className="join-page-c1-left row-container">
-          <JoinTimeline></JoinTimeline>
-          <Typography
-            variant="caption"
-            color="primary"
-            className="join-disclaimer-text"
-          >
-            *Review process takes about 2-4 business days
-          </Typography>
-        </div>
-        <div className="join-page-c1-right row-container">
-          <div className="join-page-c1-right-content row-container">
+      <Slide {...slideDefault} in direction="left">
+        <div className="join-page-c0 column-container">
+          <div className="join-page-c1-left-shadow" />
+          <div className="join-page-c1-left row-container">
+            <JoinTimeline></JoinTimeline>
             <Typography
-              color="textPrimary"
-              variant="h2"
-              className="form-title "
+              variant="caption"
+              color="primary"
+              className="join-disclaimer-text"
             >
-              <span className="purple-highlight">Sign In</span>
+              *Review process takes about 2-4 business days
             </Typography>
-            <SignInForm />
+          </div>
+          <div className="join-page-c1-right row-container">
+            <div className="join-page-c1-right-content row-container">
+              <Typography
+                color="textPrimary"
+                variant="h2"
+                className="form-title "
+              >
+                <span className="purple-highlight">Sign In</span>
+              </Typography>
+              <SignInForm />
+            </div>
           </div>
         </div>
-      </div>
+      </Slide>
     </ThemeProvider>
   );
 }
