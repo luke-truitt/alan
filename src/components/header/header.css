@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 .header-c0 {
-  background-color: #4056a1;
-  height: 75px;
+  background-color: #002e72;
+  height: 60px;
   align-items: center;
   justify-content: space-between;
   box-shadow: 1px 1px 3px;
@@ -18,7 +18,7 @@
 }
 
 .header-button-container > button {
-  height: 50px;
+  height: 40px;
   min-width: 10vw;
   margin-right: 2rem;
 }
