@@ -480,7 +480,7 @@ function Onboard(props) {
                   </div>
                   <div className="onboard-button-div column-container">
                     <div className="onboard-button">
-                      <Button color="secondary" onClick={backClick}>
+                      <Button color="secondary" onClick={backClick} style={{display: step==1 ? "none" : ""}}>
                         Previous
                       </Button>
                     </div>
