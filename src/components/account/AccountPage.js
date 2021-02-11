@@ -104,6 +104,46 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+function AccountCard(props) {
+  const classes = useStyles();
+  let valid = props.firstName == "" || props.firstName == null;
+  return (
+    <div className="user-profile">
+      {valid ? (
+        <CircularProgress />
+      ) : (
+        <div className="avatar-container column-container">
+          {props.photo == "" || props.photo == null ? (
+            <Avatar
+              alt={props.firstName}
+              style={{
+                backgroundColor: "white",
+                color: "#4056a1",
+                height: "2em",
+                width: "2em",
+              }}
+            >
+              {props.firstName.split("")[0].toUpperCase()}
+            </Avatar>
+          ) : (
+            <Avatar
+              alt={props.firstName}
+              src={props.photo}
+              style={{ height: "2em", width: "2em" }}
+            />
+          )}
+          <Typography
+            variant="h6"
+            color="primary"
+            className="account-timeline-user-name"
+          >
+            Welcome {props.firstName}!
+          </Typography>
+        </div>
+      )}
+    </div>
+  );
+}
 function AccountTimeline(props) {
   const timelineSteps = timelineData.map((data) => (
     <AccountTimelineStep
@@ -320,10 +360,7 @@ function AccountPage(props) {
 
   const location = useLocation();
   const history = useHistory();
-  if (!user.user) {
-    console.log(user);
-    history.push("/");
-  }
+  const [loadAttempts, setLoadAttempts] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);
@@ -354,6 +391,14 @@ function AccountPage(props) {
     }
   }, 1000);
   useEffect(() => {
+    setTimeout(() => {
+      if (!user.user && loadAttempts > 2) {
+        console.log(user);
+        history.push("/signin");
+      } else {
+        setLoadAttempts(loadAttempts + 1);
+      }
+    }, 500);
     if (user.user && !dataLoaded) {
       setTimeout(() => {
         getUserDoc(user)
