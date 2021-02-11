@@ -106,7 +106,7 @@ h4.onboard-loading-title {
   margin-bottom: 2rem;
 }
 
-div.onboard-loading-subtitle {
+div.onboard-loading-subtitle > * {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-family: [ "Lato", "sans-serif" ];

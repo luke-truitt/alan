@@ -64,6 +64,14 @@ p.join-timeline-step-text {
   width: 4rem;
   margin-right: 2rem;
 }
+.join-loading-subtitle > * {
+  font-size: 1.5rem;
+  font-family: [ "Lato", "sans-serif" ];
+}
+.join-loading-subtitle {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
 
 .join-form > button {
   margin-bottom: 1rem;
