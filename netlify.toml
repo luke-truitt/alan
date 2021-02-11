@@ -1,8 +1,0 @@
-[[redirects]]
-  from = "/*"
-  to = "/index.html" d
-  status = 404
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
