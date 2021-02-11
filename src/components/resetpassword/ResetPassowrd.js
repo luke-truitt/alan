@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./resetpassword.css";
+import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
@@ -82,14 +83,16 @@ function JoinTimeline() {
 function ResetForm(props) {
   const history = useHistory();
   let location = useLocation();
-  const [email, setEmail] = useState(location.state == null ? "" : location.state["email"]);
+  const [email, setEmail] = useState(
+    location.state == null ? "" : location.state["email"]
+  );
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
-  
-  const sendResetEmail = event => {
+
+  const sendResetEmail = (event) => {
     event.preventDefault();
     setSending(true);
     auth
@@ -116,12 +119,16 @@ function ResetForm(props) {
   const onChange = (e, val) => {
     if (val.stateName == "email") {
       setEmail(e);
-    } 
+    }
   };
 
   return (
     <div className="join-form row-container">
-      {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
+      {error !== null && (
+        <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
+          {error}
+        </div>
+      )}
       <TextInput
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
@@ -136,7 +143,7 @@ function ResetForm(props) {
         color="secondary"
         onClick={(e) => sendResetEmail(e)}
       >
-        {sending ? <CircularProgress/> : "Reset Password"}
+        {sending ? <CircularProgress /> : "Reset Password"}
       </Button>
       <div className="join-or-container column-container">
         <div className="join-or-horizontal-line" />
@@ -146,18 +153,20 @@ function ResetForm(props) {
 
         <div className="join-or-horizontal-line" />
       </div>
-      <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
-          Remembered your password?
-        </Typography>
-      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/signin"})}>
+      <Button
+        className="apple-sign-button"
+        variant="contained"
+        color="primary"
+        onClick={() => history.push({ pathname: "/signin" })}
+      >
         Sign In
       </Button>
-      <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
-          Need to Make and Account?
-        </Typography>
-      <Button className="apple-sign-button" variant="contained" color="primary" onClick={() => history.push({pathname: "/join"})}>
+      <Button
+        className="apple-sign-button"
+        variant="contained"
+        color="primary"
+        onClick={() => history.push({ pathname: "/join" })}
+      >
         Set Up Account
       </Button>
     </div>
@@ -184,11 +193,11 @@ function ResetPassword() {
             <Typography
               color="textPrimary"
               variant="h2"
-              className="join-page-title purple-highlight"
+              className="form-title pass-form-title"
             >
-              Reset Password
+              <span className="purple-highlight">Reset Password</span>
             </Typography>
-            <ResetForm/>
+            <ResetForm />
           </div>
         </div>
       </div>

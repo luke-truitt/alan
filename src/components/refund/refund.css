@@ -266,6 +266,7 @@ img.onboard-complete-help-arrow {
   }
   h1.refund-amount {
     font-size: 5rem;
+    padding-bottom: 3rem;
   }
 
   .refund-breakdown-row-c1.column-container {
@@ -280,6 +281,7 @@ img.onboard-complete-help-arrow {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 5vw;
+    padding-top: 3rem;
   }
   .help-button-icon {
     max-height: 1rem;
@@ -291,14 +293,13 @@ img.onboard-complete-help-arrow {
     width: auto;
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-top: 60px;
+    padding-top: 0rem;
   }
   .onboard-complete-card-mobile {
     display: block;
     width: 80vw;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2em;
     background-color: #f6f6f6 !important;
   }
   .onboard-complete-c1-breakdown {

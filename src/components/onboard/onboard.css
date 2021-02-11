@@ -28,6 +28,7 @@
   padding-top: 75px;
   box-shadow: -3px 0px 6px;
   overflow: auto;
+  justify-content: center;
 }
 
 .onboard-c1-left-title {
@@ -58,9 +59,7 @@
 }
 
 .onboard-c1-right-div {
-  padding-top: 3rem;
   margin-left: 10%;
-  padding-bottom: 1rem;
   margin-right: 1rem;
   width: 90%;
   max-width: 500px;
@@ -84,6 +83,7 @@ div.onboard-button > button {
 
 .onboard-c1-right-progress-bar {
   width: 100%;
+  margin-left: 0px !important;
 }
 h2.form-title {
   padding-bottom: 2rem;
@@ -106,10 +106,7 @@ h4.onboard-loading-title {
   margin-bottom: 2rem;
 }
 
-.form-container {
-  margin-bottom: 1.5rem;
-}
-div.onboard-loading-subtitle {
+div.onboard-loading-subtitle > * {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-family: [ "Lato", "sans-serif" ];
@@ -130,24 +127,52 @@ div.onboard-loading-subtitle {
     background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;
+
+    height: 100vh;
+    overflow: hidden;
   }
   .onboard-c1-right {
     margin: 0rem;
-    margin-top: 5rem;
+    margin-top: rem;
+
+    height: 100vh;
+    overflow: hidden;
     width: 100%;
     padding: 2rem;
-    background-color: #f6f6f6;
     box-shadow: -0.1em 0.1em 2em;
   }
   button {
     margin-left: 0;
   }
-  .onboard-c1-right-div {
-    width: 90%;
-    margin-bottom: 5rem;
-    margin: auto;
-  }
   .form-div {
+    padding-top: 1rem;
+  }
+  .onboard-c1-right-div {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    background-image: url("./../../images/bg/bg-pattern-full-light.svg");
+    background-size: cover;
+    border-radius: 0;
+    background-repeat: no-repeat;
+    margin: 0;
+  }
+  div.form-item-container > .MuiInputBase-root {
+    background-color: #f6f6f6;
+  }
+  .another-div {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100vh;
     padding-bottom: 2rem;
+    padding-top: 3rem;
+    justify-content: space-between;
+    width: 80%;
+    overflow: hidden;
+  }
+  div.onboard-button-div {
+    height: 10vh;
   }
 }

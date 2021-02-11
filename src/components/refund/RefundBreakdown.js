@@ -27,13 +27,14 @@ function numberWithCommas(x) {
 
 const Explanation = withStyles((theme) => ({
   tooltip: {
-    backgroundColor: "white",
-    border: "1px solid #F6F6F6",
-    color: "#2d2d2d",
-    fontSize: ".9rem",
+    backgroundColor: "#f6f6f6",
+    border: "1px solid #86868B",
+    color: "#86868B",
+    fontSize: ".75rem",
     fontWeight: 300,
-    lineHeight: "1rem",
-    padding: ".75rem",
+    lineHeight: ".9rem",
+    padding: ".5rem",
+    width: "250px",
     disableTouchListener: true,
   },
 }))(Tooltip);
@@ -58,7 +59,11 @@ function RefundBreakdownRow(props) {
             <Typography
               variant="body2"
               color="secondary"
-              className={props.label=="Net Refund" ? "refund-label-row" : "refund-breakdown-row-amount"}
+              className={
+                props.label == "Net Refund"
+                  ? "refund-label-row"
+                  : "refund-breakdown-row-amount"
+              }
             >
               ${numberWithCommas(props.amount)}
             </Typography>
@@ -73,8 +78,8 @@ function RefundBreakdownRow(props) {
           )}
         </div>
         <Explanation
-          width={"900px"}
-          placement="right-start"
+          width={"00px"}
+          placement="left-start"
           enterDelay={200}
           leaveDelay={500}
           TransitionComponent={Zoom}
@@ -136,7 +141,6 @@ function RefundBreakdown(props) {
         amount={props.breakdown.netRefund}
         label="Net Refund"
         description={net_refund_description}
-        
       />
     </div>
   );

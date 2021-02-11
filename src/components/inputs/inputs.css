@@ -16,7 +16,7 @@ button.single-select-button {
   margin-right: 20px; */
 }
 .form-container > .form-item-container {
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 button.single-select-button:hover {
   background-color: #d8dbe8;
@@ -111,6 +111,13 @@ div.form-container {
   .single-select-button-container > button:last-child {
     margin-left: 0px;
     margin-right: 0px;
+  }
+  .form-inputs {
+    overflow-y: scroll;
+    max-height: 60vh;
+  }
+  .form-title {
+    height: 10vh;
   }
 }
 

@@ -23,6 +23,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typist from "react-typist";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import OnboardingInitialPanel from "./OnboardInitialPanel";
+import useWindowDimensions from "./useWindowDimensions";
 import {
   income,
   dependence,
@@ -93,13 +94,14 @@ const forms = [
 
 const LinearProgressBar = withStyles((theme) => ({
   root: {
-    height: 10,
+    height: "5px",
+    width: "100vw",
   },
   colorPrimary: {
     backgroundColor: "#FFFFFF",
   },
   bar: {
-    backgroundColor: "#00B32A",
+    backgroundImage: "linear-gradient(to right, #744fc2, 60%, #002e72)",
   },
 }))(LinearProgress);
 
@@ -444,7 +446,109 @@ function Onboard(props) {
     );
   }
 
-  return (
+  const OnboardMobile = () => (
+    <ThemeProvider theme={primaryTheme}>
+      <div container className="onboard-c1-right-div row-container">
+        <ProgressBar value={(step + 1) / forms.length}></ProgressBar>
+        <div className="form-div">
+          <Form
+            title={forms[step - 1].title}
+            formItems={forms[step - 1].items}
+            fields={fields}
+            data={{}}
+            validForm={(d) => checkValid(d)}
+            onUpdate={onDataUpdate}
+            onKeyPress={(e, val) => keyDown(e, val)}
+          />
+        </div>
+        <div className="onboard-button-div column-container">
+          <div className="onboard-button">
+            <Button color="secondary" onClick={backClick}>
+              Previous
+            </Button>
+          </div>
+          <div className="onboard-button">
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={nextDisabled()}
+              onClick={forwardClick}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+
+  const { width, height } = useWindowDimensions();
+  const isMobile = width < 900;
+
+  function OnboardWeb() {
+    return (
+      <ThemeProvider theme={primaryTheme} className="onboard">
+        <Slide in {...slideDefault} direction="left">
+          <div
+            className="onboard-c0 column-container"
+            tabIndex={-1}
+            onKeyPress={(e, val) => keyDown(e, val)}
+          >
+            <Header signUp={handleClickOpen} />
+
+            {panelActive ? (
+              <OnboardingTimeline activeStep={step} />
+            ) : (
+              <OnboardingInitialPanel />
+            )}
+            <div className="onboard-c1-right row-container">
+              {loadingScreen ? (
+                <div>
+                  <div container className="onboard-c1-right-div row-container">
+                    <div className="form-div">
+                      <Form
+                        title={forms[step - 1].title}
+                        formItems={forms[step - 1].items}
+                        fields={fields}
+                        data={{}}
+                        validForm={(d) => checkValid(d)}
+                        onUpdate={onDataUpdate}
+                        onKeyPress={(e, val) => keyDown(e, val)}
+                      />
+                    </div>
+                    <div className="onboard-button-div column-container">
+                      <div className="onboard-button">
+                        <Button color="secondary" onClick={backClick}>
+                          Previous
+                        </Button>
+                      </div>
+                      <div className="onboard-button">
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          disabled={nextDisabled()}
+                          onClick={forwardClick}
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Loading />
+              )}
+            </div>
+            <AlertDialog />
+          </div>
+        </Slide>
+      </ThemeProvider>
+    );
+  }
+
+  // function DynamicOnboard {= () => (}isMobile ? <OnboardMobile /> : <OnboardWeb />);
+
+  return !isMobile ? (
     <ThemeProvider theme={primaryTheme} className="onboard">
       <Slide in {...slideDefault} direction="left">
         <div
@@ -462,11 +566,7 @@ function Onboard(props) {
           <div className="onboard-c1-right row-container">
             {loadingScreen ? (
               <div>
-                <ProgressBar
-                  value={step * (100 / forms.length)}
-                  className="onboard-c1-right-progress-bar"
-                />
-                <div container className="onboard-c1-right-div">
+                <div container className="onboard-c1-right-div row-container">
                   <div className="form-div">
                     <Form
                       title={forms[step - 1].title}
@@ -504,6 +604,42 @@ function Onboard(props) {
           <AlertDialog />
         </div>
       </Slide>
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider theme={primaryTheme}>
+      <div container className="onboard-c1-right-div row-container">
+        <ProgressBar value={(step * 100) / forms.length}></ProgressBar>
+        <div className="another-div">
+          <div className="form-div">
+            <Form
+              title={forms[step - 1].title}
+              formItems={forms[step - 1].items}
+              fields={fields}
+              data={{}}
+              validForm={(d) => checkValid(d)}
+              onUpdate={onDataUpdate}
+              onKeyPress={(e, val) => keyDown(e, val)}
+            />
+          </div>
+          <div className="onboard-button-div column-container">
+            <div className="onboard-button">
+              <Button color="secondary" onClick={backClick}>
+                Previous
+              </Button>
+            </div>
+            <div className="onboard-button">
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled={nextDisabled()}
+                onClick={forwardClick}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }
