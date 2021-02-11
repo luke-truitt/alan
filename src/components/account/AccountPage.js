@@ -99,7 +99,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AccountCard(props) {
   const classes = useStyles();
-  console.log(props)
   let valid = props.firstName == "" || props.firstName == null;
 return (
   <div className="user-profile">
@@ -364,10 +363,7 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
   const location = useLocation();
   const history = useHistory();
-  if(!user.user) {
-    console.log(user)
-    history.push("/");
-  }
+  const [loadAttempts, setLoadAttempts] = useState(0);
 
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);
@@ -398,6 +394,10 @@ function AccountPage(props) {
     }
   }, 1000);
   useEffect(() => {
+    setTimeout(() => {if(!user.user && loadAttempts > 2) {
+      console.log(user)
+      history.push("/signin");
+    } else {setLoadAttempts(loadAttempts + 1)}},500);
     if (user.user && !dataLoaded) {
       setTimeout(() => {
         getUserDoc(user)

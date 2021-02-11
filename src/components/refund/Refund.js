@@ -6,13 +6,14 @@ import {
   ThemeProvider,
   Dialog,
   DialogTitle,
+  CircularProgress
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { getUserDoc } from "../../firebase";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
@@ -28,40 +29,113 @@ function numberWithCommas(x) {
 function Refund(props) {
   let location = useLocation();
   const history = useHistory();
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [referToId, setReferToId] = useState(null);
+  const [referById, setReferById] = useState(null);
+  const [breakdown, setBreakdown] = useState(null);
+  const [loadAttempts, setLoadAttempts] = useState(0);
+
   const user = useContext(AuthContext);
-  let email = "";
-  let referToId = "";
-  let referById = "";
-  try {
-    email = location.state["email"];
-    referToId = location.state["referToId"];
-    referById = location.state["referById"];
-  } catch {
-    email = "";
-    referToId = "";
-    referById = "";
-  }
-
-  const redirectHome = () => {
-    history.push({ pathname: "/" });
+  const redirect = (path, state) => {
+    history.push({ pathname: path, state: state });
   };
-
-  if (email == "") {
-    redirectHome();
+  const loadFromState = () => {
+    let em = null;
+  let rtid = null;
+  let rbid = null;
+  let bd = null;
+    try {
+      em = location.state["email"];
+    } catch {
+      em = null;
+    }
+    try {
+      rtid = location.state["referToId"];
+    } catch {
+      rtid = null;
+    }
+    try {
+      rbid = location.state["referById"];
+    } catch {
+      rbid = null;
+    }
+    try {
+      bd = location.state["breakdown"];
+    } catch {
+      bd = null;
+    }
+    return [em, rtid, rbid, bd];
   }
-
-  try {
-    props = location.state["breakdown"];
-  } catch {
-    redirectHome();
+  const loadFromUser = async () => {
+  let em = null;
+  let rtid = null;
+  let rbid = null;
+  let bd = null;
+    if(user.user) {
+      const userData = await getUserDoc(user);
+      em = userData['email'];
+      rtid = userData['referToId'];
+      rbid = userData['referById'];
+      bd = userData['refundBreakdown'];
+    }
+    return {email: em, referToId: rtid, referById: rbid, breakdown: bd};
   }
-
-  if(props==null || user.user==null) {
-    redirectHome();
-  } 
+  let em, rtid, rbid, bd;
+  useEffect(() => setTimeout(() => {
+    console.log(loadAttempts);
+    console.log("efffectt");
+    if(!user.user && !dataLoaded && loadAttempts > 2) {
+      console.log("no user");
+      if(location.state == null) {
+        console.log('no state');
+        redirect('/',null);
+      }
+      [em, rtid, rbid, bd] = loadFromState();
+      console.log('loaded state', em, bd)
+      if(bd==null) {
+        console.log('no breakdown');
+        redirect('/',null)
+      }
+      console.log('calculator good')
+      setEmail(em);
+      setReferToId(rtid);
+      setReferById(rbid);
+      setBreakdown(bd);
+      setDataLoaded(true);
+    } else if(user.user && !dataLoaded) {
+      console.log('user logged in')
+      loadFromUser().then((res) => {
+        console.log(res)
+        em = res.email;
+        rtid = res.referToId;
+        rbid = res.referById;
+        bd = res.breakdown;
+        if(em == null) {
+          //users not logged in, some bug earlier
+          console.log('bug in log in, email not found')
+          redirect('/',null)
+        } else if(bd == null) {
+          // user hasn't taken calculator, send them to the start of the calculator
+          console.log('no breakdown for user, need to retake quiz')
+          redirect('/onboard', {email: em, referToId: rtid, referById: rbid});
+        }
+        //otherwise they're gtg
+        console.log(bd, 'user ready')
+        setEmail(em);
+        setReferToId(rtid);
+        setReferById(rbid);
+        setBreakdown(bd);
+        setDataLoaded(true);
+      })
+    } else if(!dataLoaded) {
+      setLoadAttempts(loadAttempts + 1);
+    }
+  }, 500));
+  
   
   const navTo = () => {
-    if (user) {
+    if (user.user) {
       history.push({
         pathname: "/account",
       });
@@ -72,12 +146,11 @@ function Refund(props) {
           email: email,
           referToId: referToId,
           referById: referById,
-          breakdown: props,
+          breakdown: breakdown,
         },
       });
     }
   };
-  console.log(location.state);
 
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -97,7 +170,7 @@ function Refund(props) {
         <div className="onboard-complete-c1 column-container">
           <div className="onboard-complete-c1-content column-container">
           
-            <div className="onboard-complete-c1-breakdown">
+          {dataLoaded ? <div className="onboard-complete-c1-breakdown">
             <Card className="onboard-complete-card-mobile">
                 <CardContent
                   onClick={navTo}
@@ -121,9 +194,9 @@ function Refund(props) {
                 variant="h1"
                 color="secondary"
               >
-                ${numberWithCommas(props.netRefund)}
+                ${numberWithCommas(breakdown.netRefund)}
               </Typography>
-              <RefundBreakdown breakdown={props}></RefundBreakdown>
+              <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
               <Card className="onboard-complete-card-mobile">
                 <CardContent className="onboard-complete-card-2-content">
                   <div className="refund-card-text">
@@ -166,7 +239,8 @@ function Refund(props) {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </div>: <CircularProgress/>}
+            
             <div className="row-container onboard-complete-card-container">
               <Card className="onboard-complete-card">
                 <CardContent
