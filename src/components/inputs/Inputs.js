@@ -324,6 +324,7 @@ export function DollarInput(props) {
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             placeholder="0"
+            inputProps={{ pattern: "\d*", type: "number" }}
             type="number"
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={
