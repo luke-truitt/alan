@@ -111,6 +111,8 @@ function JoinForm(props) {
   const [email, setEmail] = useState(
     location.state == null ? "" : location.state["email"]
   );
+  const [valid, setValid] = useState({'password': true, 'email': true});
+  const [invalid, setInvalid] = useState({'password': false, 'email': false});
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -158,6 +160,7 @@ function JoinForm(props) {
   };
 
   const checkValid = (d) => {
+
     // TODO
   };
   const createUserWithEmailAndPasswordHandler = async (event) => {
@@ -201,6 +204,19 @@ function JoinForm(props) {
         );
       }
       setLoading(false);
+    }
+  };
+
+  const onSubmit = () => {
+    setInvalid({'email': !valid['email'], 'password': !valid['password']});
+    if(valid['password'] && valid['email']) {
+      createUserWithEmailAndPasswordHandler();
+    }
+  }
+
+  const updateValid = (d) => {
+    for (const [key, value] of Object.entries(d)) {
+      setValid((valid) => ({ ...valid, [key]: value }));
     }
   };
 
@@ -287,35 +303,41 @@ function JoinForm(props) {
             </Typography>
           )}
           <NameInput
-            validData={(d) => checkValid(d)}
+            validData={((d) => checkValid(d))}
             onChange={(e, val) => onChange(e, val)}
             onKeyPress={(e, val) => keyDown(e, val)}
             fields={{ firstName: firstName, lastName: lastName }}
           />
           <PhoneNumberInput
-            validData={(d) => checkValid(d)}
+            validData={((d) => checkValid(d))}
             onChange={(e, val) => onChange(e, val)}
             onKeyPress={(e, val) => keyDown(e, val)}
             placeholder="Enter Phone Number"
             fields={{ phone: phone }}
+            className="early-input"
           />
           <Typography variant="caption" className="join-phone-explainer">
             So we can text you when the review is complete!
           </Typography>
           <TextInput
-            validData={(d) => checkValid(d)}
+            setValid={(val) => {updateValid({'email': val});}}
             onChange={(e, val) => onChange(e, val)}
             stateName="email"
+            helperText="Please enter a valid email."
             value={email}
+            invalid={invalid['email']}
             onKeyPress={(e, val) => keyDown(e, val)}
             placeholder="Enter Email"
-            type="email"
+            type="email" 
           />
           <TextInput
-            validData={(d) => checkValid(d)}
+            setValid={(val) => {console.log(val);
+              updateValid({'password': val});}}
             onChange={(e, val) => onChange(e, val)}
             stateName="password"
+            helperText="Your password must be at least 6 characters"
             value={password}
+            invalid={invalid['password']}
             onKeyPress={(e, val) => keyDown(e, val)}
             placeholder="Enter Password"
             type="password"
@@ -325,7 +347,7 @@ function JoinForm(props) {
             className="join-button"
             variant="contained"
             color="secondary"
-            onClick={(e) => createUserWithEmailAndPasswordHandler(e)}
+            onClick={(e) => onSubmit()}
           >
             {loading ? <CircularProgress /> : "Join"}
           </Button>

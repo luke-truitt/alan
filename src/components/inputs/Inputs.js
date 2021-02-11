@@ -425,32 +425,50 @@ export function Form(props) {
   );
 }
 export function TextInput(props) {
-  const [valid, setValid] = useState(false);
+  
 
   const checkValid = (val) => {
-    if (val.length > 0) {
+    if (val.length > 6) {
       console.log("Good");
-      setValid(true);
+      try {
+        props.setValid(true);
+      } catch {
+
+      }
     } else {
       console.log("Bad");
-      setValid(false);
+      try{ 
+        props.setValid(false);
+      } catch {
+        
+      }
     }
   };
 
-  return (
-    <ThemeProvider theme={primaryTheme}>
-      <div className="embedded-email-input-container form-item-container column-container">
-        <TextField
+  const ValidationTextField = props.invalid ? (
+    <TextField
+      error
+      helperText={props.helperText}
+      type={props.type}
+      label={props.label}
+      className="form-item-text-field"
+      variant="outlined"
+      value={props.value}
+      onKeyPress={(e, valid) => props.onKeyPress(e, valid)}
+      InputProps={{ disableUnderline: true }}
+      onChange={(e) => {
+        props.onChange(e.target.value, { stateName: props.stateName });
+        checkValid(e.target.value);
+      }}
+    />
+  ) : (
+    <TextField
           type={props.type}
-          className="form-item-text-field embedded-email-input-field"
+          className="form-item-text-field"
           variant={props.invalid ? "standard" : "outlined"}
           value={props.value}
           placeholder={props.placeholder}
           style={{
-            borderColor: "red",
-            borderWidth: props.invalid ? "1px" : "0px",
-            borderStyle: "solid",
-            borderRadius: "2px",
             paddingLeft: "3px",
           }}
           onKeyPress={(e, val) => props.onKeyPress(e, val)}
@@ -460,6 +478,13 @@ export function TextInput(props) {
             checkValid(e.target.value);
           }}
         />
+  );
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <div className="embedded-email-input-container form-item-container column-container">
+
+        {ValidationTextField}
+        
       </div>
     </ThemeProvider>
   );

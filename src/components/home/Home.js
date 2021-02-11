@@ -74,7 +74,7 @@ function Home() {
     }
   };
   const signUp = () => {
-    if(email.includes("@") && email.length > 5) {
+    if(email.includes("@") && email.length > 6) {
       navTo();
     } else {
       invalidClick();
