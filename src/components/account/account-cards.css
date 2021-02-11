@@ -56,6 +56,9 @@ div.placeholder-full {
   width: 100%;
   justify-content: space-between;
 }
+h6.invite-card-title {
+  line-height: 1.7rem;
+}
 
 .invite-card-button-container {
   min-width: 40%;
@@ -95,6 +98,17 @@ div.placeholder-full {
   div.invite-card-email-container {
     display: none;
   }
+
+  div.invite-card-c0 {
+    flex-direction: column;
+    justify-items: flex-start;
+  }
+  img.invite-card-icon {
+    margin-bottom: 0.5rem;
+  }
+  div.invite-card-c1 {
+    margin-left: 0rem;
+  }
 }
 
 .invite-card-icon {
@@ -105,4 +119,5 @@ div.placeholder-full {
 }
 span.invite-card-subtitle {
   margin-bottom: 1rem;
+  line-height: 1rem;
 }
