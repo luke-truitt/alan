@@ -154,6 +154,7 @@ div.onboard-loading-subtitle {
     display: flex;
     background-image: url("./../../images/bg/bg-pattern-full-light.svg");
     background-size: cover;
+    border-radius: 0;
     background-repeat: no-repeat;
     margin: 0;
   }
