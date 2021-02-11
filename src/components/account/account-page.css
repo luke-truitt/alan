@@ -1,6 +1,7 @@
 .account-page-c0 {
   width: 100vw;
   height: 100vh;
+  margin-top: 60px;
   overflow-y: hidden;
   overflow-x: hidden;
 }
@@ -26,6 +27,14 @@
 }
 .button-icon {
   padding-left: 5px;
+}
+h5.welcome-text {
+  font-weight: 600;
+}
+.mobile-welcome-card-content {
+  background-image: linear-gradient(to right, #744fc2, 60%, #002e72);
+  height: 100%;
+  width: 100%;
 }
 
 .account-page-c1-left-shadow {
@@ -221,8 +230,14 @@ img.placeholder-block {
 .account-title {
   display: none;
 }
+.mobile-welcome-card {
+  display: none;
+}
 
 @media only screen and (max-width: 800px) {
+  div.mobile-welcome-card {
+    display: block;
+  }
   div.account-page-c1-left {
     display: none;
   }
@@ -266,23 +281,5 @@ img.placeholder-block {
   }
   .placeholder-block {
     margin-top: 20px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .referral-card-email-container {
-    display: none;
-  }
-  .referral-card-btns-right {
-    width: 100%;
-  }
-  .referral-card-btns-right.column-container {
-    flex-direction: row;
-  }
-  .account-title {
-    display: block;
-    text-align: center;
-    color: #2d2d2d;
-    font-size: 7vw !important;
   }
 }

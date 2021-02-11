@@ -17,7 +17,7 @@ import {
   credits_description,
 } from "../../utils/summaries";
 function numberWithCommas(x) {
-  if(x==null) {
+  if (x == null) {
     return "";
   }
   var parts = x.toString().split(".");
@@ -34,6 +34,7 @@ const Explanation = withStyles((theme) => ({
     fontWeight: 300,
     lineHeight: "1rem",
     padding: ".75rem",
+    disableTouchListener: true,
   },
 }))(Tooltip);
 
@@ -85,7 +86,7 @@ function RefundBreakdownRow(props) {
             variant="body1"
             color="secondary"
             className="refund-breakdown-row-label"
-            style={{zIndex: 999, cursor: "pointer"}}
+            style={{ zIndex: 999, cursor: "pointer" }}
           >
             {props.label}
           </Typography>

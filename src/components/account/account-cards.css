@@ -53,7 +53,7 @@ div.placeholder-full {
   font-size: 0.5rem;
 }
 .invite-card-input-container {
-  width: 100%;
+  margin-right: 1rem;
   justify-content: space-between;
 }
 h6.invite-card-title {

@@ -18,6 +18,7 @@ import {
 } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
+import Header from "./../header/Header.js";
 import RefundBreakdown from "./RefundBreakdown.js";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useState, useContext, useEffect } from "react";
@@ -167,6 +168,8 @@ function Refund(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="onboard-complete-c0-top row-container">
+        <Header />
+
         {/* <div className="header" /> */}
         {/* <div className="onboard-complete-help-button-container">
           <div
@@ -196,7 +199,8 @@ function Refund(props) {
                         variant="h4"
                         color="primary"
                       >
-                        Help me file my taxes
+                        Help me file my taxes{" "}
+                        <ArrowForwardIosRoundedIcon className="help-button-icon" />
                       </Typography>
                     </CardContent>
                   </Card>
@@ -224,19 +228,20 @@ function Refund(props) {
                       <div className="refund-card-text">
                         {" "}
                         <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $2,342
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average American college student is owed in a refund.
-                    </Typography>
+                          color="textSecondary"
+                          variant="h5"
+                          className="refund-card-title"
+                        >
+                          $2,342
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          className="refund-card-caption"
+                        >
+                          That's how much the average American college student
+                          is owed in a refund.
+                        </Typography>
                       </div>
                     </CardContent>
                   </Card>
@@ -244,20 +249,22 @@ function Refund(props) {
                     <CardContent className="onboard-complete-card-3-content">
                       {" "}
                       <div className="refund-card-text row-container">
-                      <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $473
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
-                    </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="h5"
+                          className="refund-card-title"
+                        >
+                          $473
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          className="refund-card-caption"
+                        >
+                          That's how much the average college student actually
+                          receives because of lack of reporting and
+                          underutilization of credits.
+                        </Typography>
                       </div>
                     </CardContent>
                   </Card>
@@ -292,14 +299,15 @@ function Refund(props) {
                         className="refund-card-title"
                       >
                         $2,342
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average American college student is owed in a refund.
-                    </Typography>
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much the average American college student is
+                        owed in a refund.
+                      </Typography>
                     </div>
                   </CardContent>
                 </Card>
@@ -307,20 +315,22 @@ function Refund(props) {
                   <CardContent className="onboard-complete-card-3-content">
                     {" "}
                     <div className="refund-card-text row-container">
-                    <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $473
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
-                    </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $473
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much the average college student actually
+                        receives because of lack of reporting and
+                        underutilization of credits.
+                      </Typography>
                     </div>
                   </CardContent>
                 </Card>

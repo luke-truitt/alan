@@ -46,6 +46,7 @@ import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { useLocation, useHistory } from "react-router-dom";
 import * as emailjs from "emailjs-com";
+import Header from "./../header/Header.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -170,10 +171,31 @@ function numberWithCommas(x) {
 function ReviewCard(props) {
   let history = useHistory();
   let refundText;
-  if(props.userData.refundBreakdown) {
-    refundText = <div>
-    <Typography variant="body2" className="review-card-text">Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}, to see a breakdown of this, go <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => history.push({pathname: '/refund'})}>here</a>. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => props.onCalculator()}>here</a>.</Typography>
-  </div>
+  if (props.userData.refundBreakdown) {
+    refundText = (
+      <div>
+        <Typography variant="body2" className="review-card-text">
+          Your refund is going to be upwards of $
+          {numberWithCommas(props.userData.refundBreakdown.netRefund)}, to see a
+          breakdown of this, go{" "}
+          <a
+            style={{ textDecoration: "underline", cursor: "pointer" }}
+            onClick={() => history.push({ pathname: "/refund" })}
+          >
+            here
+          </a>
+          . If you want to retake the calculator or haven't taken it yet, you
+          can do so{" "}
+          <a
+            style={{ textDecoration: "underline", cursor: "pointer" }}
+            onClick={() => props.onCalculator()}
+          >
+            here
+          </a>
+          .
+        </Typography>
+      </div>
+    );
   } else {
     refundText = (
       <div>
@@ -276,10 +298,20 @@ function AccountPage(props) {
       Welcome <span className="purple-highlight"> {userData.firstName}!</span>{" "}
     </span>
   );
+  const MobileWelcome = () => (
+    <Card className="account-page-card mobile-welcome-card row-container">
+      <CardContent className="mobile-welcome-card-content">
+        <Typography className="welcome-text" variant="h5" color="primary">
+          Welcome {userData.firstName}!
+        </Typography>
+      </CardContent>
+    </Card>
+  );
   let valid = userData.firstName == "" || userData.firstName == null;
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
+      <Header />
       <Slide {...slideDefault} in direction="left">
         <div className="account-page-c0 column-container">
           <div className="account-page-c1-left-shadow" />
@@ -330,6 +362,7 @@ function AccountPage(props) {
               {Object.keys(userData).length > 2 ? (
                 <Fade in {...shortFade}>
                   <div>
+                    <MobileWelcome />
                     <InviteCard />
                     <ReviewCard
                       userData={userData}

@@ -141,7 +141,7 @@ div.refund-card-text {
   max-width: 300px;
   height: 200px;
   margin-bottom: 2rem;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   border: 1px solid #c3c3c3;
 }
 
@@ -229,14 +229,20 @@ img.onboard-complete-help-arrow {
     box-shadow: none;
     padding-bottom: 0px;
   }
-  .onboard-complete-card-1-content {
+  div.onboard-complete-card-1-content {
     width: auto;
     height: auto;
     font-size: 3.5vw;
+    padding: 16px !important;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
   }
   .onboard-complete-card-2-content {
     width: auto;
-    background-size:cover;
+    background-size: cover;
     height: 200px;
     max-width: 300px;
     margin-left: auto;
@@ -253,7 +259,7 @@ img.onboard-complete-help-arrow {
     font-size: 1.5em;
   }
   .onboard-complete-help-button-container {
-    display: none;
+    display: block;
   }
   .onboard-complete-footer {
     background-color: #ffffff;
@@ -265,8 +271,7 @@ img.onboard-complete-help-arrow {
   .refund-breakdown-row-c1.column-container {
     flex-direction: row;
   }
-
-  button.onboard-complete-apply-button {
+  .re button.onboard-complete-apply-button {
     font-size: 1.5rem;
     margin-top: 3rem;
     height: auto;
@@ -276,10 +281,17 @@ img.onboard-complete-help-arrow {
     padding-right: 10px;
     font-size: 5vw;
   }
+  .help-button-icon {
+    max-height: 1rem;
+    align-self: center;
+    margin-bottom: -0.1rem;
+    padding: 0px;
+  }
   .refund-breakdown-c0 {
     width: auto;
-    padding-left: 3vw;
-    padding-right: 3vw;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 60px;
   }
   .onboard-complete-card-mobile {
     display: block;
@@ -292,7 +304,7 @@ img.onboard-complete-help-arrow {
   .onboard-complete-c1-breakdown {
     width: 100%;
   }
-  
+
   .onboard-complete-card-container {
     width: 0px;
     display: none;
