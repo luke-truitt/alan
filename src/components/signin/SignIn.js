@@ -194,7 +194,7 @@ function SignInForm(props) {
           try {
             setGoogleLoading(true);
             signInWithGoogle("", "").then(() => {
-              setTimeout(navTo, 1000);
+              navTo();
               setGoogleLoading(false);
             });
           } catch (error) {
