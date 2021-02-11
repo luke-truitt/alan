@@ -115,7 +115,7 @@ h3.welcome-text {
   border: 1px solid #444e9e;
 }
 .disabled-card-content {
-  opacity: 20%;
+  opacity: 0.2;
 }
 
 .referral-card-email-container {
@@ -166,7 +166,7 @@ button.send-invites-button {
   padding: 10px;
 }
 .account-timeline-step {
-  opacity: 20%;
+  opacity: 0.2;
   align-items: center;
   padding-bottom: 2px;
 }
@@ -194,7 +194,7 @@ p.account-timeline-step-text {
 }
 
 #active-account-timeline-step {
-  opacity: 100%;
+  opacity: 1;
 }
 
 p.disabled-card-title {

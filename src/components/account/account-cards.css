@@ -2,15 +2,15 @@ p.disabled-card-title {
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  opacity: 20%;
+  opacity: 0.2;
 }
 
 .disabled-card-icon {
-  opacity: 20%;
+  opacity: 0.2;
   max-width: 40px;
 }
 .disabled-card-image {
-  opacity: 20%;
+  opacity: 0.2;
   height: 120px;
   margin-right: 1rem;
   box-shadow: -1px 1px 3px gray;
