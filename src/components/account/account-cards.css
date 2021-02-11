@@ -1,0 +1,102 @@
+p.disabled-card-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  opacity: 20%;
+}
+
+.disabled-card-icon {
+  opacity: 20%;
+  max-width: 40px;
+}
+.disabled-card-image {
+  opacity: 20%;
+  height: 120px;
+  margin-right: 1rem;
+  box-shadow: -1px 1px 3px gray;
+}
+
+.account-page-card-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 2rem;
+}
+
+.referral-card-content {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+}
+.card-content {
+  width: 100%;
+}
+
+div.placeholder-half {
+  width: 150px;
+  height: 100%;
+  margin-right: 2rem;
+}
+.skeleton-half {
+  margin-bottom: 0.5rem;
+  font-size: 0.5rem;
+}
+.WAMuiChipInput-inputRoot-2 {
+}
+div.placeholder-full {
+  width: 100%;
+  height: 100%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.skeleton-full {
+  margin-bottom: 0.5rem;
+  font-size: 0.5rem;
+}
+.invite-card-input-container {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.invite-card-button-container {
+  min-width: 40%;
+}
+.invite-card-button-container > button:first-child {
+  flex: 1;
+  margin-right: 0.25rem;
+}
+.invite-card-button-container > button:last-child {
+  flex: 1;
+  margin-left: 0.25rem;
+}
+.invite-card-email-container {
+  min-width: 60%;
+  justify-content: space-between;
+  margin-right: 1rem;
+  align-items: stretch;
+}
+
+.invite-card-email-container > *:first-child {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.invite-card-c1 {
+  margin-left: 2rem;
+}
+
+.invite-card-c0 {
+  padding-top: 1rem;
+  padding-top: 1rem;
+
+  align-items: flex-start;
+}
+
+.invite-card-icon {
+  width: 40px;
+}
+.invite-button-icon {
+  padding-right: 5px;
+}
+span.invite-card-subtitle {
+  margin-bottom: 1rem;
+}

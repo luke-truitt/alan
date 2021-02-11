@@ -6,13 +6,20 @@ import {
   TextField,
   Button,
   CircularProgress,
-  Avatar
+  Avatar,
+  Slide,
+  Fade,
 } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
+import { DisabledCardFull, DisabledCardHalf, InviteCard } from "./AccountCards";
+import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import Skeleton from "@material-ui/lab/Skeleton";
-
-import { primaryTheme } from "./../../utils/constants";
+import {
+  primaryTheme,
+  slideDefault,
+  fadeDefault,
+  shortFade,
+} from "./../../utils/constants";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import ChipInput from "material-ui-chip-input";
@@ -91,28 +98,12 @@ function AccountTimelineStep(props) {
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
+    display: "flex",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
 }));
-function AccountCard(props) {
-  const classes = useStyles();
-  console.log(props)
-  let valid = props.firstName == "" || props.firstName == null;
-return (
-  <div className="user-profile">
-    {valid ? <CircularProgress/> : <div className="avatar-container column-container">{(props.photo == ""||props.photo==null) ? <Avatar alt={props.firstName} style={{backgroundColor: "white", color: "#4056a1", height: "2em", width: "2em"}}>{props.firstName.split('')[0].toUpperCase()}</Avatar>: <Avatar alt={props.firstName} src={props.photo} style={{height: "2em", width: "2em"}}/>}<Typography
-        variant="h6"
-        color="primary"
-        className="account-timeline-user-name"
-      >
-        Welcome {props.firstName}!
-  </Typography></div>}
-  </div>
-)
-}
 function AccountTimeline(props) {
   const timelineSteps = timelineData.map((data) => (
     <AccountTimelineStep
@@ -124,11 +115,7 @@ function AccountTimeline(props) {
 
   return (
     <div>
-    <AccountCard firstName={props.firstName} photo={props.userPhoto}/>
-    <div className="row-container account-timeline">
-      
-      {timelineSteps}
-    </div>
+      <div className="row-container account-timeline">{timelineSteps}</div>
     </div>
   );
 }
@@ -147,7 +134,6 @@ function EmailChip(props) {
       label="Enter Emails"
       alwaysShowPlaceholder="true"
       fullWidth="true"
-      style={{ overflowY: "scroll", height: "120%" }}
       value={props.emails}
       onAdd={(chip) => handleAdd(chip)}
       onDelete={(chip) => handleDelete(chip)}
@@ -278,77 +264,31 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 function ReviewCard(props) {
-  
   return (
     <Card className="account-page-card review-card">
       <CardContent className="review-card-content column-container">
         <img src={reviewIcon} className="account-page-card-icon" />
         <Typography variant="body2" className="review-card-text">
           Our team is reviewing your initial information. We’ll be sure to text
-          and email you once they’re done! Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>.
+          and email you once they’re done! Your refund is going to be upwards of
+          ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you
+          want to retake the calculator or haven't taken it yet, you can do so{" "}
+          <a
+            style={{ textDecoration: "underline" }}
+            onClick={() => props.onCalculator()}
+          >
+            here
+          </a>
+          .
         </Typography>
       </CardContent>
     </Card>
   );
 }
 
-function UploadCard(props) {
-  return (
-    <Card className="account-page-card upload-card">
-      <CardContent className="column-container">
-        <img src={uploadIcon} className="account-page-card-icon" />
-        <Skeleton variant="text" style={{ width: "100%" }} />
-      </CardContent>
-    </Card>
-  );
-}
-function SubmitCard(props) {
-  return (
-    <Card className="account-page-card submit-card">
-      {" "}
-      <CardContent className="disabled-card-content column-container">
-        <img src={submitIcon} className="account-page-card-icon" />
-        <img src={placeholderText} className="placeholder-text" />
-      </CardContent>
-    </Card>
-  );
-}
-function TrackCard(props) {
-  return (
-    <Card className="account-page-card track-card">
-      <CardContent className="disabled-card-content">
-        <Typography className="disabled-card-title" variant="body1">
-          Track your refund
-        </Typography>
-        <div className="column-container">
-          <img src={trackImg} className="disabled-card-img" />
-
-          <img src={placeholderBlock} className="placeholder-block" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-function InvestCard(props) {
-  return (
-    <Card className="account-page-card invest-card">
-      <CardContent className="disabled-card-content">
-        <Typography className="disabled-card-title" variant="body1">
-          Invest your refund
-        </Typography>
-
-        <div className="column-container">
-          <img src={investImg} className="disabled-card-img" />
-
-          <img src={placeholderBlock} className="placeholder-block" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
 function AccountPage(props) {
   const user = useContext(AuthContext);
-  
+
   const location = useLocation();
   const history = useHistory();
 
@@ -397,22 +337,45 @@ function AccountPage(props) {
     }
   });
   const onCalculator = () => {
-    history.push({pathname: '/onboard', state: { email: userData['email'], referToId: referToId}});
-  }
+    history.push({
+      pathname: "/onboard",
+      state: { email: userData["email"], referToId: referToId },
+    });
+  };
+
+  const welcomeText = (
+    <span>
+      Welcome <span className="purple-highlight"> {userData.firstName}!</span>{" "}
+    </span>
+  );
+  let valid = userData.firstName == "" || userData.firstName == null;
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="account-page-c0 column-container">
-        <div className="account-page-c1-left-shadow" />
-        <div className="account-page-c1-left row-container">
-          <div className="account-page-c1-left-content row=container">
-            <AccountTimeline
-              activeStep={props.activeStep}
-              firstName={
-                Object.keys(userData).length > 0 ? userData["firstName"] : ""
-              }
-              userPhoto={Object.keys(userData).length > 0 ? userData["photo"] : ""}
-            />
+      <Slide {...slideDefault} in direction="left">
+        <div className="account-page-c0 column-container">
+          <div className="account-page-c1-left-shadow" />
+          <div className="account-page-c1-left row-container">
+            <div className="account-page-c1-left-content row-container">
+              <Typography className="welcome-text" variant="h3" color="primary">
+                {valid ? (
+                  <Skeleton />
+                ) : (
+                  <Fade in {...shortFade}>
+                    {welcomeText}
+                  </Fade>
+                )}
+              </Typography>
+              <AccountTimeline
+                activeStep={props.activeStep}
+                firstName={
+                  Object.keys(userData).length > 0 ? userData["firstName"] : ""
+                }
+                userPhoto={
+                  Object.keys(userData).length > 0 ? userData["photo"] : ""
+                }
+              />
+            </div>
             <Button
               className="sign-out-button"
               color="primary"
@@ -431,36 +394,35 @@ function AccountPage(props) {
               }}
             >
               Sign Out
-              <ExitToAppRoundedIcon />
+              <ExitToAppRoundedIcon className="button-icon" />
             </Button>
           </div>
-        </div>
-        <div className="account-page-c1-right">
-          <div className="account-page-c1-right-content row-container">
-            <Typography color="secondary" className="account-title">
-              Welcome {props.firstName}
-            </Typography>
-            {Object.keys(userData).length > 2 ? <div><ReferralCard
-              referToId={referToId}
-              username={userData["firstName"]}
-            />
-            <ReviewCard 
-              userData={
-                userData
-              }
-              onCalculator={() => onCalculator()}
-            />
-            <UploadCard />
-            <SubmitCard />
-            <div className="account-page-c2 column-container">
-              <TrackCard />
-              <InvestCard />
+          <div className="account-page-c1-right">
+            <div className="account-page-c1-right-content row-container">
+              {Object.keys(userData).length > 2 ? (
+                <Fade in {...shortFade}>
+                  <div>
+                    <InviteCard />
+                    <ReviewCard
+                      userData={userData}
+                      onCalculator={() => onCalculator()}
+                    />
+                    <DisabledCardFull icon={uploadIcon} />
+                    <DisabledCardFull icon={submitIcon} />
+
+                    <div className="account-page-c2 column-container">
+                      <DisabledCardHalf image={trackImg} />
+                      <DisabledCardHalf image={investImg} />
+                    </div>
+                  </div>
+                </Fade>
+              ) : (
+                <CircularProgress />
+              )}
             </div>
-            </div>
-            : <CircularProgress/>}
           </div>
         </div>
-      </div>
+      </Slide>
     </ThemeProvider>
   );
 }

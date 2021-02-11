@@ -10,10 +10,8 @@ import Home from "./components/home/Home";
 import Onboard from "./components/onboard/Onboard.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
-import SignUp from "./components/authentication/SignUp";
 import SignIn from "./components/signin/SignIn";
 import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
-import ProfilePage from "./components/authentication/ProfilePage";
 import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
@@ -22,10 +20,6 @@ import Join from "./components/join/Join";
 import Refund from "./components/refund/Refund.js";
 import AccountPage from "./components/account/AccountPage.js";
 
-import firebase from "firebase";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import { Fade } from "@material-ui/core";
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";
 initGA(trackingId);
@@ -65,12 +59,6 @@ function App() {
                 setReferTo={(rid) => setReferToId(rid)}
               />
             </Route>
-            <Route path="/signup">
-              <SignUp
-                referToId={referToId}
-                setReferTo={(rid) => setReferToId(rid)}
-              />
-            </Route>
             <Route path="/signin">
               <SignIn
                 referToId={referToId}
@@ -83,12 +71,7 @@ function App() {
                 setReferTo={(rid) => setReferToId(rid)}
               />
             </Route>
-            <Route path="/userprofile">
-              <ProfilePage
-                referToId={referToId}
-                setReferTo={(rid) => setReferToId(rid)}
-              />
-            </Route>
+
             <Route>
               <ErrorPage />
             </Route>

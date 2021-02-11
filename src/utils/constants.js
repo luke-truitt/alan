@@ -72,6 +72,6 @@ export const slideDefault = {
 
 export const shortFade = {
   timeout: {
-    enter: 10000,
+    enter: 500,
   },
 };

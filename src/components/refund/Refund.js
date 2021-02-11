@@ -6,8 +6,9 @@ import {
   ThemeProvider,
   Dialog,
   DialogTitle,
+  Slide,
 } from "@material-ui/core";
-import { primaryTheme } from "../../utils/constants.js";
+import { primaryTheme, slideDefault } from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
@@ -53,7 +54,7 @@ function Refund(props) {
   }
 
   const navTo = () => {
-    if (user) {
+    if (user.user) {
       history.push({
         pathname: "/account",
       });
@@ -85,81 +86,84 @@ function Refund(props) {
             <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
           </div>
         </div> */}
-        <div className="onboard-complete-c1 column-container">
-          <div className="onboard-complete-c1-content column-container">
-            <div className="onboard-complete-c1-breakdown">
-              <Typography className="onboard-complete-title" variant="h6">
-                Your estimated refund amount
-              </Typography>
-              <Typography
-                className="refund-amount "
-                variant="h1"
-                color="secondary"
-              >
-                ${numberWithCommas(props.netRefund)}
-              </Typography>
-              <RefundBreakdown breakdown={props}></RefundBreakdown>
-            </div>
-            <div className="row-container onboard-complete-card-container">
-              <Card className="onboard-complete-card">
-                <CardContent
-                  onClick={navTo}
-                  className="onboard-complete-card-1-content"
+
+        <Slide in {...slideDefault} direction="up">
+          <div className="onboard-complete-c1 column-container">
+            <div className="onboard-complete-c1-content column-container">
+              <div className="onboard-complete-c1-breakdown">
+                <Typography className="onboard-complete-title" variant="h6">
+                  Your estimated refund amount
+                </Typography>
+                <Typography
+                  className="refund-amount "
+                  variant="h1"
+                  color="secondary"
                 >
-                  <Typography
-                    className="refund-card-button-text"
-                    variant="h4"
-                    color="primary"
+                  ${numberWithCommas(props.netRefund)}
+                </Typography>
+                <RefundBreakdown breakdown={props}></RefundBreakdown>
+              </div>
+              <div className="row-container onboard-complete-card-container">
+                <Card className="onboard-complete-card">
+                  <CardContent
+                    onClick={navTo}
+                    className="onboard-complete-card-1-content"
                   >
-                    Help me file my taxes <ArrowForwardIosRoundedIcon />
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-2-content">
-                  <div className="refund-card-text">
+                    <Typography
+                      className="refund-card-button-text"
+                      variant="h4"
+                      color="primary"
+                    >
+                      Help me file my taxes <ArrowForwardIosRoundedIcon />
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-2-content">
+                    <div className="refund-card-text">
+                      {" "}
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $XXX
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much you lose fucker.
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-3-content">
                     {" "}
-                    <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $XXX
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much you lose fucker.
-                    </Typography>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="onboard-complete-card">
-                <CardContent className="onboard-complete-card-3-content">
-                  {" "}
-                  <div className="refund-card-text row-container">
-                    <Typography
-                      color="textSecondary"
-                      variant="h5"
-                      className="refund-card-title"
-                    >
-                      $XXX
-                    </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="caption"
-                      className="refund-card-caption"
-                    >
-                      That's how much you lose fucker.
-                    </Typography>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="refund-card-text row-container">
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $XXX
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much you lose fucker.
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        </div>
+        </Slide>
         <div className="onboard-complete-footer">
           <Button
             variant="contained"

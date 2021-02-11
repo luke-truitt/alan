@@ -54,7 +54,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import { useState, useEffect, forwardRef, useContext } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import OnboardingTimeline from "./OnboardTimeline";
-import {updateUser} from "../../firebase";
+import { updateUser } from "../../firebase";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -160,7 +160,7 @@ function Onboard(props) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
   };
-  
+
   const navToRefund = () => {
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
@@ -182,10 +182,10 @@ function Onboard(props) {
 
     sendData();
     setLoadingScreen(true);
-    if(user) {
+    if (user.user) {
       console.log(user);
       console.log(user.user);
-      updateUser(user.user.uid, {'refundBreakdown': data});
+      updateUser(user.user.uid, { refundBreakdown: data });
     }
     history.push({
       pathname: "/refund",
@@ -219,7 +219,7 @@ function Onboard(props) {
     return !formValid[step];
   };
   const handleClickOpen = () => {
-    console.log("Hey")
+    console.log("Hey");
     setOpen(true);
   };
 
@@ -382,8 +382,6 @@ function Onboard(props) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   function AlertDialog() {
-    
-  
     return (
       <div>
         <Dialog
@@ -394,10 +392,12 @@ function Onboard(props) {
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle id="alert-dialog-slide-title">Finish the Calculator</DialogTitle>
+          <DialogTitle id="alert-dialog-slide-title">
+            Finish the Calculator
+          </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-            We need your basic tax info so we can make sure we can help you. 
+              We need your basic tax info so we can make sure we can help you.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -454,7 +454,7 @@ function Onboard(props) {
           tabIndex={-1}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
-          <Header signUp={handleClickOpen}/>
+          <Header signUp={handleClickOpen} />
 
           {panelActive ? (
             <OnboardingTimeline activeStep={step} />
@@ -503,7 +503,7 @@ function Onboard(props) {
               <Loading />
             )}
           </div>
-        <AlertDialog/>
+          <AlertDialog />
         </div>
       </Slide>
     </ThemeProvider>
