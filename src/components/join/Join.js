@@ -291,6 +291,7 @@ function JoinForm(props) {
         <div
           className="join-form row-container"
           tabIndex={-1}
+          style={{outline: "none"}}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
           {error != "" && (
