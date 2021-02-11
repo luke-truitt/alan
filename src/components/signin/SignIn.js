@@ -98,14 +98,14 @@ function SignInForm(props) {
   };
 
   const signInWithEmailAndPasswordHandler = (event) => {
-    event.preventDefault();
+    
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         navTo();
       })
       .catch((error) => {
-        setError("Error signing in with password and email!");
+        setError("Incorrect Email or Password!");
         console.error("Error signing in with password and email", error);
       });
     console.log(auth);
@@ -114,6 +114,14 @@ function SignInForm(props) {
     history.push({
       pathname: "/account",
     });
+  };
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
+
+    if (code === 13) {
+      //13 is the enter keycode
+      signInWithEmailAndPasswordHandler(null);
+    }
   };
 
   const checkValid = (d) => {
@@ -140,6 +148,7 @@ function SignInForm(props) {
         onChange={(e, val) => onChange(e, val)}
         stateName="email"
         value={email}
+        onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Email"
         type="email"
       />
@@ -148,6 +157,7 @@ function SignInForm(props) {
         onChange={(e, val) => onChange(e, val)}
         stateName="password"
         value={password}
+        onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Password"
         type="password"
       />
@@ -155,6 +165,7 @@ function SignInForm(props) {
         variant="caption"
         className="sign-in-forgot-pass-text"
         onClick={() => history.push({ pathname: "/resetpassword" })}
+        style={{cursor: "pointer"}}
       >
         Forgot your password?
       </Typography>
@@ -200,7 +211,7 @@ function SignInForm(props) {
         color="textSecondary"
         onClick={() => history.push({ pathname: "/join" })}
       >
-        Not a member? <span className="join-sign-in-button">Sign Up</span>
+        Not a member? <span className="join-sign-in-button" style={{cursor: "pointer"}}>Sign Up</span>
       </Typography>
     </div>
   );

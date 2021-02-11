@@ -157,6 +157,9 @@ function ReferralCard(props) {
     }
   };
   const sendInvites = () => {
+    if (emails.length < 1) {
+      return;
+    }
     let i;
     for (i = 0; i < emails.length; i++) {
       const email_to = emails[i];
@@ -176,7 +179,7 @@ function ReferralCard(props) {
       //   console.log('FAILED...', error);
       // });
     }
-    alert("Emails sent successfully!");
+    alert("Invites Sent!");
     setEmails([]);
   };
 
@@ -264,14 +267,13 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 function ReviewCard(props) {
-  return (
-    <Card className="account-page-card review-card">
-      <CardContent className="review-card-content column-container">
-        <img src={reviewIcon} className="account-page-card-icon" />
+  let refundText;
+  if (props.userData.refundBreakdown) {
+    refundText = (
+      <div>
         <Typography variant="body2" className="review-card-text">
-          Our team is reviewing your initial information. We’ll be sure to text
-          and email you once they’re done! Your refund is going to be upwards of
-          ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you
+          Your refund is going to be upwards of $
+          {numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you
           want to retake the calculator or haven't taken it yet, you can do so{" "}
           <a
             style={{ textDecoration: "underline" }}
@@ -280,6 +282,33 @@ function ReviewCard(props) {
             here
           </a>
           .
+        </Typography>
+      </div>
+    );
+  } else {
+    refundText = (
+      <div>
+        <Typography variant="body2" className="review-card-text">
+          Retake the calculator or haven't taken it yet, you can do so{" "}
+          <a
+            style={{ textDecoration: "underline" }}
+            onClick={() => props.onCalculator()}
+          >
+            here
+          </a>
+          .
+        </Typography>
+      </div>
+    );
+  }
+
+  return (
+    <Card className="account-page-card review-card">
+      <CardContent className="review-card-content column-container">
+        <img src={reviewIcon} className="account-page-card-icon" />
+        <Typography variant="body2" className="review-card-text">
+          Our team is reviewing your initial information. We’ll be sure to text
+          and email you once they’re done! {refundText}
         </Typography>
       </CardContent>
     </Card>
@@ -291,6 +320,10 @@ function AccountPage(props) {
 
   const location = useLocation();
   const history = useHistory();
+  if (!user.user) {
+    console.log(user);
+    history.push("/");
+  }
 
   const [loading, setLoading] = useState(false);
   const [accountLoading, setAccountLoading] = useState(true);
