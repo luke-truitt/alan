@@ -58,7 +58,7 @@ function RefundBreakdownRow(props) {
             <Typography
               variant="body2"
               color="secondary"
-              className="refund-breakdown-row-amount"
+              className={props.label=="Net Refund" ? "refund-label-row" : "refund-breakdown-row-amount"}
             >
               ${numberWithCommas(props.amount)}
             </Typography>
@@ -136,6 +136,7 @@ function RefundBreakdown(props) {
         amount={props.breakdown.netRefund}
         label="Net Refund"
         description={net_refund_description}
+        
       />
     </div>
   );

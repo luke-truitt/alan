@@ -71,9 +71,9 @@ const forms = [
     formFields: ["estimatedIncome", "state", "covidCredits"],
   },
   {
-    title: "Dependent",
-    items: [dependence],
-    formFields: ["dependent"],
+    title: "Your Life",
+    items: [dependence, job, school],
+    formFields: ["dependent", "jobTitle", "companyName", "school"],
   },
   // {
   //   title: "History",
@@ -185,10 +185,8 @@ function Onboard(props) {
     sendData();
     setLoadingScreen(true);
     if (user.user) {
-      console.log(user);
-      console.log(user.user);
-      updateUser(user.user.uid, { refundBreakdown: data });
-    }
+      updateUser(user.user.uid, { refundBreakdown: data,  school: fields['school'], employer: fields['companyName'], jobTitle: fields['jobTitle']});
+    } 
     history.push({
       pathname: "/refund",
       state: {
