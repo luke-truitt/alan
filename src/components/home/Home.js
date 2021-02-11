@@ -172,7 +172,7 @@ function Home() {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
-        <Header signUp={signUp}/>
+        <Header signUp={signUp} isHome={true}/>
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">

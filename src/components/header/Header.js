@@ -12,6 +12,7 @@ function Header(props) {
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [userData, setUserData] = useState({});
   const user = useContext(AuthContext);
+
   const onSignIn = () => { if(user.user){history.push({ pathname: "/account" })}else{history.push({ pathname: "/signin" })} };
   const onSignUp = () => {
     props.signUp();
@@ -47,8 +48,8 @@ function Header(props) {
         <Typography variant="h4" className="logo-text" onClick={() => history.push({pathname: "/"})}>
           ALAN
         </Typography>
-        <div className="header-button-container">
-          {Object.keys(userData).length > 0 ? <Button onClick={onAccount} variant="outlined" color="primary">{userData['firstName'].toLowerCase().includes('wes') ? "Hola Wessisito" : `Hey   ${userData['firstName']}`}</Button>:
+        <div className={props.isHome ? "home-header" : "header-button-container"}>
+          {Object.keys(userData).length > 0 ? <Button onClick={onAccount} variant="outlined" color="primary">{userData['firstName'].toLowerCase().includes('wes') ? "Hola Wessisito" : `Hi ${userData['firstName']}`}</Button>:
           <div>
             <Button onClick={onSignUp} variant="contained" color="primary">
             Sign Up

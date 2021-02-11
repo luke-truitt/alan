@@ -50,15 +50,15 @@ const timelineData = [
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
   return (
-    <div className="column-container join-timeline-step">
+    <div className="column-container reset-timeline-step">
       <img
         src={timelineNumbers[props.number]}
-        className="join-timeline-step-number"
+        className="reset-timeline-step-number"
       />
       <Typography
         variant="body2"
         color="primary"
-        className="join-timeline-step-text"
+        className="reset-timeline-step-text"
       >
         {props.text}
       </Typography>
@@ -71,8 +71,8 @@ function JoinTimeline() {
     <JoinTimelineStep number={data.number} text={data.text} />
   ));
   return (
-    <div className="row-container join-timeline">
-      <Typography variant="h5" color="primary" className="join-timeline-title">
+    <div className="row-container reset-timeline">
+      <Typography variant="h5" color="primary" className="reset-timeline-title">
         How does it work?
       </Typography>
       {timelineSteps}
@@ -83,17 +83,25 @@ function JoinTimeline() {
 function ResetForm(props) {
   const history = useHistory();
   let location = useLocation();
-  const [email, setEmail] = useState(
-    location.state == null ? "" : location.state["email"]
-  );
+  const [valid, setValid] = useState(true);
+  const [invalid, setInvalid] = useState(false);
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
 
-  const sendResetEmail = (event) => {
-    event.preventDefault();
+    if (code === 13) {
+      //13 is the enter keycode
+      sendResetEmail();
+    }
+  };
+
+  const sendResetEmail = () => {
+    
     setSending(true);
     auth
       .sendPasswordResetEmail(email)
@@ -103,6 +111,8 @@ function ResetForm(props) {
       })
       .catch(() => {
         setError("Error resetting password");
+        setInvalid(true);
+        setSending(false);
       });
   };
 
@@ -121,37 +131,38 @@ function ResetForm(props) {
       setEmail(e);
     }
   };
-
   return (
-    <div className="join-form row-container">
-      {error !== null && (
-        <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
-          {error}
-        </div>
-      )}
+    <div className="reset-form row-container">
       <TextInput
+              setValid={(val) => {
+                setValid(val);
+              }}
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
+        onKeyPress={(e, val) => keyDown(e, val)}
         stateName="email"
+        helperText="Doesn't look like you have an account with us... Double check the email address or sign Up Below"
         value={email}
+        invalid={invalid}
         placeholder="Enter Email"
         type="email"
       />
       <Button
-        className="join-button"
+        className="reset-button"
         variant="contained"
         color="secondary"
-        onClick={(e) => sendResetEmail(e)}
+        style={{marginTop: invalid ? "30px" : ""}}
+        onClick={() => sendResetEmail()}
       >
         {sending ? <CircularProgress /> : "Reset Password"}
       </Button>
-      <div className="join-or-container column-container">
-        <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
+      <div className="reset-or-container column-container">
+        <div className="reset-or-horizontal-line" />
+        <Typography variant="caption" className="reset-or">
           OR
         </Typography>
 
-        <div className="join-or-horizontal-line" />
+        <div className="reset-or-horizontal-line" />
       </div>
       <Button
         className="apple-sign-button"
@@ -176,20 +187,20 @@ function ResetForm(props) {
 function ResetPassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="join-page-c0 column-container">
-        <div className="join-page-c1-left-shadow" />
-        <div className="join-page-c1-left row-container">
+      <div className="reset-page-c0 column-container">
+        <div className="reset-page-c1-left-shadow" />
+        <div className="reset-page-c1-left row-container">
           <JoinTimeline></JoinTimeline>
           <Typography
             variant="caption"
             color="primary"
-            className="join-disclaimer-text"
+            className="reset-disclaimer-text"
           >
             *Review process takes about 2-4 business days
           </Typography>
         </div>
-        <div className="join-page-c1-right row-container">
-          <div className="join-page-c1-right-content row-container">
+        <div className="reset-page-c1-right row-container">
+          <div className="reset-page-c1-right-content row-container">
             <Typography
               color="textPrimary"
               variant="h2"
