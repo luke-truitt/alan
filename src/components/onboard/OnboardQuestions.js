@@ -28,7 +28,7 @@ export const covidCredits = {
   type: "DollarInput",
   question: "How much did you get from government stimulus checks for COVID?",
   description:
-    "If you got anything less than $1,800 as an independent, you can get the difference in your refund!",
+    "If you received less than $1,800 as an independent, you can get the difference in your refund.",
   options: {},
   stateName: "covidCredits",
 };
