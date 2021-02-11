@@ -241,6 +241,7 @@ function AccountPage(props) {
   }, 1000);
   useEffect(() => {
     setTimeout(() => {
+      
       if (!user.user && loadAttempts > 2) {
         console.log(user);
         history.push("/signin");

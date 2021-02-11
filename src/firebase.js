@@ -19,6 +19,7 @@ export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
+  console.log("signing in with google")
   return auth.signInWithPopup(provider).then((result) => {
     if(referToId=="") {
       referToId = uuidv4();
@@ -40,6 +41,7 @@ export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
     // ...
+    console.log(error);
   });
 };
 
