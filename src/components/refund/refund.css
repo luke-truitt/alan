@@ -70,10 +70,16 @@ p.refund-tooltip {
 }
 
 p.refund-breakdown-row-amount {
+  font-weight: 100;
   width: 100%;
   font-size: 2rem;
 }
 
+p.refund-label-row {
+  font-weight: 1000;
+  font-size: 2em;
+  width: 100%;
+}
 .refund-breakdown-row-c0 {
   width: 100%;
   text-align: right;
@@ -252,7 +258,6 @@ img.onboard-complete-help-arrow {
   .onboard-complete-footer {
     background-color: #ffffff;
   }
-
   h1.refund-amount {
     font-size: 5rem;
   }

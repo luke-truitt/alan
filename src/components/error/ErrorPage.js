@@ -17,7 +17,10 @@ function ErrorPage(props) {
   const goHome = () => {
     history.push({ pathname: "/" });
   };
-
+  const signIn = () => {
+    console.log("signing in")
+    history.push({ pathname: "/signin" });
+  };
   return (
     <ThemeProvider theme={primaryTheme}>
       <div
@@ -25,22 +28,35 @@ function ErrorPage(props) {
         id="outer-container-mobile"
       >
         <div className="inner-container-left" id="inner-container-left-mobile">
-          <Typography variant="h1" color="text-primary" id="h1-mobile">
+          <Typography variant="h4" color="text-primary" id="h1-mobile">
             Looks like you might be lost. This page doesn't exist...
           </Typography>
-          <Button
-            className="embedded-field-button"
-            id="embedded-field-button-mobile"
-            variant="contained"
-            color="secondary"
-            onClick={goHome}
-          >
-            Go Home
-          </Button>
-          <Typography variant="h3" color="text-primary" id="h3-mobile">
-            Head back home to check out some S3XY tax returns... It does in fact
-            blow our minds how much money is left on the table by college
-            students.
+          <div style={{flex: "row", marginTop: "50px"}}>
+            <Button
+              className="embedded-field-button"
+              id="embedded-field-button-mobile"
+              variant="contained"
+              color="secondary"
+              style={{marginRight: "30px", marginLeft: "30px"}}
+              onClick={goHome}
+            >
+              Go Home
+            </Button>
+            <Button
+              className="embedded-field-button"
+              id="embedded-field-button-mobile"
+              variant="contained"
+              color="primary"
+              style={{marginRight: "30px", marginLeft: "30px"}}
+              onClick={signIn}
+            >
+              Log In
+            </Button>
+          </div>
+          
+          <Typography variant="h6" color="text-primary" id="h3-mobile" style={{marginTop: "50px"}}>
+            It does in fact blow our minds how much money is left on the table by college
+            students. Do yourself a favor and let us help you.
           </Typography>
         </div>
       </div>
