@@ -143,11 +143,6 @@ function SignInForm(props) {
 
   return (
     <div className="signin-form row-container">
-      {error !== null && (
-        <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
-          {error}
-        </div>
-      )}
       <TextInput
         setValid={(val) => {
           setValid(val);
