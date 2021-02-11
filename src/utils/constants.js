@@ -43,7 +43,7 @@ export const primaryTheme = createMuiTheme({
       },
     },
   },
-  shape: { borderRadius: "3px" },
+  shape: { borderRadius: "2px" },
   typography: {
     fontFamily: ["Lato", "sans-serif"],
     letterSpacing: "1rem",

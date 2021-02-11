@@ -188,22 +188,6 @@ function Refund(props) {
             <div className="onboard-complete-c1-content column-container">
               {dataLoaded ? (
                 <div className="onboard-complete-c1-breakdown">
-                  <Card className="onboard-complete-card-mobile">
-                    <CardContent
-                      onClick={navTo}
-                      className="onboard-complete-card-1-content"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <Typography
-                        className="refund-card-button-text"
-                        variant="h4"
-                        color="primary"
-                      >
-                        Help me file my taxes{" "}
-                        <ArrowForwardIosRoundedIcon className="help-button-icon" />
-                      </Typography>
-                    </CardContent>
-                  </Card>
                   <Zoom in timeout={{ enter: 1000 }}>
                     <div>
                       <Typography
@@ -218,8 +202,23 @@ function Refund(props) {
                         color="secondary"
                       >
                         ${numberWithCommas(breakdown.netRefund)}
-                      </Typography>
-
+                      </Typography>{" "}
+                      <Card className="onboard-complete-card-mobile">
+                        <CardContent
+                          onClick={navTo}
+                          className="onboard-complete-card-1-content"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <Typography
+                            className="refund-card-button-text"
+                            variant="h4"
+                            color="primary"
+                          >
+                            Help me file my taxes{" "}
+                            <ArrowForwardIosRoundedIcon className="help-button-icon" />
+                          </Typography>
+                        </CardContent>
+                      </Card>
                       <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
                     </div>
                   </Zoom>
