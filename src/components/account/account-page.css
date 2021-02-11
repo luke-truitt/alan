@@ -227,7 +227,11 @@ img.placeholder-block {
     display: none;
   }
   div.account-page-c1-right {
-    width: 100%;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  div.account-page-c1-right-content {
+    width: 100vw;
     overflow-x: hidden;
   }
   div.account-page-c0 {
@@ -241,9 +245,7 @@ img.placeholder-block {
   .account-page-card-icon {
     margin-bottom: 10px;
   }
-  .referral-card-content.column-container {
-    flex-direction: column;
-  }
+
   .review-card-content.column-container {
     flex-direction: column;
   }
