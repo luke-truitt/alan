@@ -280,10 +280,11 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 function ReviewCard(props) {
+  let history = useHistory();
   let refundText;
   if(props.userData.refundBreakdown) {
     refundText = <div>
-    <Typography variant="body2" className="review-card-text">Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline"}} onClick={() => props.onCalculator()}>here</a>.</Typography>
+    <Typography variant="body2" className="review-card-text">Your refund is going to be upwards of ${numberWithCommas(props.userData.refundBreakdown.netRefund)}, to see a breakdown of this, go <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => history.push({pathname: '/refund'})}>here</a>. If you want to retake the calculator or haven't taken it yet, you can do so <a style={{textDecoration: "underline", cursor: "pointer"}} onClick={() => props.onCalculator()}>here</a>.</Typography>
   </div>
   } else {
     refundText = <div>

@@ -206,14 +206,14 @@ function Refund(props) {
                       variant="h5"
                       className="refund-card-title"
                     >
-                      $XXX
+                      $2,342
                     </Typography>
                     <Typography
                       color="textSecondary"
                       variant="caption"
                       className="refund-card-caption"
                     >
-                      That's how much you lose fucker.
+                      That's how much the average American college student is owed in a refund.
                     </Typography>
                   </div>
                 </CardContent>
@@ -227,14 +227,14 @@ function Refund(props) {
                       variant="h5"
                       className="refund-card-title"
                     >
-                      $XXX
+                      $473
                     </Typography>
                     <Typography
                       color="textSecondary"
                       variant="caption"
                       className="refund-card-caption"
                     >
-                      That's how much you lose fucker.
+                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
                     </Typography>
                   </div>
                 </CardContent>
@@ -253,7 +253,7 @@ function Refund(props) {
                     variant="h4"
                     color="primary"
                   >
-                    Help me file my taxes <ArrowForwardIosRoundedIcon />
+                    {user ? "Go To Account" : "Help me file"} <ArrowForwardIosRoundedIcon />
                   </Typography>
                 </CardContent>
               </Card>
@@ -266,14 +266,14 @@ function Refund(props) {
                       variant="h5"
                       className="refund-card-title"
                     >
-                      $XXX
+                      $2,342
                     </Typography>
                     <Typography
                       color="textSecondary"
                       variant="caption"
                       className="refund-card-caption"
                     >
-                      That's how much you lose fucker.
+                      That's how much the average American college student is owed in a refund.
                     </Typography>
                   </div>
                 </CardContent>
@@ -287,14 +287,14 @@ function Refund(props) {
                       variant="h5"
                       className="refund-card-title"
                     >
-                      $XXX
+                      $473
                     </Typography>
                     <Typography
                       color="textSecondary"
                       variant="caption"
                       className="refund-card-caption"
                     >
-                      That's how much you lose fucker.
+                      That's how much the average college student actually receives because of lack of reporting and underutilization of credits.
                     </Typography>
                   </div>
                 </CardContent>
