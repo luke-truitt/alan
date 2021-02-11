@@ -135,7 +135,8 @@ div.onboard-loading-subtitle > * {
     overflow: hidden;
   }
   .onboard-c1-right {
-    margin: 0rem;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
 
     overflow: hidden;
     width: 100vh;
@@ -150,7 +151,8 @@ div.onboard-loading-subtitle > * {
   }
   .onboard-c1-right-div {
     width: 100%;
-    height: 100vh;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
     overflow: hidden;
     display: flex;
     background-image: url("./../../images/bg/bg-pattern-full-light.svg");
@@ -176,6 +178,14 @@ div.onboard-loading-subtitle > * {
     overflow: hidden;
   }
   div.onboard-button-div {
-    height: 10vh;
+    position: fixed;
+    bottom: 1rem;
+    align-self: center;
+  }
+  div.onboard-button-div > :first-child {
+    margin-right: 2rem;
+  }
+  div.onboard-button-div > :last-child {
+    margin-left: 2rem;
   }
 }
