@@ -324,8 +324,7 @@ export function DollarInput(props) {
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             placeholder="0"
-            inputProps={{ pattern: "\d*", type: "number" }}
-            type="number"
+            inputProps={{ pattern: "\d*" }}
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={
               isNaN(props.fields[props.stateName])
