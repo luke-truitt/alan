@@ -137,7 +137,6 @@ div.onboard-loading-subtitle > * {
   .onboard-c1-right {
     margin: 0rem;
 
-    height: 100vh;
     overflow: hidden;
     width: 100%;
     padding: 2rem;
@@ -151,7 +150,7 @@ div.onboard-loading-subtitle > * {
   }
   .onboard-c1-right-div {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     display: flex;
     background-image: url("./../../images/bg/bg-pattern-full-light.svg");
