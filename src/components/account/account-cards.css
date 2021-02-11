@@ -91,6 +91,12 @@ div.placeholder-full {
   align-items: flex-start;
 }
 
+@media only screen and (max-width: 800px) {
+  div.invite-card-email-container {
+    display: none;
+  }
+}
+
 .invite-card-icon {
   width: 40px;
 }
