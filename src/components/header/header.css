@@ -8,7 +8,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 10;
+  z-index: 100;
 }
 
 .header-button-container {
@@ -28,4 +28,9 @@ h4.logo-text {
   letter-spacing: 2px;
   color: white;
   margin-left: 2rem;
+}
+@media only screen and (max-width: 750px) {
+  .header-button-container {
+    display: none;
+  }
 }
