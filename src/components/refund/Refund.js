@@ -6,10 +6,16 @@ import {
   ThemeProvider,
   Dialog,
   DialogTitle,
+  Fade,
+  Zoom,
   Slide,
   CircularProgress,
 } from "@material-ui/core";
-import { primaryTheme, slideDefault } from "../../utils/constants.js";
+import {
+  primaryTheme,
+  slideDefault,
+  shortFade,
+} from "../../utils/constants.js";
 import "./../../styles.css";
 import "./refund.css";
 import RefundBreakdown from "./RefundBreakdown.js";
@@ -194,17 +200,25 @@ function Refund(props) {
                       </Typography>
                     </CardContent>
                   </Card>
-                  <Typography className="onboard-complete-title" variant="h6">
-                    Your estimated refund amount
-                  </Typography>
-                  <Typography
-                    className="refund-amount "
-                    variant="h1"
-                    color="secondary"
-                  >
-                    ${numberWithCommas(breakdown.netRefund)}
-                  </Typography>
-                  <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
+                  <Zoom in timeout={{ enter: 1000 }}>
+                    <div>
+                      <Typography
+                        className="onboard-complete-title"
+                        variant="h6"
+                      >
+                        Your estimated refund amount
+                      </Typography>
+                      <Typography
+                        className="refund-amount "
+                        variant="h1"
+                        color="secondary"
+                      >
+                        ${numberWithCommas(breakdown.netRefund)}
+                      </Typography>
+
+                      <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
+                    </div>
+                  </Zoom>
                   <Card className="onboard-complete-card-mobile">
                     <CardContent className="onboard-complete-card-2-content">
                       <div className="refund-card-text">
