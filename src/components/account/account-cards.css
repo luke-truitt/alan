@@ -109,6 +109,9 @@ h6.invite-card-title {
   div.invite-card-c1 {
     margin-left: 0rem;
   }
+  div.invite-card-button-container {
+    width: 100%;
+  }
 }
 
 .invite-card-icon {
