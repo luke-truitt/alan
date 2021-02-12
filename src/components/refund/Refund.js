@@ -167,8 +167,8 @@ function Refund(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
+    <Header />
       <div className="onboard-complete-c0-top row-container">
-        <Header />
 
         {/* <div className="header" /> */}
         {/* <div className="onboard-complete-help-button-container">
@@ -244,7 +244,7 @@ function Refund(props) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="onboard-complete-card-mobile">
+                  <Card className="onboard-complete-card-mobile" >
                     <CardContent className="onboard-complete-card-3-content">
                       {" "}
                       <div className="refund-card-text row-container">
@@ -259,6 +259,7 @@ function Refund(props) {
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
+                          style={{marginBottom: "70px"}}
                         >
                           That's how much the average college student actually
                           receives because of lack of reporting and

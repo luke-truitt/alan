@@ -1,8 +1,6 @@
 .account-page-c0 {
   width: 100vw;
-  height: 100vh;
-  margin-top: 60px;
-  overflow-y: hidden;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 .account-page-c1-left {
@@ -30,6 +28,7 @@
 }
 h5.welcome-text {
   font-weight: 600;
+  vertical-align: center;
 }
 .mobile-welcome-card-content {
   background-image: linear-gradient(to right, #5f5fc4, 50%, #001064);

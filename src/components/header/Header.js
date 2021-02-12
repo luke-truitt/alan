@@ -1,18 +1,27 @@
-import { AppBar, ThemeProvider, Button, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  ThemeProvider,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants";
 import { useHistory, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import "./../../styles.css";
 import "./header.css";
-import { getUserDoc } from "../../firebase";
+import { getUserDoc, auth } from "../../firebase";
 import { AuthContext } from "../../providers/AuthProvider";
-import logo from "./../../images/logo/white-tax.svg";
+import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 
 function Header(props) {
   const history = useHistory();
   const [loadAttempts, setLoadAttempts] = useState(0);
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const user = useContext(AuthContext);
+
   const onSignIn = () => {
     if (user.user) {
       history.push({ pathname: "/account" });
@@ -21,7 +30,7 @@ function Header(props) {
     }
   };
   const onSignUp = () => {
-    props.signUp();
+    props.signUp ? props.signUp() : history.push({ pathname: "/join" });
   };
   const onAccount = () => {
     if (user.user) {
@@ -33,7 +42,7 @@ function Header(props) {
 
   useEffect(() => {
     setTimeout(() => {
-      if (user.user && loadAttempts < 2 && Object.keys(userData).length < 1) {
+      if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
         setTimeout(() => {
           getUserDoc(user)
             .then((result) => {
@@ -46,9 +55,7 @@ function Header(props) {
             })
             .catch(() => console.log("ERROR GETTING USER"));
           setLoadAttempts(loadAttempts + 1);
-        }, 500);
-      } else {
-        setLoadAttempts(loadAttempts + 1);
+        }, 1000);
       }
     });
   });
@@ -62,13 +69,41 @@ function Header(props) {
         >
           <img src={logo} className="header-logo" />
         </Typography>
-        <div className="header-button-container">
+        <div
+          className={props.isHome ? "home-header" : "header-button-container"}
+        >
           {Object.keys(userData).length > 0 ? (
-            <Button onClick={onAccount} variant="outlined" color="primary">
-              {userData["firstName"].toLowerCase().includes("wes")
-                ? "Hola Wessisito"
-                : `Hey   ${userData["firstName"]}`}
-            </Button>
+            <div>
+              <Button
+                onClick={onAccount}
+                variant="outlined"
+                color="primary"
+                className="username-button"
+              >
+                {userData["firstName"].toLowerCase().includes("wes")
+                  ? "Hola Wessisito"
+                  : `Hi ${userData["firstName"]}!`}
+              </Button>
+              <Button
+                className="header-sign-out-button"
+                color="primary"
+                onClick={() => {
+                  console.log("No dice");
+                  setLoading(true);
+                  auth
+                    .signOut()
+                    .then(() => {
+                      history.push({ pathname: "/join" });
+                      setLoading(false);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                }}
+              >
+                {loading ? <CircularProgress /> : <div>Sign Out</div>}
+              </Button>
+            </div>
           ) : (
             <div>
               <Button onClick={onSignUp} variant="contained" color="primary">

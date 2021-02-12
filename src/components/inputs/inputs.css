@@ -29,6 +29,7 @@ button.selected {
 }
 h6.form-item-question {
   line-height: 1.6rem;
+  margin-bottom: 1vh;
 }
 
 span.form-item-description {
@@ -55,7 +56,7 @@ div.account-page-c1-right
 }
 
 h2.form-title {
-  padding-bottom: 2rem;
+  padding-bottom: 3vh;
   font-size: 2.5em;
 }
 div.form-item-container.column-container {
@@ -90,6 +91,7 @@ div.form-container {
   width: 100%;
 }
 
+
 @media only screen and (max-width: 900px) {
   button.single-select-button {
     height: 50px;
@@ -114,7 +116,7 @@ div.form-container {
   }
   .form-inputs {
     overflow-y: scroll;
-    max-height: 60vh;
+    max-height: 65vh;
   }
   .form-title {
     height: 10vh;

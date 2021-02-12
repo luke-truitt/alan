@@ -19,6 +19,7 @@ import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import "./../inputs/inputs.css";
+import Header from "../header/Header";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -52,15 +53,15 @@ const timelineData = [
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
   return (
-    <div className="column-container join-timeline-step">
+    <div className="column-container signin-timeline-step">
       <img
         src={timelineNumbers[props.number]}
-        className="join-timeline-step-number"
+        className="signin-timeline-step-number"
       />
       <Typography
         variant="body2"
         color="primary"
-        className="join-timeline-step-text"
+        className="signin-timeline-step-text"
       >
         {props.text}
       </Typography>
@@ -73,8 +74,12 @@ function JoinTimeline() {
     <JoinTimelineStep number={data.number} text={data.text} />
   ));
   return (
-    <div className="row-container join-timeline">
-      <Typography variant="h5" color="primary" className="join-timeline-title">
+    <div className="row-container signin-timeline">
+      <Typography
+        variant="h5"
+        color="primary"
+        className="signin-timeline-title"
+      >
         How does it work?
       </Typography>
       {timelineSteps}
@@ -90,6 +95,8 @@ function SignInForm(props) {
   );
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(true);
+  const [invalid, setInvalid] = useState(false);
   const [error, setError] = useState("");
   const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -97,15 +104,19 @@ function SignInForm(props) {
     history.push({ pathname: "/" });
   };
 
-  const signInWithEmailAndPasswordHandler = (event) => {
+  const signInWithEmailAndPasswordHandler = () => {
+    setLoading(true);
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         navTo();
+        setLoading(false);
       })
       .catch((error) => {
         setError("Incorrect Email or Password!");
         console.error("Error signing in with password and email", error);
+        setInvalid(true);
+        setLoading(false);
       });
     console.log(auth);
   };
@@ -119,7 +130,7 @@ function SignInForm(props) {
 
     if (code === 13) {
       //13 is the enter keycode
-      signInWithEmailAndPasswordHandler(null);
+      signInWithEmailAndPasswordHandler();
     }
   };
 
@@ -136,26 +147,29 @@ function SignInForm(props) {
   };
 
   return (
-    <div className="join-form row-container">
-      {error !== null && (
-        <div className="py-4 bg-red-600 w-full text-white text-center mb-3">
-          {error}
-        </div>
-      )}
+    <div className="signin-form row-container">
       <TextInput
-        validData={(d) => checkValid(d)}
+        setValid={(val) => {
+          setValid(val);
+        }}
         onChange={(e, val) => onChange(e, val)}
         stateName="email"
+        helperText=""
         value={email}
+        invalid={invalid}
         onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Email"
         type="email"
       />
       <TextInput
-        validData={(d) => checkValid(d)}
+        setValid={(val) => {
+          setValid(val);
+        }}
         onChange={(e, val) => onChange(e, val)}
         stateName="password"
+        helperText="Please enter a valid email and password."
         value={password}
+        invalid={invalid}
         onKeyPress={(e, val) => keyDown(e, val)}
         placeholder="Enter Password"
         type="password"
@@ -170,20 +184,20 @@ function SignInForm(props) {
       </Typography>
 
       <Button
-        className="join-button"
+        className="signin-button"
         variant="contained"
         color="secondary"
-        onClick={(e) => signInWithEmailAndPasswordHandler(e)}
+        onClick={() => signInWithEmailAndPasswordHandler()}
       >
         {loading ? <CircularProgress /> : "Sign In"}
       </Button>
-      <div className="join-or-container column-container">
-        <div className="join-or-horizontal-line" />
-        <Typography variant="caption" className="join-or">
+      <div className="signin-or-container column-container">
+        <div className="signin-or-horizontal-line" />
+        <Typography variant="caption" className="signin-or">
           OR
         </Typography>
 
-        <div className="join-or-horizontal-line" />
+        <div className="signin-or-horizontal-line" />
       </div>
       <Button
         className="google-sign-button"
@@ -203,7 +217,7 @@ function SignInForm(props) {
       >
         {googleLoading ? <CircularProgress /> : "Sign in with Google"}
       </Button>
-      <div className="join-or-horizontal-line" />
+      <div className="signin-or-horizontal-line" />
       <Typography
         variant="body1"
         className="sign-in-sign-up-text"
@@ -211,7 +225,7 @@ function SignInForm(props) {
         onClick={() => history.push({ pathname: "/join" })}
       >
         Not a member?{" "}
-        <span className="join-sign-in-button" style={{ cursor: "pointer" }}>
+        <span className="signin-sign-in-button" style={{ cursor: "pointer" }}>
           Sign Up
         </span>
       </Typography>
@@ -222,10 +236,11 @@ function SignInForm(props) {
 function SignIn() {
   return (
     <ThemeProvider theme={primaryTheme}>
+      <Header />
       <Slide {...slideDefault} in direction="left">
-        <div className="join-page-c0 column-container">
-          <div className="join-page-c1-left-shadow" />
-          <div className="join-page-c1-left row-container">
+        <div className="signin-page-c0 column-container">
+          <div className="signin-page-c1-left-shadow" />
+          <div className="signin-page-c1-left row-container">
             <JoinTimeline></JoinTimeline>
             <Typography
               variant="caption"
@@ -235,8 +250,8 @@ function SignIn() {
               *Review process takes about 2-4 business days
             </Typography>
           </div>
-          <div className="join-page-c1-right row-container">
-            <div className="join-page-c1-right-content row-container">
+          <div className="signin-page-c1-right row-container">
+            <div className="signin-page-c1-right-content row-container">
               <Typography
                 color="textPrimary"
                 variant="h2"

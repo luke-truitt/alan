@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  CircularProgress,
 } from "@material-ui/core";
 import "./onboard.css";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -73,7 +74,7 @@ const forms = [
   {
     title: "Your Life",
     items: [dependence, job, school],
-    formFields: ["dependent", "jobTitle", "companyName", "school"],
+    formFields: ["dependent", "school"],
   },
   // {
   //   title: "History",
@@ -245,6 +246,7 @@ function Onboard(props) {
       });
     }
     if (step >= forms.length) {
+      console.log("loadingScreen");
       setLoadingScreen(false);
       setTimeout(navToRefund, 5000);
       setStep(forms.length);
@@ -474,7 +476,7 @@ function Onboard(props) {
               disabled={nextDisabled()}
               onClick={forwardClick}
             >
-              Next
+              {panelActive ? <CircularProgress/> : "Next"}
             </Button>
           </div>
         </div>
@@ -550,14 +552,13 @@ function Onboard(props) {
 
   return !isMobile ? (
     <ThemeProvider theme={primaryTheme} className="onboard">
+      <Header signUp={handleClickOpen}/>
       <Slide in {...slideDefault} direction="left">
         <div
           className="onboard-c0 column-container"
           tabIndex={-1}
           onKeyPress={(e, val) => keyDown(e, val)}
         >
-          <Header signUp={handleClickOpen} />
-
           {panelActive ? (
             <OnboardingTimeline activeStep={step} />
           ) : (
@@ -567,6 +568,7 @@ function Onboard(props) {
             {loadingScreen ? (
               <div>
                 <div container className="onboard-c1-right-div row-container">
+                  <div className="background-mobile">
                   <div className="form-div">
                     <Form
                       title={forms[step - 1].title}
@@ -595,6 +597,7 @@ function Onboard(props) {
                       </Button>
                     </div>
                   </div>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -608,7 +611,7 @@ function Onboard(props) {
   ) : (
     <ThemeProvider theme={primaryTheme}>
       <div container className="onboard-c1-right-div row-container">
-        <ProgressBar value={(step * 100) / forms.length}></ProgressBar>
+        {loadingScreen ? (<div><ProgressBar value={(step * 100) / forms.length}></ProgressBar>
         <div className="another-div">
           <div className="form-div">
             <Form
@@ -639,6 +642,12 @@ function Onboard(props) {
             </div>
           </div>
         </div>
+        </div>)
+          : (
+            <Loading />
+          )
+        }
+        
       </div>
     </ThemeProvider>
   );

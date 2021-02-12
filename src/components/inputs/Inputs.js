@@ -47,6 +47,7 @@ export function PhoneNumberInput(props) {
           label="Phone Number"
           autoComplete
           variant="outlined"
+          inputProps={{ inputMode: "numeric" }}
           onKeyPress={(e, val) => props.onKeyPress(e, val)}
           placeholder={props.placeholder}
           value={props.fields["phone"]}
@@ -114,6 +115,20 @@ export function SchoolInput(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
+      <Typography
+        variant="h6"
+        color="textPrimary"
+        className="form-item-question"
+      >
+        {props.question}
+      </Typography>
+      <Typography
+        variant="caption"
+        color="textSecondary"
+        className="form-item-description"
+      >
+        {props.description}
+      </Typography>
       <div className="form-item-container column-container school-input">
         <Autocomplete
           id="combo-box-demo"
@@ -134,6 +149,7 @@ export function SchoolInput(props) {
           className="form-item-text-field"
           label="Graduation Year"
           value={props.fields["classYear"]}
+          inputProps={{ inputMode: "numeric" }}
           variant="outlined"
           onKeyPress={(e, val) => props.onKeyPress(e, val)}
           onChange={(e) => {
@@ -169,7 +185,7 @@ export function JobInput(props) {
       <div className="form-item-container column-container">
         <TextField
           className="form-item-text-field"
-          label="Company Name"
+          label="Company"
           value={props.fields["companyName"]}
           autoComplete
           onKeyPress={(e, val) => props.onKeyPress(e, val)}
@@ -415,7 +431,7 @@ export function Form(props) {
   ));
   return (
     <ThemeProvider theme={primaryTheme}>
-      <div className="form-container">
+      <div className="form-container" id="top-of-form">
         <Typography variant="h2" color="textPrimary" className="form-title">
           <span className="teal-highlight">{props.title}</span>
         </Typography>

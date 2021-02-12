@@ -2,11 +2,10 @@
 .onboard-c0 {
   width: 100vw;
   height: 100vh;
-  overflow-y: hidden;
+  margin-top: -50px;
 }
 .onboard-c1-left {
   width: 35vw;
-  height: 100vh;
   padding-top: 75px;
   background-image: url("./../../images/bg/bg-pattern-third.svg");
   background-repeat: no-repeat;
@@ -45,11 +44,6 @@
   width: 15vw;
   margin-top: 2rem;
 }
-.form-div > * > *:last-child {
-  height: 500px;
-  width: 100%;
-  padding-right: 2rem;
-}
 .onboard-c1-left-div {
   width: 80%;
   height: 100%;
@@ -85,10 +79,6 @@ div.onboard-button > button {
 .onboard-c1-right-progress-bar {
   width: 100%;
   margin-left: 0px !important;
-}
-h2.form-title {
-  padding-bottom: 2rem;
-  font-size: 2.5em;
 }
 
 .onboard-loading-container {
@@ -147,7 +137,7 @@ div.onboard-loading-subtitle > * {
     margin-left: 0;
   }
   .form-div {
-    padding-top: 1rem;
+    padding-top: 5vh;
   }
   .onboard-c1-right-div {
     width: 100%;
@@ -171,8 +161,6 @@ div.onboard-loading-subtitle > * {
     flex-direction: column;
     margin: auto;
     height: 100vh;
-    padding-bottom: 2rem;
-    padding-top: 3rem;
     justify-content: flex-start;
     width: 80%;
     overflow: hidden;
@@ -187,5 +175,8 @@ div.onboard-loading-subtitle > * {
   }
   div.onboard-button-div > :last-child {
     margin-left: 2rem;
+  }
+  .onboard-c1-right-div {
+    max-width: 100%;
   }
 }

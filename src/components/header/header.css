@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 .header-c0 {
+<<<<<<< HEAD
   background-color: #283596;
   height: 60px;
+=======
+  background-color: #313d7c;
+  height: 50px;
+>>>>>>> e7169079970eb9d8bb3ce8458f0afa1a03e290e1
   align-items: center;
   justify-content: space-between;
   box-shadow: 1px 1px 3px;
-  position: fixed;
   top: 0;
+  position: relative;
   width: 100vw;
   z-index: 100;
 }
@@ -19,9 +24,13 @@
 }
 
 .header-button-container > div > button {
-  height: 40px;
+  height: 30px;
   min-width: 10vw;
   margin-right: 2rem;
+}
+.home-header > div > button {
+  height: 40px;
+  min-width: 6vw;
 }
 
 h4.logo-text {
@@ -34,6 +43,20 @@ h4.logo-text {
   .header-button-container {
     display: none;
   }
+  .home-header {
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+  }
+  .home-header > div > button {
+    height: 30px;
+    width: auto;
+    float: right;
+  }
+  
 }
 .header-logo {
   height: 40px;
