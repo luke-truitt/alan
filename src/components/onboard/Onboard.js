@@ -154,19 +154,14 @@ function Onboard(props) {
           formFields: ["state"],
         },
         {
-          title: "Covid Credits",
-          items: [covidCredits],
-          formFields: ["covidCredits"],
-        },
-        {
-          title: "Dependence",
-          items: [dependence],
-          formFields: ["dependent"],
-        },
-        {
           title: "Work",
           items: [job],
-          formFields: [],
+          formFields: ["companyName", "jobTitle"],
+        },
+        {
+          title: "Student Status",
+          items: [studentStatus],
+          formFields: ["student"],
         },
         {
           title: "School",
@@ -184,9 +179,20 @@ function Onboard(props) {
           formFields: ["loanPayments"],
         },
         {
-          title: "Student Status",
-          items: [studentStatus],
-          formFields: ["student"],
+          title: "Covid Credits",
+          items: [covidCredits],
+          formFields: ["covidCredits"],
+        },
+        {
+          title: "Dependence",
+          items: [dependence],
+          formFields: ["dependent"],
+        },
+
+        {
+          title: "Citizenship",
+          items: [citizenStatus],
+          formFields: ["citizen"],
         },
       ];
   const checkValid = (d) => {
