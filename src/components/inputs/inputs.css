@@ -29,7 +29,7 @@ button.selected {
 }
 h6.form-item-question {
   line-height: 1.6rem;
-  margin-bottom: 1vh;
+  margin-bottom: 1rem;
 }
 
 span.form-item-description {
@@ -41,7 +41,18 @@ span.form-item-description {
 .form-item-container {
   padding-bottom: 2rem;
 }
+.double-input-container {
+  width: 100%;
+}
 
+div.double-input-container > *:first-child {
+  margin-right: 0.5rem;
+  flex: 1;
+}
+div.double-input-container > *:last-child {
+  margin-left: 0.5rem;
+  flex: 1;
+}
 div.account-page-c1-right
   > div
   > div.MuiPaper-root.MuiCard-root.account-page-card.referral-card.MuiPaper-rounded
@@ -92,7 +103,6 @@ div.form-container {
   width: 100%;
 }
 
-
 @media only screen and (max-width: 900px) {
   button.single-select-button {
     height: 50px;
@@ -114,10 +124,6 @@ div.form-container {
   .single-select-button-container > button:last-child {
     margin-left: 0px;
     margin-right: 0px;
-  }
-  .form-inputs {
-    overflow-y: scroll;
-    max-height: 65vh;
   }
   .form-title {
     height: 10vh;

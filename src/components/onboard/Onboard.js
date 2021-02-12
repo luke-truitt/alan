@@ -38,6 +38,7 @@ import {
   school,
   phoneNumber,
   intlStudent,
+  citizenStatus,
   job,
   state,
   refund,
@@ -63,8 +64,6 @@ const {
   REACT_APP_WAITLIST_URL,
   REACT_APP_CALCULATOR_URL,
 } = process.env;
-
-
 
 const LinearProgressBar = withStyles((theme) => ({
   root: {
@@ -120,69 +119,82 @@ function Onboard(props) {
 
   const { width, height } = useWindowDimensions();
   const isMobile = width < 900;
-const forms = !isMobile ? [
-  {
-    title: "Income",
-    items: [income, state, covidCredits],
-    formFields: ["estimatedIncome", "state", "covidCredits"],
-  },
-  {
-    title: "Your Life",
-    items: [dependence, job, school],
-    formFields: ["dependent", "school"],
-  },
-  {
-    title: "Education",
-    items: [educationExpenses, studentLoans, studentStatus],
-    formFields: ["educationExpenses", "loanPayments", "student"],
-  },
-] : [
-  {
-    title: "Income",
-    items: [income],
-    formFields: ["estimatedIncome"],
-  },
-  {
-    title: "State",
-    items: [state],
-    formFields: ["state"],
-  },
-  {
-    title: "Covid Credits",
-    items: [covidCredits],
-    formFields: ["covidCredits"],
-  },
-  {
-    title: "Dependence",
-    items: [dependence],
-    formFields: ["dependent"],
-  },
-  {
-    title: "Work",
-    items: [job],
-    formFields: [],
-  },
-  {
-    title: "School",
-    items: [school],
-    formFields: ["school"],
-  },
-  {
-    title: "Education Expenses",
-    items: [educationExpenses],
-    formFields: ["educationExpenses"],
-  },
-  {
-    title: "Student Loans",
-    items: [studentLoans],
-    formFields: ["loanPayments"],
-  },
-  {
-    title: "Student Status",
-    items: [studentStatus],
-    formFields: ["student"],
-  },
-];
+  const forms = !isMobile
+    ? [
+        {
+          title: "Income",
+          items: [income, state, job],
+          formFields: ["estimatedIncome", "state", "companyName", "jobTitle"],
+        },
+        {
+          title: "Education",
+          items: [studentStatus, school, educationExpenses, studentLoans],
+          formFields: [
+            "student",
+            "school",
+            "educationExpenses",
+            "loanPayments",
+          ],
+        },
+        {
+          title: "History",
+          items: [covidCredits, dependence, citizenStatus],
+          formFields: ["covidCredits", "dependence", "citizen"],
+        },
+      ]
+    : [
+        {
+          title: "Income",
+          items: [income],
+          formFields: ["estimatedIncome"],
+        },
+        {
+          title: "State",
+          items: [state],
+          formFields: ["state"],
+        },
+        {
+          title: "Work",
+          items: [job],
+          formFields: ["companyName", "jobTitle"],
+        },
+        {
+          title: "Student Status",
+          items: [studentStatus],
+          formFields: ["student"],
+        },
+        {
+          title: "School",
+          items: [school],
+          formFields: ["school"],
+        },
+        {
+          title: "Education Expenses",
+          items: [educationExpenses],
+          formFields: ["educationExpenses"],
+        },
+        {
+          title: "Student Loans",
+          items: [studentLoans],
+          formFields: ["loanPayments"],
+        },
+        {
+          title: "Covid Credits",
+          items: [covidCredits],
+          formFields: ["covidCredits"],
+        },
+        {
+          title: "Dependence",
+          items: [dependence],
+          formFields: ["dependent"],
+        },
+
+        {
+          title: "Citizenship",
+          items: [citizenStatus],
+          formFields: ["citizen"],
+        },
+      ];
   const checkValid = (d) => {
     const availableFields = forms[step - 1].formFields;
     let validData = true;
@@ -198,6 +210,7 @@ const forms = !isMobile ? [
     updateValid({ [step]: validData });
   };
   const updateValid = (d) => {
+    console.log(d);
     for (const [key, value] of Object.entries(d)) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
@@ -225,8 +238,13 @@ const forms = !isMobile ? [
     sendData();
     setLoadingScreen(true);
     if (user.user) {
-      updateUser(user.user.uid, { refundBreakdown: data,  school: fields['school'], employer: fields['companyName'], jobTitle: fields['jobTitle']});
-    } 
+      updateUser(user.user.uid, {
+        refundBreakdown: data,
+        school: fields["school"],
+        employer: fields["companyName"],
+        jobTitle: fields["jobTitle"],
+      });
+    }
     history.push({
       pathname: "/refund",
       state: {
@@ -489,7 +507,7 @@ const forms = !isMobile ? [
 
   return !isMobile ? (
     <ThemeProvider theme={primaryTheme} className="onboard">
-      <Header page={"Onboard"} signUp={handleClickOpen}/>
+      <Header page={"Onboard"} signUp={handleClickOpen} />
       <Slide in {...slideDefault} direction="left">
         <div
           className="onboard-c0 column-container"
@@ -506,34 +524,38 @@ const forms = !isMobile ? [
               <div>
                 <div container className="onboard-c1-right-div row-container">
                   <div className="background-mobile">
-                  <div className="form-div">
-                    <Form
-                      title={forms[step - 1].title}
-                      formItems={forms[step - 1].items}
-                      fields={fields}
-                      data={{}}
-                      validForm={(d) => checkValid(d)}
-                      onUpdate={onDataUpdate}
-                      onKeyPress={(e, val) => keyDown(e, val)}
-                    />
-                  </div>
-                  <div className="onboard-button-div column-container">
-                    <div className="onboard-button">
-                      <Button color="secondary" onClick={backClick} style={{display: step==1 ? "none" : ""}}>
-                        Previous
-                      </Button>
+                    <div className="form-div">
+                      <Form
+                        title={forms[step - 1].title}
+                        formItems={forms[step - 1].items}
+                        fields={fields}
+                        data={{}}
+                        validForm={(d) => checkValid(d)}
+                        onUpdate={onDataUpdate}
+                        onKeyPress={(e, val) => keyDown(e, val)}
+                      />
                     </div>
-                    <div className="onboard-button">
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        disabled={nextDisabled()}
-                        onClick={forwardClick}
-                      >
-                        Next
-                      </Button>
+                    <div className="onboard-button-div column-container">
+                      <div className="onboard-button">
+                        <Button
+                          color="secondary"
+                          onClick={backClick}
+                          style={{ display: step == 1 ? "none" : "" }}
+                        >
+                          Previous
+                        </Button>
+                      </div>
+                      <div className="onboard-button">
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          disabled={nextDisabled()}
+                          onClick={forwardClick}
+                        >
+                          Next
+                        </Button>
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </div>
               </div>
@@ -548,43 +570,43 @@ const forms = !isMobile ? [
   ) : (
     <ThemeProvider theme={primaryTheme}>
       <div container className="onboard-c1-right-div row-container">
-        {loadingScreen ? (<div><ProgressBar value={(step * 100) / forms.length}></ProgressBar>
-        <div className="another-div">
-          <div className="form-div">
-            <Form
-              title={forms[step - 1].title}
-              formItems={forms[step - 1].items}
-              fields={fields}
-              data={{}}
-              validForm={(d) => checkValid(d)}
-              onUpdate={onDataUpdate}
-              onKeyPress={(e, val) => keyDown(e, val)}
-            />
-          </div>
-          <div className="onboard-button-div column-container">
-            <div className="onboard-button">
-              <Button color="secondary" onClick={backClick}>
-                Previous
-              </Button>
+        {loadingScreen ? (
+          <div>
+            <ProgressBar value={(step * 100) / forms.length}></ProgressBar>
+            <div className="another-div">
+              <div className="form-div">
+                <Form
+                  title={forms[step - 1].title}
+                  formItems={forms[step - 1].items}
+                  fields={fields}
+                  data={{}}
+                  validForm={(d) => checkValid(d)}
+                  onUpdate={onDataUpdate}
+                  onKeyPress={(e, val) => keyDown(e, val)}
+                />
+              </div>
+              <div className="onboard-button-div column-container">
+                <div className="onboard-button">
+                  <Button color="secondary" onClick={backClick}>
+                    Previous
+                  </Button>
+                </div>
+                <div className="onboard-button">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    disabled={nextDisabled()}
+                    onClick={forwardClick}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="onboard-button">
-              <Button
-                variant="contained"
-                color="secondary"
-                disabled={nextDisabled()}
-                onClick={forwardClick}
-              >
-                Next
-              </Button>
-            </div>
           </div>
-        </div>
-        </div>)
-          : (
-            <Loading />
-          )
-        }
-        
+        ) : (
+          <Loading />
+        )}
       </div>
     </ThemeProvider>
   );
