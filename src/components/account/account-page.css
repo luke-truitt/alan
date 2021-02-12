@@ -32,7 +32,7 @@ h5.welcome-text {
   font-weight: 600;
 }
 .mobile-welcome-card-content {
-  background-image: linear-gradient(to right, #744fc2, 60%, #002e72);
+  background-image: linear-gradient(to right, #5f5fc4, 50%, #001064);
   height: 100%;
   width: 100%;
 }

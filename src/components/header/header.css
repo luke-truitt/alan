@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 .header-c0 {
-  background-color: #313d7c;
+  background-color: #283596;
   height: 60px;
   align-items: center;
   justify-content: space-between;
@@ -34,4 +34,9 @@ h4.logo-text {
   .header-button-container {
     display: none;
   }
+}
+.header-logo {
+  height: 40px;
+  justify-self: center;
+  vertical-align: middle;
 }

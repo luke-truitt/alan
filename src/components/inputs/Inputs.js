@@ -324,7 +324,7 @@ export function DollarInput(props) {
           <OutlinedInput
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             placeholder="0"
-            inputProps={{ inputMode: 'numeric' }}
+            inputProps={{ inputMode: "numeric" }}
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
             value={
               isNaN(props.fields[props.stateName])
@@ -417,7 +417,7 @@ export function Form(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="form-container">
         <Typography variant="h2" color="textPrimary" className="form-title">
-          <span className="purple-highlight">{props.title}</span>
+          <span className="teal-highlight">{props.title}</span>
         </Typography>
         <div className="form-inputs">{inputs}</div>
       </div>
@@ -425,23 +425,17 @@ export function Form(props) {
   );
 }
 export function TextInput(props) {
-  
-
   const checkValid = (val) => {
     if (val.length > 6) {
       console.log("Good");
       try {
         props.setValid(true);
-      } catch {
-
-      }
+      } catch {}
     } else {
       console.log("Bad");
-      try{ 
+      try {
         props.setValid(false);
-      } catch {
-        
-      }
+      } catch {}
     }
   };
 
@@ -463,28 +457,26 @@ export function TextInput(props) {
     />
   ) : (
     <TextField
-          type={props.type}
-          className="form-item-text-field"
-          variant={props.invalid ? "standard" : "outlined"}
-          value={props.value}
-          placeholder={props.placeholder}
-          style={{
-            paddingLeft: "3px",
-          }}
-          onKeyPress={(e, val) => props.onKeyPress(e, val)}
-          InputProps={{ disableUnderline: true }}
-          onChange={(e) => {
-            props.onChange(e.target.value, { stateName: props.stateName });
-            checkValid(e.target.value);
-          }}
-        />
+      type={props.type}
+      className="form-item-text-field"
+      variant={props.invalid ? "standard" : "outlined"}
+      value={props.value}
+      placeholder={props.placeholder}
+      style={{
+        paddingLeft: "3px",
+      }}
+      onKeyPress={(e, val) => props.onKeyPress(e, val)}
+      InputProps={{ disableUnderline: true }}
+      onChange={(e) => {
+        props.onChange(e.target.value, { stateName: props.stateName });
+        checkValid(e.target.value);
+      }}
+    />
   );
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
-
         {ValidationTextField}
-        
       </div>
     </ThemeProvider>
   );

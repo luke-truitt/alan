@@ -102,12 +102,12 @@ span.join-or {
 button.google-sign-button {
   background-color: white;
   border: 1px solid #d1d3d4;
-  color: #4056a1;
+  color: #283593;
 }
 button.apple-sign-button {
   background-color: white;
   border: 1px solid #d1d3d4;
-  color: #4056a1;
+  color: #283593;
 }
 
 span.join-phone-explainer {
@@ -134,7 +134,7 @@ span.join-phone-explainer {
   .join-page-c1-left-shadow {
     display: none;
   }
-  h2.purple-highlight {
+  h2.teal-highlight {
     margin-left: 20px;
   }
 }
@@ -151,7 +151,7 @@ button.google-sign-button {
 
 span.join-sign-in-button {
   text-decoration: underline;
-  color: #4056a1;
+  color: #283593;
   font-weight: 600;
 }
 

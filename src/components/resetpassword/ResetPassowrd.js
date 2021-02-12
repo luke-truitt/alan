@@ -195,7 +195,7 @@ function ResetPassword() {
               variant="h2"
               className="form-title pass-form-title"
             >
-              <span className="purple-highlight">Reset Password</span>
+              <span className="teal-highlight">Reset Password</span>
             </Typography>
             <ResetForm />
           </div>
