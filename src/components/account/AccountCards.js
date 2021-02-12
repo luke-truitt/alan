@@ -94,9 +94,9 @@ function EmailChip(props) {
 }
 export function InviteCard(props) {
   const inviteCardTitle =
-    "Invite a friend to Alan and we'll file both of your taxes for free.";
+    "Invite a friend to Standard and we'll file both of your taxes for free.";
   const inviteCardSubtitle =
-    "Know someone missing out on free government $$? We'll waive the $25 filing fee for both of you when they file with Alan!";
+    "Know someone missing out on free government $$? We'll waive the $25 filing fee for both of you when they file with Standard!";
   const [emails, setEmails] = useState([]);
 
   const handleAdd = (chip) => {
@@ -138,7 +138,7 @@ export function InviteCard(props) {
     if (navigator.share) {
       navigator
         .share({
-          title: "Alan Will Do Your Taxes",
+          title: "Standard Will Do Your Taxes",
           text: `Students lose out on thousands in their refund every year. You don't need to have even worked to get money back. Check it out -- `,
           url: "/",
         })

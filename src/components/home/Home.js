@@ -129,8 +129,8 @@ function Home() {
           <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              We have your email associated with an account already, would you
-              like to sign in?
+              That email is already ssociated with an account, would you like to
+              sign in?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -202,7 +202,7 @@ function Home() {
                 color="textPrimary"
                 className="home-subtitle"
               >
-                The government owes students money. Alan will find you the
+                The government owes students money. Standard will find you the
                 credits you qualify for, maximize your refund, explain why. All
                 in under 10 minutes.
               </Typography>

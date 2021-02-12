@@ -1,17 +1,17 @@
 export const income = {
   type: "DollarInput",
-  question: "How much money did you make last year?",
+  question: "How much money did you make in 2020",
   placeholder: "",
-  description: "A ball park is fine, round to the nearest $1000",
+  description: "A ballpark estimate is fine. The closer the better!",
   options: {},
   stateName: "estimatedIncome",
 };
 
 export const dependence = {
   type: "SingleSelect",
-  question: "Can you be claimed as a dependent for 2020?",
+  question: "Can you be claimed as a dependent in 2020?",
   description:
-    "Did your parents pay for most of your expenses (i.e. rent, food)",
+    "Did your parents pay for most of your expenses (i.e. rent, food)?",
   options: { Yes: "Yes", No: "No", "I'm not sure": "idk" },
   stateName: "dependent",
 };
@@ -19,16 +19,16 @@ export const dependence = {
 export const educationCredits = {
   type: "SingleSelect",
   question: "Have you ever claimed educational tax credits before?",
-  description: "Most people haven't! That's why we made Alan.",
+  description: "Most people haven't! That's why we made Standard.",
   options: { Yes: "Yes", No: "No", "Not Sure": "idk" },
   stateName: "taxCredits",
 };
 
 export const covidCredits = {
   type: "DollarInput",
-  question: "How much did you get from government stimulus checks for COVID?",
+  question: "How much have you received in government COVID stimulus checks?",
   description:
-    "If you received less than $1,800 as an independent, you can get the difference in your refund.",
+    "If you received less than $1,800, you may qualify to get the difference in your refund.",
   options: {},
   stateName: "covidCredits",
 };
@@ -60,9 +60,8 @@ export const refundSize = {
 export const educationExpenses = {
   type: "DollarInput",
   question:
-    "How much of your own money did you spend on educational expenses last year?",
-  description:
-    "This includes money spent on tuition, electronics, chargers, textbooks, and other supplies",
+    "How much of your own money did you spend on education-related expenses in 2020?",
+  description: "This includes tuition, electronics, chargers, supplies, etc.",
   options: {},
   stateName: "educationExpenses",
 };
@@ -70,24 +69,23 @@ export const educationExpenses = {
 export const studentLoans = {
   type: "DollarInput",
   question: "How much of your student loans did you pay off in 2020?",
-  description:
-    "Most students usually don't begin loan repayment until graduation.",
+  description: "Most students don't begin loan repayment until graduation.",
   options: {},
   stateName: "loanPayments",
 };
 export const job = {
   type: "JobInput",
-  question: "Where did you work last year and what'd you do?",
+  question: "Who was your primary employer?",
   description:
-    "Put the one that you made the most money from. If you didn't work anywhere put N/A for both.",
+    "List the company from which you made the majority of your income.",
   options: {},
   stateName: "job",
 };
 export const state = {
   type: "Dropdown",
-  question: "Where did you work from most of the time last year?",
+  question: "Where did you make most of your money?",
   description:
-    "This is not where your employer was, rather where you physically lived while working. ",
+    "We want to know where you lived when you worked, which could be different than where your employer is based",
   options: {
     Alabama: "AL",
     Alaska: "AK",
@@ -157,6 +155,13 @@ export const studentStatus = {
   options: { Yes: "Yes", No: "No" },
   stateName: "student",
 };
+export const citizenStatus = {
+  type: "SingleSelect",
+  question: "Are you a U.S. citizen?",
+  description: "You're eligible for a refund regardless",
+  options: { Yes: "Yes", No: "No" },
+  stateName: "citizen",
+};
 
 export const name = {
   type: "NameInput",
@@ -167,7 +172,7 @@ export const name = {
 };
 export const school = {
   type: "SchoolInput",
-  question: "Where did you go to school and when did you graduate?",
+  question: "Where do/did you go to school?",
   description: "",
   options: {},
   stateName: "school",

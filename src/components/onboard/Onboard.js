@@ -38,6 +38,7 @@ import {
   school,
   phoneNumber,
   intlStudent,
+  citizenStatus,
   job,
   state,
   refund,
@@ -66,31 +67,22 @@ const {
 
 const forms = [
   // { title: "Personal", items: [name, phoneNumber, school, intlStudent], formFields: ["firstName", "lastName", "phone", "school", "classYear", "international"] },
+
   {
     title: "Income",
-    items: [income, state, covidCredits],
-    formFields: ["estimatedIncome", "state", "covidCredits"],
+    items: [income, state, job],
+    formFields: ["estimatedIncome", "state", "job"],
   },
-  {
-    title: "Your Life",
-    items: [dependence, job, school],
-    formFields: ["dependent", "school"],
-  },
-  // {
-  //   title: "History",
-  //   items: [taxMethod, refundSize, educationCredits],
-  //   formFields: ["howFiled", "estimatedRefund", "taxCredits"]
-  // },
   {
     title: "Education",
-    items: [educationExpenses, studentLoans, studentStatus],
-    formFields: ["educationExpenses", "loanPayments", "student"],
+    items: [studentStatus, school, educationExpenses, studentLoans],
+    formFields: ["student", "school", "educationExpenses", "loanPayments"],
   },
-  // {
-  //   title: "Refund",
-  //   items: [refund],
-  //   formFields: []
-  // },
+  {
+    title: "History",
+    items: [covidCredits, dependence, citizenStatus],
+    formFields: ["covidCredits", "dependence", "citizen"],
+  },
 ];
 
 const LinearProgressBar = withStyles((theme) => ({
@@ -159,6 +151,7 @@ function Onboard(props) {
     updateValid({ [step]: validData });
   };
   const updateValid = (d) => {
+    console.log(d);
     for (const [key, value] of Object.entries(d)) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
@@ -186,8 +179,13 @@ function Onboard(props) {
     sendData();
     setLoadingScreen(true);
     if (user.user) {
-      updateUser(user.user.uid, { refundBreakdown: data,  school: fields['school'], employer: fields['companyName'], jobTitle: fields['jobTitle']});
-    } 
+      updateUser(user.user.uid, {
+        refundBreakdown: data,
+        school: fields["school"],
+        employer: fields["companyName"],
+        jobTitle: fields["jobTitle"],
+      });
+    }
     history.push({
       pathname: "/refund",
       state: {
@@ -476,7 +474,7 @@ function Onboard(props) {
               disabled={nextDisabled()}
               onClick={forwardClick}
             >
-              {panelActive ? <CircularProgress/> : "Next"}
+              {panelActive ? <CircularProgress /> : "Next"}
             </Button>
           </div>
         </div>
@@ -552,7 +550,7 @@ function Onboard(props) {
 
   return !isMobile ? (
     <ThemeProvider theme={primaryTheme} className="onboard">
-      <Header signUp={handleClickOpen}/>
+      <Header signUp={handleClickOpen} />
       <Slide in {...slideDefault} direction="left">
         <div
           className="onboard-c0 column-container"
@@ -569,34 +567,38 @@ function Onboard(props) {
               <div>
                 <div container className="onboard-c1-right-div row-container">
                   <div className="background-mobile">
-                  <div className="form-div">
-                    <Form
-                      title={forms[step - 1].title}
-                      formItems={forms[step - 1].items}
-                      fields={fields}
-                      data={{}}
-                      validForm={(d) => checkValid(d)}
-                      onUpdate={onDataUpdate}
-                      onKeyPress={(e, val) => keyDown(e, val)}
-                    />
-                  </div>
-                  <div className="onboard-button-div column-container">
-                    <div className="onboard-button">
-                      <Button color="secondary" onClick={backClick} style={{display: step==1 ? "none" : ""}}>
-                        Previous
-                      </Button>
+                    <div className="form-div">
+                      <Form
+                        title={forms[step - 1].title}
+                        formItems={forms[step - 1].items}
+                        fields={fields}
+                        data={{}}
+                        validForm={(d) => checkValid(d)}
+                        onUpdate={onDataUpdate}
+                        onKeyPress={(e, val) => keyDown(e, val)}
+                      />
                     </div>
-                    <div className="onboard-button">
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        disabled={nextDisabled()}
-                        onClick={forwardClick}
-                      >
-                        Next
-                      </Button>
+                    <div className="onboard-button-div column-container">
+                      <div className="onboard-button">
+                        <Button
+                          color="secondary"
+                          onClick={backClick}
+                          style={{ display: step == 1 ? "none" : "" }}
+                        >
+                          Previous
+                        </Button>
+                      </div>
+                      <div className="onboard-button">
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          disabled={nextDisabled()}
+                          onClick={forwardClick}
+                        >
+                          Next
+                        </Button>
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </div>
               </div>
@@ -611,43 +613,43 @@ function Onboard(props) {
   ) : (
     <ThemeProvider theme={primaryTheme}>
       <div container className="onboard-c1-right-div row-container">
-        {loadingScreen ? (<div><ProgressBar value={(step * 100) / forms.length}></ProgressBar>
-        <div className="another-div">
-          <div className="form-div">
-            <Form
-              title={forms[step - 1].title}
-              formItems={forms[step - 1].items}
-              fields={fields}
-              data={{}}
-              validForm={(d) => checkValid(d)}
-              onUpdate={onDataUpdate}
-              onKeyPress={(e, val) => keyDown(e, val)}
-            />
-          </div>
-          <div className="onboard-button-div column-container">
-            <div className="onboard-button">
-              <Button color="secondary" onClick={backClick}>
-                Previous
-              </Button>
+        {loadingScreen ? (
+          <div>
+            <ProgressBar value={(step * 100) / forms.length}></ProgressBar>
+            <div className="another-div">
+              <div className="form-div">
+                <Form
+                  title={forms[step - 1].title}
+                  formItems={forms[step - 1].items}
+                  fields={fields}
+                  data={{}}
+                  validForm={(d) => checkValid(d)}
+                  onUpdate={onDataUpdate}
+                  onKeyPress={(e, val) => keyDown(e, val)}
+                />
+              </div>
+              <div className="onboard-button-div column-container">
+                <div className="onboard-button">
+                  <Button color="secondary" onClick={backClick}>
+                    Previous
+                  </Button>
+                </div>
+                <div className="onboard-button">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    disabled={nextDisabled()}
+                    onClick={forwardClick}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
             </div>
-            <div className="onboard-button">
-              <Button
-                variant="contained"
-                color="secondary"
-                disabled={nextDisabled()}
-                onClick={forwardClick}
-              >
-                Next
-              </Button>
-            </div>
           </div>
-        </div>
-        </div>)
-          : (
-            <Loading />
-          )
-        }
-        
+        ) : (
+          <Loading />
+        )}
       </div>
     </ThemeProvider>
   );

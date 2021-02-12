@@ -168,45 +168,47 @@ export function JobInput(props) {
   };
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Typography
-        variant="h6"
-        color="textPrimary"
-        className="form-item-question"
-      >
-        {props.question}
-      </Typography>
-      <Typography
-        variant="caption"
-        color="textSecondary"
-        className="form-item-description"
-      >
-        {props.description}
-      </Typography>
-      <div className="form-item-container column-container">
-        <TextField
-          className="form-item-text-field"
-          label="Company"
-          value={props.fields["companyName"]}
-          autoComplete
-          onKeyPress={(e, val) => props.onKeyPress(e, val)}
-          variant="outlined"
-          onChange={(e) => {
-            props.onChange(e.target.value, { stateName: "companyName" });
-            checkValid(e.target.value, "companyName");
-          }}
-        />
-        <TextField
-          className="form-item-text-field"
-          label="Job Title"
-          value={props.fields["jobTitle"]}
-          autoComplete
-          onKeyPress={(e, val) => props.onKeyPress(e, val)}
-          variant="outlined"
-          onChange={(e) => {
-            props.onChange(e.target.value, { stateName: "jobTitle" });
-            checkValid(e.target.value, "jobTitle");
-          }}
-        />
+      <div className="form-item-container row-container">
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          className="form-item-question"
+        >
+          {props.question}
+        </Typography>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          className="form-item-description"
+        >
+          {props.description}
+        </Typography>
+        <div className="column-container double-input-container">
+          <TextField
+            className="form-item-text-field"
+            label="Company"
+            value={props.fields["companyName"]}
+            autoComplete
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
+            variant="outlined"
+            onChange={(e) => {
+              props.onChange(e.target.value, { stateName: "companyName" });
+              checkValid(e.target.value, "companyName");
+            }}
+          />
+          <TextField
+            className="form-item-text-field"
+            label="Job Title"
+            value={props.fields["jobTitle"]}
+            autoComplete
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
+            variant="outlined"
+            onChange={(e) => {
+              props.onChange(e.target.value, { stateName: "jobTitle" });
+              checkValid(e.target.value, "jobTitle");
+            }}
+          />
+        </div>
       </div>
     </ThemeProvider>
   );
