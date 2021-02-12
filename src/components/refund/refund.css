@@ -303,6 +303,9 @@ img.onboard-complete-help-arrow {
     font-size: 5vw;
     padding-top: 3rem;
   }
+  p.refund-card-button-subtext {
+    display: none;
+  }
   .help-button-icon {
     max-height: 1rem;
     align-self: center;

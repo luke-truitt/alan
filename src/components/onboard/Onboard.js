@@ -220,6 +220,7 @@ function Onboard(props) {
   };
 
   const navToRefund = () => {
+    console.log("hii");
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
@@ -308,7 +309,7 @@ function Onboard(props) {
     if (step >= forms.length) {
       console.log("loadingScreen");
       setLoadingScreen(false);
-      setTimeout(navToRefund, 5000);
+      setTimeout(navToRefund, 7000);
       setStep(forms.length);
     } else {
       setStep(step + 1);

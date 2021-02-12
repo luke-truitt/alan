@@ -1,0 +1,45 @@
+@media only screen and (max-width: 1000px) {
+  p.join-timeline-step-text {
+    font-size: 0.9rem !important;
+  }
+}
+
+.join-timeline {
+  max-width: 70%;
+  margin: auto;
+}
+h5.join-timeline-title {
+  padding-bottom: 2rem;
+  font-size: 1.9rem;
+}
+div.join-timeline-step-text-div {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  /* background-color: blue; */
+}
+p.join-timeline-step-text {
+  font-size: 1.2rem;
+
+  /* background-color: red; */
+}
+.join-timeline-step-number {
+  width: 4rem;
+  margin-right: 2rem;
+  padding-bottom: 3px;
+}
+
+.join-timeline-text-container {
+  min-height: 100%;
+  justify-content: space-between;
+  /* background-color: yellow; */
+  justify-self: flex-start;
+  padding: 0;
+}
+
+.join-timeline-text-content {
+}
+
+.join-timeline-number-container {
+  justify-content: space-between;
+}

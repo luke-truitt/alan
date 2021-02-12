@@ -178,22 +178,32 @@ function ReviewCard(props) {
     refundText = (
       <div>
         <Typography variant="body2" className="review-card-text">
-          If you want to retake the calculator, you can do so{" "}
+          If you want to{" "}
+          {props.userData.refundBreakdown.netRefund ? (
+            <span>retake</span>
+          ) : (
+            <span>take</span>
+          )}{" "}
+          the calculator, you can do so{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}
             onClick={() => props.onCalculator()}
           >
             here
-          </a>{" "}
-          {". "}
-          Your initial estimate was $
-          <a
-            style={{ textDecoration: "underline", cursor: "pointer" }}
-            onClick={() => history.push({ pathname: "/refund" })}
-          >
-            {numberWithCommas(props.userData.refundBreakdown.netRefund)}
           </a>
-          .
+          {". "}
+          {props.userData.refundBreakdown.netRefund && (
+            <span>
+              "Your initial estimate was $"
+              <a
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+                onClick={() => history.push({ pathname: "/refund" })}
+              >
+                {numberWithCommas(props.userData.refundBreakdown.netRefund)}
+              </a>
+              .
+            </span>
+          )}
         </Typography>
       </div>
     );

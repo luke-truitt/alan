@@ -11,7 +11,7 @@ import Onboard from "./components/onboard/Onboard.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignIn from "./components/signin/SignIn";
-import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
+import ResetPassword from "./components/resetpassword/ResetPassword";
 import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
@@ -32,9 +32,11 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
-            <Route exact path="/" >
-              <Home referToId={referToId}
-                setReferTo={(rid) => setReferToId(rid)}/>
+            <Route exact path="/">
+              <Home
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/join">
               <Join
@@ -67,7 +69,7 @@ function App() {
               />
             </Route>
             <Route path="/resetpassword">
-              <ResetPassowrd
+              <ResetPassword
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />
