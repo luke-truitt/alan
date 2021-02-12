@@ -161,11 +161,14 @@ function AccountTimeline(props) {
   );
 }
 function numberWithCommas(x) {
-  if(x==null) {
+  if (x == null) {
     return "";
   }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if(parts[1] && parts[1].length == 1) {
+    parts[1] = parts[1] + "0";
+  }
   return parts.join(".");
 }
 function ReviewCard(props) {
@@ -311,7 +314,7 @@ function AccountPage(props) {
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header isHome={true}/>
+      <Header page={"Account"}/>
       <Slide {...slideDefault} in direction="left">
         <div className="account-page-c0 column-container">
           <div className="account-page-c1-left-shadow" />

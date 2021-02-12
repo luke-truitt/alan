@@ -10,46 +10,29 @@
   width: 100vw;
   z-index: 100;
 }
-
-.header-button-container {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-right: 2rem;
-}
-
-.header-button-container > div > button {
-  height: 30px;
-  min-width: 10vw;
-  margin-right: 2rem;
-}
-.home-header > div > button {
-  height: 40px;
-  min-width: 6vw;
-}
-
 h4.logo-text {
   font-family: "Crimson Text", serif;
   letter-spacing: 2px;
   color: white;
   margin-left: 2rem;
 }
+
+.header-button-container {
+  height: 100%;
+  display: flex; 
+  align-items: center;
+}
+
+.header-button-container > button{
+  height: 80%;
+  margin-right: 2vw;
+}
+
+.username-button {
+  border: none !important;
+  font-size: 15pt !important;
+}
+
 @media only screen and (max-width: 750px) {
-  .header-button-container {
-    display: none;
-  }
-  .home-header {
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-    display: flex;
-    flex-direction: row;
-  }
-  .home-header > div > button {
-    height: 30px;
-    width: auto;
-    float: right;
-  }
   
 }

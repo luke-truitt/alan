@@ -230,7 +230,7 @@ function SignInForm(props) {
 function SignIn() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header/>
+      <Header page={"SignIn"}/>
       <Slide {...slideDefault} in direction="left">
         <div className="signin-page-c0 column-container">
           <div className="signin-page-c1-left-shadow" />

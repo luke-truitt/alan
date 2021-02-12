@@ -413,7 +413,7 @@ function JoinForm(props) {
 function Join(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
-    <Header />
+    <Header page={"Join"}/>
       <Slide {...slideDefault} in direction="left">
         <div className="join-page-c0 column-container">
           <div className="join-page-c1-left-shadow" />
