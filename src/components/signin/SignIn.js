@@ -6,7 +6,11 @@ import {
   CircularProgress,
   Slide,
 } from "@material-ui/core";
-import { primaryTheme, slideDefault } from "../../utils/constants.js";
+import {
+  primaryTheme,
+  slideDefault,
+  timelineData,
+} from "../../utils/constants.js";
 import "./signin.css";
 import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
@@ -28,27 +32,6 @@ const timelineNumbers = {
   4: joinTimeline4,
   5: joinTimeline5,
 };
-
-const timelineData = [
-  { number: 1, text: "Join Us" },
-  {
-    number: 2,
-    text:
-      "Receive a link to file taxes after our team of tax experts reviews your info*",
-  },
-  {
-    number: 3,
-    text: "Upload relevant documents (W2s, etc.). We’ll help you locate them.",
-  },
-  {
-    number: 4,
-    text: "Submit! Refunds are typically processed within 3 weeks",
-  },
-  {
-    number: 5,
-    text: "We collect a flat $25 fee only if you receive a refund (Read why).",
-  },
-];
 
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
@@ -236,7 +219,7 @@ function SignInForm(props) {
 function SignIn() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header page={"SignIn"}/>
+      <Header page={"SignIn"} />
       <Slide {...slideDefault} in direction="left">
         <div className="signin-page-c0 column-container">
           <div className="signin-page-c1-left-shadow" />

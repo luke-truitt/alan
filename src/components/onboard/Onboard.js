@@ -156,7 +156,8 @@ function Onboard(props) {
         {
           title: "Work",
           items: [job],
-          formFields: ["companyName", "jobTitle"],
+          formFields: [],
+          // formFields: ["companyName", "jobTitle"],
         },
         {
           title: "Student Status",
@@ -192,7 +193,7 @@ function Onboard(props) {
         {
           title: "Citizenship",
           items: [citizenStatus],
-          formFields: ["citizen"],
+          formFields: [],
         },
       ];
   const checkValid = (d) => {
@@ -537,6 +538,7 @@ function Onboard(props) {
                         formItems={forms[step - 1].items}
                         fields={fields}
                         data={{}}
+                        // validForm={(d) => checkValid(d)}
                         validForm={(d) => checkValid(d)}
                         onUpdate={onDataUpdate}
                         onKeyPress={(e, val) => keyDown(e, val)}

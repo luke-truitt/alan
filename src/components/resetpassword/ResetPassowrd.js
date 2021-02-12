@@ -5,7 +5,7 @@ import {
   TextField,
   CircularProgress,
 } from "@material-ui/core";
-import { primaryTheme } from "../../utils/constants.js";
+import { primaryTheme, timelineData } from "../../utils/constants.js";
 import "./resetpassword.css";
 import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
@@ -26,27 +26,6 @@ const timelineNumbers = {
   4: joinTimeline4,
   5: joinTimeline5,
 };
-
-const timelineData = [
-  { number: 1, text: "Join Us" },
-  {
-    number: 2,
-    text:
-      "Receive a link to file taxes after our team of tax experts reviews your info*",
-  },
-  {
-    number: 3,
-    text: "Upload relevant documents (W2s, etc.). We’ll help you locate them.",
-  },
-  {
-    number: 4,
-    text: "Submit! Refunds are typically processed within 3 weeks",
-  },
-  {
-    number: 5,
-    text: "We collect a flat $25 fee only if you receive a refund (Read why).",
-  },
-];
 
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
@@ -102,7 +81,6 @@ function ResetForm(props) {
   };
 
   const sendResetEmail = () => {
-    
     setSending(true);
     auth
       .sendPasswordResetEmail(email)
@@ -135,9 +113,9 @@ function ResetForm(props) {
   return (
     <div className="reset-form row-container">
       <TextInput
-              setValid={(val) => {
-                setValid(val);
-              }}
+        setValid={(val) => {
+          setValid(val);
+        }}
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
         onKeyPress={(e, val) => keyDown(e, val)}
@@ -152,7 +130,7 @@ function ResetForm(props) {
         className="reset-button"
         variant="contained"
         color="secondary"
-        style={{marginTop: invalid ? "30px" : ""}}
+        style={{ marginTop: invalid ? "30px" : "" }}
         onClick={() => sendResetEmail()}
       >
         {sending ? <CircularProgress /> : "Reset Password"}
@@ -188,7 +166,7 @@ function ResetForm(props) {
 function ResetPassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header page={"ResetPassword"}/>
+      <Header page={"ResetPassword"} />
       <div className="reset-page-c0 column-container">
         <div className="reset-page-c1-left-shadow" />
         <div className="reset-page-c1-left row-container">

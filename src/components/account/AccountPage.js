@@ -9,7 +9,7 @@ import {
   Avatar,
   Slide,
   Fade,
-  Snackbar
+  Snackbar,
 } from "@material-ui/core";
 import { DisabledCardFull, DisabledCardHalf, InviteCard } from "./AccountCards";
 import { makeStyles } from "@material-ui/core/styles";
@@ -68,7 +68,7 @@ const BASE_URL = "https://fromstandard.com";
 
 const timelineData = [
   { number: 1, text: "Join Us" },
-  { number: 2, text: "Info Review" },
+  { number: 2, text: "Review" },
   { number: 3, text: "Document Upload" },
   { number: 4, text: "Submit" },
   { number: 5, text: "Refund Time!" },
@@ -166,7 +166,7 @@ function numberWithCommas(x) {
   }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  if(parts[1] && parts[1].length == 1) {
+  if (parts[1] && parts[1].length == 1) {
     parts[1] = parts[1] + "0";
   }
   return parts.join(".");
@@ -178,22 +178,20 @@ function ReviewCard(props) {
     refundText = (
       <div>
         <Typography variant="body2" className="review-card-text">
-          Your refund is going to be upwards of $
-          {numberWithCommas(props.userData.refundBreakdown.netRefund)}, to see a
-          breakdown of this, go{" "}
-          <a
-            style={{ textDecoration: "underline", cursor: "pointer" }}
-            onClick={() => history.push({ pathname: "/refund" })}
-          >
-            here
-          </a>
-          . If you want to retake the calculator or haven't taken it yet, you
-          can do so{" "}
+          If you want to retake the calculator o, you can do so{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}
             onClick={() => props.onCalculator()}
           >
             here
+          </a>{" "}
+          {". "}
+          Your initial estimate was $
+          <a
+            style={{ textDecoration: "underline", cursor: "pointer" }}
+            onClick={() => history.push({ pathname: "/refund" })}
+          >
+            {numberWithCommas(props.userData.refundBreakdown.netRefund)}
           </a>
           .
         </Typography>
@@ -221,8 +219,8 @@ function ReviewCard(props) {
       <CardContent className="review-card-content column-container">
         <img src={reviewIcon} className="account-page-card-icon" />
         <Typography variant="body2" className="review-card-text">
-          Our team is reviewing your initial information. We’ll be sure to text
-          and email you once they’re done! {refundText}
+          Our team is reviewing your initial information. We'll text and email
+          you when it's time to finish filing. {refundText}
         </Typography>
       </CardContent>
     </Card>
@@ -233,7 +231,9 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
 
   const location = useLocation();
-  const [openToast, setOpenToast] = useState(location.state ? location.state['accountNew'] : false);
+  const [openToast, setOpenToast] = useState(
+    location.state ? location.state["accountNew"] : false
+  );
   const history = useHistory();
   const [loadAttempts, setLoadAttempts] = useState(0);
 
@@ -293,7 +293,7 @@ function AccountPage(props) {
     setOpenToast(true);
   };
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -324,7 +324,7 @@ function AccountPage(props) {
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header page={"Account"}/>
+      <Header page={"Account"} />
       <Slide {...slideDefault} in direction="left">
         <div className="account-page-c0 column-container">
           <div className="account-page-c1-left-shadow" />
@@ -396,16 +396,15 @@ function AccountPage(props) {
             </div>
           </div>
           <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={openToast}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        message="Nice work making that account!"
-        
-      />
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            open={openToast}
+            autoHideDuration={5000}
+            onClose={handleClose}
+            message="Nice work making that account!"
+          />
         </div>
       </Slide>
     </ThemeProvider>

@@ -115,48 +115,50 @@ export function SchoolInput(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Typography
-        variant="h6"
-        color="textPrimary"
-        className="form-item-question"
-      >
-        {props.question}
-      </Typography>
-      <Typography
-        variant="caption"
-        color="textSecondary"
-        className="form-item-description"
-      >
-        {props.description}
-      </Typography>
-      <div className="form-item-container column-container school-input">
-        <Autocomplete
-          id="combo-box-demo"
-          className="form-item-text-field"
-          options={schools}
-          onKeyPress={(e, val) => props.onKeyPress(e, val)}
-          getOptionLabel={(option) => option.name}
-          // inputValue = {props.fields["school"]}
-          onChange={(e, value) => {
-            props.onChange(value, { stateName: "school" });
-            checkValid(value, "school");
-          }}
-          renderInput={(params) => (
-            <TextField {...params} label="School" variant="outlined" />
-          )}
-        />
-        <TextField
-          className="form-item-text-field"
-          label="Graduation Year"
-          value={props.fields["classYear"]}
-          inputProps={{ inputMode: "numeric" }}
-          variant="outlined"
-          onKeyPress={(e, val) => props.onKeyPress(e, val)}
-          onChange={(e) => {
-            props.onChange(e.target.value, { stateName: "classYear" });
-            checkValid({ name: e.target.value }, "classYear");
-          }}
-        />
+      <div className="form-item-container row-container">
+        <Typography
+          variant="h6"
+          color="textPrimary"
+          className="form-item-question"
+        >
+          {props.question}
+        </Typography>
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          className="form-item-description"
+        >
+          {props.description}
+        </Typography>
+        <div className="double-input-container column-container school-input">
+          <Autocomplete
+            id="combo-box-demo"
+            className="form-item-text-field"
+            options={schools}
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
+            getOptionLabel={(option) => option.name}
+            // inputValue = {props.fields["school"]}
+            onChange={(e, value) => {
+              props.onChange(value, { stateName: "school" });
+              checkValid(value, "school");
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label="School" variant="outlined" />
+            )}
+          />
+          <TextField
+            className="form-item-text-field"
+            label="Graduation Year"
+            value={props.fields["classYear"]}
+            inputProps={{ inputMode: "numeric" }}
+            variant="outlined"
+            onKeyPress={(e, val) => props.onKeyPress(e, val)}
+            onChange={(e) => {
+              props.onChange(e.target.value, { stateName: "classYear" });
+              checkValid({ name: e.target.value }, "classYear");
+            }}
+          />
+        </div>
       </div>
     </ThemeProvider>
   );
