@@ -46,9 +46,9 @@ h5.join-timeline-title {
 }
 .join-timeline-step {
   margin-bottom: 0.25rem;
-  vertical-align: center;
-  align-content: center;
   vertical-align: middle;
+  align-content: center;
+  display: flex;
 }
 span.join-disclaimer-text {
   float: bottom left;
@@ -57,8 +57,10 @@ span.join-disclaimer-text {
 }
 p.join-timeline-step-text {
   font-size: 1.2rem;
-  align-self: baseline;
-  justify-items: flex-end;
+  margin-top: 5px;
+}
+.join-timeline > .join-timeline-step:first-of-type > .join-timeline-step-text {
+  margin-top: 20px;
 }
 .join-timeline-step-number {
   width: 4rem;

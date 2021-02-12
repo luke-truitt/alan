@@ -190,14 +190,16 @@ div.acct-sign-out {
 p.account-timeline-step-text {
   align-self: baseline;
   justify-items: flex-end;
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   vertical-align: middle;
   font-weight: 400;
+  margin-top: 8px;
+  text-align: left;
 }
 .account-timeline-step-number {
   max-width: 3rem;
   width: 3rem;
-  margin-right: 2rem;
+  margin-right: 1.5rem;
   padding: 0;
 }
 
