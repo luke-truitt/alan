@@ -46,7 +46,6 @@ import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
 import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { useLocation, useHistory } from "react-router-dom";
-import * as emailjs from "emailjs-com";
 import Header from "./../header/Header.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
@@ -65,7 +64,7 @@ const mockProps = {
   activeStep: 2,
 };
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://fromstandard.com";
 
 const timelineData = [
   { number: 1, text: "Join Us" },

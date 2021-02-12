@@ -13,12 +13,13 @@ import ChipInput from "material-ui-chip-input";
 import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import { useState } from "react";
 import "./account-cards.css";
+import * as emailjs from "emailjs-com";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
-const SERVICE_ID = "service_784yhvi";
+const SERVICE_ID = "service_ah750kn";
 
-const BASE_URL = "http://taxes.fromstandard.com";
+const BASE_URL = "http://fromstandard.com";
 
 export function PlaceholderFull() {
   return (
@@ -118,19 +119,20 @@ export function InviteCard(props) {
       const templateParams = {
         from_name: props.username,
         send_to: email_to,
+        refer_link: BASE_URL + "/?referId=" + props.referToId
       };
-      //     emailjs.send(
-      //       SERVICE_ID,
-      //       TEMPLATE_ID,
-      //       templateParams,
-      //       USER_ID
-      //  ).then(function(response) {
-      //   console.log(email_to, 'SUCCESS!', response.status, response.text);
-      // }, function(error) {
-      //   console.log('FAILED...', error);
-      // });
+          emailjs.send(
+            SERVICE_ID,
+            TEMPLATE_ID,
+            templateParams,
+            USER_ID
+       ).then(function(response) {
+        alert("Invites sent successfully!");
+        console.log(email_to, 'SUCCESS!', response.status, response.text);
+      }, function(error) {
+        console.log('FAILED...', error);
+      });
     }
-    alert("Emails sent successfully!");
     setEmails([]);
   };
 
