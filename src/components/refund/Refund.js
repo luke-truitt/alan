@@ -22,6 +22,7 @@ import Header from "./../header/Header.js";
 import RefundBreakdown from "./RefundBreakdown.js";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useState, useContext, useEffect } from "react";
+import useWindowDimensions from "../onboard/useWindowDimensions";
 import { useLocation, useHistory } from "react-router-dom";
 import { getUserDoc } from "../../firebase";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
@@ -31,8 +32,12 @@ function numberWithCommas(x) {
   }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if(parts[1] && parts[1].length == 1) {
+    parts[1] = parts[1] + "0";
+  }
   return parts.join(".");
 }
+
 
 function Refund(props) {
   let location = useLocation();
@@ -43,7 +48,8 @@ function Refund(props) {
   const [referById, setReferById] = useState(null);
   const [breakdown, setBreakdown] = useState(null);
   const [loadAttempts, setLoadAttempts] = useState(0);
-
+  const { width, height } = useWindowDimensions();
+  const isMobile = width < 900;
   const user = useContext(AuthContext);
   const redirect = (path, state) => {
     history.push({ pathname: path, state: state });
@@ -167,28 +173,15 @@ function Refund(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
-    <Header />
+    <Header page={"Refund"}/>
       <div className="onboard-complete-c0-top row-container">
 
-        {/* <div className="header" /> */}
-        {/* <div className="onboard-complete-help-button-container">
-          <div
-            className="onboard-complete-help-button row-container "
-            onClick={navTo}
-          >
-            <Typography variant="h6" className="onboard-complete-help-text">
-              Help me file
-            </Typography>
-            <img src={whiteArrow} className="onboard-complete-help-arrow"></img>
-          </div>
-        </div> */}
-
-        <Slide in {...slideDefault} direction="up">
+        {!isMobile ? (<Slide in {...slideDefault} direction="up">
           <div className="onboard-complete-c1 column-container">
             <div className="onboard-complete-c1-content column-container">
               {dataLoaded ? (
                 <div className="onboard-complete-c1-breakdown">
-                  <Zoom in timeout={{ enter: 1000 }}>
+                  <Zoom in timeout={{ enter: 500 }}>
                     <div>
                       <Typography
                         className="onboard-complete-title"
@@ -203,22 +196,6 @@ function Refund(props) {
                       >
                         ${numberWithCommas(breakdown.netRefund)}
                       </Typography>{" "}
-                      <Card className="onboard-complete-card-mobile">
-                        <CardContent
-                          onClick={navTo}
-                          className="onboard-complete-card-1-content"
-                          style={{ cursor: "pointer" }}
-                        >
-                          <Typography
-                            className="refund-card-button-text"
-                            variant="h4"
-                            color="primary"
-                          >
-                            Help me file my taxes{" "}
-                            <ArrowForwardIosRoundedIcon className="help-button-icon" />
-                          </Typography>
-                        </CardContent>
-                      </Card>
                       <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
                     </div>
                   </Zoom>
@@ -337,7 +314,160 @@ function Refund(props) {
               </div>
             </div>
           </div>
-        </Slide>
+        </Slide>)
+        
+        : (<Slide in {...slideDefault} direction="up"><div className="onboard-complete-c1 column-container">
+            <div className="onboard-complete-c1-content column-container">
+              {dataLoaded ? (
+                <div className="onboard-complete-c1-breakdown">
+                    <div>
+                      <Typography
+                        className="onboard-complete-title"
+                        variant="h6"
+                      >
+                        Your estimated refund amount
+                      </Typography>
+                      <Typography
+                        className="refund-amount "
+                        variant="h1"
+                        color="secondary"
+                      >
+                        ${numberWithCommas(breakdown.netRefund)}
+                      </Typography>{" "}
+                      <Card className="onboard-complete-card-mobile">
+                        <CardContent
+                          onClick={navTo}
+                          className="onboard-complete-card-1-content"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <Typography
+                            className="refund-card-button-text"
+                            variant="h4"
+                            color="primary"
+                          >
+                            Help me file my taxes{" "}
+                            <ArrowForwardIosRoundedIcon className="help-button-icon" />
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                      <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
+                    </div>
+                  <Card className="onboard-complete-card-mobile">
+                    <CardContent className="onboard-complete-card-2-content">
+                      <div className="refund-card-text">
+                        {" "}
+                        <Typography
+                          color="textSecondary"
+                          variant="h5"
+                          className="refund-card-title"
+                        >
+                          $2,342
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          className="refund-card-caption"
+                        >
+                          That's how much the average American college student
+                          is owed in a refund.
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="onboard-complete-card-mobile" >
+                    <CardContent className="onboard-complete-card-3-content">
+                      {" "}
+                      <div className="refund-card-text row-container">
+                        <Typography
+                          color="textSecondary"
+                          variant="h5"
+                          className="refund-card-title"
+                        >
+                          $473
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          className="refund-card-caption"
+                          style={{marginBottom: "70px"}}
+                        >
+                          That's how much the average college student actually
+                          receives because of lack of reporting and
+                          underutilization of credits.
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : (
+                <CircularProgress />
+              )}
+
+              <div className="row-container onboard-complete-card-container">
+                <Card className="onboard-complete-card">
+                  <CardContent
+                    onClick={navTo}
+                    className="onboard-complete-card-1-content"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Typography
+                      className="refund-card-button-text"
+                      variant="h4"
+                      color="primary"
+                    >
+                      Help me file my taxes <ArrowForwardIosRoundedIcon />
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-2-content">
+                    <div className="refund-card-text">
+                      {" "}
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $2,342
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much the average American college student is
+                        owed in a refund.
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card className="onboard-complete-card">
+                  <CardContent className="onboard-complete-card-3-content">
+                    {" "}
+                    <div className="refund-card-text row-container">
+                      <Typography
+                        color="textSecondary"
+                        variant="h5"
+                        className="refund-card-title"
+                      >
+                        $473
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        className="refund-card-caption"
+                      >
+                        That's how much the average college student actually
+                        receives because of lack of reporting and
+                        underutilization of credits.
+                      </Typography>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div></Slide>)
+        }
 
         <div className="onboard-complete-footer">
           <Button

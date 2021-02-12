@@ -188,7 +188,7 @@ function ResetForm(props) {
 function ResetPassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header/>
+      <Header page={"ResetPassword"}/>
       <div className="reset-page-c0 column-container">
         <div className="reset-page-c1-left-shadow" />
         <div className="reset-page-c1-left row-container">

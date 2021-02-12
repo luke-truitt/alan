@@ -31,7 +31,7 @@ const {
   REACT_APP_CALCULATOR_URL,
 } = process.env;
 
-function Home() {
+function Home(props) {
   const [email, setEmail] = useState("");
   const [invalid, setInvalid] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ function Home() {
     setUser(old_user);
     setOpen(true);
   };
-
+  console.log(props)
   const handleClose = (choice) => {
     if (choice == "no") {
       history.push({
@@ -148,19 +148,20 @@ function Home() {
 
   const addEmail = async (email) => {
     const old_user = await findUserByEmail(email);
-
+    console.log(props);
     console.log(old_user);
     if (old_user == null) {
+      history.push({
+        pathname: "/onboard",
+        state: { email: email, referById: referById },
+      });
       axios
         .post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
           email: email,
         })
         .then(function (response) {
           const referToId = response.data.referId;
-          history.push({
-            pathname: "/onboard",
-            state: { email: email, referToId: referToId, referById: referById },
-          });
+          props.setReferTo(referToId);
           console.log(response);
           setLoading(false);
         })
@@ -175,7 +176,7 @@ function Home() {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
-        <Header signUp={signUp} isHome={true} />
+        <Header signUp={signUp} page={"Home"}/>
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">

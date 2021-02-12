@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 .header-c0 {
   background-color: #283596;
-  height: 60px;
+  height: 50px;
   align-items: center;
   justify-content: space-between;
   box-shadow: 1px 1px 3px;
@@ -10,50 +10,41 @@
   width: 100vw;
   z-index: 100;
 }
-
-.header-button-container {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin-right: 2rem;
-}
-
-.header-button-container > div > button {
-  height: 30px;
-  min-width: 10vw;
-  margin-right: 2rem;
-}
-.home-header > div > button {
-  height: 40px;
-  min-width: 6vw;
-}
-
 h4.logo-text {
   font-family: "Crimson Text", serif;
   letter-spacing: 2px;
   color: white;
   margin-left: 2rem;
 }
+
+.header-button-container {
+  height: 100%;
+  display: flex; 
+  align-items: center;
+}
+
+.header-button-container > button{
+  height: 80%;
+  margin-right: 2vw;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.username-button {
+  border: none !important;
+  font-size: 15pt !important;
+}
+
 @media only screen and (max-width: 750px) {
-  .header-button-container {
-    display: none;
-  }
-  .home-header {
-    height: 50px;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-    display: flex;
-    flex-direction: row;
-  }
-  .home-header > div > button {
-    height: 30px;
+  .header-button-container > button{
     width: auto;
-    float: right;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
-.header-logo {
-  height: 40px;
-  justify-self: center;
-  vertical-align: middle;
+
+@media only screen and (max-width: 350px) {
+  .header-sign-out-button{
+    display: none !important;
+  }
 }

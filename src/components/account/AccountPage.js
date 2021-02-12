@@ -9,6 +9,7 @@ import {
   Avatar,
   Slide,
   Fade,
+  Snackbar
 } from "@material-ui/core";
 import { DisabledCardFull, DisabledCardHalf, InviteCard } from "./AccountCards";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,7 +22,7 @@ import {
   shortFade,
 } from "./../../utils/constants";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, Fragment } from "react";
 import ChipInput from "material-ui-chip-input";
 
 import { auth, getUserDoc } from "../../firebase";
@@ -166,6 +167,9 @@ function numberWithCommas(x) {
   }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if(parts[1] && parts[1].length == 1) {
+    parts[1] = parts[1] + "0";
+  }
   return parts.join(".");
 }
 function ReviewCard(props) {
@@ -230,6 +234,7 @@ function AccountPage(props) {
   const user = useContext(AuthContext);
 
   const location = useLocation();
+  const [openToast, setOpenToast] = useState(location.state ? location.state['accountNew'] : false);
   const history = useHistory();
   const [loadAttempts, setLoadAttempts] = useState(0);
 
@@ -285,6 +290,16 @@ function AccountPage(props) {
       }, 500);
     }
   });
+  const handleClick = () => {
+    setOpenToast(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenToast(false);
+  };
   const onCalculator = () => {
     history.push({
       pathname: "/onboard",
@@ -310,7 +325,7 @@ function AccountPage(props) {
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header isHome={true}/>
+      <Header page={"Account"}/>
       <Slide {...slideDefault} in direction="left">
         <div className="account-page-c0 column-container">
           <div className="account-page-c1-left-shadow" />
@@ -381,6 +396,17 @@ function AccountPage(props) {
               )}
             </div>
           </div>
+          <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={openToast}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        message="Nice work making that account!"
+        
+      />
         </div>
       </Slide>
     </ThemeProvider>

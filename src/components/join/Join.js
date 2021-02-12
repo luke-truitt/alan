@@ -5,13 +5,14 @@ import {
   TextField,
   CircularProgress,
   Slide,
+  Snackbar
 } from "@material-ui/core";
 import { primaryTheme, slideDefault } from "../../utils/constants.js";
 import "./join.css";
 import Typist from "react-typist";
 import Lottie from "react-lottie";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
@@ -151,7 +152,7 @@ function JoinForm(props) {
     //   console.log('FAILED...', error);
     // });
   };
-
+  
   const navTo = () => {
     setLoading(false);
     createUserWithEmailAndPasswordHandler(null);
@@ -187,8 +188,9 @@ function JoinForm(props) {
         referById,
         refundBreakdown,
       }).then((res) => {
-        console.log(res);
-        setTimeout(navTo, 4000);
+        setTimeout(() => {history.push({
+          pathname: "/account", state: {accountNew: true}
+        });}, 4000);
         setPassword("");
         setFirstName("");
         setLastName("");
@@ -276,6 +278,7 @@ function JoinForm(props) {
 
   return (
     <div>
+      
       {googleLoading || loading ? (
         <Loading />
       ) : (
@@ -398,11 +401,12 @@ function JoinForm(props) {
               Already have an Account?{" "}
               <span
                 className="join-sign-in-button"
-                style={{ cursor: "pointer", paddingBottom: "20px" }}
+                style={{ cursor: "pointer"}}
               >
                 Sign In
               </span>
             </Typography>
+            
           </div>
         </div>
       )}
@@ -413,7 +417,7 @@ function JoinForm(props) {
 function Join(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
-    <Header />
+    <Header page={"Join"}/>
       <Slide {...slideDefault} in direction="left">
         <div className="join-page-c0 column-container">
           <div className="join-page-c1-left-shadow" />
@@ -435,6 +439,7 @@ function Join(props) {
               />
             </div>
           </div>
+          
         </div>
       </Slide>
     </ThemeProvider>

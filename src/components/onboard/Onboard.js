@@ -65,26 +65,6 @@ const {
   REACT_APP_CALCULATOR_URL,
 } = process.env;
 
-const forms = [
-  // { title: "Personal", items: [name, phoneNumber, school, intlStudent], formFields: ["firstName", "lastName", "phone", "school", "classYear", "international"] },
-
-  {
-    title: "Income",
-    items: [income, state, job],
-    formFields: ["estimatedIncome", "state", "job"],
-  },
-  {
-    title: "Education",
-    items: [studentStatus, school, educationExpenses, studentLoans],
-    formFields: ["student", "school", "educationExpenses", "loanPayments"],
-  },
-  {
-    title: "History",
-    items: [covidCredits, dependence, citizenStatus],
-    formFields: ["covidCredits", "dependence", "citizen"],
-  },
-];
-
 const LinearProgressBar = withStyles((theme) => ({
   root: {
     height: "5px",
@@ -122,6 +102,7 @@ function Onboard(props) {
       }
     }
   };
+
   setTimeout(() => {
     setPanelActive(true);
   }, 3000);
@@ -136,6 +117,78 @@ function Onboard(props) {
     }
   };
 
+  const { width, height } = useWindowDimensions();
+  const isMobile = width < 900;
+  const forms = !isMobile
+    ? [
+        {
+          title: "Income",
+          items: [income, state, job],
+          formFields: ["estimatedIncome", "state", "companyName", "jobTitle"],
+        },
+        {
+          title: "Education",
+          items: [studentStatus, school, educationExpenses, studentLoans],
+          formFields: [
+            "student",
+            "school",
+            "educationExpenses",
+            "loanPayments",
+          ],
+        },
+        {
+          title: "History",
+          items: [covidCredits, dependence, citizenStatus],
+          formFields: ["covidCredits", "dependence", "citizen"],
+        },
+      ]
+    : [
+        {
+          title: "Income",
+          items: [income],
+          formFields: ["estimatedIncome"],
+        },
+        {
+          title: "State",
+          items: [state],
+          formFields: ["state"],
+        },
+        {
+          title: "Covid Credits",
+          items: [covidCredits],
+          formFields: ["covidCredits"],
+        },
+        {
+          title: "Dependence",
+          items: [dependence],
+          formFields: ["dependent"],
+        },
+        {
+          title: "Work",
+          items: [job],
+          formFields: [],
+        },
+        {
+          title: "School",
+          items: [school],
+          formFields: ["school"],
+        },
+        {
+          title: "Education Expenses",
+          items: [educationExpenses],
+          formFields: ["educationExpenses"],
+        },
+        {
+          title: "Student Loans",
+          items: [studentLoans],
+          formFields: ["loanPayments"],
+        },
+        {
+          title: "Student Status",
+          items: [studentStatus],
+          formFields: ["student"],
+        },
+      ];
   const checkValid = (d) => {
     const availableFields = forms[step - 1].formFields;
     let validData = true;
@@ -446,111 +499,9 @@ function Onboard(props) {
     );
   }
 
-  const OnboardMobile = () => (
-    <ThemeProvider theme={primaryTheme}>
-      <div container className="onboard-c1-right-div row-container">
-        <ProgressBar value={(step + 1) / forms.length}></ProgressBar>
-        <div className="form-div">
-          <Form
-            title={forms[step - 1].title}
-            formItems={forms[step - 1].items}
-            fields={fields}
-            data={{}}
-            validForm={(d) => checkValid(d)}
-            onUpdate={onDataUpdate}
-            onKeyPress={(e, val) => keyDown(e, val)}
-          />
-        </div>
-        <div className="onboard-button-div column-container">
-          <div className="onboard-button">
-            <Button color="secondary" onClick={backClick}>
-              Previous
-            </Button>
-          </div>
-          <div className="onboard-button">
-            <Button
-              variant="contained"
-              color="secondary"
-              disabled={nextDisabled()}
-              onClick={forwardClick}
-            >
-              {panelActive ? <CircularProgress /> : "Next"}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </ThemeProvider>
-  );
-
-  const { width, height } = useWindowDimensions();
-  const isMobile = width < 900;
-
-  function OnboardWeb() {
-    return (
-      <ThemeProvider theme={primaryTheme} className="onboard">
-        <Slide in {...slideDefault} direction="left">
-          <div
-            className="onboard-c0 column-container"
-            tabIndex={-1}
-            onKeyPress={(e, val) => keyDown(e, val)}
-          >
-            <Header signUp={handleClickOpen} />
-
-            {panelActive ? (
-              <OnboardingTimeline activeStep={step} />
-            ) : (
-              <OnboardingInitialPanel />
-            )}
-            <div className="onboard-c1-right row-container">
-              {loadingScreen ? (
-                <div>
-                  <div container className="onboard-c1-right-div row-container">
-                    <div className="form-div">
-                      <Form
-                        title={forms[step - 1].title}
-                        formItems={forms[step - 1].items}
-                        fields={fields}
-                        data={{}}
-                        validForm={(d) => checkValid(d)}
-                        onUpdate={onDataUpdate}
-                        onKeyPress={(e, val) => keyDown(e, val)}
-                      />
-                    </div>
-                    <div className="onboard-button-div column-container">
-                      <div className="onboard-button">
-                        <Button color="secondary" onClick={backClick}>
-                          Previous
-                        </Button>
-                      </div>
-                      <div className="onboard-button">
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          disabled={nextDisabled()}
-                          onClick={forwardClick}
-                        >
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <Loading />
-              )}
-            </div>
-            <AlertDialog />
-          </div>
-        </Slide>
-      </ThemeProvider>
-    );
-  }
-
-  // function DynamicOnboard {= () => (}isMobile ? <OnboardMobile /> : <OnboardWeb />);
-
   return !isMobile ? (
     <ThemeProvider theme={primaryTheme} className="onboard">
-      <Header signUp={handleClickOpen} />
+      <Header page={"Onboard"} signUp={handleClickOpen} />
       <Slide in {...slideDefault} direction="left">
         <div
           className="onboard-c0 column-container"
