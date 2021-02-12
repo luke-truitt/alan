@@ -32,7 +32,7 @@ import Header from "../header/Header";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_b3u2bhe";
-const SERVICE_ID = "service_784yhvi";
+const SERVICE_ID = "service_ah750kn";
 const timelineNumbers = {
   1: joinTimeline1,
   2: joinTimeline2,
@@ -124,21 +124,18 @@ function JoinForm(props) {
       to_name: firstName,
       to_email: email,
     };
-    //     emailjs.send(
-    //       SERVICE_ID,
-    //       TEMPLATE_ID,
-    //       templateParams,
-    //       USER_ID
-    //  ).then(function(response) {
-    //   console.log(email, 'SUCCESS!', response.status, response.text);
-    // }, function(error) {
-    //   console.log('FAILED...', error);
-    // });
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+      function (response) {
+        console.log(email, "SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
   };
 
   const navTo = () => {
     setLoading(false);
-    createUserWithEmailAndPasswordHandler(null);
     history.push({
       pathname: "/account",
     });
@@ -171,6 +168,7 @@ function JoinForm(props) {
         referById,
         refundBreakdown,
       }).then((res) => {
+        sendWelcomeEmail();
         setTimeout(() => {
           history.push({
             pathname: "/account",
@@ -231,7 +229,7 @@ function JoinForm(props) {
 
     if (code === 13) {
       //13 is the enter keycode
-      navTo();
+      createUserWithEmailAndPasswordHandler(null);
     }
   };
   function Loading() {
@@ -359,6 +357,7 @@ function JoinForm(props) {
                     referById,
                     refundBreakdown
                   ).then(() => {
+                    // sendWelcomeEmail();
                     navTo();
                     setGoogleLoading(false);
                   });
