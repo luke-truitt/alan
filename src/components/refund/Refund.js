@@ -258,13 +258,14 @@ function Refund(props) {
                       className="onboard-complete-card-1-content"
                       style={{ cursor: "pointer" }}
                     >
-                      <div className="row-container">
+                      <div className="row-container refund-card-button-content ">
                         <Typography
                           className="refund-card-button-text"
                           variant="h4"
                           color="primary"
                         >
-                          Get Started <ArrowForwardIosRoundedIcon />
+                          Get Started{" "}
+                          <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
                         </Typography>
                         <Typography
                           variant="body2"
@@ -354,13 +355,14 @@ function Refund(props) {
                           style={{ cursor: "pointer" }}
                         >
                           {" "}
-                          <div className="row-container">
+                          <div className="row-container refund-card-button-content">
                             <Typography
                               className="refund-card-button-text"
                               variant="h4"
                               color="primary"
                             >
-                              Get Started <ArrowForwardIosRoundedIcon />
+                              Get Started{" "}
+                              <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
                             </Typography>
                             <Typography
                               variant="body2"
@@ -374,6 +376,15 @@ function Refund(props) {
                           </div>
                         </CardContent>
                       </Card>
+                      <Typography
+                        variant="body2"
+                        color="secondary"
+                        className="refund-card-button-subtext-mobile"
+                      >
+                        Free to sign up. We maximize state and federal refunds
+                        and only charge a single fee of $25 if we find you
+                        money.
+                      </Typography>
                       <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
                     </div>
                     <Card className="onboard-complete-card-mobile">
@@ -431,7 +442,7 @@ function Refund(props) {
                   <Card className="onboard-complete-card">
                     <CardContent
                       onClick={navTo}
-                      className="onboard-complete-card-1-content"
+                      className="onboard-complete-card-1-content refund-card-button-content "
                       style={{ cursor: "pointer" }}
                     >
                       {" "}
@@ -441,7 +452,8 @@ function Refund(props) {
                           variant="h4"
                           color="primary"
                         >
-                          Get Started <ArrowForwardIosRoundedIcon />
+                          Get Started{" "}
+                          <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
                         </Typography>
                         <Typography
                           variant="body2"

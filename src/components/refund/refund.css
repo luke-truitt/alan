@@ -116,19 +116,18 @@ a.refund-breakdown-row-label {
   background-image: linear-gradient(to right, #5f5fc4, 50%, #001064);
 }
 .refund-card-button-text {
-  width: 90%;
   vertical-align: middle;
 }
+
 h4.refund-card-button-text {
   font-weight: 500;
   text-align: left;
   align-self: center;
-  width: 90%;
 }
 p.refund-card-button-subtext {
   padding-top: 1rem;
+  font-size: 1rem;
   text-align: left;
-  width: 90%;
   align-self: center;
 }
 
@@ -213,6 +212,9 @@ img.onboard-complete-help-arrow {
   width: 75px;
   cursor: pointer;
 }
+.refund-subtext-mobile {
+  display: none;
+}
 
 .refund-breakdown-highlight-red > *:first-child > *:first-child > *:last-child {
   background-image: url("./../../images/text-decoration/red-highlight.svg");
@@ -246,6 +248,9 @@ img.onboard-complete-help-arrow {
     box-shadow: none;
     padding-bottom: 0px;
   }
+  .refund-breakdown-c0 {
+    margin-top: 4rem;
+  }
   div.onboard-complete-card-1-content {
     width: auto;
     height: auto;
@@ -272,8 +277,24 @@ img.onboard-complete-help-arrow {
     margin-right: auto;
     margin-left: auto;
   }
+  .refund-card-button-subtext-mobile {
+    width: 100%;
+    justify-items: center;
+    display: flex;
+  }
+  p.refund-card-button-subtext-mobile {
+    width: 80%;
+    margin: auto;
+    padding-top: 1.5rem;
+
+    font-size: 1rem;
+  }
   h4.refund-card-button-text {
     font-size: 1.5em;
+  }
+  svg.refund-card-button-icon {
+    font-size: 0.8em;
+    vertical-align: middle;
   }
   .onboard-complete-help-button-container {
     display: block;
@@ -285,7 +306,6 @@ img.onboard-complete-help-arrow {
     font-size: 4rem;
     padding-bottom: 3rem;
   }
-
   .refund-breakdown-row-c1.column-container {
     flex-direction: row;
   }
@@ -294,8 +314,6 @@ img.onboard-complete-help-arrow {
     padding: 0.5rem;
     margin-top: 3rem;
     height: auto;
-  }
-  .onboard-complete-apply-text {
   }
   h6.onboard-complete-title {
     padding-left: 10px;
@@ -336,4 +354,8 @@ img.onboard-complete-help-arrow {
   .onboard-complete-footer {
     display: none;
   }
+}
+
+.refund-card-button-content {
+  max-width: 80%;
 }

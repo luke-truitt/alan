@@ -413,7 +413,8 @@ function AccountPage(props) {
             open={openToast}
             autoHideDuration={5000}
             onClose={handleClose}
-            message="Nice work making that account!"
+            severity="success"
+            message="Nice work! Glad to have you here."
           />
         </div>
       </Slide>
