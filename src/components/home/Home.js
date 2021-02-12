@@ -13,7 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Slide
+  Slide,
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme, fadeDefault } from "../../utils/constants.js";
@@ -41,24 +41,28 @@ function Home() {
   const emailInput = useRef(null);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
-    const handleClickOpen = (old_user) => {
-      setUser(old_user);
-      setOpen(true);
-    };
-  
-    const handleClose = (choice) => {
-      if(choice=="no") {
-        history.push({
-          pathname: "/onboard",
-          state: { email: user.email, referToId: user.referToId, referById: user.referById },
-        });
-      } else {
-        history.push({
-          pathname: "/signin"
-        });
-      }
-      setOpen(false);
-    };
+  const handleClickOpen = (old_user) => {
+    setUser(old_user);
+    setOpen(true);
+  };
+
+  const handleClose = (choice) => {
+    if (choice == "no") {
+      history.push({
+        pathname: "/onboard",
+        state: {
+          email: user.email,
+          referToId: user.referToId,
+          referById: user.referById,
+        },
+      });
+    } else {
+      history.push({
+        pathname: "/signin",
+      });
+    }
+    setOpen(false);
+  };
 
   let referById = "";
 
@@ -74,12 +78,12 @@ function Home() {
     }
   };
   const signUp = () => {
-    if(email.includes("@") && email.length > 6) {
+    if (email.includes("@") && email.length > 6) {
       navTo();
     } else {
       invalidClick();
     }
-  }
+  };
   useEffect(() => {
     initGA(trackingId);
     PageView();
@@ -112,8 +116,6 @@ function Home() {
     return <Slide direction="up" ref={ref} {...props} />;
   });
   function AlertDialog(props) {
-    
-  
     return (
       <div>
         <Dialog
@@ -127,7 +129,8 @@ function Home() {
           <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-            We have your email associated with an account already, would you like to sign in?
+              We have your email associated with an account already, would you
+              like to sign in?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -144,35 +147,35 @@ function Home() {
   }
 
   const addEmail = async (email) => {
-    const old_user = await findUserByEmail(email)
+    const old_user = await findUserByEmail(email);
 
-      console.log(old_user);
-      if(old_user==null) {
-        axios
-      .post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
-        email: email,
-      })
-      .then(function (response) {
-        const referToId = response.data.referId;
-        history.push({
-          pathname: "/onboard",
-          state: { email: email, referToId: referToId, referById: referById },
+    console.log(old_user);
+    if (old_user == null) {
+      axios
+        .post(REACT_APP_API_BASE_URL + REACT_APP_WAITLIST_URL, {
+          email: email,
+        })
+        .then(function (response) {
+          const referToId = response.data.referId;
+          history.push({
+            pathname: "/onboard",
+            state: { email: email, referToId: referToId, referById: referById },
+          });
+          console.log(response);
+          setLoading(false);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-        console.log(response);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      } else {
-        handleClickOpen(old_user);
-      }
-  }
+    } else {
+      handleClickOpen(old_user);
+    }
+  };
 
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
-      <Header signUp={signUp} page={"Home"}/>
+        <Header signUp={signUp} page={"Home"}/>
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
@@ -181,8 +184,8 @@ function Home() {
                 color="textPrimary"
                 className="home-title"
               >
-                Get up to a <span className="purple-highlight">$5,000</span> tax
-                refund in <span className="purple-highlight">10 minutes</span>.
+                Get up to a <span className="teal-highlight">$5,000</span> tax
+                refund in <span className="teal-highlight">10 minutes</span>.
               </Typography>
               <EmbeddedEmailInput
                 className="home-input"
@@ -205,7 +208,7 @@ function Home() {
               </Typography>
             </div>
             <img src={ben} className="home-ben"></img>
-            <AlertDialog open={open} handleClose={handleClose}/>
+            <AlertDialog open={open} handleClose={handleClose} />
           </div>
         </Fade>
       </div>

@@ -23,7 +23,7 @@ button.single-select-button:hover {
 }
 button.selected {
   background-color: #d8dbe8;
-  border: 1px solid #4056a1;
+  border: 1px solid #283593;
   font-weight: normal;
   color: #6d6d6d;
 }
@@ -133,6 +133,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }

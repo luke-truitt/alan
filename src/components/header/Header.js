@@ -1,15 +1,21 @@
-import { AppBar, ThemeProvider, Button, Typography, CircularProgress } from "@material-ui/core";
+import {
+  AppBar,
+  ThemeProvider,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants";
 import { useHistory, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import "./../../styles.css";
 import "./header.css";
 import { getUserDoc, auth } from "../../firebase";
-import { AuthContext} from "../../providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import useWindowDimensions from "../onboard/useWindowDimensions";
+import logo from "./../../images/logo/white-tax.svg";
 
-  
 function Header(props) {
   const history = useHistory();
   const [loadAttempts, setLoadAttempts] = useState(0);
@@ -38,7 +44,7 @@ function Header(props) {
 
   // let isLoggedIn = user.user 
   useEffect(() => {
-      setTimeout(() => {
+    setTimeout(() => {
       if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
         setTimeout(() => {
           getUserDoc(user)
@@ -49,16 +55,16 @@ function Header(props) {
               setUserData(result);
             })
             .catch(() => console.log("ERROR GETTING USER"));
-            setLoadAttempts(loadAttempts+1);
+          setLoadAttempts(loadAttempts + 1);
         }, 1000);
-      } 
+      }
     });
   });
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="header-c0 column-container">
         <Typography variant="h4" className="logo-text" onClick={() => onLogo()}>
-          STANDARD
+          <img src={logo} className="header-logo" />
         </Typography>
         <div className="header-button-container">
           <Button onClick={onAccount} variant="outlined" color="primary" className="username-button">{userData['firstName'] && userData['firstName'].toLowerCase().includes('wes') ? "Hola Wessisito" : `Hi ${userData['firstName']}!`}</Button>

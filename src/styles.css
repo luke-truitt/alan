@@ -15,11 +15,10 @@
   flex-direction: column;
 }
 
-span.purple-highlight {
-  background-image: url("./images/text-decoration/purple-highlight.svg");
+span.teal-highlight {
+  background-image: url("./images/text-decoration/teal-highlight.svg");
   background-position: left bottom;
   background-repeat: no-repeat;
-  padding-bottom: 0.75rem;
 }
 #menu-
   > div.MuiPaper-root-1121.MuiMenu-paper-1041.MuiPopover-paper-1044.MuiPaper-rounded-1122

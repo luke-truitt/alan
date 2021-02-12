@@ -2,6 +2,7 @@
   width: 100%;
   justify-content: space-between;
   margin: auto;
+  height: 100vh;
 }
 
 .home-c1 {
@@ -29,9 +30,9 @@ img.home-ben {
   height: auto;
   max-width: 50%;
   align-self: flex-end;
-  z-index: -2;
+  z-index: -5;
 }
-span.purple-highlight {
+span.teal-highlight {
   padding-bottom: -1rem;
 }
 

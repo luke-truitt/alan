@@ -12,10 +12,10 @@ export const primaryTheme = createMuiTheme({
       contrastText: "#2d2d2d",
     },
     secondary: {
-      light: "#7282d3",
-      main: "#4056a1",
-      dark: "#002e72",
-      contrastText: "#ffffff",
+      light: "#5F5FC4",
+      main: "#283593",
+      dark: "#001064",
+      contrastText: "#f6f6f6",
     },
     text: {
       primary: "#2d2d2d",

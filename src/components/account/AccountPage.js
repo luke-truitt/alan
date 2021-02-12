@@ -119,7 +119,7 @@ function AccountCard(props) {
               alt={props.firstName}
               style={{
                 backgroundColor: "white",
-                color: "#4056a1",
+                color: "#283593",
                 height: "2em",
                 width: "2em",
               }}
@@ -266,7 +266,6 @@ function AccountPage(props) {
   }, 1000);
   useEffect(() => {
     setTimeout(() => {
-      
       if (!user.user && loadAttempts > 2) {
         console.log(user);
         history.push("/signin");
@@ -298,7 +297,7 @@ function AccountPage(props) {
 
   const welcomeText = (
     <span>
-      Welcome <span className="purple-highlight"> {userData.firstName}!</span>{" "}
+      Welcome <span className="teal-highlight"> {userData.firstName}!</span>{" "}
     </span>
   );
   const MobileWelcome = () => (

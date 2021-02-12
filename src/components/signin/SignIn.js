@@ -75,7 +75,11 @@ function JoinTimeline() {
   ));
   return (
     <div className="row-container signin-timeline">
-      <Typography variant="h5" color="primary" className="signin-timeline-title">
+      <Typography
+        variant="h5"
+        color="primary"
+        className="signin-timeline-title"
+      >
         How does it work?
       </Typography>
       {timelineSteps}
@@ -143,7 +147,6 @@ function SignInForm(props) {
   };
 
   return (
-    
     <div className="signin-form row-container">
       <TextInput
         setValid={(val) => {
@@ -175,7 +178,7 @@ function SignInForm(props) {
         variant="caption"
         className="sign-in-forgot-pass-text"
         onClick={() => history.push({ pathname: "/resetpassword" })}
-        style={{cursor: "pointer"}}
+        style={{ cursor: "pointer" }}
       >
         Forgot your password?
       </Typography>
@@ -221,7 +224,10 @@ function SignInForm(props) {
         color="textSecondary"
         onClick={() => history.push({ pathname: "/join" })}
       >
-        Not a member? <span className="signin-sign-in-button" style={{cursor: "pointer"}}>Sign Up</span>
+        Not a member?{" "}
+        <span className="signin-sign-in-button" style={{ cursor: "pointer" }}>
+          Sign Up
+        </span>
       </Typography>
     </div>
   );
@@ -251,7 +257,7 @@ function SignIn() {
                 variant="h2"
                 className="form-title "
               >
-                <span className="purple-highlight">Sign In</span>
+                <span className="teal-highlight">Sign In</span>
               </Typography>
               <SignInForm />
             </div>

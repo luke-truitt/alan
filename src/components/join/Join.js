@@ -281,7 +281,7 @@ function JoinForm(props) {
       ) : (
         <div>
           <Typography color="textPrimary" variant="h2" className="form-title">
-            <span className=" purple-highlight">Join</span>
+            <span className=" teal-highlight">Join</span>
           </Typography>
           <div
             className="join-form row-container"
