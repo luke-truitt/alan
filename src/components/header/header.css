@@ -36,5 +36,15 @@ h4.logo-text {
 }
 
 @media only screen and (max-width: 750px) {
-  
+  .header-button-container > button{
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .header-sign-out-button{
+    display: none !important;
+  }
 }

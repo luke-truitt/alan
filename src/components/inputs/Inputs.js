@@ -182,7 +182,8 @@ export function JobInput(props) {
       >
         {props.description}
       </Typography>
-      <div className="form-item-container column-container">
+      <div className="form-item-container column-container"
+        style={{paddingTop: "10px"}}>
         <TextField
           className="form-item-text-field"
           label="Company"
