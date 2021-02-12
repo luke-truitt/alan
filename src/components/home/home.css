@@ -1,11 +1,7 @@
 .home-c0 {
-  height: 100%;
   width: 100%;
   justify-content: space-between;
   margin: auto;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  margin-top: 50px;
 }
 
 .home-c1 {
@@ -13,13 +9,13 @@
   max-width: 600px;
   margin-left: 5rem;
   margin-right: -10rem;
-
   justify-content: center;
 }
 h2.home-title {
   margin-bottom: 3rem;
   text-align: left;
 }
+
 p.home-subtitle {
   text-align: left;
   font-size: 1.2rem;
@@ -42,11 +38,9 @@ span.purple-highlight {
 @media only screen and (max-width: 800px) {
   div.home-c1 {
     margin: auto;
-    height: 100%;
   }
   div.home-c0 {
-    padding-top: 8rem;
-    overflow: scroll;
+    padding-top: 7rem;
     flex-direction: column;
   }
 

@@ -23,6 +23,7 @@ import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
+import Header from "../header/Header";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_b3u2bhe";
@@ -275,7 +276,6 @@ function JoinForm(props) {
 
   return (
     <div>
-      {" "}
       {googleLoading || loading ? (
         <Loading />
       ) : (
@@ -398,7 +398,7 @@ function JoinForm(props) {
               Already have an Account?{" "}
               <span
                 className="join-sign-in-button"
-                style={{ cursor: "pointer", marginBottom: "20px" }}
+                style={{ cursor: "pointer", paddingBottom: "20px" }}
               >
                 Sign In
               </span>
@@ -413,6 +413,7 @@ function JoinForm(props) {
 function Join(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
+    <Header />
       <Slide {...slideDefault} in direction="left">
         <div className="join-page-c0 column-container">
           <div className="join-page-c1-left-shadow" />

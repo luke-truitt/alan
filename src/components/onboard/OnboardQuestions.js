@@ -79,7 +79,7 @@ export const job = {
   type: "JobInput",
   question: "Where did you work last year and what'd you do?",
   description:
-    "We know you may have worked at many places, just put the one that you made the most money from. If you didn't work anywhere put N/A for both.",
+    "Put the one that you made the most money from. If you didn't work anywhere put N/A for both.",
   options: {},
   stateName: "job",
 };
@@ -167,7 +167,7 @@ export const name = {
 };
 export const school = {
   type: "SchoolInput",
-  question: "",
+  question: "Where did you go to school and when did you graduate?",
   description: "",
   options: {},
   stateName: "school",

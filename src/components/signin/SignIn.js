@@ -19,6 +19,7 @@ import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import "./../inputs/inputs.css";
+import Header from "../header/Header";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -142,6 +143,7 @@ function SignInForm(props) {
   };
 
   return (
+    
     <div className="signin-form row-container">
       <TextInput
         setValid={(val) => {
@@ -228,6 +230,7 @@ function SignInForm(props) {
 function SignIn() {
   return (
     <ThemeProvider theme={primaryTheme}>
+      <Header/>
       <Slide {...slideDefault} in direction="left">
         <div className="signin-page-c0 column-container">
           <div className="signin-page-c1-left-shadow" />

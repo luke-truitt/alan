@@ -17,6 +17,7 @@ import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
 import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import Header from "../header/Header";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -187,6 +188,7 @@ function ResetForm(props) {
 function ResetPassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
+      <Header/>
       <div className="reset-page-c0 column-container">
         <div className="reset-page-c1-left-shadow" />
         <div className="reset-page-c1-left row-container">

@@ -311,7 +311,7 @@ function AccountPage(props) {
   props = mockProps;
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header />
+      <Header isHome={true}/>
       <Slide {...slideDefault} in direction="left">
         <div className="account-page-c0 column-container">
           <div className="account-page-c1-left-shadow" />

@@ -3,20 +3,18 @@
   background-image: url("./../../images/bg/bg-pattern-half.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  margin: auto;
 }
 
 .join-page-c1-right {
   width: 50%;
   background-color: #f6f6f6;
-  overflow-y: scroll;
+  height: auto;
+  padding-top: 1rem;
 }
 
 .join-page-c0 {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  margin-top: 50px;
 }
 .join-page-c1-right-content {
   width: 90%;
@@ -95,7 +93,9 @@ span.join-or {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
 }
-
+h2.form-container {
+  padding-top: 30px;
+}
 .join-or-container {
   margin-bottom: 1rem;
 }
@@ -158,5 +158,6 @@ span.join-sign-in-button {
 
 p.join-sign-in-text {
   padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 0.9rem;
 }
