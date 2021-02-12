@@ -520,7 +520,7 @@ const forms = !isMobile ? [
                   <div className="onboard-button-div column-container">
                     <div className="onboard-button">
                       <Button color="secondary" onClick={backClick} style={{display: step==1 ? "none" : ""}}>
-                        {props.referToId}
+                        Previous
                       </Button>
                     </div>
                     <div className="onboard-button">
