@@ -178,7 +178,7 @@ function ReviewCard(props) {
     refundText = (
       <div>
         <Typography variant="body2" className="review-card-text">
-          If you want to retake the calculator o, you can do so{" "}
+          If you want to retake the calculator, you can do so{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}
             onClick={() => props.onCalculator()}
