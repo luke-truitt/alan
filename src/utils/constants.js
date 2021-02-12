@@ -75,3 +75,25 @@ export const shortFade = {
     enter: 500,
   },
 };
+
+export const timelineData = [
+  { number: 1, text: "Join Standard" },
+  {
+    number: 2,
+    text:
+      "Receive a link to file after our team of tax experts review your info*",
+  },
+  {
+    number: 3,
+    text:
+      "Upload supporting documents (W2s, etc.). We'll help you find what you need.",
+  },
+  {
+    number: 4,
+    text: "Submit! Refunds are typically processed within 3 weeks.",
+  },
+  {
+    number: 5,
+    text: "Pay a flat rate of $25 only if you receive a refund.",
+  },
+];

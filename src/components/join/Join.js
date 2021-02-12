@@ -5,9 +5,13 @@ import {
   TextField,
   CircularProgress,
   Slide,
-  Snackbar
+  Snackbar,
 } from "@material-ui/core";
-import { primaryTheme, slideDefault } from "../../utils/constants.js";
+import {
+  primaryTheme,
+  slideDefault,
+  timelineData,
+} from "../../utils/constants.js";
 import "./join.css";
 import Typist from "react-typist";
 import Lottie from "react-lottie";
@@ -36,27 +40,6 @@ const timelineNumbers = {
   4: joinTimeline4,
   5: joinTimeline5,
 };
-
-const timelineData = [
-  { number: 1, text: "Join Us" },
-  {
-    number: 2,
-    text:
-      "Receive a link to file taxes after our team of tax experts reviews your info*",
-  },
-  {
-    number: 3,
-    text: "Upload relevant documents (W2s, etc.). We’ll help you locate them.",
-  },
-  {
-    number: 4,
-    text: "Submit! Refunds are typically processed within 3 weeks",
-  },
-  {
-    number: 5,
-    text: "We collect a flat $25 fee only if you receive a refund (Read why).",
-  },
-];
 
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
@@ -152,7 +135,7 @@ function JoinForm(props) {
     //   console.log('FAILED...', error);
     // });
   };
-  
+
   const navTo = () => {
     setLoading(false);
     createUserWithEmailAndPasswordHandler(null);
@@ -188,9 +171,12 @@ function JoinForm(props) {
         referById,
         refundBreakdown,
       }).then((res) => {
-        setTimeout(() => {history.push({
-          pathname: "/account", state: {accountNew: true}
-        });}, 4000);
+        setTimeout(() => {
+          history.push({
+            pathname: "/account",
+            state: { accountNew: true },
+          });
+        }, 4000);
         setPassword("");
         setFirstName("");
         setLastName("");
@@ -278,7 +264,6 @@ function JoinForm(props) {
 
   return (
     <div>
-      
       {googleLoading || loading ? (
         <Loading />
       ) : (
@@ -401,12 +386,11 @@ function JoinForm(props) {
               Already have an Account?{" "}
               <span
                 className="join-sign-in-button"
-                style={{ cursor: "pointer"}}
+                style={{ cursor: "pointer" }}
               >
                 Sign In
               </span>
             </Typography>
-            
           </div>
         </div>
       )}
@@ -417,7 +401,7 @@ function JoinForm(props) {
 function Join(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
-    <Header page={"Join"}/>
+      <Header page={"Join"} />
       <Slide {...slideDefault} in direction="left">
         <div className="join-page-c0 column-container">
           <div className="join-page-c1-left-shadow" />
@@ -439,7 +423,6 @@ function Join(props) {
               />
             </div>
           </div>
-          
         </div>
       </Slide>
     </ThemeProvider>

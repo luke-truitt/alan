@@ -32,12 +32,11 @@ function numberWithCommas(x) {
   }
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  if(parts[1] && parts[1].length == 1) {
+  if (parts[1] && parts[1].length == 1) {
     parts[1] = parts[1] + "0";
   }
   return parts.join(".");
 }
-
 
 function Refund(props) {
   let location = useLocation();
@@ -173,33 +172,113 @@ function Refund(props) {
 
   return (
     <ThemeProvider theme={primaryTheme}>
-    <Header page={"Refund"}/>
+      <Header page={"Refund"} />
       <div className="onboard-complete-c0-top row-container">
+        {!isMobile ? (
+          <Slide in {...slideDefault} direction="up">
+            <div className="onboard-complete-c1 column-container">
+              <div className="onboard-complete-c1-content column-container">
+                {dataLoaded ? (
+                  <div className="onboard-complete-c1-breakdown">
+                    <Zoom in timeout={{ enter: 500 }}>
+                      <div>
+                        <Typography
+                          className="onboard-complete-title"
+                          variant="h6"
+                        >
+                          You're owed
+                        </Typography>
+                        <Typography
+                          className="refund-amount "
+                          variant="h1"
+                          color="secondary"
+                        >
+                          ${numberWithCommas(breakdown.netRefund)}
+                        </Typography>{" "}
+                        <RefundBreakdown
+                          breakdown={breakdown}
+                        ></RefundBreakdown>
+                      </div>
+                    </Zoom>
+                    <Card className="onboard-complete-card-mobile">
+                      <CardContent className="onboard-complete-card-2-content">
+                        <div className="refund-card-text">
+                          {" "}
+                          <Typography
+                            color="textSecondary"
+                            variant="h5"
+                            className="refund-card-title"
+                          >
+                            $2,342
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            className="refund-card-caption"
+                          >
+                            That's how much the average American college student
+                            is owed in a refund.
+                          </Typography>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card className="onboard-complete-card-mobile">
+                      <CardContent className="onboard-complete-card-3-content">
+                        {" "}
+                        <div className="refund-card-text row-container">
+                          <Typography
+                            color="textSecondary"
+                            variant="h5"
+                            className="refund-card-title"
+                          >
+                            $473
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            className="refund-card-caption"
+                            style={{ marginBottom: "70px" }}
+                          >
+                            That's how much the average college student actually
+                            receives because of lack of reporting and
+                            underutilization of credits.
+                          </Typography>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ) : (
+                  <CircularProgress />
+                )}
 
-        {!isMobile ? (<Slide in {...slideDefault} direction="up">
-          <div className="onboard-complete-c1 column-container">
-            <div className="onboard-complete-c1-content column-container">
-              {dataLoaded ? (
-                <div className="onboard-complete-c1-breakdown">
-                  <Zoom in timeout={{ enter: 500 }}>
-                    <div>
-                      <Typography
-                        className="onboard-complete-title"
-                        variant="h6"
-                      >
-                        Your estimated refund amount
-                      </Typography>
-                      <Typography
-                        className="refund-amount "
-                        variant="h1"
-                        color="secondary"
-                      >
-                        ${numberWithCommas(breakdown.netRefund)}
-                      </Typography>{" "}
-                      <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
-                    </div>
-                  </Zoom>
-                  <Card className="onboard-complete-card-mobile">
+                <div className="row-container onboard-complete-card-container">
+                  <Card className="onboard-complete-card">
+                    <CardContent
+                      onClick={navTo}
+                      className="onboard-complete-card-1-content"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <div className="row-container">
+                        <Typography
+                          className="refund-card-button-text"
+                          variant="h4"
+                          color="primary"
+                        >
+                          Get Started <ArrowForwardIosRoundedIcon />
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="primary"
+                          className="refund-card-button-subtext"
+                        >
+                          Free to sign up. We maximize state and federal refunds
+                          and only charge a single fee of $25 if we find you
+                          money.
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="onboard-complete-card">
                     <CardContent className="onboard-complete-card-2-content">
                       <div className="refund-card-text">
                         {" "}
@@ -221,7 +300,7 @@ function Refund(props) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="onboard-complete-card-mobile" >
+                  <Card className="onboard-complete-card">
                     <CardContent className="onboard-complete-card-3-content">
                       {" "}
                       <div className="refund-card-text row-container">
@@ -236,7 +315,6 @@ function Refund(props) {
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
-                          style={{marginBottom: "70px"}}
                         >
                           That's how much the average college student actually
                           receives because of lack of reporting and
@@ -246,86 +324,21 @@ function Refund(props) {
                     </CardContent>
                   </Card>
                 </div>
-              ) : (
-                <CircularProgress />
-              )}
-
-              <div className="row-container onboard-complete-card-container">
-                <Card className="onboard-complete-card">
-                  <CardContent
-                    onClick={navTo}
-                    className="onboard-complete-card-1-content"
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Typography
-                      className="refund-card-button-text"
-                      variant="h4"
-                      color="primary"
-                    >
-                      Help me file my taxes <ArrowForwardIosRoundedIcon />
-                    </Typography>
-                  </CardContent>
-                </Card>
-                <Card className="onboard-complete-card">
-                  <CardContent className="onboard-complete-card-2-content">
-                    <div className="refund-card-text">
-                      {" "}
-                      <Typography
-                        color="textSecondary"
-                        variant="h5"
-                        className="refund-card-title"
-                      >
-                        $2,342
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="caption"
-                        className="refund-card-caption"
-                      >
-                        That's how much the average American college student is
-                        owed in a refund.
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="onboard-complete-card">
-                  <CardContent className="onboard-complete-card-3-content">
-                    {" "}
-                    <div className="refund-card-text row-container">
-                      <Typography
-                        color="textSecondary"
-                        variant="h5"
-                        className="refund-card-title"
-                      >
-                        $473
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="caption"
-                        className="refund-card-caption"
-                      >
-                        That's how much the average college student actually
-                        receives because of lack of reporting and
-                        underutilization of credits.
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
-          </div>
-        </Slide>)
-        
-        : (<Slide in {...slideDefault} direction="up"><div className="onboard-complete-c1 column-container">
-            <div className="onboard-complete-c1-content column-container">
-              {dataLoaded ? (
-                <div className="onboard-complete-c1-breakdown">
+          </Slide>
+        ) : (
+          <Slide in {...slideDefault} direction="up">
+            <div className="onboard-complete-c1 column-container">
+              <div className="onboard-complete-c1-content column-container">
+                {dataLoaded ? (
+                  <div className="onboard-complete-c1-breakdown">
                     <div>
                       <Typography
                         className="onboard-complete-title"
                         variant="h6"
                       >
-                        Your estimated refund amount
+                        You're owed
                       </Typography>
                       <Typography
                         className="refund-amount "
@@ -340,19 +353,109 @@ function Refund(props) {
                           className="onboard-complete-card-1-content"
                           style={{ cursor: "pointer" }}
                         >
-                          <Typography
-                            className="refund-card-button-text"
-                            variant="h4"
-                            color="primary"
-                          >
-                            Help me file my taxes{" "}
-                            <ArrowForwardIosRoundedIcon className="help-button-icon" />
-                          </Typography>
+                          {" "}
+                          <div className="row-container">
+                            <Typography
+                              className="refund-card-button-text"
+                              variant="h4"
+                              color="primary"
+                            >
+                              Get Started <ArrowForwardIosRoundedIcon />
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              color="primary"
+                              className="refund-card-button-subtext"
+                            >
+                              Free to sign up. We maximize state and federal
+                              refunds and only charge a single fee of $25 if we
+                              find you money.
+                            </Typography>
+                          </div>
                         </CardContent>
                       </Card>
                       <RefundBreakdown breakdown={breakdown}></RefundBreakdown>
                     </div>
-                  <Card className="onboard-complete-card-mobile">
+                    <Card className="onboard-complete-card-mobile">
+                      <CardContent className="onboard-complete-card-2-content">
+                        <div className="refund-card-text">
+                          {" "}
+                          <Typography
+                            color="textSecondary"
+                            variant="h5"
+                            className="refund-card-title"
+                          >
+                            $2,342
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            className="refund-card-caption"
+                          >
+                            That's how much the average American college student
+                            is owed in a refund.
+                          </Typography>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card className="onboard-complete-card-mobile">
+                      <CardContent className="onboard-complete-card-3-content">
+                        {" "}
+                        <div className="refund-card-text row-container">
+                          <Typography
+                            color="textSecondary"
+                            variant="h5"
+                            className="refund-card-title"
+                          >
+                            $473
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            className="refund-card-caption"
+                            style={{ marginBottom: "70px" }}
+                          >
+                            That's how much the average college student actually
+                            receives because of lack of reporting and
+                            underutilization of credits.
+                          </Typography>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ) : (
+                  <CircularProgress />
+                )}
+
+                <div className="row-container onboard-complete-card-container">
+                  <Card className="onboard-complete-card">
+                    <CardContent
+                      onClick={navTo}
+                      className="onboard-complete-card-1-content"
+                      style={{ cursor: "pointer" }}
+                    >
+                      {" "}
+                      <div className="row-container">
+                        <Typography
+                          className="refund-card-button-text"
+                          variant="h4"
+                          color="primary"
+                        >
+                          Get Started <ArrowForwardIosRoundedIcon />
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="primary"
+                          className="refund-card-button-subtext"
+                        >
+                          Free to sign up. We maximize state and federal refunds
+                          and only charge a single fee of $25 if we find you
+                          money.
+                        </Typography>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="onboard-complete-card">
                     <CardContent className="onboard-complete-card-2-content">
                       <div className="refund-card-text">
                         {" "}
@@ -374,7 +477,7 @@ function Refund(props) {
                       </div>
                     </CardContent>
                   </Card>
-                  <Card className="onboard-complete-card-mobile" >
+                  <Card className="onboard-complete-card">
                     <CardContent className="onboard-complete-card-3-content">
                       {" "}
                       <div className="refund-card-text row-container">
@@ -389,7 +492,6 @@ function Refund(props) {
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
-                          style={{marginBottom: "70px"}}
                         >
                           That's how much the average college student actually
                           receives because of lack of reporting and
@@ -399,84 +501,28 @@ function Refund(props) {
                     </CardContent>
                   </Card>
                 </div>
-              ) : (
-                <CircularProgress />
-              )}
-
-              <div className="row-container onboard-complete-card-container">
-                <Card className="onboard-complete-card">
-                  <CardContent
-                    onClick={navTo}
-                    className="onboard-complete-card-1-content"
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Typography
-                      className="refund-card-button-text"
-                      variant="h4"
-                      color="primary"
-                    >
-                      Help me file my taxes <ArrowForwardIosRoundedIcon />
-                    </Typography>
-                  </CardContent>
-                </Card>
-                <Card className="onboard-complete-card">
-                  <CardContent className="onboard-complete-card-2-content">
-                    <div className="refund-card-text">
-                      {" "}
-                      <Typography
-                        color="textSecondary"
-                        variant="h5"
-                        className="refund-card-title"
-                      >
-                        $2,342
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="caption"
-                        className="refund-card-caption"
-                      >
-                        That's how much the average American college student is
-                        owed in a refund.
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="onboard-complete-card">
-                  <CardContent className="onboard-complete-card-3-content">
-                    {" "}
-                    <div className="refund-card-text row-container">
-                      <Typography
-                        color="textSecondary"
-                        variant="h5"
-                        className="refund-card-title"
-                      >
-                        $473
-                      </Typography>
-                      <Typography
-                        color="textSecondary"
-                        variant="caption"
-                        className="refund-card-caption"
-                      >
-                        That's how much the average college student actually
-                        receives because of lack of reporting and
-                        underutilization of credits.
-                      </Typography>
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
             </div>
-          </div></Slide>)
-        }
+          </Slide>
+        )}
 
-        <div className="onboard-complete-footer">
+        <div className="onboard-complete-footer row-container">
           <Button
             variant="contained"
             className="onboard-complete-apply-button"
             onClick={navTo}
           >
-            {user ? "Save This Refund Data" : "Ready to file? Apply now"}
+            {user.user ? "Save This Refund Data" : "Get Started with Standard"}
           </Button>
+          <Typography
+            variant="h6"
+            color="secondary"
+            className="onboard-complete-apply-text"
+          >
+            So far, we've helped 13,000 students access $41,000,000. Free to
+            sign up and we charge a flat $25 filing fee only if we find you a
+            refund.
+          </Typography>
         </div>
       </div>
     </ThemeProvider>

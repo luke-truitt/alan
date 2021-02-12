@@ -96,7 +96,7 @@ export function InviteCard(props) {
   const inviteCardTitle =
     "Invite a friend to Standard and we'll file both of your taxes for free.";
   const inviteCardSubtitle =
-    "Know someone missing out on free government $$? We'll waive the $25 filing fee for both of you when they file with Standard!";
+    "Know someone who is missing out on free money? We'll waive the $25 fee for both of you when she files with Standard.";
   const [emails, setEmails] = useState([]);
 
   const handleAdd = (chip) => {
