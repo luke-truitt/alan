@@ -398,7 +398,7 @@ function JoinForm(props) {
               Already have an Account?{" "}
               <span
                 className="join-sign-in-button"
-                style={{ cursor: "pointer", paddingBottom: "20px" }}
+                style={{ cursor: "pointer"}}
               >
                 Sign In
               </span>

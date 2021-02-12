@@ -9,12 +9,12 @@
   width: 50%;
   background-color: #f6f6f6;
   height: auto;
-  padding-top: 1rem;
+  padding-top: 75px;
 }
 
 .join-page-c0 {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   margin-top: -50px;
 }
 .join-page-c1-right-content {
@@ -30,9 +30,8 @@ div.join-form > div.form-item-container > div.form-item-text-field {
 .join-page-c1-left-shadow {
   position: absolute;
   width: 50vw;
-  height: 100%;
   z-index: 9;
-  top: 0;
+  top: 50;
   left: 0;
   box-shadow: inset -2px 2px 4px black;
 }

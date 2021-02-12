@@ -42,7 +42,21 @@ function Header(props) {
   const { width, height } = useWindowDimensions();
   const isMobile = width < 900;
 
-  // let isLoggedIn = user.user 
+  let isLoggedIn = user.user;
+  let isHome = page=="Home";
+  let isJoin = page=="Join";
+  let isAccount = page=="Account";
+  let isSignIn = page=="SignIn";
+  let isResetPassword = page=="ResetPassword";
+  let isOnboard = page=="Onboard";
+  let isRefund = page=="Refund";
+
+  let displayAccount = isLoggedIn
+  let displaySignOut = (isLoggedIn && (isJoin || isHome || isAccount))
+  let displaySignUp = (!isLoggedIn && (isHome || (isRefund && !isMobile)))
+  let displaySignIn = (!isLoggedIn && (isHome || (isRefund && !isMobile)))
+  let displayName = (userData['firstName']==undefined ) ? "" : `Hi ${userData['firstName']}!`;
+  let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>
   useEffect(() => {
     setTimeout(() => {
       if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
@@ -67,10 +81,10 @@ function Header(props) {
           <img src={logo} className="header-logo" />
         </Typography>
         <div className="header-button-container">
-          <Button onClick={onAccount} variant="outlined" color="primary" className="username-button">{userData['firstName'] && userData['firstName'].toLowerCase().includes('wes') ? "Hola Wessisito" : `Hi ${userData['firstName']}!`}</Button>
-          <Button onClick={onSignOut} variant="contained" color="primary" className="header-sign-out-button">{loading ? <CircularProgress /> : <div>Sign Out</div>}</Button>
-          <Button onClick={onSignUp} variant="contained" color="primary"> Sign Up </Button>
-          <Button onClick={onSignIn} variant="outlined" color="primary"> Sign in </Button>
+          {displayAccount && <Button onClick={onAccount} variant="outlined" color="primary" className="username-button">{displayName}</Button>}
+          {displaySignOut && <Button onClick={onSignOut} variant="contained" color="primary" className="header-sign-out-button">{signOutName}</Button>}
+          {displaySignUp && <Button onClick={onSignUp} variant="contained" color="primary"> Sign Up </Button>}
+          {displaySignIn && <Button onClick={onSignIn} variant="outlined" color="primary"> Sign in </Button>}
         </div>
       </div>
     </ThemeProvider>
