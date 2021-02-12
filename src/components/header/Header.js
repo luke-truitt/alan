@@ -13,6 +13,7 @@ import "./header.css";
 import { getUserDoc, auth } from "../../firebase";
 import { AuthContext } from "../../providers/AuthProvider";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
+import logo from "./../../images/logo/white-tax.svg";
 
 function Header(props) {
   const history = useHistory();
