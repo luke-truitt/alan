@@ -131,7 +131,7 @@ export function InviteCard(props) {
     Mixpanel.track("referral", { type: "send" });
     const email_to = email;
     const templateParams = {
-      from_name: props.username,
+      from_name: props.firstName + props.lastName,
       send_to: email_to,
       refer_link: BASE_URL + "/?referId=" + props.referToId,
     };
@@ -227,7 +227,7 @@ export function InviteCard(props) {
                   variant="contained"
                   onClick={sendInvite}
                 >
-                  Send invites
+                  Send invite
                 </Button>
               </div>
               <div className="invite-card-button-container column-container">

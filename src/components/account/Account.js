@@ -394,6 +394,8 @@ function Account(props) {
                   <div>
                     <MobileWelcome />
                     <InviteCard
+                      firstName={userData["firstName"]}
+                      lastName={userData["lastName"]}
                       username={userData["firstName"]}
                       referToId={userData["referToId"]}
                     />
