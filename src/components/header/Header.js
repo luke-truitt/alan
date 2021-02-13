@@ -32,6 +32,8 @@ function Header(props) {
     console.log("No dice"); 
     setLoading(true);
     auth.signOut().then(() => {
+        setUserData({});
+        displayName='';
         history.push({ pathname: "/join" });
         setLoading(false);
       }).catch((error) => {
