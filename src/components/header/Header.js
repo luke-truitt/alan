@@ -63,7 +63,6 @@ function Header(props) {
   let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>
 
   useEffect(() => {
-    console.log(userData);
     setTimeout(() => {
       if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
         setTimeout(() => {

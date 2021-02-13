@@ -115,7 +115,7 @@ export function InviteCard(props) {
     let i;
     for (i = 0; i < emails.length; i++) {
       const email_to = emails[i];
-
+      console.log(props.referToId);
       const templateParams = {
         from_name: props.username,
         send_to: email_to,

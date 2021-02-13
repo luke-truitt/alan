@@ -386,7 +386,7 @@ function AccountPage(props) {
                 <Fade in {...shortFade}>
                   <div>
                     <MobileWelcome />
-                    <InviteCard />
+                    <InviteCard username={userData['firstName']} referToId={userData['referToId']}/>
                     <ReviewCard
                       userData={userData}
                       onCalculator={() => onCalculator()}

@@ -110,6 +110,7 @@ function JoinForm(props) {
         props.setReferTo(uuidv4());
         setTimeout(() => {}, 200);
       }
+      console.log(props);
       const referToId = props.referToId;
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
