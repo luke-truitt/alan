@@ -21,10 +21,10 @@ import {
   fadeDefault,
   shortFade,
 } from "./../../utils/constants";
+
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useEffect, useState, Fragment } from "react";
 import ChipInput from "material-ui-chip-input";
-
 import { auth, getUserDoc } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { isIOS, isAndroid, isSafari } from "react-device-detect";
@@ -194,7 +194,7 @@ function ReviewCard(props) {
           {". "}
           {props.userData.refundBreakdown.netRefund && (
             <span>
-              "Your initial estimate was $"
+              Your initial estimate was $
               <a
                 style={{ textDecoration: "underline", cursor: "pointer" }}
                 onClick={() => history.push({ pathname: "/refund" })}

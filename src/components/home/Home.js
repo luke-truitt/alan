@@ -17,12 +17,13 @@ import {
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme, fadeDefault } from "../../utils/constants.js";
-
+import { Mixpanel } from "./../../mixpanel.js";
 import { findUserByEmail } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
+
 import ben from "./../../images/home/ben.png";
 const trackingId = "UA-189058741-1";
 const {
@@ -162,6 +163,9 @@ function Home(props) {
         .then(function (response) {
           const referToId = response.data.referId;
           props.setReferTo(referToId);
+          Mixpanel.identify(referToId);
+          Mixpanel.track("waitlist_joined");
+          Mixpanel.people.set_once({ sign_up_date: new Date() });
           console.log(response);
           setLoading(false);
         })
@@ -169,6 +173,8 @@ function Home(props) {
           console.log(error);
         });
     } else {
+      Mixpanel.identify(old_user.referToId);
+      Mixpanel.track("waitlist_rejoined", { time: new Date() });
       handleClickOpen(old_user);
     }
   };

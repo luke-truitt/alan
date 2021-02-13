@@ -14,6 +14,7 @@ import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import { useState } from "react";
 import "./account-cards.css";
 import * as emailjs from "emailjs-com";
+import { EmailChipInput } from "./../inputs/Inputs";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -86,7 +87,7 @@ function EmailChip(props) {
       label="Enter Emails"
       alwaysShowPlaceholder="true"
       value={props.emails}
-      style={{ overflowX: "auto" }}
+      style={{ overflow: "hidden" }}
       onAdd={(chip) => handleAdd(chip)}
       onDelete={(chip) => handleDelete(chip)}
       variant="outlined"
@@ -174,18 +175,7 @@ export function InviteCard(props) {
             </Typography>
             <div className="invite-card-input-container column-container">
               <div className="invite-card-email-container column-container">
-                <EmailChip
-                  onAdd={(email) => handleAdd(email)}
-                  onDelete={(email) => handleDelete(email)}
-                  emails={emails}
-                />
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={sendInvites}
-                >
-                  Send invites
-                </Button>
+                <EmailChipInput />
               </div>
               <div className="invite-card-button-container column-container">
                 <Button
