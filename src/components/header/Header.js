@@ -32,9 +32,8 @@ function Header(props) {
     console.log("No dice"); 
     setLoading(true);
     auth.signOut().then(() => {
-        setUserData({});
-        displayName='';
         history.push({ pathname: "/join" });
+        setUserData({});
         setLoading(false);
       }).catch((error) => {
         console.log(error);
@@ -60,6 +59,7 @@ function Header(props) {
   let displayName = (userData['firstName']==undefined ) ? "" : `Hi ${userData['firstName']}!`;
   let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>
   useEffect(() => {
+    console.log(userData);
     setTimeout(() => {
       if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
         setTimeout(() => {
@@ -73,7 +73,7 @@ function Header(props) {
             .catch(() => console.log("ERROR GETTING USER"));
           setLoadAttempts(loadAttempts + 1);
         }, 1000);
-      }
+      } 
     });
   });
   return (
