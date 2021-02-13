@@ -526,15 +526,6 @@ function Refund(props) {
           >
             {user.user ? "Save This Refund Data" : "Get Started with Standard"}
           </Button>
-          <Typography
-            variant="h6"
-            color="secondary"
-            className="onboard-complete-apply-text"
-          >
-            So far, we've helped 13,000 students access $41,000,000. Free to
-            sign up and we charge a flat $25 filing fee only if we find you a
-            refund.
-          </Typography>
         </div>
       </div>
     </ThemeProvider>
