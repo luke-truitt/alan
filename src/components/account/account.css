@@ -26,10 +26,15 @@
 .button-icon {
   padding-left: 5px;
 }
-h5.welcome-text {
-  font-weight: 600;
+h3.welcome-text {
+  font-weight: 400;
   vertical-align: center;
 }
+
+h3.welcome-text > span > span {
+  padding-bottom: 0.3rem;
+}
+
 .mobile-welcome-card-content {
   background-image: linear-gradient(to right, #5f5fc4, 50%, #001064);
   height: 100%;

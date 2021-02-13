@@ -206,16 +206,16 @@ export function InviteCard(props) {
             <div className="invite-card-input-container column-container">
               <div className="invite-card-email-container column-container">
                 <TextField
+                  variant="outlined"
                   setValid={(val) => {}}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                   stateName="email"
-                  helperText="Enter a friends email."
                   value={email}
                   invalid={false}
                   onKeyPress={(e, val) => keyDown(e, val)}
-                  placeholder="Email"
+                  placeholder="Friend's email"
                   type="email"
                 />
                 <Button
