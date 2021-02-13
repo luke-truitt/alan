@@ -26,10 +26,14 @@ import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
 import Header from "../header/Header";
 import { Mixpanel } from "../../mixpanel.js";
+const {
+  REACT_APP_EMAILJS_USER_ID,
+  REACT_APP_EMAILJS_SERVICE_ID,
+} = process.env;
 
-const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
+const USER_ID = REACT_APP_EMAILJS_USER_ID;
 const TEMPLATE_ID = "template_b3u2bhe";
-const SERVICE_ID = "service_ah750kn";
+const SERVICE_ID = REACT_APP_EMAILJS_SERVICE_ID;
 
 function JoinForm(props) {
   const user = useContext(AuthContext);
@@ -125,7 +129,7 @@ function JoinForm(props) {
           $last_name: lastName,
           $phone: phone,
         });
-        sendWelcomeEmail();
+        // sendWelcomeEmail();
         setTimeout(() => {
           history.push({
             pathname: "/account",

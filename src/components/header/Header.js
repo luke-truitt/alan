@@ -80,13 +80,14 @@ function Header(props) {
   let isResetPassword = page == "ResetPassword";
   let isOnboard = page == "Onboard";
   let isRefund = page == "Refund";
+  let isContact = page =="Contact";
 
-  let displayAccount = isLoggedIn;
+  let displayAccount = isLoggedIn && !(isMobile && isAccount);
   let displaySignOut = isLoggedIn && (isJoin || isHome || isAccount);
   let displaySignUp =
-    !isLoggedIn && ((isHome && !isMobile) || (isRefund && !isMobile));
-  let displaySignIn = !isLoggedIn && (isHome || (isRefund && !isMobile));
-  let displayContact = !(isMobile && isOnboard) && !(isMobile && isRefund);
+    !isLoggedIn && ((isHome && !isMobile) || (isRefund && !isMobile) || isContact);
+  let displaySignIn = !isLoggedIn && (isHome || isContact || (isRefund && !isMobile));
+  let displayContact = !(isMobile && isOnboard) && !(isMobile && isRefund) && !isContact;
   let displayName =
     userData["firstName"] == undefined ? "" : `Hi ${userData["firstName"]}!`;
   let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>;
@@ -117,7 +118,7 @@ function Header(props) {
           style={{ cursor: "pointer" }}
           onClick={() => onLogo()}
         >
-          <img src={logo} className="header-logo" />
+          <img src={logo} className="header-logo" />{}
         </Typography>
         <div className="header-button-container">
           {displayAccount && (

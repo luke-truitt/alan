@@ -83,19 +83,19 @@ function ContactInfo(props) {
   return (
     <div className="contact-form row-container">
         <Typography variant="body1" className="contact-or">
-          Email Us: <a href="mailto:hello@fromstandard.com">hello@fromstandard.com</a>
+          <strong>Email</strong> <a href="mailto:hello@fromstandard.com">team@fromstandard.com</a>
         </Typography>
         <Typography variant="body1" className="contact-or">
-          Call or Text Us: <a href="tel:+17208072551">+1 (720) 807 - 2551</a>
+        <strong>Call or Text</strong> <a href="tel:+17208072551">+1 (720) 807 - 2551</a>
         </Typography>
         <Typography variant="body1" className="contact-or">
-          Our Address: 1801 California Street Floor 24, Denver, CO 80202
+        <strong>Address</strong> 1801 California Street Floor 24, Denver, CO 80202
         </Typography>
       <div className="contact-or-horizontal-line" style={{marginTop: "5vh", marginBottom: "5vh"}} />
       <Button
         className="contact-sign-button"
-        variant="outlined"
-        color="primary"
+        variant="contained"
+        color="secondary"
         onClick={() => history.push({ pathname: "/" })}
       >
         Go Home
@@ -103,15 +103,15 @@ function ContactInfo(props) {
       <Button
         className="contact-sign-button"
         variant="contained"
-        color="primary"
+        color="secondary"
         onClick={() => history.push({ pathname: "/" })}
       >
         Estimate your Refund
       </Button>
       <Button
         className="contact-sign-button"
-        variant="outlined"
-        color="primary"
+        variant="contained"
+        color="secondary"
         onClick={() => history.push({ pathname: "/signin" })}
       >
         Sign In
@@ -119,7 +119,7 @@ function ContactInfo(props) {
       <Button
         className="contact-sign-button"
         variant="contained"
-        color="primary"
+        color="secondary"
         onClick={() => history.push({ pathname: "/join" })}
       >
         Set Up Account
