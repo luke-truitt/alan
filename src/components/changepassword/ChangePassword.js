@@ -12,10 +12,10 @@ import {
   DialogActions
 } from "@material-ui/core";
 import { primaryTheme, timelineData } from "../../utils/constants.js";
-import "./resetpassword.css";
+import "./changepassword.css";
 import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
@@ -36,15 +36,15 @@ const timelineNumbers = {
 function JoinTimelineStep(props) {
   const isLast = props.number === 5;
   return (
-    <div className="column-container reset-timeline-step">
+    <div className="column-container change-timeline-step">
       <img
         src={timelineNumbers[props.number]}
-        className="reset-timeline-step-number"
+        className="change-timeline-step-number"
       />
       <Typography
         variant="body2"
         color="primary"
-        className="reset-timeline-step-text"
+        className="change-timeline-step-text"
       >
         {props.text}
       </Typography>
@@ -57,8 +57,8 @@ function JoinTimeline() {
     <JoinTimelineStep number={data.number} text={data.text} />
   ));
   return (
-    <div className="row-container reset-timeline">
-      <Typography variant="h5" color="primary" className="reset-timeline-title">
+    <div className="row-container change-timeline">
+      <Typography variant="h5" color="primary" className="change-timeline-title">
         How does it work?
       </Typography>
       {timelineSteps}
@@ -66,12 +66,32 @@ function JoinTimeline() {
   );
 }
 
-function ResetForm(props) {
+function ChangeForm(props) {
   const history = useHistory();
   let location = useLocation();
+
+  const getCode = () => {
+    const params =
+    location.search.split("?").length == 1
+      ? [] : location.search.split("?")[1].split("&");
+    console.log(location.search);
+    console.log(params);
+    let i;
+    for (i = 0; i < params.length; i++) {
+      const paramName = params[i].split("=")[0];
+      if (paramName == "oobCode") {
+        console.log('heeee')
+        return params[i].split("=")[1];
+      }
+    }
+    console.log('here')
+    return '';
+  }
+  const [code, setCode] = useState(getCode());
+  const [codeValid, setCodeValid] = useState(false);
   const [valid, setValid] = useState(true);
   const [invalid, setInvalid] = useState(false);
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [open, setOpen] = useState(false);
@@ -79,27 +99,48 @@ function ResetForm(props) {
     history.push({ pathname: "/" });
   };
   const keyDown = (e, val) => {
-    var code = e.keyCode || e.which;
+    var keyCode = e.keyCode || e.which;
 
-    if (code === 13) {
+    if (keyCode === 13) {
       //13 is the enter keycode
-      sendResetEmail();
+      onChangePassword();
     }
   };
-
-  const sendResetEmail = () => {
-    setSending(true);
-    auth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        setOpen(true);
-        setSending(false);
+  
+  
+  if(!codeValid) {
+    console.log(code);
+    auth.verifyPasswordResetCode(code)
+      .then(function(email) {
+        setCodeValid(true);
       })
-      .catch(() => {
-        setError("Error resetting password");
+      .catch(function(error) {
+        alert("This code has expired, sending you to the Forgot Password Screen");
+        history.push({pathname: 'resetpassword'})
+      })
+  }
+    
+  const onChangePassword = () => {
+    console.log(code);
+    auth.confirmPasswordReset(code, password)
+    .then(function() {
+      // Success message
+      setOpen(true);
+    })
+    .catch(function(e) {
+      // Invalid code message
+      // if code invalid, send to forgot password screen
+      if(e.t && e.t.code=="auth/invalid-action-code") {
+        alert("This code has expired, sending you to the Forgot Password Screen");
+        history.push({pathname: 'resetpassword'})
+      } else {
+        // else if the input password was bad prompt to reenter it
+        setError("Incorrect Email or Password!");
+        console.error("Error signing in with password and email", e);
         setInvalid(true);
         setSending(false);
-      });
+      }
+    })
   };
 
   const navTo = () => {
@@ -113,8 +154,8 @@ function ResetForm(props) {
   };
 
   const onChange = (e, val) => {
-    if (val.stateName == "email") {
-      setEmail(e);
+    if (val.stateName == "password") {
+      setPassword(e);
     }
   };
   const handleClickOpen = () => {
@@ -155,7 +196,7 @@ function ResetForm(props) {
     );
   }
   return (
-    <div className="reset-form row-container">
+    <div className="change-form row-container">
       <TextInput
         setValid={(val) => {
           setValid(val);
@@ -163,29 +204,29 @@ function ResetForm(props) {
         validData={(d) => checkValid(d)}
         onChange={(e, val) => onChange(e, val)}
         onKeyPress={(e, val) => keyDown(e, val)}
-        stateName="email"
-        helperText="Doesn't look like you have an account with us... Double check the email address or sign Up Below"
-        value={email}
+        stateName="password"
+        helperText="Make your password a bit stronger and don't reuse old ones"
+        value={password}
         invalid={invalid}
-        placeholder="Enter Email"
-        type="email"
+        placeholder="Enter New Password"
+        type="password"
       />
       <Button
-        className="reset-button"
+        className="change-button"
         variant="contained"
         color="secondary"
         style={{ marginTop: invalid ? "30px" : "" }}
-        onClick={() => sendResetEmail()}
+        onClick={() => onChangePassword()}
       >
-        {sending ? <CircularProgress /> : "Reset Password"}
+        {sending ? <CircularProgress /> : "Change Password"}
       </Button>
-      <div className="reset-or-container column-container">
-        <div className="reset-or-horizontal-line" />
-        <Typography variant="caption" className="reset-or">
+      <div className="change-or-container column-container">
+        <div className="change-or-horizontal-line" />
+        <Typography variant="caption" className="change-or">
           OR
         </Typography>
 
-        <div className="reset-or-horizontal-line" />
+        <div className="change-or-horizontal-line" />
       </div>
       <Button
         className="apple-sign-button"
@@ -208,32 +249,21 @@ function ResetForm(props) {
   );
 }
 
-function ResetPassword() {
+function ChangePassword() {
   return (
     <ThemeProvider theme={primaryTheme}>
-      <Header page={"ResetPassword"} />
-      <div className="reset-page-c0 column-container">
-        <div className="reset-page-c1-left-shadow" />
-        <div className="reset-page-c1-left row-container">
-          <JoinTimeline></JoinTimeline>
-          <Typography
-            variant="caption"
-            color="primary"
-            className="reset-disclaimer-text"
-          >
-            *Review process takes about 2-4 business days
-          </Typography>
-        </div>
-        <div className="reset-page-c1-right row-container">
-          <div className="reset-page-c1-right-content row-container">
+      <Header page={"ChangePassword"} />
+      <div className="change-page-c0 column-container">
+        <div className="change-page-c1-right row-container">
+          <div className="change-page-c1-right-content row-container">
             <Typography
               color="textPrimary"
               variant="h2"
               className="form-title pass-form-title"
             >
-              <span className="teal-highlight">Reset Password</span>
+              <span className="teal-highlight">Change Password</span>
             </Typography>
-            <ResetForm />
+            <ChangeForm />
           </div>
         </div>
       </div>
@@ -241,4 +271,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default ChangePassword;

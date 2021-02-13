@@ -12,6 +12,7 @@ import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignIn from "./components/signin/SignIn";
 import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
+import ChangePassword from "./components/changepassword/ChangePassword";
 import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
@@ -72,7 +73,12 @@ function App() {
                 setReferTo={(rid) => setReferToId(rid)}
               />
             </Route>
-
+            <Route path="/changepassword">
+              <ChangePassword
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
+            </Route>
             <Route>
               <ErrorPage />
             </Route>
