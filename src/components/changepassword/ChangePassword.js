@@ -195,6 +195,7 @@ function ChangeForm(props) {
       </div>
     );
   }
+  
   return (
     <div className="change-form row-container">
       <TextInput

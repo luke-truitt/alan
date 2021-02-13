@@ -13,6 +13,7 @@ import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignIn from "./components/signin/SignIn";
 import ResetPassword from "./components/resetpassword/ResetPassword";
 import ChangePassword from "./components/changepassword/ChangePassword";
+import Contact from "./components/changepassword copy/Contact";
 import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";
@@ -77,6 +78,12 @@ function App() {
             </Route>
             <Route path="/changepassword">
               <ChangePassword
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
+            </Route>
+            <Route path="/contact">
+              <Contact
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />
