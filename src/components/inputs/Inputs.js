@@ -152,7 +152,11 @@ export function SchoolInput(props) {
           <TextField
             className="form-item-text-field"
             label="Graduation Year"
-            value={props.fields["classYear"]}
+            value={
+              isNaN(props.fields['classYear'])
+                ? ""
+                : props.fields['classYear']
+            }
             inputProps={{ inputMode: "numeric" }}
             variant="outlined"
             onKeyPress={(e, val) => props.onKeyPress(e, val)}
@@ -450,12 +454,10 @@ export function Form(props) {
 export function TextInput(props) {
   const checkValid = (val) => {
     if (val.length > 6) {
-      console.log("Good");
       try {
         props.setValid(true);
       } catch {}
     } else {
-      console.log("Bad");
       try {
         props.setValid(false);
       } catch {}
@@ -575,10 +577,8 @@ export function EmbeddedEmailInput(props) {
         mail
       )
     ) {
-      console.log("Good");
       setValid(true);
     } else {
-      console.log("Bad");
       setValid(false);
     }
   };

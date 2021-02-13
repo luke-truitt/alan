@@ -286,7 +286,6 @@ function Account(props) {
   useEffect(() => {
     setTimeout(() => {
       if (!user.user && loadAttempts > 2) {
-        console.log(user);
         history.push("/signin");
       } else {
         setLoadAttempts(loadAttempts + 1);
@@ -303,7 +302,7 @@ function Account(props) {
             setUserData(result);
             setDataLoaded(true);
           })
-          .catch(() => console.log("ERROR GETTING USER"));
+          .catch(() => {});
       }, 500);
     }
   });
@@ -371,7 +370,6 @@ function Account(props) {
               className="sign-out-button"
               color="primary"
               onClick={() => {
-                console.log("No dice");
                 setLoading(true);
                 auth
                   .signOut()
@@ -381,7 +379,6 @@ function Account(props) {
                     setLoading(false);
                   })
                   .catch((error) => {
-                    console.log(error);
                   });
               }}
             >

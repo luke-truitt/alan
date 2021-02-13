@@ -6,7 +6,7 @@ import { Mixpanel } from "./mixpanel";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-Ka1sSqIt_mhlKHE2hiIBLdXuixB2Uek",
-  authDomain: "auth.fromstandard.com",
+  authDomain: "alan-taxes.firebaseapp.com",
   projectId: "alan-taxes",
   storageBucket: "alan-taxes.appspot.com",
   messagingSenderId: "31692548469",
@@ -20,14 +20,12 @@ export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
-  console.log("signing in with google");
   return auth
     .signInWithPopup(provider)
     .then((result) => {
       if (referToId == "") {
         referToId = uuidv4();
       }
-      console.log(referToId);
       // The signed-in user info.
       var user = result.user;
       const firstName = user.displayName.split(" ")[0];
@@ -58,7 +56,6 @@ export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
       // ...
-      console.log(error);
     });
 };
 
@@ -68,10 +65,8 @@ export const getUserDoc = async (user) => {
   const userRef = firestore.collection("users").doc(user.user.uid);
   const doc = await userRef.get();
   if (!doc.exists) {
-    console.log("No such document!");
     return null;
   } else {
-    console.log("Document data:", doc.data());
     return doc.data();
   }
 };
@@ -82,7 +77,6 @@ export const updateUser = async (uid, fields) => {
     const res = await userRef.update(fields);
     return res;
   } catch (error) {
-    console.log("error updating record", error);
     return null;
   }
 };
@@ -116,14 +110,12 @@ export const getUserDocument = async (uid) => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();
-    console.log(userDocument.data());
+
     return {
       uid,
       ...userDocument.data(),
     };
-  } catch (error) {
-    console.error("Error fetching user", error);
-  }
+  } catch (error) {}
 };
 
 export const findUserByEmail = async (email) => {
@@ -134,7 +126,6 @@ export const findUserByEmail = async (email) => {
       .where("email", "==", email)
       .get();
     if (snapshot.empty) {
-      console.log("No matching documents.");
       return;
     }
     let user = {};
@@ -144,7 +135,5 @@ export const findUserByEmail = async (email) => {
     });
 
     return user;
-  } catch (error) {
-    console.error("Error fetching user", error);
-  }
+  } catch (error) {}
 };

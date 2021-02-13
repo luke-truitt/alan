@@ -21,10 +21,10 @@ function Calculator(props) {
     function sendData() {
         axios.post(base_url + '/calculated', data)
         .then(function (response) {
-          console.log(response);
+          
         })
         .catch(function (error) {
-          console.log(error);
+          
         });
     };
     const updateDict = (d) => {

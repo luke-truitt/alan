@@ -56,7 +56,6 @@ function SignInForm(props) {
         setInvalid(true);
         setLoading(false);
       });
-    console.log(auth);
   };
   const navTo = () => {
     history.push({

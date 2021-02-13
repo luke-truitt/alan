@@ -44,7 +44,7 @@ function JoinForm(props) {
   let i;
   for (i = 0; i < searchParams.length; i++) {
     const paramName = searchParams[i].split("=")[0];
-    console.log(paramName);
+
     if (paramName == "referId") {
       referByIdDirect = searchParams[i].split("=")[1];
     }
@@ -82,12 +82,8 @@ function JoinForm(props) {
       to_email: email,
     };
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
-      function (response) {
-        console.log(email, "SUCCESS!", response.status, response.text);
-      },
-      function (error) {
-        console.log("FAILED...", error);
-      }
+      function (response) {},
+      function (error) {}
     );
   };
 
@@ -102,16 +98,13 @@ function JoinForm(props) {
     // TODO
   };
   const createUserWithEmailAndPasswordHandler = async (event) => {
-    console.log("loading");
     setLoading(true);
 
     try {
       if (props.referToId == null || props.referToId == "") {
-        console.log("IDK");
         props.setReferTo(uuidv4());
         setTimeout(() => {}, 200);
       }
-      console.log(props);
       const referToId = props.referToId;
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
@@ -282,7 +275,6 @@ function JoinForm(props) {
             />
             <TextInput
               setValid={(val) => {
-                console.log(val);
                 updateValid({ password: val });
               }}
               onChange={(e, val) => onChange(e, val)}
@@ -332,7 +324,6 @@ function JoinForm(props) {
                 } catch (error) {
                   setError(error.message);
                   Mixpanel.track("error_on_join", { type: "google" });
-                  console.error("Error signing up with Google", error);
                 }
               }}
             >

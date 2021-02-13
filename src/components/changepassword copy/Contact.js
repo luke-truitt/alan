@@ -94,7 +94,7 @@ function ContactInfo(props) {
       <div className="contact-or-horizontal-line" style={{marginTop: "5vh", marginBottom: "5vh"}} />
       <Button
         className="contact-sign-button"
-        variant="contained"
+        variant="outlined"
         color="primary"
         onClick={() => history.push({ pathname: "/" })}
       >
@@ -110,7 +110,7 @@ function ContactInfo(props) {
       </Button>
       <Button
         className="contact-sign-button"
-        variant="contained"
+        variant="outlined"
         color="primary"
         onClick={() => history.push({ pathname: "/signin" })}
       >

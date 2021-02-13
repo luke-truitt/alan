@@ -25,9 +25,11 @@ function Header(props) {
   const [page, setPage] = useState(props.page);
 
   const user = useContext(AuthContext);
+
   if (user.user) {
     Mixpanel.identify(user.user.referToId);
   }
+
   const onSignIn = () => {
     if (user.user) {
       history.push({ pathname: "/account" });
@@ -46,7 +48,6 @@ function Header(props) {
     }
   };
   const onSignOut = () => {
-    console.log("No dice");
     setLoading(true);
     auth
       .signOut()
@@ -57,7 +58,7 @@ function Header(props) {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        Mixpanel.track("error_sign_out");
       });
   };
   const onContact = () => {
@@ -101,7 +102,7 @@ function Header(props) {
               }
               setUserData(result);
             })
-            .catch(() => console.log("ERROR GETTING USER"));
+            .catch(() => {});
           setLoadAttempts(loadAttempts + 1);
         }, 1000);
       }

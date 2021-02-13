@@ -126,7 +126,6 @@ export function InviteCard(props) {
   const sendInvite = () => {
     Mixpanel.track("referral", { type: "send" });
     const email_to = email;
-
     const templateParams = {
       from_name: props.username,
       send_to: email_to,
@@ -135,20 +134,18 @@ export function InviteCard(props) {
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
       function (response) {
         alert("Invites sent successfully!");
-        console.log(email_to, "SUCCESS!", response.status, response.text);
+        setEmail("");
       },
       function (error) {
-        console.log("FAILED...", error);
+        Mixpanel.track("error_referral_send");
+        setEmail("");
       }
     );
-
-    setEmail("");
   };
   // const sendInvites = () => {
   //   let i;
   //   for (i = 0; i < emails.length; i++) {
   //     const email_to = emails[i];
-  //     console.log(props.referToId);
   //     const templateParams = {
   //       from_name: props.username,
   //       send_to: email_to,
@@ -177,7 +174,6 @@ export function InviteCard(props) {
         })
         .then(() => {
           Mixpanel.track("referral", { type: "share" });
-          console.log("Successfully shared");
           alert("Successfully shared!");
         })
         .catch((error) => {
@@ -211,13 +207,15 @@ export function InviteCard(props) {
               <div className="invite-card-email-container column-container">
                 <TextField
                   setValid={(val) => {}}
-                  onChange={(e, val) => setEmail(val)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   stateName="email"
-                  helperText="Please enter a valid email."
+                  helperText="Enter a friends email."
                   value={email}
                   invalid={false}
                   onKeyPress={(e, val) => keyDown(e, val)}
-                  placeholder="Enter Friends Email"
+                  placeholder="Email"
                   type="email"
                 />
                 <Button

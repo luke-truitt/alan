@@ -74,17 +74,13 @@ function ChangeForm(props) {
     const params =
     location.search.split("?").length == 1
       ? [] : location.search.split("?")[1].split("&");
-    console.log(location.search);
-    console.log(params);
     let i;
     for (i = 0; i < params.length; i++) {
       const paramName = params[i].split("=")[0];
       if (paramName == "oobCode") {
-        console.log('heeee')
         return params[i].split("=")[1];
       }
     }
-    console.log('here')
     return '';
   }
   const [code, setCode] = useState(getCode());
@@ -109,7 +105,6 @@ function ChangeForm(props) {
   
   
   if(!codeValid) {
-    console.log(code);
     auth.verifyPasswordResetCode(code)
       .then(function(email) {
         setCodeValid(true);
@@ -121,7 +116,6 @@ function ChangeForm(props) {
   }
     
   const onChangePassword = () => {
-    console.log(code);
     auth.confirmPasswordReset(code, password)
     .then(function() {
       // Success message
@@ -195,7 +189,7 @@ function ChangeForm(props) {
       </div>
     );
   }
-  
+
   return (
     <div className="change-form row-container">
       <TextInput
