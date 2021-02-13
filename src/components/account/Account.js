@@ -247,7 +247,7 @@ function ReviewCard(props) {
 function Account(props) {
   const user = useContext(AuthContext);
   Mixpanel.identify(user.user.referToId);
-  Mixpanel.track("visit_join");
+  Mixpanel.track("visit_account");
   const location = useLocation();
   const [openToast, setOpenToast] = useState(
     location.state ? location.state["accountNew"] : false
@@ -378,8 +378,7 @@ function Account(props) {
                     history.push({ pathname: "/join" });
                     setLoading(false);
                   })
-                  .catch((error) => {
-                  });
+                  .catch((error) => {});
               }}
             >
               Sign Out
