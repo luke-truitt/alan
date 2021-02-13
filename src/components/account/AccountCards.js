@@ -95,9 +95,9 @@ function EmailChip(props) {
 }
 export function InviteCard(props) {
   const inviteCardTitle =
-    "Invite a friend to Standard and we'll file both of your taxes for free.";
+    "Invite friends to Standard and we'll file your taxes for free.";
   const inviteCardSubtitle =
-    "Know someone who is missing out on free money? We'll waive the $25 fee for both of you when she files with Standard.";
+    "Know someone who is missing out on free money? We'll waive the $25 fee for you when two friends file with Standard.";
   const [emails, setEmails] = useState([]);
 
   const handleAdd = (chip) => {
@@ -119,19 +119,17 @@ export function InviteCard(props) {
       const templateParams = {
         from_name: props.username,
         send_to: email_to,
-        refer_link: BASE_URL + "/?referId=" + props.referToId
+        refer_link: BASE_URL + "/?referId=" + props.referToId,
       };
-          emailjs.send(
-            SERVICE_ID,
-            TEMPLATE_ID,
-            templateParams,
-            USER_ID
-       ).then(function(response) {
-        alert("Invites sent successfully!");
-        console.log(email_to, 'SUCCESS!', response.status, response.text);
-      }, function(error) {
-        console.log('FAILED...', error);
-      });
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+        function (response) {
+          alert("Invites sent successfully!");
+          console.log(email_to, "SUCCESS!", response.status, response.text);
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
     }
     setEmails([]);
   };

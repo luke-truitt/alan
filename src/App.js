@@ -33,9 +33,11 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
-            <Route exact path="/" >
-              <Home referToId={referToId}
-                setReferTo={(rid) => setReferToId(rid)}/>
+            <Route exact path="/">
+              <Home
+                referToId={referToId}
+                setReferTo={(rid) => setReferToId(rid)}
+              />
             </Route>
             <Route path="/join">
               <Join
@@ -68,7 +70,7 @@ function App() {
               />
             </Route>
             <Route path="/resetpassword">
-              <ResetPassowrd
+              <ResetPassword
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
               />

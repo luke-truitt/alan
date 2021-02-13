@@ -36,35 +36,10 @@ div.join-form > div.form-item-container > div.form-item-text-field {
   left: 0;
   box-shadow: inset -2px 2px 4px black;
 }
-.join-timeline {
-  max-width: 70%;
-  margin: auto;
-}
-h5.join-timeline-title {
-  padding-bottom: 2rem;
-  font-size: 1.9rem;
-}
-.join-timeline-step {
-  margin-bottom: 0.25rem;
-  vertical-align: middle;
-  align-content: center;
-  display: flex;
-}
 span.join-disclaimer-text {
   float: bottom left;
   margin-bottom: 2rem;
   margin-left: 2rem;
-}
-p.join-timeline-step-text {
-  font-size: 1.2rem;
-  margin-top: 5px;
-}
-.join-timeline > .join-timeline-step:first-of-type > .join-timeline-step-text {
-  margin-top: 20px;
-}
-.join-timeline-step-number {
-  width: 4rem;
-  margin-right: 2rem;
 }
 .join-loading-subtitle > span {
   font-size: 1.5rem;
@@ -117,7 +92,7 @@ button.apple-sign-button {
 
 span.join-phone-explainer {
   position: relative;
-  top: -1rem;
+  top: -2rem;
   font-weight: 500;
   color: #6d6d6d;
   font-size: 0.75rem;
@@ -141,12 +116,6 @@ span.join-phone-explainer {
   }
   h2.teal-highlight {
     margin-left: 20px;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  p.join-timeline-step-text {
-    font-size: 1rem;
   }
 }
 

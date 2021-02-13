@@ -21,11 +21,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import loadingAnimation from "../../lotties/coin-loading.json";
-import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
-import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
-import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
-import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
-import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import JoinTimeline from "./JoinTimeline";
 import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
 import Header from "../header/Header";
@@ -33,46 +29,6 @@ import Header from "../header/Header";
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_b3u2bhe";
 const SERVICE_ID = "service_ah750kn";
-const timelineNumbers = {
-  1: joinTimeline1,
-  2: joinTimeline2,
-  3: joinTimeline3,
-  4: joinTimeline4,
-  5: joinTimeline5,
-};
-
-function JoinTimelineStep(props) {
-  const isLast = props.number === 5;
-  return (
-    <div className="column-container join-timeline-step">
-      <img
-        src={timelineNumbers[props.number]}
-        className="join-timeline-step-number"
-      />
-      <Typography
-        variant="body2"
-        color="primary"
-        className="join-timeline-step-text"
-      >
-        {props.text}
-      </Typography>
-    </div>
-  );
-}
-
-function JoinTimeline() {
-  const timelineSteps = timelineData.map((data) => (
-    <JoinTimelineStep number={data.number} text={data.text} />
-  ));
-  return (
-    <div className="row-container join-timeline">
-      <Typography variant="h5" color="primary" className="join-timeline-title">
-        How does it work?
-      </Typography>
-      {timelineSteps}
-    </div>
-  );
-}
 
 function JoinForm(props) {
   const user = useContext(AuthContext);

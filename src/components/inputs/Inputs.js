@@ -521,8 +521,8 @@ export function EmbeddedEmailInput(props) {
   const ButtonText = (
     <span className="home-button-text">
       {" "}
-      <span className="home-mobile-button-text"> Calculate </span>
-      <span className="home-web-button-text"> Calculate my refund</span>
+      <span className="home-mobile-button-text"> Estimate </span>
+      <span className="home-web-button-text"> Estimate my refund</span>
     </span>
   );
 

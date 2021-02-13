@@ -45,7 +45,7 @@ function Home(props) {
     setUser(old_user);
     setOpen(true);
   };
-  console.log(props)
+  console.log(props);
   const handleClose = (choice) => {
     if (choice == "no") {
       history.push({
@@ -129,8 +129,8 @@ function Home(props) {
           <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              That email is already ssociated with an account, would you like to
-              sign in?
+              That email is already associated with an account, would you like
+              to sign in?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -176,17 +176,24 @@ function Home(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
-        <Header signUp={signUp} page={"Home"}/>
+        <Header signUp={signUp} page={"Home"} />
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
-              <Typography
-                variant="h2"
-                color="textPrimary"
-                className="home-title"
-              >
+              <Typography variant="h2" color="secondary" className="home-title">
                 Get up to a <span className="teal-highlight">$5,000</span> tax
                 refund in <span className="teal-highlight">10 minutes</span>.
+              </Typography>
+              <Typography
+                variant="body1"
+                color="secondary"
+                className="home-subtitle-lower"
+              >
+                Standard qualifies students for unclaimed tax credits.
+                <br />
+                <br />
+                We do the paper work, you get cash, and we'll explain why. If we
+                can't get you a bigger refund, you pay $0.
               </Typography>
               <EmbeddedEmailInput
                 className="home-input"
@@ -199,13 +206,14 @@ function Home(props) {
                 loading={loading}
               />
               <Typography
-                variant="body2"
-                color="textPrimary"
-                className="home-subtitle"
+                variant="caption"
+                color="secondary"
+                className="home-caption"
               >
-                The government owes students money. Standard will find you the
-                credits you qualify for, maximize your refund, explain why. All
-                in under 10 minutes.
+                <strong>
+                  We have a team of tax experts to make sure nothing is left on
+                  the table.{" "}
+                </strong>
               </Typography>
             </div>
             <img src={ben} className="home-ben"></img>

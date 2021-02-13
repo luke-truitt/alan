@@ -17,58 +17,9 @@ import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
-import joinTimeline1 from "./../../images/timeline/timeline-1.svg";
-import joinTimeline2 from "./../../images/timeline/timeline-2.svg";
-import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
-import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
-import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
+import JoinTimeline from "./../join/JoinTimeline";
 import "./../inputs/inputs.css";
 import Header from "../header/Header";
-
-const timelineNumbers = {
-  1: joinTimeline1,
-  2: joinTimeline2,
-  3: joinTimeline3,
-  4: joinTimeline4,
-  5: joinTimeline5,
-};
-
-function JoinTimelineStep(props) {
-  const isLast = props.number === 5;
-  return (
-    <div className="column-container signin-timeline-step">
-      <img
-        src={timelineNumbers[props.number]}
-        className="signin-timeline-step-number"
-      />
-      <Typography
-        variant="body2"
-        color="primary"
-        className="signin-timeline-step-text"
-      >
-        {props.text}
-      </Typography>
-    </div>
-  );
-}
-
-function JoinTimeline() {
-  const timelineSteps = timelineData.map((data) => (
-    <JoinTimelineStep number={data.number} text={data.text} />
-  ));
-  return (
-    <div className="row-container signin-timeline">
-      <Typography
-        variant="h5"
-        color="primary"
-        className="signin-timeline-title"
-      >
-        How does it work?
-      </Typography>
-      {timelineSteps}
-    </div>
-  );
-}
 
 function SignInForm(props) {
   const history = useHistory();
