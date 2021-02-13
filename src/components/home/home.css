@@ -52,6 +52,7 @@ img.home-ben {
   max-width: 50%;
   align-self: flex-end;
   z-index: -5;
+  bottom: 0;
 }
 span.teal-highlight {
   padding-bottom: -1rem;
@@ -67,18 +68,23 @@ div.home-c1.row-container > div > div > div > fieldset > legend > span {
 @media only screen and (max-width: 800px) {
   div.home-c1 {
     margin: auto;
+    width: 90%;
   }
   div.home-c0 {
     padding-top: 7rem;
     flex-direction: column;
+    height: auto;
+    overflow-y: scroll;
   }
 
   h2.home-title {
     text-align: center;
-    font-size: 2.3rem;
+    font-size: 2.4rem;
+    line-height: 2.6rem;
   }
-  p.home-subtitle {
+  p.home-subtitle-lower {
     text-align: center;
+    font-size: 0.9rem;
   }
 
   .home-ben {
