@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB-Ka1sSqIt_mhlKHE2hiIBLdXuixB2Uek",
-    authDomain: "auth.fromstandard.com",
+    authDomain: "alan-taxes.firebaseapp.com",
     projectId: "alan-taxes",
     storageBucket: "alan-taxes.appspot.com",
     messagingSenderId: "31692548469",
