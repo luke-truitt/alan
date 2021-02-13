@@ -149,7 +149,11 @@ export function SchoolInput(props) {
           <TextField
             className="form-item-text-field"
             label="Graduation Year"
-            value={props.fields["classYear"]}
+            value={
+              isNaN(props.fields['classYear'])
+                ? ""
+                : props.fields['classYear']
+            }
             inputProps={{ inputMode: "numeric" }}
             variant="outlined"
             onKeyPress={(e, val) => props.onKeyPress(e, val)}

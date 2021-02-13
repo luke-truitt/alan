@@ -123,7 +123,7 @@ export function InviteCard(props) {
   const sendInvite = () => {
     
     const email_to = email;
-    
+    console.log(email_to);
     const templateParams = {
       from_name: props.username,
       send_to: email_to,
@@ -133,13 +133,14 @@ export function InviteCard(props) {
       function (response) {
         alert("Invites sent successfully!");
         console.log(email_to, "SUCCESS!", response.status, response.text);
+        setEmail('');
       },
       function (error) {
         console.log("FAILED...", error);
+        setEmail('');
       }
     );
     
-    setEmail('');
   };
   // const sendInvites = () => {
   //   let i;
@@ -206,13 +207,13 @@ export function InviteCard(props) {
               <div className="invite-card-email-container column-container">
               <TextField
               setValid={(val) => {}}
-              onChange={(e, val) => setEmail(val)}
+              onChange={(e) => {setEmail(e.target.value);}}
               stateName="email"
-              helperText="Please enter a valid email."
+              helperText="Enter a friends email."
               value={email}
               invalid={false}
               onKeyPress={(e, val) => keyDown(e, val)}
-              placeholder="Enter Friends Email"
+              placeholder="Email"
               type="email"
             />
                 <Button
