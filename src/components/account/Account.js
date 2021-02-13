@@ -246,8 +246,10 @@ function ReviewCard(props) {
 
 function Account(props) {
   const user = useContext(AuthContext);
-  Mixpanel.identify(user.user.referToId);
-  Mixpanel.track("visit_join");
+  if(user.user) {
+    Mixpanel.identify(user.user.referToId);
+    Mixpanel.track("visit_join");
+  }
   const location = useLocation();
   const [openToast, setOpenToast] = useState(
     location.state ? location.state["accountNew"] : false

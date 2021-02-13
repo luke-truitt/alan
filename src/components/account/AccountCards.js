@@ -16,10 +16,14 @@ import "./account-cards.css";
 import * as emailjs from "emailjs-com";
 import { EmailChipInput } from "./../inputs/Inputs";
 import { Mixpanel } from "./../../mixpanel.js";
+const {
+  REACT_APP_EMAILJS_USER_ID,
+  REACT_APP_EMAILJS_SERVICE_ID,
+} = process.env;
 
-const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
+const USER_ID = REACT_APP_EMAILJS_USER_ID;
 const TEMPLATE_ID = "template_kwxoxb7";
-const SERVICE_ID = "service_ah750kn";
+const SERVICE_ID = REACT_APP_EMAILJS_SERVICE_ID;
 
 const BASE_URL = "http://fromstandard.com";
 

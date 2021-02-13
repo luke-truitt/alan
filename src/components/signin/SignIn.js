@@ -144,7 +144,7 @@ function SignInForm(props) {
           try {
             setGoogleLoading(true);
             Mixpanel.track("sign_in", { type: "google" });
-            signInWithGoogle("", "").then(() => {
+            signInWithGoogle("", "", {}).then(() => {
               navTo();
               setGoogleLoading(false);
             });
