@@ -180,6 +180,15 @@ function Home(props) {
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
+            <Typography
+                variant="caption"
+                color="secondary"
+                className="home-label"
+              >
+                <strong>
+                  FOR STUDENTS{" "}
+                </strong>
+              </Typography>
               <Typography variant="h2" color="secondary" className="home-title">
                 Get up to a <span className="teal-highlight">$5,000</span> tax
                 refund in <span className="teal-highlight">10 minutes</span>.
@@ -189,7 +198,7 @@ function Home(props) {
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                Students can qualify for thousands of dollars in special tax credits, we help you qualify for those and you'll get it back in cash within a month.
+                We qualify students for unclaimed tax credits.
                 <br />
                 <br />
                 We do the paper work, you get cash, and we'll explain why. If we

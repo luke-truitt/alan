@@ -99,6 +99,7 @@ export function InviteCard(props) {
   const inviteCardSubtitle =
     "Know someone who is missing out on free money? We'll waive the $25 fee for you when two friends file with Standard.";
   const [emails, setEmails] = useState([]);
+  const [email, setEmail] = useState('');
 
   const handleAdd = (chip) => {
     setEmails([...emails, chip]);
@@ -111,28 +112,57 @@ export function InviteCard(props) {
       setEmails([emails.filter((c) => c !== deletedChip)]);
     }
   };
-  const sendInvites = () => {
-    let i;
-    for (i = 0; i < emails.length; i++) {
-      const email_to = emails[i];
-      console.log(props.referToId);
-      const templateParams = {
-        from_name: props.username,
-        send_to: email_to,
-        refer_link: BASE_URL + "/?referId=" + props.referToId,
-      };
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
-        function (response) {
-          alert("Invites sent successfully!");
-          console.log(email_to, "SUCCESS!", response.status, response.text);
-        },
-        function (error) {
-          console.log("FAILED...", error);
-        }
-      );
+
+  const keyDown = (e, val) => {
+    var code = e.keyCode || e.which;
+
+    if (code === 13 || code === 32 || code === 39) {
+      sendInvite();
     }
-    setEmails([]);
   };
+  const sendInvite = () => {
+    
+    const email_to = email;
+    
+    const templateParams = {
+      from_name: props.username,
+      send_to: email_to,
+      refer_link: BASE_URL + "/?referId=" + props.referToId,
+    };
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+      function (response) {
+        alert("Invites sent successfully!");
+        console.log(email_to, "SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+    
+    setEmail('');
+  };
+  // const sendInvites = () => {
+  //   let i;
+  //   for (i = 0; i < emails.length; i++) {
+  //     const email_to = emails[i];
+  //     console.log(props.referToId);
+  //     const templateParams = {
+  //       from_name: props.username,
+  //       send_to: email_to,
+  //       refer_link: BASE_URL + "/?referId=" + props.referToId,
+  //     };
+  //     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
+  //       function (response) {
+  //         alert("Invites sent successfully!");
+  //         console.log(email_to, "SUCCESS!", response.status, response.text);
+  //       },
+  //       function (error) {
+  //         console.log("FAILED...", error);
+  //       }
+  //     );
+  //   }
+  //   setEmails([]);
+  // };
 
   const handleShareClick = () => {
     if (navigator.share) {
@@ -174,15 +204,21 @@ export function InviteCard(props) {
             </Typography>
             <div className="invite-card-input-container column-container">
               <div className="invite-card-email-container column-container">
-                <EmailChip
-                  onAdd={(email) => handleAdd(email)}
-                  onDelete={(email) => handleDelete(email)}
-                  emails={emails}
-                />
+              <TextField
+              setValid={(val) => {}}
+              onChange={(e, val) => setEmail(val)}
+              stateName="email"
+              helperText="Please enter a valid email."
+              value={email}
+              invalid={false}
+              onKeyPress={(e, val) => keyDown(e, val)}
+              placeholder="Enter Friends Email"
+              type="email"
+            />
                 <Button
                   color="secondary"
                   variant="contained"
-                  onClick={sendInvites}
+                  onClick={sendInvite}
                 >
                   Send invites
                 </Button>

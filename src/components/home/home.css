@@ -46,7 +46,9 @@ div.home-c1.row-container > div > div > div > fieldset {
 span.home-mobile-button-text {
   display: none;
 }
-
+.home-label {
+  padding-bottom: 8vh;
+}
 img.home-ben {
   height: auto;
   max-width: 50%;
