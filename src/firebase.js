@@ -2,15 +2,24 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
-
+const {
+  REACT_APP_FIREBASE_KEY,
+  REACT_APP_FIREBASE_AUTH,
+  REACT_APP_FIREBASE_PROJECT,
+  REACT_APP_FIREBASE_BUCKET,
+  REACT_APP_FIREBASE_SENDER_ID,
+  REACT_APP_FIREBASE_APP,
+  REACT_APP_FIREBASE_MEASUREMENT
+} = process.env;
+console.log(REACT_APP_FIREBASE_APP)
 const firebaseConfig = {
-    apiKey: "AIzaSyB-Ka1sSqIt_mhlKHE2hiIBLdXuixB2Uek",
-    authDomain: "alan-taxes.firebaseapp.com",
-    projectId: "alan-taxes",
-    storageBucket: "alan-taxes.appspot.com",
-    messagingSenderId: "31692548469",
-    appId: "1:31692548469:web:afbd5ba64498ed999a4b3c",
-    measurementId: "G-FL6C0RL62K"
+    apiKey: REACT_APP_FIREBASE_KEY,
+    authDomain: REACT_APP_FIREBASE_AUTH,
+    projectId: REACT_APP_FIREBASE_PROJECT,
+    storageBucket: REACT_APP_FIREBASE_BUCKET,
+    messagingSenderId: REACT_APP_FIREBASE_SENDER_ID,
+    appId: REACT_APP_FIREBASE_APP,
+    measurementId: REACT_APP_FIREBASE_MEASUREMENT
   };
 
 firebase.initializeApp(firebaseConfig);

@@ -14,7 +14,7 @@ import { getUserDoc, auth } from "../../firebase";
 import { AuthContext } from "../../providers/AuthProvider";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import useWindowDimensions from "../onboard/useWindowDimensions";
-import logo from "./../../images/logo/white-tax.svg";
+import logo from "./../../images/logo/tax.svg";
 
 function Header(props) {
   const history = useHistory();
