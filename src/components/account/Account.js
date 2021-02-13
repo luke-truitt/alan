@@ -20,7 +20,7 @@ import {
   slideDefault,
   fadeDefault,
   shortFade,
-} from "./../../utils/constants";
+} from "../../utils/constants";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useEffect, useState, Fragment } from "react";
 import ChipInput from "material-ui-chip-input";
@@ -29,7 +29,7 @@ import { auth, getUserDoc } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import "./../../styles.css";
-import "./account-page.css";
+import "./account.css";
 import giftIcon from "./../../images/icons/gift-dark.svg";
 import shareIcon from "./../../images/icons/share-dark.svg";
 import copyIcon from "./../../images/icons/copy-dark.svg";
@@ -46,7 +46,7 @@ import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
 import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { useLocation, useHistory } from "react-router-dom";
-import Header from "./../header/Header.js";
+import Header from "../header/Header.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -237,7 +237,7 @@ function ReviewCard(props) {
   );
 }
 
-function AccountPage(props) {
+function Account(props) {
   const user = useContext(AuthContext);
 
   const location = useLocation();
@@ -422,4 +422,4 @@ function AccountPage(props) {
   );
 }
 
-export default AccountPage;
+export default Account;

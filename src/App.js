@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import "./global.css";
 import Join from "./components/join/Join";
 import Refund from "./components/refund/Refund.js";
-import AccountPage from "./components/account/AccountPage.js";
+import AccountPage from "./components/account/Account.js";
 
 import { PageView, initGA, Event } from "./components/tracking/Tracking";
 const trackingId = "UA-189058741-1";
