@@ -18,7 +18,6 @@ function ErrorPage(props) {
     history.push({ pathname: "/" });
   };
   const signIn = () => {
-    console.log("signing in")
     history.push({ pathname: "/signin" });
   };
   return (

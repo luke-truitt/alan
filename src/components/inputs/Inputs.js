@@ -451,12 +451,10 @@ export function Form(props) {
 export function TextInput(props) {
   const checkValid = (val) => {
     if (val.length > 6) {
-      console.log("Good");
       try {
         props.setValid(true);
       } catch {}
     } else {
-      console.log("Bad");
       try {
         props.setValid(false);
       } catch {}
@@ -514,10 +512,8 @@ export function EmbeddedEmailInput(props) {
         mail
       )
     ) {
-      console.log("Good");
       setValid(true);
     } else {
-      console.log("Bad");
       setValid(false);
     }
   };

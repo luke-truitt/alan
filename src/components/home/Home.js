@@ -45,7 +45,7 @@ function Home(props) {
     setUser(old_user);
     setOpen(true);
   };
-  console.log(props);
+
   const handleClose = (choice) => {
     if (choice == "no") {
       history.push({
@@ -106,7 +106,6 @@ function Home(props) {
   let i;
   for (i = 0; i < searchParams.length; i++) {
     const paramName = searchParams[i].split("=")[0];
-    console.log(paramName);
     if (paramName == "referId") {
       referById = searchParams[i].split("=")[1];
     }
@@ -148,8 +147,6 @@ function Home(props) {
 
   const addEmail = async (email) => {
     const old_user = await findUserByEmail(email);
-    console.log(props);
-    console.log(old_user);
     if (old_user == null) {
       history.push({
         pathname: "/onboard",
@@ -162,11 +159,9 @@ function Home(props) {
         .then(function (response) {
           const referToId = response.data.referId;
           props.setReferTo(referToId);
-          console.log(response);
           setLoading(false);
         })
         .catch(function (error) {
-          console.log(error);
         });
     } else {
       handleClickOpen(old_user);

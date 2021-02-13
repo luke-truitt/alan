@@ -123,7 +123,6 @@ export function InviteCard(props) {
   const sendInvite = () => {
     
     const email_to = email;
-    console.log(email_to);
     const templateParams = {
       from_name: props.username,
       send_to: email_to,
@@ -132,11 +131,9 @@ export function InviteCard(props) {
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
       function (response) {
         alert("Invites sent successfully!");
-        console.log(email_to, "SUCCESS!", response.status, response.text);
         setEmail('');
       },
       function (error) {
-        console.log("FAILED...", error);
         setEmail('');
       }
     );
@@ -146,7 +143,6 @@ export function InviteCard(props) {
   //   let i;
   //   for (i = 0; i < emails.length; i++) {
   //     const email_to = emails[i];
-  //     console.log(props.referToId);
   //     const templateParams = {
   //       from_name: props.username,
   //       send_to: email_to,
@@ -174,7 +170,6 @@ export function InviteCard(props) {
           url: "/",
         })
         .then(() => {
-          console.log("Successfully shared");
           alert("Successfully shared!");
         })
         .catch((error) => {

@@ -29,14 +29,13 @@ function Header(props) {
   const onSignUp = () => { props.signUp ? props.signUp() : history.push({pathname: "/join"}); };
   const onAccount = () => { if(user.user) {history.push({ pathname: "/account" })} else {history.push({ pathname: "/signin" })} };
   const onSignOut = () => { 
-    console.log("No dice"); 
     setLoading(true);
     auth.signOut().then(() => {
         history.push({ pathname: "/join" });
         setUserData({});
         setLoading(false);
       }).catch((error) => {
-        console.log(error);
+        
       });
     }
   const onContact = () => { history.push({pathname: "/contact"}); };
@@ -73,7 +72,7 @@ function Header(props) {
               }
               setUserData(result);
             })
-            .catch(() => console.log("ERROR GETTING USER"));
+            .catch(() => {});
           setLoadAttempts(loadAttempts + 1);
         }, 1000);
       } 

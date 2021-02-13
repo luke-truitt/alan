@@ -97,41 +97,30 @@ function Refund(props) {
   let em, rtid, rbid, bd;
   useEffect(() =>
     setTimeout(() => {
-      console.log(loadAttempts);
-      console.log("efffectt");
       if (!user.user && !dataLoaded && loadAttempts > 2) {
-        console.log("no user");
         if (location.state == null) {
-          console.log("no state");
           redirect("/", null);
         }
         [em, rtid, rbid, bd] = loadFromState();
-        console.log("loaded state", em, bd);
         if (bd == null) {
-          console.log("no breakdown");
           redirect("/", null);
         }
-        console.log("calculator good");
         setEmail(em);
         setReferToId(rtid);
         setReferById(rbid);
         setBreakdown(bd);
         setDataLoaded(true);
       } else if (user.user && !dataLoaded) {
-        console.log("user logged in");
         loadFromUser().then((res) => {
-          console.log(res);
           em = res.email;
           rtid = res.referToId;
           rbid = res.referById;
           bd = res.breakdown;
           if (em == null) {
             //users not logged in, some bug earlier
-            console.log("bug in log in, email not found");
             redirect("/", null);
           } else if (bd == null) {
             // user hasn't taken calculator, send them to the start of the calculator
-            console.log("no breakdown for user, need to retake quiz");
             redirect("/onboard", {
               email: em,
               referToId: rtid,
@@ -139,7 +128,6 @@ function Refund(props) {
             });
           }
           //otherwise they're gtg
-          console.log(bd, "user ready");
           setEmail(em);
           setReferToId(rtid);
           setReferById(rbid);

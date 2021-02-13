@@ -198,10 +198,8 @@ function Onboard(props) {
       ];
   const checkValid = (d) => {
     const availableFields = forms[step - 1].formFields;
-    console.log(availableFields);
     let validData = true;
     availableFields.map((field) => {
-      console.log(d);
       try {
 
         if (d[field] == null || !d[field]) {
@@ -211,11 +209,9 @@ function Onboard(props) {
         validData = false;
       }
     });
-    console.log(validData);
     updateValid({ [step]: validData });
   };
   const updateValid = (d) => {
-    console.log(d);
     for (const [key, value] of Object.entries(d)) {
       setFormValid((fields) => ({ ...fields, [key]: value }));
     }
@@ -268,10 +264,8 @@ function Onboard(props) {
     axios
       .post(REACT_APP_API_BASE_URL + REACT_APP_CALCULATOR_URL, fields)
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
       });
   }
 
@@ -283,7 +277,6 @@ function Onboard(props) {
     return !formValid[step];
   };
   const handleClickOpen = () => {
-    console.log("Hey");
     setOpen(true);
   };
 
@@ -309,7 +302,6 @@ function Onboard(props) {
       });
     }
     if (step >= forms.length) {
-      console.log("loadingScreen");
       setLoadingScreen(false);
       setTimeout(navToRefund, 7000);
       setStep(forms.length);
