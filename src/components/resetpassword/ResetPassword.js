@@ -9,8 +9,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
+import { Mixpanel } from "./../../mixpanel.js";
+
 import { primaryTheme } from "../../utils/constants.js";
 import "./resetpassword.css";
 import "./../../styles.css";
@@ -76,7 +78,7 @@ function ResetForm(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     navTo();
@@ -98,7 +100,8 @@ function ResetForm(props) {
           <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Password Reset Email Sent! Check your email to reset your password and sign in.
+              Password Reset Email Sent! Check your email to reset your password
+              and sign in.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -131,7 +134,10 @@ function ResetForm(props) {
         variant="contained"
         color="secondary"
         style={{ marginTop: invalid ? "30px" : "" }}
-        onClick={() => sendResetEmail()}
+        onClick={() => {
+          Mixpanel.track("passowrd_reset");
+          sendResetEmail();
+        }}
       >
         {sending ? <CircularProgress /> : "Reset Password"}
       </Button>

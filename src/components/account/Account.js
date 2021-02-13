@@ -29,6 +29,8 @@ import { v4 as uuidv4 } from "uuid";
 import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import "./../../styles.css";
 import "./account.css";
+import { Mixpanel } from "./../../mixpanel.js";
+
 import giftIcon from "./../../images/icons/gift-dark.svg";
 import shareIcon from "./../../images/icons/share-dark.svg";
 import copyIcon from "./../../images/icons/copy-dark.svg";
@@ -186,7 +188,10 @@ function ReviewCard(props) {
           the calculator, you can do so{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}
-            onClick={() => props.onCalculator()}
+            onClick={() => {
+              Mixpanel.track("retake_refund");
+              props.onCalculator();
+            }}
           >
             here
           </a>
@@ -196,7 +201,10 @@ function ReviewCard(props) {
               Your initial estimate was $
               <a
                 style={{ textDecoration: "underline", cursor: "pointer" }}
-                onClick={() => history.push({ pathname: "/refund" })}
+                onClick={() => {
+                  Mixpanel.track("review_refund", { type: "share" });
+                  history.push({ pathname: "/refund" });
+                }}
               >
                 {numberWithCommas(props.userData.refundBreakdown.netRefund)}
               </a>
@@ -238,7 +246,8 @@ function ReviewCard(props) {
 
 function Account(props) {
   const user = useContext(AuthContext);
-
+  Mixpanel.identify(user.user.referToId);
+  Mixpanel.track("visit_join");
   const location = useLocation();
   const [openToast, setOpenToast] = useState(
     location.state ? location.state["accountNew"] : false
@@ -367,6 +376,7 @@ function Account(props) {
                 auth
                   .signOut()
                   .then(() => {
+                    Mixpanel.track("sign_out", { page: "account" });
                     history.push({ pathname: "/join" });
                     setLoading(false);
                   })

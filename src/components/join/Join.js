@@ -25,6 +25,7 @@ import JoinTimeline from "./JoinTimeline";
 import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
 import Header from "../header/Header";
+import { Mixpanel } from "../../mixpanel.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_b3u2bhe";
@@ -125,6 +126,12 @@ function JoinForm(props) {
         referById,
         refundBreakdown,
       }).then((res) => {
+        Mixpanel.track("account_created", { type: "normal" });
+        Mixpanel.people.set({
+          $first_name: firstName,
+          $last_name: lastName,
+          $phone: phone,
+        });
         sendWelcomeEmail();
         setTimeout(() => {
           history.push({
@@ -138,6 +145,7 @@ function JoinForm(props) {
         setPhone("");
       });
     } catch (error) {
+      Mixpanel.track("error_on_join", { type: "normal" });
       console.log("error ", error);
       if (error.message) {
         setError(error.message);
@@ -153,6 +161,7 @@ function JoinForm(props) {
   const onSubmit = () => {
     setInvalid({ email: !valid["email"], password: !valid["password"] });
     if (valid["password"] && valid["email"]) {
+      Mixpanel.track("join", { type: "normal" });
       createUserWithEmailAndPasswordHandler();
     }
   };
@@ -308,18 +317,21 @@ function JoinForm(props) {
               color="primary"
               onClick={() => {
                 try {
+                  Mixpanel.track("join", { type: "google" });
                   setGoogleLoading(true);
                   signInWithGoogle(
                     props.referToId,
                     referById,
                     refundBreakdown
                   ).then(() => {
+                    Mixpanel.track("account_created", { type: "google" });
                     // sendWelcomeEmail();
                     navTo();
                     setGoogleLoading(false);
                   });
                 } catch (error) {
                   setError(error.message);
+                  Mixpanel.track("error_on_join", { type: "google" });
                   console.error("Error signing up with Google", error);
                 }
               }}
@@ -355,6 +367,8 @@ function JoinForm(props) {
 }
 
 function Join(props) {
+  Mixpanel.identify(props.referToId);
+  Mixpanel.track("visit_join");
   return (
     <ThemeProvider theme={primaryTheme}>
       <Header page={"Join"} />

@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import { Mixpanel } from "./mixpanel";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-Ka1sSqIt_mhlKHE2hiIBLdXuixB2Uek",
@@ -32,6 +33,12 @@ export const signInWithGoogle = (referToId, referById, refundBreakdown) => {
       const firstName = user.displayName.split(" ")[0];
       const lastName = "";
       const phone = user.phoneNumber;
+      Mixpanel.identify(referToId);
+      Mixpanel.people.set_once({
+        $first_name: firstName,
+        $last_name: lastName,
+        $phone: phone,
+      });
       generateUserDocument(user, {
         firstName,
         lastName,

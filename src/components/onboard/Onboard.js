@@ -225,7 +225,6 @@ function Onboard(props) {
   };
 
   const navToRefund = () => {
-    
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
@@ -315,16 +314,23 @@ function Onboard(props) {
     }
     if (step >= forms.length) {
       console.log("loadingScreen");
-      Mixpanel.track("onboarding_complete", { time: new Date() });
+      Mixpanel.track("onboarding_complete");
       setLoadingScreen(false);
       setTimeout(navToRefund, 7000);
       setStep(forms.length);
     } else {
       setStep(step + 1);
       Mixpanel.track(trackingEvent);
-      forms[step - 1].formFields.forEach((field) =>
-        Mixpanel.people.set({ field: fields.field })
-      );
+      forms[step - 1].formFields.forEach((field) => {
+        console.log({ field: fields[field] });
+        const properties = {};
+        if (field === "school") {
+          properties[field] = fields[field]["name"];
+        } else {
+          properties[field] = fields[field];
+        }
+        Mixpanel.people.set(properties);
+      });
     }
   };
 

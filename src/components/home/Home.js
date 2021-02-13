@@ -164,6 +164,7 @@ function Home(props) {
           const referToId = response.data.referId;
           props.setReferTo(referToId);
           Mixpanel.identify(referToId);
+          Mixpanel.people.set({ email: email });
           Mixpanel.track("waitlist_joined");
           Mixpanel.people.set_once({ sign_up_date: new Date() });
           console.log(response);
@@ -186,14 +187,12 @@ function Home(props) {
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
-            <Typography
+              <Typography
                 variant="caption"
                 color="secondary"
                 className="home-label"
               >
-                <strong>
-                  FOR STUDENTS{" "}
-                </strong>
+                <strong>FOR STUDENTS </strong>
               </Typography>
               <Typography variant="h2" color="secondary" className="home-title">
                 Get up to a <span className="teal-highlight">$5,000</span> tax

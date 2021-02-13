@@ -15,6 +15,7 @@ import { useState } from "react";
 import "./account-cards.css";
 import * as emailjs from "emailjs-com";
 import { EmailChipInput } from "./../inputs/Inputs";
+import { Mixpanel } from "./../../mixpanel.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -95,12 +96,13 @@ function EmailChip(props) {
   );
 }
 export function InviteCard(props) {
+  Mixpanel.identify(props.referToId);
   const inviteCardTitle =
     "Invite friends to Standard and we'll file your taxes for free.";
   const inviteCardSubtitle =
     "Know someone who is missing out on free money? We'll waive the $25 fee for you when two friends file with Standard.";
   const [emails, setEmails] = useState([]);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleAdd = (chip) => {
     setEmails([...emails, chip]);
@@ -122,9 +124,9 @@ export function InviteCard(props) {
     }
   };
   const sendInvite = () => {
-    
+    Mixpanel.track("referral", { type: "send" });
     const email_to = email;
-    
+
     const templateParams = {
       from_name: props.username,
       send_to: email_to,
@@ -139,8 +141,8 @@ export function InviteCard(props) {
         console.log("FAILED...", error);
       }
     );
-    
-    setEmail('');
+
+    setEmail("");
   };
   // const sendInvites = () => {
   //   let i;
@@ -174,10 +176,12 @@ export function InviteCard(props) {
           url: "/",
         })
         .then(() => {
+          Mixpanel.track("referral", { type: "share" });
           console.log("Successfully shared");
           alert("Successfully shared!");
         })
         .catch((error) => {
+          Mixpanel.track("error_share");
           console.error("Something went wrong sharing the blog", error);
         });
     }
@@ -205,20 +209,17 @@ export function InviteCard(props) {
             </Typography>
             <div className="invite-card-input-container column-container">
               <div className="invite-card-email-container column-container">
-<<<<<<< HEAD
-                <EmailChipInput />
-=======
-              <TextField
-              setValid={(val) => {}}
-              onChange={(e, val) => setEmail(val)}
-              stateName="email"
-              helperText="Please enter a valid email."
-              value={email}
-              invalid={false}
-              onKeyPress={(e, val) => keyDown(e, val)}
-              placeholder="Enter Friends Email"
-              type="email"
-            />
+                <TextField
+                  setValid={(val) => {}}
+                  onChange={(e, val) => setEmail(val)}
+                  stateName="email"
+                  helperText="Please enter a valid email."
+                  value={email}
+                  invalid={false}
+                  onKeyPress={(e, val) => keyDown(e, val)}
+                  placeholder="Enter Friends Email"
+                  type="email"
+                />
                 <Button
                   color="secondary"
                   variant="contained"
@@ -226,17 +227,17 @@ export function InviteCard(props) {
                 >
                   Send invites
                 </Button>
->>>>>>> f28519b3776014cb1c964cba67eb217d5e384a14
               </div>
               <div className="invite-card-button-container column-container">
                 <Button
                   color="textPrimary"
                   variant="outlined"
-                  onClick={() =>
+                  onClick={() => {
+                    Mixpanel.track("referral", { type: "copy" });
                     navigator.clipboard.writeText(
                       BASE_URL + "/?referId=" + props.referToId
-                    )
-                  }
+                    );
+                  }}
                 >
                   <FileCopyRoundedIcon
                     className="invite-button-icon"
