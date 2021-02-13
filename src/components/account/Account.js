@@ -194,7 +194,7 @@ function ReviewCard(props) {
           {". "}
           {props.userData.refundBreakdown.netRefund && (
             <span>
-              "Your initial estimate was $"
+              Your initial estimate was $
               <a
                 style={{ textDecoration: "underline", cursor: "pointer" }}
                 onClick={() => history.push({ pathname: "/refund" })}
