@@ -178,7 +178,7 @@ function Refund(props) {
                           className="onboard-complete-title"
                           variant="h6"
                         >
-                          You're owed
+                          You're owed an estimated
                         </Typography>
                         <Typography
                           className="refund-amount "
@@ -251,14 +251,16 @@ function Refund(props) {
                       style={{ cursor: "pointer" }}
                     >
                       <div className="row-container refund-card-button-content ">
+                        <div style={{display: "flex", flexDirection: "row"}}>
                         <Typography
                           className="refund-card-button-text"
                           variant="h4"
                           color="primary"
                         >
-                          Get Started{" "}
-                          <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                          {user.user ? "Save To Profile" : "Get Started"}{" "}
                         </Typography>
+                        <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                        </div>
                         <Typography
                           variant="body2"
                           color="primary"
@@ -331,7 +333,7 @@ function Refund(props) {
                         className="onboard-complete-title"
                         variant="h6"
                       >
-                        You're owed
+                        You're owed an estimated
                       </Typography>
                       <Typography
                         className="refund-amount "
@@ -348,14 +350,17 @@ function Refund(props) {
                         >
                           {" "}
                           <div className="row-container refund-card-button-content">
+
+                            <div style={{display: "flex", flexDirection: "row"}}>
                             <Typography
                               className="refund-card-button-text"
                               variant="h4"
                               color="primary"
                             >
-                              Get Started{" "}
-                              <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                              {user.user ? "Save To Profile" : "Get Started"} {" "}
                             </Typography>
+                              <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                            </div>
                             <Typography
                               variant="body2"
                               color="primary"
@@ -439,14 +444,16 @@ function Refund(props) {
                     >
                       {" "}
                       <div className="row-container">
+                      <div style={{display: "flex", flexDirection: "row"}}>
                         <Typography
                           className="refund-card-button-text"
                           variant="h4"
                           color="primary"
                         >
-                          Get Started{" "}
-                          <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                          {user.user ? "Save To Profile" : "Get Started"} {" "}
                         </Typography>
+                          <ArrowForwardIosRoundedIcon className=" refund-card-button-icon" />
+                          </div>
                         <Typography
                           variant="body2"
                           color="primary"
@@ -516,7 +523,7 @@ function Refund(props) {
             className="onboard-complete-apply-button"
             onClick={navTo}
           >
-            {user.user ? "Save This Refund Data" : "Get Started with Standard"}
+            {user.user ? "Save This Refund To My Profile" : "Get Started with Standard"}
           </Button>
         </div>
       </div>
