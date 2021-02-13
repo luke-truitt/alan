@@ -11,7 +11,7 @@ import Onboard from "./components/onboard/Onboard.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignIn from "./components/signin/SignIn";
-import ResetPassowrd from "./components/resetpassword/ResetPassowrd";
+import ResetPassword from "./components/resetpassword/ResetPassword";
 import ChangePassword from "./components/changepassword/ChangePassword";
 import { AuthProvider } from "./providers/AuthProvider";
 
