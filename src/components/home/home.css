@@ -97,5 +97,6 @@ div.home-c1.row-container > div > div > div > fieldset > legend > span {
   }
   span.home-mobile-button-text {
     display: block;
+    font-size: 1rem;
   }
 }
