@@ -189,7 +189,7 @@ function Home(props) {
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                Standard qualifies students for unclaimed tax credits.
+                Students can qualify for thousands of dollars in special tax credits, we help you qualify for those and you'll get it back in cash within a month.
                 <br />
                 <br />
                 We do the paper work, you get cash, and we'll explain why. If we

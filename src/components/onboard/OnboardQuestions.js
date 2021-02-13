@@ -160,7 +160,7 @@ export const citizenStatus = {
   question: "Are you a U.S. citizen?",
   description: "You're eligible for a refund regardless.",
   options: { Yes: "Yes", No: "No" },
-  stateName: "",
+  stateName: "citizen",
 };
 
 export const name = {
