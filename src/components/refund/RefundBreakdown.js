@@ -5,6 +5,7 @@ import equal_icon from "../../images/icons/equal-outline-purple.svg";
 import { ThemeProvider, Typography, Tooltip } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import useWindowDimensions from "../onboard/useWindowDimensions";
 
 import Zoom from "@material-ui/core/Zoom";
 import { useState } from "react";
@@ -28,6 +29,7 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
+
 const Explanation = withStyles((theme) => ({
   tooltip: {
     backgroundColor: "#f6f6f6",
@@ -43,6 +45,7 @@ const Explanation = withStyles((theme) => ({
 }))(Tooltip);
 
 function RefundBreakdownRow(props) {
+
   const SYMBOLS = {
     add: add_icon,
     equal: equal_icon,
@@ -80,7 +83,7 @@ function RefundBreakdownRow(props) {
             </Typography>
           )}
         </div>
-        <Explanation
+        {!props.isMobile ? <Explanation
           width={"00px"}
           placement="left-start"
           enterDelay={200}
@@ -98,13 +101,23 @@ function RefundBreakdownRow(props) {
           >
             {props.label}
           </Typography>
-        </Explanation>
+        </Explanation> : <Typography
+            variant="body1"
+            color="secondary"
+            className="refund-breakdown-row-label"
+            style={{ zIndex: 999, cursor: "pointer" }}
+          >
+            {props.label}
+          </Typography> }
       </div>
     </ThemeProvider>
   );
 }
 
 function RefundBreakdown(props) {
+  const { width, height } = useWindowDimensions();
+  const isMobile = width < 900;
+
   return (
     <div className="refund-breakdown-c0 row-container">
       <RefundBreakdownRow
@@ -112,6 +125,7 @@ function RefundBreakdown(props) {
         type="dollar"
         label="Taxable Income"
         description={taxable_income_description}
+        isMobile = {isMobile}
       />
       <RefundBreakdownRow
         symbol="multiply"
@@ -119,6 +133,7 @@ function RefundBreakdown(props) {
         amount={props.breakdown.taxRate}
         label="Effective Tax Rate"
         description={effective_tax_rate_description}
+        isMobile = {isMobile}
       />
       <div className="refund-breakdown-highlight-red">
         <RefundBreakdownRow
@@ -127,6 +142,7 @@ function RefundBreakdown(props) {
           amount={props.breakdown.taxBill}
           label="Tax Bill"
           description={tax_bill_description}
+          isMobile = {isMobile}
         />
       </div>
       <div className="refund-breakdown-highlight-green">
@@ -136,6 +152,7 @@ function RefundBreakdown(props) {
           amount={props.breakdown.creditsAndWitholdings}
           label="Credits + Witholdings"
           description={withholdings_description}
+          isMobile = {isMobile}
         />
       </div>
       <RefundBreakdownRow
@@ -144,6 +161,7 @@ function RefundBreakdown(props) {
         amount={props.breakdown.netRefund}
         label="Net Refund"
         description={net_refund_description}
+        isMobile = {isMobile}
       />
     </div>
   );
