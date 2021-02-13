@@ -380,8 +380,7 @@ function Account(props) {
                     history.push({ pathname: "/join" });
                     setLoading(false);
                   })
-                  .catch((error) => {
-                  });
+                  .catch((error) => {});
               }}
             >
               Sign Out
