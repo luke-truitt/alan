@@ -138,10 +138,8 @@ function Onboard(props) {
         },
         {
           title: "History",
-          items: [covidCredits, dependence],
-          formFields: ["covidCredits", "dependence"],
-          // items: [covidCredits, dependence, citizenStatus],
-          // formFields: ["covidCredits", "dependence", "citizen"],
+          items: [covidCredits, dependence, citizenStatus],
+          formFields: ["covidCredits", "dependent", "citizen"],
         },
       ]
     : [
@@ -200,9 +198,12 @@ function Onboard(props) {
       ];
   const checkValid = (d) => {
     const availableFields = forms[step - 1].formFields;
+    console.log(availableFields);
     let validData = true;
     availableFields.map((field) => {
+      console.log(d);
       try {
+
         if (d[field] == null || !d[field]) {
           validData = false;
         }
@@ -210,6 +211,7 @@ function Onboard(props) {
         validData = false;
       }
     });
+    console.log(validData);
     updateValid({ [step]: validData });
   };
   const updateValid = (d) => {
@@ -410,13 +412,16 @@ function Onboard(props) {
   }
 
   function getNonRefundableCredits() {
-    if (fields["student"] == "No" || fields["student"] == "") {
+    if (fields['citizen']=='No' || fields["student"] == "No" || fields["student"] == "") {
       return 0;
     }
     return Math.max(Math.min(2500, fields["educationExpenses"]) - 1000, 0);
   }
 
   function getRefundableCredits() {
+    if (fields['citizen']=='No') {
+      return 0;
+    }
     let creds = Math.max(1800 - fields["covidCredits"], 0);
     if (fields["student"] == "No" || fields["student"] == "") {
       return creds;
@@ -554,7 +559,7 @@ function Onboard(props) {
                         <Button
                           variant="contained"
                           color="secondary"
-                          // disabled={nextDisabled()}
+                          disabled={nextDisabled()}
                           onClick={forwardClick}
                         >
                           Next
@@ -600,7 +605,7 @@ function Onboard(props) {
                   <Button
                     variant="contained"
                     color="secondary"
-                    // disabled={nextDisabled()}
+                    disabled={nextDisabled()}
                     onClick={forwardClick}
                   >
                     Next

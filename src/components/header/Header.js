@@ -77,7 +77,7 @@ function Header(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
       <div className="header-c0 column-container">
-        <Typography variant="h4" className="logo-text" onClick={() => onLogo()}>
+        <Typography variant="h4" className="logo-text" style={{cursor: "pointer"}} onClick={() => onLogo()}>
           <img src={logo} className="header-logo" />
         </Typography>
         <div className="header-button-container">

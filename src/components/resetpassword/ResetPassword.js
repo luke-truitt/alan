@@ -4,12 +4,18 @@ import {
   Typography,
   TextField,
   CircularProgress,
+  Slide,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants.js";
 import "./resetpassword.css";
 import "./../../styles.css";
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import Header from "../header/Header";
@@ -24,6 +30,7 @@ function ResetForm(props) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
+  const [open, setOpen] = useState(false);
   const redirectHome = () => {
     history.push({ pathname: "/" });
   };
@@ -41,7 +48,7 @@ function ResetForm(props) {
     auth
       .sendPasswordResetEmail(email)
       .then(() => {
-        navTo();
+        setOpen(true);
         setSending(false);
       })
       .catch(() => {
@@ -66,6 +73,43 @@ function ResetForm(props) {
       setEmail(e);
     }
   };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+    navTo();
+  };
+  const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  function AlertDialog(props) {
+    return (
+      <div>
+        <Dialog
+          open={props.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={props.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Password Reset Email Sent! Check your email to reset your password and sign in.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => props.handleClose()} color="secondary">
+              Sign In
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
   return (
     <div className="reset-form row-container">
       <TextInput
@@ -115,6 +159,7 @@ function ResetForm(props) {
       >
         Set Up Account
       </Button>
+      <AlertDialog open={open} handleClose={handleClose} />
     </div>
   );
 }
