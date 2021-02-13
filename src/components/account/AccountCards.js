@@ -14,6 +14,8 @@ import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import { useState } from "react";
 import "./account-cards.css";
 import * as emailjs from "emailjs-com";
+import { EmailChipInput } from "./../inputs/Inputs";
+import { Mixpanel } from "./../../mixpanel.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -86,7 +88,7 @@ function EmailChip(props) {
       label="Enter Emails"
       alwaysShowPlaceholder="true"
       value={props.emails}
-      style={{ overflowX: "auto" }}
+      style={{ overflow: "hidden" }}
       onAdd={(chip) => handleAdd(chip)}
       onDelete={(chip) => handleDelete(chip)}
       variant="outlined"
@@ -94,12 +96,13 @@ function EmailChip(props) {
   );
 }
 export function InviteCard(props) {
+  Mixpanel.identify(props.referToId);
   const inviteCardTitle =
     "Invite friends to Standard and we'll file your taxes for free.";
   const inviteCardSubtitle =
     "Know someone who is missing out on free money? We'll waive the $25 fee for you when two friends file with Standard.";
   const [emails, setEmails] = useState([]);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleAdd = (chip) => {
     setEmails([...emails, chip]);
@@ -121,7 +124,7 @@ export function InviteCard(props) {
     }
   };
   const sendInvite = () => {
-    
+    Mixpanel.track("referral", { type: "send" });
     const email_to = email;
     const templateParams = {
       from_name: props.username,
@@ -131,13 +134,13 @@ export function InviteCard(props) {
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
       function (response) {
         alert("Invites sent successfully!");
-        setEmail('');
+        setEmail("");
       },
       function (error) {
-        setEmail('');
+        Mixpanel.track("error_referral_send");
+        setEmail("");
       }
     );
-    
   };
   // const sendInvites = () => {
   //   let i;
@@ -170,9 +173,11 @@ export function InviteCard(props) {
           url: "/",
         })
         .then(() => {
+          Mixpanel.track("referral", { type: "share" });
           alert("Successfully shared!");
         })
         .catch((error) => {
+          Mixpanel.track("error_share");
           console.error("Something went wrong sharing the blog", error);
         });
     }
@@ -200,17 +205,19 @@ export function InviteCard(props) {
             </Typography>
             <div className="invite-card-input-container column-container">
               <div className="invite-card-email-container column-container">
-              <TextField
-              setValid={(val) => {}}
-              onChange={(e) => {setEmail(e.target.value);}}
-              stateName="email"
-              helperText="Enter a friends email."
-              value={email}
-              invalid={false}
-              onKeyPress={(e, val) => keyDown(e, val)}
-              placeholder="Email"
-              type="email"
-            />
+                <TextField
+                  variant="outlined"
+                  setValid={(val) => {}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  stateName="email"
+                  value={email}
+                  invalid={false}
+                  onKeyPress={(e, val) => keyDown(e, val)}
+                  placeholder="Friend's email"
+                  type="email"
+                />
                 <Button
                   color="secondary"
                   variant="contained"
@@ -223,11 +230,12 @@ export function InviteCard(props) {
                 <Button
                   color="textPrimary"
                   variant="outlined"
-                  onClick={() =>
+                  onClick={() => {
+                    Mixpanel.track("referral", { type: "copy" });
                     navigator.clipboard.writeText(
                       BASE_URL + "/?referId=" + props.referToId
-                    )
-                  }
+                    );
+                  }}
                 >
                   <FileCopyRoundedIcon
                     className="invite-button-icon"

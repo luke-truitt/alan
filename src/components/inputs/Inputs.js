@@ -8,6 +8,7 @@ import {
   Select,
   Button,
   MenuItem,
+  Chip,
   TextField,
   InputAdornment,
   OutlinedInput,
@@ -22,6 +23,8 @@ import { schools } from "../../data/Schools.js";
 import { primaryTheme } from "../../utils/constants.js";
 import "./inputs.css";
 import "../../styles.css";
+import { Divider } from "antd";
+import { DriveEta } from "@material-ui/icons";
 
 const InputTypes = {
   Dropdown,
@@ -499,6 +502,68 @@ export function TextInput(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="embedded-email-input-container form-item-container column-container">
         {ValidationTextField}
+      </div>
+    </ThemeProvider>
+  );
+}
+export function EmailChipInput(props) {
+  // const [inputValue, setInputValue] = useState("");
+  // const [emails, setEmails] = useState([]);
+  // const handleDelete = (emailToDelete) => {
+  //   setEmails((emails) =>
+  //     emails.filter((email) => email.key !== emailToDelete.key)
+  //   );
+  // };
+  // const chips = (
+  //   <div className="row-container">
+  //       {emails.map((email) => (
+  //         <li key={email.key}>
+  //         <Chip
+  //           label={email.email}
+  //           onDelete={handleDelete(email)}
+  //           className="email-chip"
+  //         />
+  //         </li>
+  //       ))}</div>
+  // );
+
+  // const handlePress = (a) => {
+  //   console.log("change");
+  //   console.log(a, a.key);
+  //   if (a.key === "Enter") {
+  //     console.log("enter");
+  //     const newEmail = {
+  //       key: emails.length,
+  //       email: a.target.value,
+  //     };
+  //     const newEmails = emails;
+  //     newEmails.push(newEmail);
+  //     setEmails(newEmails);
+  //     setInputValue(a.target.value);
+  //     console.log(emails);
+  //     console.log(chips);
+  //   }
+  // };
+
+  // const handleChange = (a) => {
+  //   setInputValue(a.target.value);
+  // };
+
+  return (
+    <ThemeProvider theme={primaryTheme}>
+      <div className="email-chip-input-container form-item-container column-container">
+        <TextField
+          label="Enter an email"
+          className="form-item-text-field email-chip-input-field"
+          variant="outlined"
+        />
+        <Button
+          className="email-chip-input-button"
+          variant="contained"
+          color="secondary"
+        >
+          <span className="email-chip-input-button-text">Invite friend</span>
+        </Button>
       </div>
     </ThemeProvider>
   );

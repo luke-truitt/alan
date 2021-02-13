@@ -57,7 +57,7 @@ img.home-ben {
   bottom: 0;
 }
 span.teal-highlight {
-  padding-bottom: -1rem;
+  background-position-y: 95% !important;
 }
 .home-c1 > div.embedded-email-input-container {
   margin-bottom: 3rem;
@@ -68,6 +68,10 @@ div.home-c1.row-container > div > div > div > fieldset > legend > span {
 }
 
 @media only screen and (max-width: 800px) {
+  span.teal-highlight {
+    background-position-y: 95% !important;
+    background-size: auto 20%;
+  }
   div.home-c1 {
     margin: auto;
     width: 90%;

@@ -13,6 +13,8 @@ import {
 } from "../../utils/constants.js";
 import "./signin.css";
 import "./../../styles.css";
+import { Mixpanel } from "./../../mixpanel.js";
+
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
 import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
@@ -43,10 +45,12 @@ function SignInForm(props) {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
+        Mixpanel.track("sign_in", { type: "normal" });
         navTo();
         setLoading(false);
       })
       .catch((error) => {
+        Mixpanel.track("error_sign_in", { type: "normal" });
         setError("Incorrect Email or Password!");
         console.error("Error signing in with password and email", error);
         setInvalid(true);
@@ -139,11 +143,13 @@ function SignInForm(props) {
         onClick={() => {
           try {
             setGoogleLoading(true);
+            Mixpanel.track("sign_in", { type: "google" });
             signInWithGoogle("", "").then(() => {
               navTo();
               setGoogleLoading(false);
             });
           } catch (error) {
+            Mixpanel.track("error_sign_in", { type: "google" });
             console.error("Error signing in with Google", error);
           }
         }}

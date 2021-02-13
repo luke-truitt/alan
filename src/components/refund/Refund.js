@@ -26,6 +26,7 @@ import useWindowDimensions from "../onboard/useWindowDimensions";
 import { useLocation, useHistory } from "react-router-dom";
 import { getUserDoc } from "../../firebase";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
+import { Mixpanel } from "../../mixpanel.js";
 function numberWithCommas(x) {
   if (x == null) {
     return "";
@@ -91,6 +92,9 @@ function Refund(props) {
       rtid = userData["referToId"];
       rbid = userData["referById"];
       bd = userData["refundBreakdown"];
+      Mixpanel.identify(rtid);
+      Mixpanel.track("viewed_refund");
+      Mixpanel.people.set(bd);
     }
     return { email: em, referToId: rtid, referById: rbid, breakdown: bd };
   };

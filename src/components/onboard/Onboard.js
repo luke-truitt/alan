@@ -58,6 +58,7 @@ import { useState, useEffect, forwardRef, useContext } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
 import OnboardingTimeline from "./OnboardTimeline";
 import { updateUser } from "../../firebase";
+import { Mixpanel } from "../../mixpanel";
 const trackingId = "UA-189058741-1";
 const {
   REACT_APP_API_BASE_URL,
@@ -90,6 +91,7 @@ function Onboard(props) {
   const [loadingScreen, setLoadingScreen] = useState(true);
   const [open, setOpen] = useState(false);
   const user = useContext(AuthContext);
+  Mixpanel.identify(user.referToId);
 
   const history = useHistory();
   const keyDown = (e, val) => {
@@ -119,6 +121,8 @@ function Onboard(props) {
 
   const { width, height } = useWindowDimensions();
   const isMobile = width < 900;
+  const device = isMobile ? "mobile" : "web";
+  Mixpanel.people.set({ device_type: device });
   const forms = !isMobile
     ? [
         {
@@ -201,7 +205,6 @@ function Onboard(props) {
     let validData = true;
     availableFields.map((field) => {
       try {
-
         if (d[field] == null || !d[field]) {
           validData = false;
         }
@@ -218,7 +221,6 @@ function Onboard(props) {
   };
 
   const navToRefund = () => {
-    
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;
@@ -263,10 +265,8 @@ function Onboard(props) {
   function sendData() {
     axios
       .post(REACT_APP_API_BASE_URL + REACT_APP_CALCULATOR_URL, fields)
-      .then(function (response) {
-      })
-      .catch(function (error) {
-      });
+      .then(function (response) {})
+      .catch(function (error) {});
   }
 
   /*
@@ -294,6 +294,8 @@ function Onboard(props) {
 
   // Click Next Logic
   const forwardClick = () => {
+    const trackingEvent = "onboarding_" + step + "_complete_" + device;
+
     if (step == 1) {
       onDataUpdate({
         email: email,
@@ -302,11 +304,23 @@ function Onboard(props) {
       });
     }
     if (step >= forms.length) {
+      Mixpanel.track("onboarding_complete");
       setLoadingScreen(false);
       setTimeout(navToRefund, 7000);
       setStep(forms.length);
     } else {
       setStep(step + 1);
+      Mixpanel.track(trackingEvent);
+      forms[step - 1].formFields.forEach((field) => {
+        console.log({ field: fields[field] });
+        const properties = {};
+        if (field === "school") {
+          properties[field] = fields[field]["name"];
+        } else {
+          properties[field] = fields[field];
+        }
+        Mixpanel.people.set(properties);
+      });
     }
   };
 
@@ -404,14 +418,18 @@ function Onboard(props) {
   }
 
   function getNonRefundableCredits() {
-    if (fields['citizen']=='No' || fields["student"] == "No" || fields["student"] == "") {
+    if (
+      fields["citizen"] == "No" ||
+      fields["student"] == "No" ||
+      fields["student"] == ""
+    ) {
       return 0;
     }
     return Math.max(Math.min(2500, fields["educationExpenses"]) - 1000, 0);
   }
 
   function getRefundableCredits() {
-    if (fields['citizen']=='No') {
+    if (fields["citizen"] == "No") {
       return 0;
     }
     let creds = Math.max(1800 - fields["covidCredits"], 0);

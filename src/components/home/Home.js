@@ -17,12 +17,13 @@ import {
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
 import { primaryTheme, fadeDefault } from "../../utils/constants.js";
-
+import { Mixpanel } from "./../../mixpanel.js";
 import { findUserByEmail } from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import Header from "../header/Header";
 import React, { useRef, useState, useEffect, forwardRef } from "react";
 import { PageView, initGA, Event } from "../tracking/Tracking";
+
 import ben from "./../../images/home/ben.png";
 const trackingId = "UA-189058741-1";
 const {
@@ -159,11 +160,16 @@ function Home(props) {
         .then(function (response) {
           const referToId = response.data.referId;
           props.setReferTo(referToId);
+          Mixpanel.identify(referToId);
+          Mixpanel.people.set({ email: email });
+          Mixpanel.track("waitlist_joined");
+          Mixpanel.people.set_once({ sign_up_date: new Date() });
           setLoading(false);
         })
-        .catch(function (error) {
-        });
+        .catch(function (error) {});
     } else {
+      Mixpanel.identify(old_user.referToId);
+      Mixpanel.track("waitlist_rejoined", { time: new Date() });
       handleClickOpen(old_user);
     }
   };
@@ -175,14 +181,12 @@ function Home(props) {
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
-            <Typography
+              <Typography
                 variant="caption"
                 color="secondary"
                 className="home-label"
               >
-                <strong>
-                  FOR STUDENTS{" "}
-                </strong>
+                <strong>FOR STUDENTS </strong>
               </Typography>
               <Typography variant="h2" color="secondary" className="home-title">
                 Get up to a <span className="teal-highlight">$5,000</span> tax
