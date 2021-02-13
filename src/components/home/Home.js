@@ -186,6 +186,15 @@ function Home(props) {
         <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
+            <Typography
+                variant="caption"
+                color="secondary"
+                className="home-label"
+              >
+                <strong>
+                  FOR STUDENTS{" "}
+                </strong>
+              </Typography>
               <Typography variant="h2" color="secondary" className="home-title">
                 Get up to a <span className="teal-highlight">$5,000</span> tax
                 refund in <span className="teal-highlight">10 minutes</span>.
@@ -195,7 +204,7 @@ function Home(props) {
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                Standard qualifies students for unclaimed tax credits.
+                We qualify students for unclaimed tax credits.
                 <br />
                 <br />
                 We do the paper work, you get cash, and we'll explain why. If we

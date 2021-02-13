@@ -225,7 +225,7 @@ function Onboard(props) {
   };
 
   const navToRefund = () => {
-    console.log("hii");
+    
     const refund = Number(getRefund().toFixed(2));
     const taxableIncome = Number(getTaxableIncome().toFixed(2));
     let taxRate = 0;

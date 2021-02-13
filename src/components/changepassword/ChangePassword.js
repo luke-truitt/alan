@@ -183,7 +183,7 @@ function ChangeForm(props) {
           <DialogTitle id="alert-dialog-slide-title">Account Found</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Password Reset Email Sent! Check your email to reset your password and sign in.
+              Password Reset! Sign In Below
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -195,6 +195,7 @@ function ChangeForm(props) {
       </div>
     );
   }
+  
   return (
     <div className="change-form row-container">
       <TextInput

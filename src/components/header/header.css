@@ -10,11 +10,11 @@
   width: 100vw;
   z-index: 100;
 }
-h4.logo-text {
-  font-family: "Crimson Text", serif;
-  letter-spacing: 2px;
-  color: white;
-  margin-left: 2rem;
+.header-logo {
+  margin-top: 10px;
+  height: 30px;
+  width: auto;
+  margin-left: 2vw;
 }
 
 .header-button-container {
@@ -24,7 +24,7 @@ h4.logo-text {
 }
 
 .header-button-container > button{
-  height: 80%;
+  height: 70%;
   margin-right: 2vw;
   padding-left: 30px;
   padding-right: 30px;
@@ -34,7 +34,9 @@ h4.logo-text {
   border: none !important;
   font-size: 15pt !important;
 }
-
+.contact-button {
+  border: none !important;
+}
 @media only screen and (max-width: 750px) {
   .header-button-container > button{
     width: auto;
@@ -42,7 +44,12 @@ h4.logo-text {
     padding-right: 20px;
   }
 }
-
+@media only screen and (max-width: 750px) {
+  .header-button-container > button{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
 @media only screen and (max-width: 350px) {
   .header-sign-out-button{
     display: none !important;

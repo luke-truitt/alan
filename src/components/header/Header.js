@@ -32,14 +32,15 @@ function Header(props) {
     console.log("No dice"); 
     setLoading(true);
     auth.signOut().then(() => {
-        setUserData({});
-        displayName='';
         history.push({ pathname: "/join" });
+        setUserData({});
         setLoading(false);
       }).catch((error) => {
         console.log(error);
       });
     }
+  const onContact = () => { history.push({pathname: "/contact"}); };
+
   const onLogo = () => { history.push({ pathname: "/" }); }
   const { width, height } = useWindowDimensions();
   const isMobile = width < 900;
@@ -55,10 +56,12 @@ function Header(props) {
 
   let displayAccount = isLoggedIn
   let displaySignOut = (isLoggedIn && (isJoin || isHome || isAccount))
-  let displaySignUp = (!isLoggedIn && (isHome || (isRefund && !isMobile)))
+  let displaySignUp = (!isLoggedIn && ((isHome && !isMobile) || (isRefund && !isMobile)))
   let displaySignIn = (!isLoggedIn && (isHome || (isRefund && !isMobile)))
+  let displayContact = (!(isMobile && isOnboard) && !(isMobile && isRefund));
   let displayName = (userData['firstName']==undefined ) ? "" : `Hi ${userData['firstName']}!`;
   let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>
+
   useEffect(() => {
     setTimeout(() => {
       if (user.user && loadAttempts < 5 && Object.keys(userData).length < 1) {
@@ -73,7 +76,7 @@ function Header(props) {
             .catch(() => console.log("ERROR GETTING USER"));
           setLoadAttempts(loadAttempts + 1);
         }, 1000);
-      }
+      } 
     });
   });
   return (
@@ -87,6 +90,7 @@ function Header(props) {
           {displaySignOut && <Button onClick={onSignOut} variant="contained" color="primary" className="header-sign-out-button">{signOutName}</Button>}
           {displaySignUp && <Button onClick={onSignUp} variant="contained" color="primary"> Sign Up </Button>}
           {displaySignIn && <Button onClick={onSignIn} variant="outlined" color="primary"> Sign in </Button>}
+          {displayContact && <Button onClick={onContact} variant="outlined" color="primary" className="contact-button"> Contact </Button>}
         </div>
       </div>
     </ThemeProvider>
