@@ -29,7 +29,7 @@ const USER_ID = REACT_APP_EMAILJS_USER_ID;
 const TEMPLATE_ID = "template_kwxoxb7";
 const SERVICE_ID = REACT_APP_EMAILJS_SERVICE_ID;
 
-const BASE_URL = "http://fromstandard.com";
+const BASE_URL = "http://taxes.fromstandard.com";
 
 export function PlaceholderFull() {
   return (

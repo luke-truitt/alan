@@ -60,6 +60,7 @@ import OnboardingTimeline from "./OnboardTimeline";
 import { updateUser } from "../../firebase";
 import { Mixpanel } from "../../mixpanel";
 const trackingId = "UA-189058741-1";
+
 const {
   REACT_APP_API_BASE_URL,
   REACT_APP_WAITLIST_URL,
@@ -423,6 +424,8 @@ function Onboard(props) {
     if (
       fields["citizen"] == "No" ||
       fields["student"] == "No" ||
+      fields["dependent"] == "No" ||
+      fields["dependent"] == "idk" ||
       fields["student"] == ""
     ) {
       return 0;
@@ -431,7 +434,7 @@ function Onboard(props) {
   }
 
   function getRefundableCredits() {
-    if (fields["citizen"] == "No") {
+    if (fields["citizen"] == "No" || fields["dependent"] == "No" || fields["dependent"] == "idk") {
       return 0;
     }
     let creds = Math.max(1800 - fields["covidCredits"], 0);

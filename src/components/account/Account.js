@@ -70,7 +70,7 @@ const mockProps = {
   activeStep: 2,
 };
 
-const BASE_URL = "https://fromstandard.com";
+const BASE_URL = "https://taxes.fromstandard.com";
 
 const timelineData = [
   { number: 1, text: "Join Us" },
