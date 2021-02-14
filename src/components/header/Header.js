@@ -33,7 +33,7 @@ function Header(props) {
 
       history.push({ pathname: "/account" });
     } else {
-      Mixpanel.track("visit_account", { source: "header" });
+      Mixpanel.track("visit_sign_in", { source: "header" });
       history.push({ pathname: "/signin" });
     }
   };
