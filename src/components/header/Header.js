@@ -33,7 +33,7 @@ function Header(props) {
 
       history.push({ pathname: "/account" });
     } else {
-      Mixpanel.track("visit_account", { source: "header" });
+      Mixpanel.track("visit_sign_in", { source: "header" });
       history.push({ pathname: "/signin" });
     }
   };
@@ -74,7 +74,6 @@ function Header(props) {
     if (user.user) {
       Mixpanel.identify(user.user.referToId);
     }
-    Mixpanel.track("visit_home", { source: "header" });
     history.push({ pathname: "/" });
   };
   const { width, height } = useWindowDimensions();

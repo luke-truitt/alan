@@ -97,7 +97,6 @@ function ContactInfo(props) {
         variant="contained"
         color="secondary"
         onClick={() => {
-          Mixpanel.track("visit_home", { source: "contact" });
           history.push({ pathname: "/" });
         }}
       >
@@ -108,7 +107,6 @@ function ContactInfo(props) {
         variant="contained"
         color="secondary"
         onClick={() => {
-          Mixpanel.track("visit_home", { source: "contact" });
           history.push({ pathname: "/" });
         }}
       >
