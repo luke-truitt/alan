@@ -48,9 +48,9 @@
   .header-button-container > button{
     padding-left: 5px;
     padding-right: 5px;
+    width: auto;
+    font-size: 10pt !important;
   }
-}
-@media only screen and (max-width: 350px) {
   .header-sign-out-button{
     display: none !important;
   }
