@@ -123,7 +123,7 @@ export const generateUserDocument = async (user, additionalData) => {
 
   if (!snapshot.exists) {
     console.log('new user');
-    sendWelcomeEmail(additionalData['email'], additionalData['firstName']);
+    sendWelcomeEmail(user.email, additionalData['firstName']);
     const { email, firstName, lastName, phone } = user;
     // const displayName = firstName;
     try {

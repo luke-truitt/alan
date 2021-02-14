@@ -206,7 +206,7 @@ function Home(props) {
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                We qualify students for unclaimed tax credits.
+                We qualify students for unclaimed tax credits. <u>It doesn't matter if you had no income or are a dependent.</u>
                 <br />
                 <br />
                 We do the paperwork, you get cash, and we'll explain why. If we
