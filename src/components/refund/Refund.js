@@ -203,7 +203,7 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $2,342
+                            $1,313.89
                           </Typography>
                           <Typography
                             color="textSecondary"
@@ -211,7 +211,7 @@ function Refund(props) {
                             className="refund-card-caption"
                           >
                             That's how much the average American college student
-                            is owed in a refund.
+                            misses on their current refund due to not filing, unclaimed credits, and incorrent tax identification.
                           </Typography>
                         </div>
                       </CardContent>
@@ -225,7 +225,7 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $473
+                            $466
                           </Typography>
                           <Typography
                             color="textSecondary"
@@ -306,7 +306,7 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $473
+                          $466
                         </Typography>
                         <Typography
                           color="textSecondary"
@@ -417,7 +417,7 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $473
+                            $466
                           </Typography>
                           <Typography
                             color="textSecondary"
@@ -499,7 +499,7 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $473
+                          $466
                         </Typography>
                         <Typography
                           color="textSecondary"

@@ -209,8 +209,8 @@ function Home(props) {
                 We qualify students for unclaimed tax credits. <u>It doesn't matter if you had no income or are a dependent.</u>
                 <br />
                 <br />
-                We do the paperwork, you get cash, and we'll explain why. If we
-                can't get you a bigger refund, you pay $0.
+                The peace of mind of a CPA for the price of lunch. Don't pay until you get paid, and if we
+                can't get you a bigger refund we waive the $25 fee.
               </Typography>
               <EmbeddedEmailInput
                 className="home-input"

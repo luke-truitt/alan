@@ -362,7 +362,7 @@ function JoinForm(props) {
                   Mixpanel.identify(props.referToId);
 
                   Mixpanel.track("visit_sign_in", { source: "join" });
-                  history.push({ pathname: "/signin" });
+                  history.push({ pathname: "/signin"});
                 }
               }}
             >
