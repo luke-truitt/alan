@@ -306,7 +306,7 @@ function JoinForm(props) {
               color="secondary"
               onClick={(e) => onSubmit()}
             >
-              {loading ? <CircularProgress /> : "Join"}
+              {loading ? <CircularProgress /> : "Get Your Refund"}
             </Button>
             <div className="join-or-container column-container">
               <div className="join-or-horizontal-line" />
