@@ -209,7 +209,7 @@ function Home(props) {
               >
                 We qualify students for unclaimed tax credits.{" "}
                 <u>
-                  It doesn't matter if you had no income or are a dependent.
+                  You still may qualify for a refund if you had no income or are a dependent.
                 </u>
                 <br />
                 <br />
