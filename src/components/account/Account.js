@@ -419,8 +419,8 @@ function Account(props) {
                     <DisabledCardFull icon={submitIcon} />
 
                     <div className="account-page-c2 column-container">
-                      <DisabledCardHalf image={trackImg} />
-                      <DisabledCardHalf image={investImg} />
+                      <DisabledCardHalf image={trackImg} title="Track your Refund"/>
+                      <DisabledCardHalf image={investImg} title="Invest your Refund"/>
                     </div>
                   </div>
                 </Fade>
