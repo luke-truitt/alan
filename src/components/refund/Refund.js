@@ -49,7 +49,7 @@ function Refund(props) {
   const [breakdown, setBreakdown] = useState(null);
   const [loadAttempts, setLoadAttempts] = useState(0);
   const { width, height } = useWindowDimensions();
-  const isMobile = width < 900;
+  const isMobile = width < 750;
   const user = useContext(AuthContext);
   const redirect = (path, state) => {
     history.push({ pathname: path, state: state });
