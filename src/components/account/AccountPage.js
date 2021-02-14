@@ -20,7 +20,8 @@ import {
   slideDefault,
   fadeDefault,
   shortFade,
-} from "../../utils/constants";
+} from "./../../utils/constants";
+
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext, useEffect, useState, Fragment } from "react";
 import ChipInput from "material-ui-chip-input";
@@ -28,9 +29,7 @@ import { auth, getUserDoc } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { isIOS, isAndroid, isSafari } from "react-device-detect";
 import "./../../styles.css";
-import "./account.css";
-import { Mixpanel } from "./../../mixpanel.js";
-
+import "./account-page.css";
 import giftIcon from "./../../images/icons/gift-dark.svg";
 import shareIcon from "./../../images/icons/share-dark.svg";
 import copyIcon from "./../../images/icons/copy-dark.svg";
@@ -47,12 +46,7 @@ import accountTimeline3 from "./../../images/timeline/timeline-3.svg";
 import accountTimeline4 from "./../../images/timeline/timeline-4.svg";
 import accountTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import { useLocation, useHistory } from "react-router-dom";
-import Header from "../header/Header.js";
-import MuiAlert from "@material-ui/lab/Alert";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import Header from "./../header/Header.js";
 
 const USER_ID = "user_oxRU2E4xVKC6z7tq0Ee66";
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -193,11 +187,7 @@ function ReviewCard(props) {
           the calculator, you can do so{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}
-            onClick={() => {
-              Mixpanel.identify(props.referToId);
-              Mixpanel.track("retake_refund");
-              props.onCalculator();
-            }}
+            onClick={() => props.onCalculator()}
           >
             here
           </a>
@@ -207,11 +197,7 @@ function ReviewCard(props) {
               Your initial estimate was $
               <a
                 style={{ textDecoration: "underline", cursor: "pointer" }}
-                onClick={() => {
-                  Mixpanel.identify(props.referToId);
-                  Mixpanel.track("view_refund", { source: "account" });
-                  history.push({ pathname: "/refund" });
-                }}
+                onClick={() => history.push({ pathname: "/refund" })}
               >
                 {numberWithCommas(props.userData.refundBreakdown.netRefund)}
               </a>
@@ -228,11 +214,7 @@ function ReviewCard(props) {
           Retake the calculator or haven't taken it yet, you can do so{" "}
           <a
             style={{ textDecoration: "underline" }}
-            onClick={() => {
-              Mixpanel.identify(props.referToId);
-              Mixpanel.track("retake_refund");
-              props.onCalculator();
-            }}
+            onClick={() => props.onCalculator()}
           >
             here
           </a>
@@ -255,8 +237,9 @@ function ReviewCard(props) {
   );
 }
 
-function Account(props) {
+function AccountPage(props) {
   const user = useContext(AuthContext);
+
   const location = useLocation();
   const [openToast, setOpenToast] = useState(
     location.state ? location.state["accountNew"] : false
@@ -295,6 +278,7 @@ function Account(props) {
   useEffect(() => {
     setTimeout(() => {
       if (!user.user && loadAttempts > 2) {
+        console.log(user);
         history.push("/signin");
       } else {
         setLoadAttempts(loadAttempts + 1);
@@ -308,11 +292,10 @@ function Account(props) {
               setDataLoaded(false);
               return;
             }
-            Mixpanel.identify(user.referToId);
             setUserData(result);
             setDataLoaded(true);
           })
-          .catch(() => {});
+          .catch(() => console.log("ERROR GETTING USER"));
       }, 500);
     }
   });
@@ -327,8 +310,6 @@ function Account(props) {
     setOpenToast(false);
   };
   const onCalculator = () => {
-    Mixpanel.identify(referToId);
-    Mixpanel.track("visit_onboard", { source: "account" });
     history.push({
       pathname: "/onboard",
       state: { email: userData["email"], referToId: referToId },
@@ -382,16 +363,18 @@ function Account(props) {
               className="sign-out-button"
               color="primary"
               onClick={() => {
+                console.log("No dice");
                 setLoading(true);
                 auth
                   .signOut()
-                  .then(() => {
-                    Mixpanel.identify(referToId);
-                    Mixpanel.track("sign_out", { source: "account" });
+                  .then(() => 
+                    
                     history.push({ pathname: "/join" });
                     setLoading(false);
                   })
-                  .catch((error) => {});
+                  .catch((error) => {
+                    console.log(error);
+                  });
               }}
             >
               Sign Out
@@ -404,15 +387,9 @@ function Account(props) {
                 <Fade in {...shortFade}>
                   <div>
                     <MobileWelcome />
-                    <InviteCard
-                      firstName={userData["firstName"]}
-                      lastName={userData["lastName"]}
-                      username={userData["firstName"]}
-                      referToId={userData["referToId"]}
-                    />
+                    <InviteCard />
                     <ReviewCard
                       userData={userData}
-                      referToId={userData["referToId"]}
                       onCalculator={() => onCalculator()}
                     />
                     <DisabledCardFull icon={uploadIcon} />
@@ -437,15 +414,13 @@ function Account(props) {
             open={openToast}
             autoHideDuration={5000}
             onClose={handleClose}
-          >
-            <Alert onClose={handleClose} severity="success">
-              Nice work! Glad to have you here.
-            </Alert>
-          </Snackbar>
+            severity="success"
+            message="Nice work! Glad to have you here."
+          />
         </div>
       </Slide>
     </ThemeProvider>
   );
 }
 
-export default Account;
+export default AccountPage;

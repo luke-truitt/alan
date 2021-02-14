@@ -13,7 +13,7 @@ import RouteChangeTracker from "./utils/RouteChangeTracker";
 import SignIn from "./components/signin/SignIn";
 import ResetPassword from "./components/resetpassword/ResetPassword";
 import ChangePassword from "./components/changepassword/ChangePassword";
-import Contact from "./components/changepassword copy/Contact";
+import Contact from "./components/contact/Contact";
 import { AuthProvider } from "./providers/AuthProvider";
 
 import { useEffect, useState } from "react";

@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
 import { primaryTheme, timelineData } from "../../utils/constants.js";
 import "./changepassword.css";
@@ -24,6 +24,7 @@ import joinTimeline3 from "./../../images/timeline/timeline-3.svg";
 import joinTimeline4 from "./../../images/timeline/timeline-4.svg";
 import joinTimeline5 from "./../../images/timeline/timeline-5-last.svg";
 import Header from "../header/Header";
+import { Mixpanel } from "./../../mixpanel";
 
 const timelineNumbers = {
   1: joinTimeline1,
@@ -58,7 +59,11 @@ function JoinTimeline() {
   ));
   return (
     <div className="row-container change-timeline">
-      <Typography variant="h5" color="primary" className="change-timeline-title">
+      <Typography
+        variant="h5"
+        color="primary"
+        className="change-timeline-title"
+      >
         How does it work?
       </Typography>
       {timelineSteps}
@@ -72,8 +77,9 @@ function ChangeForm(props) {
 
   const getCode = () => {
     const params =
-    location.search.split("?").length == 1
-      ? [] : location.search.split("?")[1].split("&");
+      location.search.split("?").length == 1
+        ? []
+        : location.search.split("?")[1].split("&");
     let i;
     for (i = 0; i < params.length; i++) {
       const paramName = params[i].split("=")[0];
@@ -81,8 +87,8 @@ function ChangeForm(props) {
         return params[i].split("=")[1];
       }
     }
-    return '';
-  }
+    return "";
+  };
   const [code, setCode] = useState(getCode());
   const [codeValid, setCodeValid] = useState(false);
   const [valid, setValid] = useState(true);
@@ -91,9 +97,6 @@ function ChangeForm(props) {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [open, setOpen] = useState(false);
-  const redirectHome = () => {
-    history.push({ pathname: "/" });
-  };
   const keyDown = (e, val) => {
     var keyCode = e.keyCode || e.which;
 
@@ -102,42 +105,48 @@ function ChangeForm(props) {
       onChangePassword();
     }
   };
-  
-  
-  if(!codeValid) {
-    auth.verifyPasswordResetCode(code)
-      .then(function(email) {
+
+  if (!codeValid) {
+    auth
+      .verifyPasswordResetCode(code)
+      .then(function (email) {
         setCodeValid(true);
       })
-      .catch(function(error) {
-        alert("This code has expired, sending you to the Forgot Password Screen");
-        history.push({pathname: 'resetpassword'})
-      })
+      .catch(function (error) {
+        alert(
+          "This code has expired, sending you to the Forgot Password Screen"
+        );
+        history.push({ pathname: "resetpassword" });
+      });
   }
-    
+
   const onChangePassword = () => {
-    auth.confirmPasswordReset(code, password)
-    .then(function() {
-      // Success message
-      setOpen(true);
-    })
-    .catch(function(e) {
-      // Invalid code message
-      // if code invalid, send to forgot password screen
-      if(e.t && e.t.code=="auth/invalid-action-code") {
-        alert("This code has expired, sending you to the Forgot Password Screen");
-        history.push({pathname: 'resetpassword'})
-      } else {
-        // else if the input password was bad prompt to reenter it
-        setError("Incorrect Email or Password!");
-        console.error("Error signing in with password and email", e);
-        setInvalid(true);
-        setSending(false);
-      }
-    })
+    auth
+      .confirmPasswordReset(code, password)
+      .then(function () {
+        // Success message
+        setOpen(true);
+      })
+      .catch(function (e) {
+        // Invalid code message
+        // if code invalid, send to forgot password screen
+        if (e.t && e.t.code == "auth/invalid-action-code") {
+          alert(
+            "This code has expired, sending you to the Forgot Password Screen"
+          );
+          history.push({ pathname: "resetpassword" });
+        } else {
+          // else if the input password was bad prompt to reenter it
+          setError("Incorrect Email or Password!");
+          console.error("Error signing in with password and email", e);
+          setInvalid(true);
+          setSending(false);
+        }
+      });
   };
 
   const navTo = () => {
+    Mixpanel.track("visit_sign_in", { source: "change_password" });
     history.push({
       pathname: "/signin",
     });
@@ -155,7 +164,7 @@ function ChangeForm(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     navTo();
@@ -227,7 +236,12 @@ function ChangeForm(props) {
         className="apple-sign-button"
         variant="contained"
         color="primary"
-        onClick={() => history.push({ pathname: "/signin" })}
+        onClick={() => {
+          Mixpanel.track("visit_sign_in", { source: "change_password" });
+          history.push({
+            pathname: "/signin",
+          });
+        }}
       >
         Sign In
       </Button>
@@ -235,7 +249,10 @@ function ChangeForm(props) {
         className="apple-sign-button"
         variant="contained"
         color="primary"
-        onClick={() => history.push({ pathname: "/join" })}
+        onClick={() => {
+          Mixpanel.track("visit_join", { source: "change_password" });
+          history.push({ pathname: "/join" });
+        }}
       >
         Set Up Account
       </Button>

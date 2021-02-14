@@ -91,8 +91,6 @@ function Onboard(props) {
   const [loadingScreen, setLoadingScreen] = useState(true);
   const [open, setOpen] = useState(false);
   const user = useContext(AuthContext);
-  Mixpanel.identify(user.referToId);
-
   const history = useHistory();
   const keyDown = (e, val) => {
     var code = e.keyCode || e.which;
@@ -249,6 +247,8 @@ function Onboard(props) {
         jobTitle: fields["jobTitle"],
       });
     }
+    Mixpanel.identify(props.referToId);
+    Mixpanel.track("visit_refund", { source: "onboard" });
     history.push({
       pathname: "/refund",
       state: {
@@ -304,12 +304,14 @@ function Onboard(props) {
       });
     }
     if (step >= forms.length) {
+      Mixpanel.identify(props.referToId);
       Mixpanel.track("onboarding_complete");
       setLoadingScreen(false);
       setTimeout(navToRefund, 7000);
       setStep(forms.length);
     } else {
       setStep(step + 1);
+      Mixpanel.identify(props.referToId);
       Mixpanel.track(trackingEvent);
       forms[step - 1].formFields.forEach((field) => {
         console.log({ field: fields[field] });

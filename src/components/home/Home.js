@@ -49,6 +49,10 @@ function Home(props) {
 
   const handleClose = (choice) => {
     if (choice == "no") {
+      if (user) {
+        Mixpanel.identify(user.referToId);
+      }
+      Mixpanel.track("visit_onboard", { source: "home" });
       history.push({
         pathname: "/onboard",
         state: {
@@ -58,6 +62,10 @@ function Home(props) {
         },
       });
     } else {
+      if (user) {
+        Mixpanel.identify(user.referToId);
+      }
+      Mixpanel.track("visit_sign_in", { source: "home" });
       history.push({
         pathname: "/signin",
       });
@@ -149,6 +157,7 @@ function Home(props) {
   const addEmail = async (email) => {
     const old_user = await findUserByEmail(email);
     if (old_user == null) {
+      Mixpanel.track("visit_home", { source: "home" });
       history.push({
         pathname: "/onboard",
         state: { email: email, referById: referById },
@@ -161,7 +170,7 @@ function Home(props) {
           const referToId = response.data.referId;
           props.setReferTo(referToId);
           Mixpanel.identify(referToId);
-          Mixpanel.people.set({ email: email });
+          Mixpanel.people.set({ $email: email });
           Mixpanel.track("waitlist_joined");
           Mixpanel.people.set_once({ sign_up_date: new Date() });
           setLoading(false);

@@ -26,10 +26,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as emailjs from "emailjs-com";
 import Header from "../header/Header";
 import { Mixpanel } from "../../mixpanel.js";
-const {
-  REACT_APP_EMAILJS_USER_ID,
-  REACT_APP_EMAILJS_SERVICE_ID,
-} = process.env;
+const { REACT_APP_EMAILJS_USER_ID, REACT_APP_EMAILJS_SERVICE_ID } = process.env;
 
 const USER_ID = REACT_APP_EMAILJS_USER_ID;
 const TEMPLATE_ID = "template_b3u2bhe";
@@ -93,6 +90,9 @@ function JoinForm(props) {
 
   const navTo = () => {
     setLoading(false);
+    Mixpanel.identify(props.referToId);
+
+    Mixpanel.track("visit_account", { source: "join" });
     history.push({
       pathname: "/account",
     });
@@ -123,14 +123,20 @@ function JoinForm(props) {
         referById,
         refundBreakdown,
       }).then((res) => {
+        Mixpanel.identify(referToId);
+
         Mixpanel.track("account_created", { type: "normal" });
         Mixpanel.people.set({
+          $email: email,
           $first_name: firstName,
           $last_name: lastName,
           $phone: phone,
         });
         // sendWelcomeEmail();
         setTimeout(() => {
+          Mixpanel.identify(props.referToId);
+
+          Mixpanel.track("visit_account", { source: "join" });
           history.push({
             pathname: "/account",
             state: { accountNew: true },
@@ -142,6 +148,8 @@ function JoinForm(props) {
         setPhone("");
       });
     } catch (error) {
+      Mixpanel.identify(props.referToId);
+
       Mixpanel.track("error_on_join", { type: "normal" });
       console.log("error ", error);
       if (error.message) {
@@ -158,6 +166,7 @@ function JoinForm(props) {
   const onSubmit = () => {
     setInvalid({ email: !valid["email"], password: !valid["password"] });
     if (valid["password"] && valid["email"]) {
+      Mixpanel.identify(props.referToId);
       Mixpanel.track("join", { type: "normal" });
       createUserWithEmailAndPasswordHandler();
     }
@@ -313,6 +322,8 @@ function JoinForm(props) {
               color="primary"
               onClick={() => {
                 try {
+                  Mixpanel.identify(props.referToId);
+
                   Mixpanel.track("join", { type: "google" });
                   setGoogleLoading(true);
                   signInWithGoogle(
@@ -320,6 +331,8 @@ function JoinForm(props) {
                     referById,
                     refundBreakdown
                   ).then(() => {
+                    Mixpanel.identify(props.referToId);
+
                     Mixpanel.track("account_created", { type: "google" });
                     // sendWelcomeEmail();
                     navTo();
@@ -327,6 +340,8 @@ function JoinForm(props) {
                   });
                 } catch (error) {
                   setError(error.message);
+                  Mixpanel.identify(props.referToId);
+
                   Mixpanel.track("error_on_join", { type: "google" });
                 }
               }}
@@ -340,8 +355,13 @@ function JoinForm(props) {
               color="textSecondary"
               onClick={() => {
                 if (user.user) {
+                  Mixpanel.identify(props.referToId);
+                  Mixpanel.track("visit_account", { source: "join" });
                   history.push({ pathname: "/account" });
                 } else {
+                  Mixpanel.identify(props.referToId);
+
+                  Mixpanel.track("visit_sign_in", { source: "join" });
                   history.push({ pathname: "/signin" });
                 }
               }}
@@ -362,8 +382,6 @@ function JoinForm(props) {
 }
 
 function Join(props) {
-  Mixpanel.identify(props.referToId);
-  Mixpanel.track("visit_join");
   return (
     <ThemeProvider theme={primaryTheme}>
       <Header page={"Join"} />

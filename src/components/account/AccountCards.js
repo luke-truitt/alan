@@ -4,6 +4,7 @@ import {
   CardContent,
   TextField,
   Button,
+  Snackbar,
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import giftIcon from "./../../images/icons/gift-dark.svg";
@@ -16,10 +17,13 @@ import "./account-cards.css";
 import * as emailjs from "emailjs-com";
 import { EmailChipInput } from "./../inputs/Inputs";
 import { Mixpanel } from "./../../mixpanel.js";
-const {
-  REACT_APP_EMAILJS_USER_ID,
-  REACT_APP_EMAILJS_SERVICE_ID,
-} = process.env;
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+const { REACT_APP_EMAILJS_USER_ID, REACT_APP_EMAILJS_SERVICE_ID } = process.env;
 
 const USER_ID = REACT_APP_EMAILJS_USER_ID;
 const TEMPLATE_ID = "template_kwxoxb7";
@@ -100,14 +104,29 @@ function EmailChip(props) {
   );
 }
 export function InviteCard(props) {
-  Mixpanel.identify(props.referToId);
   const inviteCardTitle =
     "Invite friends to Standard and we'll file your taxes for free.";
   const inviteCardSubtitle =
     "Know someone who is missing out on free money? We'll waive the $25 fee for you when two friends file with Standard.";
   const [emails, setEmails] = useState([]);
   const [email, setEmail] = useState("");
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openFail, setOpenFail] = useState(false);
 
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSuccess(false);
+  };
+  const handleCloseFail = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenFail(false);
+  };
   const handleAdd = (chip) => {
     setEmails([...emails, chip]);
   };
@@ -127,22 +146,25 @@ export function InviteCard(props) {
       sendInvite();
     }
   };
+
   const sendInvite = () => {
     Mixpanel.track("referral", { type: "send" });
+    Mixpanel.identify(props.referToId);
     const email_to = email;
     const templateParams = {
-      from_name: props.firstName + props.lastName,
+      from_first_name: props.firstName,
+      from_full_name: props.firstName + " " + props.lastName,
       send_to: email_to,
       refer_link: BASE_URL + "/?referId=" + props.referToId,
     };
     emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID).then(
       function (response) {
-        alert("Invites sent successfully!");
+        setOpenSuccess(true);
         setEmail("");
       },
       function (error) {
         Mixpanel.track("error_referral_send");
-        setEmail("");
+        setOpenFail(true);
       }
     );
   };
@@ -169,6 +191,7 @@ export function InviteCard(props) {
   // };
 
   const handleShareClick = () => {
+    Mixpanel.identify(props.referToId);
     if (navigator.share) {
       navigator
         .share({
@@ -190,6 +213,24 @@ export function InviteCard(props) {
   return (
     <Card className="invite-card account-page-card">
       <CardContent className="invite-card-content">
+        <Snackbar
+          open={openSuccess}
+          autoHideDuration={2000}
+          onClose={handleCloseSuccess}
+        >
+          <Alert onClose={handleCloseSuccess} severity="success">
+            Invite successfully sent! Nice work.
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={openFail}
+          autoHideDuration={2000}
+          onClose={handleCloseFail}
+        >
+          <Alert onClose={handleCloseFail} severity="error">
+            Hm, that didn't work. Re-check the email.
+          </Alert>
+        </Snackbar>
         <div className="invite-card-c0 column-container">
           <img src={giftIcon} className="invite-card-icon" />
           <div className="invite-card-c1 row-container">
@@ -235,6 +276,7 @@ export function InviteCard(props) {
                   color="textPrimary"
                   variant="outlined"
                   onClick={() => {
+                    Mixpanel.identify(props.referToId);
                     Mixpanel.track("referral", { type: "copy" });
                     navigator.clipboard.writeText(
                       BASE_URL + "/?referId=" + props.referToId
