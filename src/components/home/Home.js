@@ -209,7 +209,7 @@ function Home(props) {
                 We qualify students for unclaimed tax credits.
                 <br />
                 <br />
-                We do the paper work, you get cash, and we'll explain why. If we
+                We do the paperwork, you get cash, and we'll explain why. If we
                 can't get you a bigger refund, you pay $0.
               </Typography>
               <EmbeddedEmailInput
