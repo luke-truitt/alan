@@ -26,14 +26,14 @@ function Header(props) {
 
   const user = useContext(AuthContext);
 
-  if (user.user) {
-    Mixpanel.identify(user.user.referToId);
-  }
-
   const onSignIn = () => {
     if (user.user) {
+      Mixpanel.identify(user.user.referToId);
+      Mixpanel.track("visit_account", { source: "header" });
+
       history.push({ pathname: "/account" });
     } else {
+      Mixpanel.track("visit_account", { source: "header" });
       history.push({ pathname: "/signin" });
     }
   };
@@ -42,8 +42,11 @@ function Header(props) {
   };
   const onAccount = () => {
     if (user.user) {
+      Mixpanel.identify(user.user.referToId);
+      Mixpanel.track("visit_account", { source: "header" });
       history.push({ pathname: "/account" });
     } else {
+      Mixpanel.track("visit_sign_in", { source: "header" });
       history.push({ pathname: "/signin" });
     }
   };
@@ -52,7 +55,8 @@ function Header(props) {
     auth
       .signOut()
       .then(() => {
-        Mixpanel.track("sign_out", { page: "header" });
+        Mixpanel.identify(user.user.referToId);
+        Mixpanel.track("sign_out", { source: "header" });
         history.push({ pathname: "/join" });
         setUserData({});
         setLoading(false);
@@ -62,11 +66,15 @@ function Header(props) {
       });
   };
   const onContact = () => {
+    Mixpanel.track("visit_contact", { source: "header" });
     history.push({ pathname: "/contact" });
   };
 
   const onLogo = () => {
-    Mixpanel.track("logo_click");
+    if (user.user) {
+      Mixpanel.identify(user.user.referToId);
+    }
+    Mixpanel.track("visit_home", { source: "header" });
     history.push({ pathname: "/" });
   };
   const { width, height } = useWindowDimensions();
@@ -80,14 +88,17 @@ function Header(props) {
   let isResetPassword = page == "ResetPassword";
   let isOnboard = page == "Onboard";
   let isRefund = page == "Refund";
-  let isContact = page =="Contact";
+  let isContact = page == "Contact";
 
   let displayAccount = isLoggedIn && !(isMobile && isAccount);
   let displaySignOut = isLoggedIn && (isJoin || isHome || isAccount);
   let displaySignUp =
-    !isLoggedIn && ((isHome && !isMobile) || (isRefund && !isMobile) || isContact);
-  let displaySignIn = !isLoggedIn && (isHome || isContact || (isRefund && !isMobile));
-  let displayContact = !(isMobile && isOnboard) && !(isMobile && isRefund) && !isContact;
+    !isLoggedIn &&
+    ((isHome && !isMobile) || (isRefund && !isMobile) || isContact);
+  let displaySignIn =
+    !isLoggedIn && (isHome || isContact || (isRefund && !isMobile));
+  let displayContact =
+    !(isMobile && isOnboard) && !(isMobile && isRefund) && !isContact;
   let displayName =
     userData["firstName"] == undefined ? "" : `Hi ${userData["firstName"]}!`;
   let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>;
@@ -118,7 +129,8 @@ function Header(props) {
           style={{ cursor: "pointer" }}
           onClick={() => onLogo()}
         >
-          <img src={logo} className="header-logo" />{}
+          <img src={logo} className="header-logo" />
+          {}
         </Typography>
         <div className="header-button-container">
           {displayAccount && (

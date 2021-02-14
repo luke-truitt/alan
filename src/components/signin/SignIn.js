@@ -17,7 +17,12 @@ import { Mixpanel } from "./../../mixpanel.js";
 
 import { NameInput, PhoneNumberInput, TextInput } from "../inputs/Inputs.js";
 import { useState } from "react";
-import { auth, signInWithGoogle, generateUserDocument } from "../../firebase";
+import {
+  auth,
+  signInWithGoogle,
+  generateUserDocument,
+  getUserDoc,
+} from "../../firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import JoinTimeline from "./../join/JoinTimeline";
 import "./../inputs/inputs.css";
@@ -36,15 +41,11 @@ function SignInForm(props) {
   const [error, setError] = useState("");
   const [googleLoading, setGoogleLoading] = useState(false);
 
-  const redirectHome = () => {
-    history.push({ pathname: "/" });
-  };
-
   const signInWithEmailAndPasswordHandler = () => {
     setLoading(true);
     auth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((res) => {
         Mixpanel.track("sign_in", { type: "normal" });
         navTo();
         setLoading(false);
@@ -58,6 +59,7 @@ function SignInForm(props) {
       });
   };
   const navTo = () => {
+    Mixpanel.track("visit_account", { source: "sign_in" });
     history.push({
       pathname: "/account",
     });
@@ -114,7 +116,10 @@ function SignInForm(props) {
       <Typography
         variant="caption"
         className="sign-in-forgot-pass-text"
-        onClick={() => history.push({ pathname: "/resetpassword" })}
+        onClick={() => {
+          Mixpanel.track("visit_reset_pass", { source: "sign_in" });
+          history.push({ pathname: "/resetpassword" });
+        }}
         style={{ cursor: "pointer" }}
       >
         Forgot your password?
@@ -161,7 +166,10 @@ function SignInForm(props) {
         variant="body1"
         className="sign-in-sign-up-text"
         color="textSecondary"
-        onClick={() => history.push({ pathname: "/join" })}
+        onClick={() => {
+          Mixpanel.track("visit_join", { source: "sign_in" });
+          history.push({ pathname: "/join" });
+        }}
       >
         Not a member?{" "}
         <span className="signin-sign-in-button" style={{ cursor: "pointer" }}>

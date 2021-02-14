@@ -92,8 +92,6 @@ function Refund(props) {
       rtid = userData["referToId"];
       rbid = userData["referById"];
       bd = userData["refundBreakdown"];
-      Mixpanel.identify(rtid);
-      Mixpanel.track("viewed_refund");
       Mixpanel.people.set(bd);
     }
     return { email: em, referToId: rtid, referById: rbid, breakdown: bd };
@@ -146,10 +144,14 @@ function Refund(props) {
 
   const navTo = () => {
     if (user.user) {
+      Mixpanel.identify(referToId);
+      Mixpanel.track("visit_account", { source: "refund" });
       history.push({
         pathname: "/account",
       });
     } else {
+      Mixpanel.identify(referToId);
+      Mixpanel.track("visit_join", { source: "refund" });
       history.push({
         pathname: "/join",
         state: {

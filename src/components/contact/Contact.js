@@ -9,8 +9,9 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
+import { Mixpanel } from "../../mixpanel";
 import { primaryTheme, timelineData } from "../../utils/constants.js";
 import "./contact.css";
 import "./../../styles.css";
@@ -58,7 +59,11 @@ function JoinTimeline() {
   ));
   return (
     <div className="row-container contact-timeline">
-      <Typography variant="h5" color="primary" className="contact-timeline-title">
+      <Typography
+        variant="h5"
+        color="primary"
+        className="contact-timeline-title"
+      >
         How does it work?
       </Typography>
       {timelineSteps}
@@ -69,34 +74,32 @@ function JoinTimeline() {
 function ContactInfo(props) {
   const history = useHistory();
   let location = useLocation();
-
-  const redirectHome = () => {
-    history.push({ pathname: "/" });
-  };
-
-  const navTo = (path) => {
-    history.push({
-      pathname: path,
-    });
-  };
-  
   return (
     <div className="contact-form row-container">
-        <Typography variant="body1" className="contact-or">
-          <strong>Email</strong> <a href="mailto:hello@fromstandard.com">team@fromstandard.com</a>
-        </Typography>
-        <Typography variant="body1" className="contact-or">
-        <strong>Call or Text</strong> <a href="tel:+17208072551">+1 (720) 807 - 2551</a>
-        </Typography>
-        <Typography variant="body1" className="contact-or">
-        <strong>Address</strong> 1801 California Street Floor 24, Denver, CO 80202
-        </Typography>
-      <div className="contact-or-horizontal-line" style={{marginTop: "5vh", marginBottom: "5vh"}} />
+      <Typography variant="body1" className="contact-or">
+        <strong>Email</strong>{" "}
+        <a href="mailto:hello@fromstandard.com">team@fromstandard.com</a>
+      </Typography>
+      <Typography variant="body1" className="contact-or">
+        <strong>Call or Text</strong>{" "}
+        <a href="tel:+17208072551">+1 (720) 807 - 2551</a>
+      </Typography>
+      <Typography variant="body1" className="contact-or">
+        <strong>Address</strong> 1801 California Street Floor 24, Denver, CO
+        80202
+      </Typography>
+      <div
+        className="contact-or-horizontal-line"
+        style={{ marginTop: "5vh", marginBottom: "5vh" }}
+      />
       <Button
         className="contact-sign-button"
         variant="contained"
         color="secondary"
-        onClick={() => history.push({ pathname: "/" })}
+        onClick={() => {
+          Mixpanel.track("visit_home", { source: "contact" });
+          history.push({ pathname: "/" });
+        }}
       >
         Go Home
       </Button>
@@ -104,7 +107,10 @@ function ContactInfo(props) {
         className="contact-sign-button"
         variant="contained"
         color="secondary"
-        onClick={() => history.push({ pathname: "/" })}
+        onClick={() => {
+          Mixpanel.track("visit_home", { source: "contact" });
+          history.push({ pathname: "/" });
+        }}
       >
         Estimate your Refund
       </Button>
@@ -112,7 +118,10 @@ function ContactInfo(props) {
         className="contact-sign-button"
         variant="contained"
         color="secondary"
-        onClick={() => history.push({ pathname: "/signin" })}
+        onClick={() => {
+          Mixpanel.track("visit_sign_in", { source: "contact" });
+          history.push({ pathname: "/signin" });
+        }}
       >
         Sign In
       </Button>
@@ -120,7 +129,10 @@ function ContactInfo(props) {
         className="contact-sign-button"
         variant="contained"
         color="secondary"
-        onClick={() => history.push({ pathname: "/join" })}
+        onClick={() => {
+          Mixpanel.track("visit_join", { source: "contact" });
+          history.push({ pathname: "/join" });
+        }}
       >
         Set Up Account
       </Button>

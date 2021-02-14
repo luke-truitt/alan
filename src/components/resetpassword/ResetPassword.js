@@ -33,9 +33,6 @@ function ResetForm(props) {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [open, setOpen] = useState(false);
-  const redirectHome = () => {
-    history.push({ pathname: "/" });
-  };
   const keyDown = (e, val) => {
     var code = e.keyCode || e.which;
 
@@ -61,6 +58,7 @@ function ResetForm(props) {
   };
 
   const navTo = () => {
+    Mixpanel.track("visit_sign_in", { source: "reset_pass" });
     history.push({
       pathname: "/signin",
     });
@@ -153,7 +151,10 @@ function ResetForm(props) {
         className="apple-sign-button"
         variant="contained"
         color="primary"
-        onClick={() => history.push({ pathname: "/signin" })}
+        onClick={() => {
+          Mixpanel.track("visit_sign_in", { source: "reset_pass" });
+          history.push({ pathname: "/signin" });
+        }}
       >
         Sign In
       </Button>
@@ -161,7 +162,10 @@ function ResetForm(props) {
         className="apple-sign-button"
         variant="contained"
         color="primary"
-        onClick={() => history.push({ pathname: "/join" })}
+        onClick={() => {
+          Mixpanel.track("visit_join", { source: "reset_pass" });
+          history.push({ pathname: "/join" });
+        }}
       >
         Set Up Account
       </Button>
