@@ -95,8 +95,9 @@ function Home(props) {
   };
   useEffect(() => {
     initGA(trackingId);
+    Mixpanel.track("visit_home");
     PageView();
-  });
+  }, []);
 
   const navTo = () => {
     Event("SIGNUP", "User Signed Up", "LANDING_PAGE");
@@ -206,11 +207,15 @@ function Home(props) {
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                We qualify students for unclaimed tax credits. <u>It doesn't matter if you had no income or are a dependent.</u>
+                We qualify students for unclaimed tax credits.{" "}
+                <u>
+                  It doesn't matter if you had no income or are a dependent.
+                </u>
                 <br />
                 <br />
-                The peace of mind of a CPA for the price of lunch. Don't pay until you get paid, and if we
-                can't get you a bigger refund we waive the $25 fee.
+                The peace of mind of a CPA for the price of lunch. Don't pay
+                until you get paid, and if we can't get you a bigger refund we
+                waive the $25 fee.
               </Typography>
               <EmbeddedEmailInput
                 className="home-input"

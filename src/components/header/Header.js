@@ -74,7 +74,6 @@ function Header(props) {
     if (user.user) {
       Mixpanel.identify(user.user.referToId);
     }
-    Mixpanel.track("visit_home", { source: "header" });
     history.push({ pathname: "/" });
   };
   const { width, height } = useWindowDimensions();
