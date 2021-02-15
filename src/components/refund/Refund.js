@@ -210,8 +210,7 @@ function Refund(props) {
                             variant="caption"
                             className="refund-card-caption"
                           >
-                            That's how much the average American college student
-                            misses on their current refund due to not filing, unclaimed credits, and incorrent tax identification.
+                            That's how much the average American college student misses in tax refunds.
                           </Typography>
                         </div>
                       </CardContent>
@@ -225,7 +224,7 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $466
+                            $885,000,000
                           </Typography>
                           <Typography
                             color="textSecondary"
@@ -233,9 +232,7 @@ function Refund(props) {
                             className="refund-card-caption"
                             style={{ marginBottom: "70px" }}
                           >
-                            That's how much the average college student actually
-                            receives because of lack of reporting and
-                            underutilization of credits.
+                            That's how much in education tax credits is left on the table every year. 
                           </Typography>
                         </div>
                       </CardContent>
@@ -284,15 +281,15 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $2,342
+                          $1,313.89
                         </Typography>
                         <Typography
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
                         >
-                          That's how much the average American college student
-                          is owed in a refund.
+                          That's how much the average American college student misses in tax refunds.
+
                         </Typography>
                       </div>
                     </CardContent>
@@ -306,16 +303,14 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $466
+                          $885,000,000
                         </Typography>
                         <Typography
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
                         >
-                          That's how much the average college student actually
-                          receives because of lack of reporting and
-                          underutilization of credits.
+                          That's how much in education tax credits is left on the table every year. 
                         </Typography>
                       </div>
                     </CardContent>
@@ -395,15 +390,14 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $2,342
+                            $1,313.89
                           </Typography>
                           <Typography
                             color="textSecondary"
                             variant="caption"
                             className="refund-card-caption"
                           >
-                            That's how much the average American college student
-                            is owed in a refund.
+                            That's how much the average American college student misses in tax refunds.
                           </Typography>
                         </div>
                       </CardContent>
@@ -417,7 +411,7 @@ function Refund(props) {
                             variant="h5"
                             className="refund-card-title"
                           >
-                            $466
+                            $885,000,000
                           </Typography>
                           <Typography
                             color="textSecondary"
@@ -425,9 +419,7 @@ function Refund(props) {
                             className="refund-card-caption"
                             style={{ marginBottom: "70px" }}
                           >
-                            That's how much the average college student actually
-                            receives because of lack of reporting and
-                            underutilization of credits.
+                            That's how much in education tax credits is left on the table every year. 
                           </Typography>
                         </div>
                       </CardContent>
@@ -477,15 +469,14 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $2,342
+                          $1,313.89
                         </Typography>
                         <Typography
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
                         >
-                          That's how much the average American college student
-                          is owed in a refund.
+                          That's how much the average American college student misses in tax refunds.
                         </Typography>
                       </div>
                     </CardContent>
@@ -499,16 +490,14 @@ function Refund(props) {
                           variant="h5"
                           className="refund-card-title"
                         >
-                          $466
+                          $885,000,000
                         </Typography>
                         <Typography
                           color="textSecondary"
                           variant="caption"
                           className="refund-card-caption"
                         >
-                          That's how much the average college student actually
-                          receives because of lack of reporting and
-                          underutilization of credits.
+                          That's how much in education tax credits is left on the table every year. 
                         </Typography>
                       </div>
                     </CardContent>

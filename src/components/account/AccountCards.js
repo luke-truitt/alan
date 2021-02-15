@@ -68,7 +68,7 @@ export function DisabledCardHalf(props) {
     <Card className="account-page-card disabled-card-full">
       <CardContent className="card-content">
         <Typography className="disabled-card-title" variant="body1">
-          Track your refund
+          {props.title}
         </Typography>
         <div className="column-container">
           <img src={props.image} className="disabled-card-image" />

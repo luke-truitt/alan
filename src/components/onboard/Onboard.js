@@ -424,7 +424,7 @@ function Onboard(props) {
     if (
       fields["citizen"] == "No" ||
       fields["student"] == "No" ||
-      fields["dependent"] == "No" ||
+      fields["dependent"] == "Yes" ||
       fields["dependent"] == "idk" ||
       fields["student"] == ""
     ) {
@@ -434,7 +434,7 @@ function Onboard(props) {
   }
 
   function getRefundableCredits() {
-    if (fields["citizen"] == "No" || fields["dependent"] == "No" || fields["dependent"] == "idk") {
+    if (fields["citizen"] == "No" || fields["dependent"] == "Yes" || fields["dependent"] == "idk") {
       return 0;
     }
     let creds = Math.max(1800 - fields["covidCredits"], 0);
