@@ -158,7 +158,6 @@ function Home(props) {
   const addEmail = async (email) => {
     const old_user = await findUserByEmail(email);
     if (old_user == null) {
-      Mixpanel.track("visit_home", { source: "home" });
       history.push({
         pathname: "/onboard",
         state: { email: email, referById: referById },
@@ -199,23 +198,18 @@ function Home(props) {
                 <strong>FOR STUDENTS </strong>
               </Typography>
               <Typography variant="h2" color="secondary" className="home-title">
-                Get up to a <span className="teal-highlight">$5,000</span> tax
-                refund in <span className="teal-highlight">10 minutes</span>.
+                The average student leaves{" "}
+                <span className="teal-highlight">$1,363</span> on the table
+                during tax season
               </Typography>
               <Typography
                 variant="body1"
                 color="secondary"
                 className="home-subtitle-lower"
               >
-                We qualify students for unclaimed tax credits.{" "}
-                <u>
-                  It doesn't matter if you had no income or are a dependent.
-                </u>
-                <br />
-                <br />
-                The peace of mind of a CPA for the price of lunch. Don't pay
-                until you get paid, and if we can't get you a bigger refund we
-                waive the $25 fee.
+                We qualify students for unclaimed tax credits. Don't pay until
+                you get paid, and if we can't get you a bigger refund we waive
+                the $25 fee.
               </Typography>
               <EmbeddedEmailInput
                 className="home-input"
@@ -227,15 +221,28 @@ function Home(props) {
                 invalidClick={invalidClick}
                 loading={loading}
               />
+
               <Typography
                 variant="caption"
                 color="secondary"
-                className="home-caption"
+                className="qualifier-label"
               >
-                <strong>
-                  We have a team of tax experts to make sure nothing is left on
-                  the table.{" "}
-                </strong>
+                <strong>EVEN IF YOU </strong>
+              </Typography>
+              <Typography
+                variant="body1"
+                color="secondary"
+                className="qualifier-text"
+              >
+                ✅ Had no income <br />
+                ✅ Your parents file for you
+                <br />
+                ✅ Are a dependent
+                <br />
+                ✅ File your own taxes
+                <br />
+                ✅ Are an international student
+                <br />
               </Typography>
             </div>
             <img src={ben} className="home-ben"></img>

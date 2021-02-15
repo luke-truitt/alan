@@ -10,7 +10,7 @@
 
 .home-c1 {
   width: 100%;
-  max-width: 550px;
+  max-width: 650px;
   margin-left: 4rem;
   margin-right: -2rem;
   justify-content: center;
@@ -19,8 +19,8 @@
 h2.home-title {
   margin-bottom: 2rem;
   text-align: left;
-  line-height: 4rem;
-  font-size: 4rem;
+  line-height: 3rem;
+  font-size: 3rem;
   font-weight: 400;
 }
 
@@ -47,24 +47,31 @@ span.home-mobile-button-text {
   display: none;
 }
 .home-label {
-  padding-bottom: 8vh;
+  padding-bottom: 4vh;
 }
 img.home-ben {
   height: auto;
-  max-width: 50%;
+  max-width: 40%;
   align-self: flex-end;
   z-index: -5;
   bottom: 0;
+  margin-left: 5rem;
 }
 span.teal-highlight {
   background-position-y: 95% !important;
 }
 .home-c1 > div.embedded-email-input-container {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 div.home-c1.row-container > div > div > div > fieldset > legend > span {
   font-size: 0.9rem;
+}
+p.qualifier-text {
+  line-height: 1.6rem;
+}
+span.qualifier-label {
+  margin-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 800px) {
@@ -85,12 +92,13 @@ div.home-c1.row-container > div > div > div > fieldset > legend > span {
 
   h2.home-title {
     text-align: center;
-    font-size: 2.4rem;
-    line-height: 2.6rem;
+    font-size: 2rem;
+    line-height: 2.2rem;
   }
   p.home-subtitle-lower {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1rem;
   }
 
   .home-ben {
