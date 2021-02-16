@@ -40,42 +40,42 @@ function Process(props) {
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      1. Do the first thing
+                      1. <i>You</i> Submit Tax Information
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      Here's this easy thing you do like give us your data.
+                      We'll walk you through what forms and information you need and why it's relevant, so you don't get in any trouble and get back what you deserve.
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      2. Get the next thing.
+                      2. <i>We</i> Maximize Your Return
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      Maybe some money if you're lucky or smart.
+                      Our software combined with our tax team use the information you submit to match you to as many credits and deductions you qualify for and file. Explaining all of it along the way.
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      3. Get the best thing.
+                      3. <i>You</i> Get a Refund
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      Maybe we will make you rich as fuck but we will see.
+                      We'll help you track your refund, give you some cool options for what to do with it, and in case the government has questions on your return, we'll have your back. 
                     </Typography>
                   </div>
                 </div>
