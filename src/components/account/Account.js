@@ -255,6 +255,19 @@ function ReviewCard(props) {
   );
 }
 
+function OverviewCard(props) {
+
+  return (
+    <Card className="account-page-card review-card">
+      <CardContent className="review-card-content column-container">
+        <Typography variant="body2" className="review-card-text">
+          The overview of the process is as follows:
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+}
+
 function Account(props) {
   const user = useContext(AuthContext);
   const location = useLocation();
@@ -404,6 +417,7 @@ function Account(props) {
                 <Fade in {...shortFade}>
                   <div>
                     <MobileWelcome />
+                    <OverviewCard/>
                     <InviteCard
                       firstName={userData["firstName"]}
                       lastName={userData["lastName"]}

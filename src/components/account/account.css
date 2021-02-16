@@ -3,6 +3,7 @@
   min-height: 100vh;
   overflow-x: hidden;
 }
+
 .account-page-c1-left {
   background-image: url("./../../images/bg/bg-gradient-third.svg");
   width: 30vw;
@@ -10,6 +11,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .account-page-c1-right {
   background-image: url("./../../images/bg/bg-pattern-full-light.svg");
   width: 70vw;
@@ -23,6 +25,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 .button-icon {
   padding-left: 5px;
 }
@@ -43,7 +46,7 @@ h3.welcome-text > span > span {
 
 .account-page-c1-left-shadow {
   position: absolute;
-  min-height: 100vh;
+  min-height: 100%;
   width: 30vw;
   z-index: 9;
   top: 50;
