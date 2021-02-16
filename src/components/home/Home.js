@@ -188,7 +188,7 @@ function Home(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
         <Header signUp={signUp} page={"Home"} />
-        {/* <Fade in {...fadeDefault}> */}
+        <Fade in {...fadeDefault}>
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
               <Typography
@@ -250,10 +250,10 @@ function Home(props) {
             <AlertDialog open={open} handleClose={handleClose} />
           </div>
           
-        {/* </Fade> */}
-        <div className="row-container process-container">
+        </Fade>
+        {/* <div className="row-container process-container">
           <Process/>
-        </div>
+        </div> */}
       </div>
       
     </ThemeProvider>
