@@ -240,9 +240,11 @@ function Home(props) {
                 <br />
                 ✅ Are a dependent
                 <br />
-                ✅ File your own taxes
-                <br />
                 ✅ Are an international student
+                <br />
+                ✅ Are on scholarship or grant
+                <br />
+                ✅ Were a student in the last 3 years
                 <br />
               </Typography>
             </div>
