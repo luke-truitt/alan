@@ -16,6 +16,7 @@ import {
   Slide,
 } from "@material-ui/core/";
 import { EmbeddedEmailInput } from "../inputs/Inputs.js";
+import Process from "../process/Process.js";
 import { primaryTheme, fadeDefault } from "../../utils/constants.js";
 import { Mixpanel } from "./../../mixpanel.js";
 import { findUserByEmail } from "../../firebase";
@@ -187,7 +188,7 @@ function Home(props) {
     <ThemeProvider theme={primaryTheme}>
       <div className="page-root row-container">
         <Header signUp={signUp} page={"Home"} />
-        <Fade in {...fadeDefault}>
+        {/* <Fade in {...fadeDefault}> */}
           <div className="home-c0 column-container">
             <div className="home-c1 row-container">
               <Typography
@@ -248,8 +249,13 @@ function Home(props) {
             <img src={ben} className="home-ben"></img>
             <AlertDialog open={open} handleClose={handleClose} />
           </div>
-        </Fade>
+          
+        {/* </Fade> */}
+        <div className="row-container process-container">
+          <Process/>
+        </div>
       </div>
+      
     </ThemeProvider>
   );
 }
