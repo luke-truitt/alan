@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import Home from "./components/home/Home";
+import Home2 from "./components/home/Home2";
+
 import Onboard from "./components/onboard/Onboard.js";
 import ErrorPage from "./components/error/ErrorPage";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
@@ -35,10 +37,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Home
+              {/* <Home
                 referToId={referToId}
                 setReferTo={(rid) => setReferToId(rid)}
-              />
+              /> */}
+              <Home2 />
             </Route>
             <Route path="/join">
               <Join
