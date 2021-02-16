@@ -7,7 +7,14 @@ import {
 import "./../../styles.css";
 import "./process.css";
 import { primaryTheme } from "../../utils/constants";
-
+import {
+  process_step_one_title,
+process_step_one_subtext,
+process_step_two_title,
+process_step_two_subtext,
+process_step_three_title,
+process_step_three_subtext
+} from "../../utils/summaries";
 function Process(props) {
   return (
     <ThemeProvider theme={primaryTheme}>
@@ -40,42 +47,42 @@ function Process(props) {
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      1. <i>You</i> Submit Tax Information
+                      1. {process_step_one_title}
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      We'll walk you through what forms and information you need and why it's relevant, so you don't get in any trouble and get back what you deserve.
+                      {process_step_one_subtext}
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      2. <i>We</i> Maximize Your Return
+                      2. {process_step_two_title}
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      Our software combined with our tax team use the information you submit to match you to as many credits and deductions you qualify for and file. Explaining all of it along the way.
+                      {process_step_two_subtext}
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="h5"
                       className="process-card-text-step"
                     >
-                      3. <i>You</i> Get a Refund
+                      3. {process_step_three_title}
                     </Typography>
                     <Typography
                       color="textPrimary"
                       variant="body1"
                       className="process-card-text-description"
                     >
-                      We'll help you track your refund, give you some cool options for what to do with it, and in case the government has questions on your return, we'll have your back. 
+                      {process_step_three_subtext}
                     </Typography>
                   </div>
                 </div>

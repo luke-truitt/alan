@@ -12,3 +12,10 @@ export const credits_description =
   "Credits are direct subtractions from your bill. So if a one's credits are more than their bill, they get a refund.";
 export const net_refund_description =
   "Often, because of withholdings, deductions, and credits, one pays more than they are owed throughout the year. This is reflected in the net refund (or sometimes a bill!).";
+
+export const process_step_one_title = "You Submit Tax Information"
+export const process_step_one_subtext = "We'll walk you through what forms and information you need and why it's relevant, so you don't get in any trouble and get back what you deserve."
+export const process_step_two_title = "We Maximize Your Return"
+export const process_step_two_subtext = "Our software combined with our tax team use the information you submit to match you to as many credits and deductions you qualify for and file. Explaining all of it along the way."
+export const process_step_three_title = "You Get a Refund"
+export const process_step_three_subtext = "We'll help you track your refund, give you some cool options for what to do with it, and in case the government has questions on your return, we'll have your back."
