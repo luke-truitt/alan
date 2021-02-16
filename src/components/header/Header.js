@@ -4,6 +4,9 @@ import {
   Button,
   Typography,
   CircularProgress,
+  IconButton,
+  Menu,
+  MenuItem
 } from "@material-ui/core";
 import { primaryTheme } from "../../utils/constants";
 import { useHistory, useLocation } from "react-router-dom";
@@ -16,6 +19,7 @@ import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import useWindowDimensions from "../onboard/useWindowDimensions";
 import logo from "./../../images/logo/tax.svg";
 import { Mixpanel } from "./../../mixpanel.js";
+import {Menu as MenuIcon} from "@material-ui/icons";
 
 function Header(props) {
   const history = useHistory();
@@ -23,6 +27,15 @@ function Header(props) {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(props.page);
+  const [menuEl, setMenuEl] = useState(null);
+
+  const toggleMenu = (event) => {
+    setMenuEl(event.currentTarget);
+  }
+
+  const handleClose = () => {
+    setMenuEl(null);
+  }
 
   const user = useContext(AuthContext);
 
@@ -76,6 +89,7 @@ function Header(props) {
     }
     history.push({ pathname: "/" });
   };
+
   const { width, height } = useWindowDimensions();
   const isMobile = width < 900;
 
@@ -89,18 +103,21 @@ function Header(props) {
   let isRefund = page == "Refund";
   let isContact = page == "Contact";
 
-  let displayAccount = isLoggedIn && !(isMobile && isAccount);
-  let displaySignOut = isLoggedIn && (isJoin || isHome || isAccount);
-  let displaySignUp =
-    !isLoggedIn &&
-    ((isHome && !isMobile) || (isRefund && !isMobile) || isContact);
-  let displaySignIn =
-    !isLoggedIn && (isHome || isContact || (isRefund && !isMobile));
-  let displayContact =
-    !(isMobile && isOnboard) && !(isMobile && isRefund) && !isContact;
+  let displayBurger = isMobile;
+  let displayHomeBurger = !isHome;
+  let displayAccount = isLoggedIn && !isMobile;
+  let displayAccountBurger = isLoggedIn;
+  let displaySignOut = isLoggedIn && (isJoin || isHome || isAccount) && !isMobile;
+  let displaySignOutBurger = isLoggedIn;
+  let displaySignUp = !isLoggedIn && !isMobile;
+  let displaySignUpBurger = !isLoggedIn;
+  let displaySignIn = !isLoggedIn && !isMobile;
+  let displaySignInBurger = !isLoggedIn;
+  let displayContact = !isMobile;
+  let displayContactBurger = true;
   let displayName =
     userData["firstName"] == undefined ? "" : `Hi ${userData["firstName"]}!`;
-  let signOutName = loading ? <CircularProgress /> : <div>Sign Out</div>;
+  let logOutName = loading ? <CircularProgress /> : <div>Log Out</div>;
 
   useEffect(() => {
     setTimeout(() => {
@@ -149,7 +166,7 @@ function Header(props) {
               color="primary"
               className="header-sign-out-button"
             >
-              {signOutName}
+              {logOutName}
             </Button>
           )}
           {displaySignUp && (
@@ -161,7 +178,7 @@ function Header(props) {
           {displaySignIn && (
             <Button onClick={onSignIn} variant="outlined" color="primary">
               {" "}
-              Sign in{" "}
+              Sign In{" "}
             </Button>
           )}
           {displayContact && (
@@ -174,6 +191,29 @@ function Header(props) {
               {" "}
               Contact{" "}
             </Button>
+          )}
+          {displayBurger && (
+            <div>
+            <IconButton edge="start" aria-label="menu" onClick={toggleMenu} variant="outlined"
+              color="primary"
+              className="username-button">
+              {displayName}&nbsp;<MenuIcon />
+          </IconButton>
+          <Menu
+          id="simple-menu"
+          anchorEl={menuEl}
+          keepMounted
+          open={Boolean(menuEl)}
+          onClose={handleClose}
+        >
+          {displayHomeBurger && <MenuItem onClick={onLogo}>Home</MenuItem>}
+          {displayAccountBurger && <MenuItem onClick={onAccount}>My Account</MenuItem>}
+          {displayContactBurger && <MenuItem onClick={onContact}>Contact</MenuItem>}
+          {displaySignInBurger && <MenuItem onClick={onSignIn}>Login</MenuItem>}
+          {displaySignUpBurger && <MenuItem onClick={onSignUp}>Join</MenuItem>}
+          {displaySignOutBurger && <MenuItem onClick={onSignOut}>{logOutName}</MenuItem>}
+        </Menu>
+        </div>
           )}
         </div>
       </div>
