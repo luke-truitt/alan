@@ -84,7 +84,9 @@ h6.invite-card-title {
 }
 
 .invite-card-c1 {
-  margin-left: 2rem;
+  margin-left: 10px;
+  border-left: solid 1px #969696;
+  padding-left: 10px;
 }
 
 .invite-card-c0 {
@@ -92,6 +94,21 @@ h6.invite-card-title {
   padding-top: 1rem;
 
   align-items: flex-start;
+}
+
+.referral-container {
+  max-width: 100px;
+  align-items: center;
+  display: flex;
+  margin-top:auto;
+  margin-bottom:auto;
+  text-align: center;
+}
+
+.num-referral {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  font-size: 1.75rem !important;
 }
 
 @media only screen and (max-width: 800px) {
@@ -104,18 +121,40 @@ h6.invite-card-title {
     justify-items: flex-start;
   }
   img.invite-card-icon {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; 
   }
   div.invite-card-c1 {
     margin-left: 0rem;
+    padding-left: 0rem;
+    border-left: none;
+    border-top: solid 1px #969696;
+    padding-top: 10px;
   }
   div.invite-card-button-container {
     width: 100%;
+  }
+  .referral-container {
+    max-width: 100%;
+    align-items: center;
+    display: flex;
+    margin-top:auto;
+    flex-direction: row;
+    margin-bottom: 10px;
+    text-align: center;
+    justify-content: space-between;
+  }
+  .invite-card-icon {
+    margin-bottom: 0;
+    margin-right: 20px;
+  }
+  .num-referral {
+    margin-right: 10px !important;
   }
 }
 
 .invite-card-icon {
   width: 40px;
+  margin-bottom: 0.2rem;
 }
 .invite-button-icon {
   padding-right: 5px;

@@ -232,7 +232,21 @@ export function InviteCard(props) {
           </Alert>
         </Snackbar>
         <div className="invite-card-c0 column-container">
-          <img src={giftIcon} className="invite-card-icon" />
+        <div className="row-container referral-container">
+            <img src={giftIcon} className="invite-card-icon" />
+            <Typography color="secondary"
+              variant="h6"
+              className="num-referral">
+              <span className="teal-highlight">2</span>
+            </Typography>
+            <Typography
+                variant="caption"
+                color="secondary"
+                className="referral-label"
+              >
+                <strong>UNTIL FREE TAXES</strong>
+              </Typography>
+          </div>
           <div className="invite-card-c1 row-container">
             <Typography
               color="textPrimary"

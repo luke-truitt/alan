@@ -417,7 +417,6 @@ function Account(props) {
                 <Fade in {...shortFade}>
                   <div>
                     <MobileWelcome />
-                    <OverviewCard/>
                     <InviteCard
                       firstName={userData["firstName"]}
                       lastName={userData["lastName"]}
